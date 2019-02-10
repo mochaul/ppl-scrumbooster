@@ -13,7 +13,7 @@ Contributors:
 
 Scrum Master: [**Arfi Renaldi @arfi.renaldi**](https://gitlab.cs.ui.ac.id/arfi.renaldi/)
 
-### **Penjelasan Produk**
+### Penjelasan Produk
 
 ------
 
