@@ -83,30 +83,36 @@ Pada Git Flow PPL 2019 terdapat beberapa cabang (branch), yaitu:
 2. Branch `staging`: Branch yang terkait dengan proses pengembangan. Branch ini akan menyimpan *source code* hasil pekerjaan dari setiap developer yang dikumpulkan di satu tempat. Aplikasi yang akan dipergunakan pada saat *sprint review* berasal dari branch ini.
 
 3. Branch `user story`: Branch yang digunakan untuk *implementasi* sebuah *user story* (PBI). Nantinya, akan ada beberapa cabang *user story* yang diberi nama sesuai dengan nama *user story* yang dikembangkan. Branch ini merupakan percabangan dari branch `staging`.  Pada saat akan digabungkan, *code reviewer* dari branch *user story* adalah teman satu tim yang bukan penanggung jawab dari *user story* tersebut. **Lakukan commit squash saat melakukan merge request**.
-**Format penamaan branch:** `US-<nomor_user_story>-<judul_user_story>`
-Contoh: `US-1-Sebagai_user_saya_ingin_melakukan_login`
+
+  **Format penamaan branch:** `US-<nomor_user_story>-<judul_user_story>`
+  Contoh: `US-1-Sebagai_user_saya_ingin_melakukan_login`
 
 4. Branch `hotfix`: Percabangan dari branch `master` yang dibuat apabila terdapat *bug* pada kode di branch `master`. Branch ini digunakan sebagai tempat untuk memperbaiki *bug* tersebut. Selanjutnya, branch ini akan kembali di-*merge* ke branch `master`.
 
 5. Branch `coldfix`: Branch yang dibuat untuk melakukan *rollback* (menghapus semua perubahan dari branch *user story*) apabila dalam sprint review terjadi penolakan salah satu *user story* oleh Product Owner. Branch ini nantinya akan ditarik dari branch `staging`, dan perbaikannya akan kembali di-*merge* ke branch `staging`.
-**Format penamaan branch:** `coldfix-sprint_<nomor_sprint>`
-Contoh: `coldfix-sprint_1`
+
+  **Format penamaan branch:** `coldfix-sprint_<nomor_sprint>`
+  Contoh: `coldfix-sprint_1`
 
 **Konvensi penamaan commit**
 
 Ada 3 *tag* yang akan digunakan dalam penamaan *commit* dalam Git Flow kali ini.
 
 1. **[RED]**: Commit yang bersifat menginisiasi kode *unit test* dari suatu aplikasi (fungsi/class kosong). Ditandai dengan **silang merah** pada hasil *pipeline test* GitLab.
-**Contoh commit message:** `[RED] membuat test_login_admin`
+
+  **Contoh commit message:** `[RED] membuat test_login_admin`
 
 2. **[GREEN]**: Commit yang bersifat mengimplementasikan *unit test* pada aplikasi. Ditandai dengan **centang hijau** pada hasil *pipeline test* GitLab.
-**Contoh commit message:** `[GREEN] membuat fungsi login_for_admin`
+
+  **Contoh commit message:** `[GREEN] membuat fungsi login_for_admin`
 
 3. **[REFACTOR]**: Commit yang bersifat mengubah susunan kode *unit test* pada aplikasi, dengan tidak mengubah status dari *pipeline test* Gitlab. (tetap sukses).
-**Contoh commit message:** `[REFACTOR] restructure fungsi login_for_admin`
+
+  **Contoh commit message:** `[REFACTOR] restructure fungsi login_for_admin`
 
 4. **[CHORES]**: Commit yang berisikan implementasi yang tidak berhubungan langsung dengan fungsionalitas aplikasi (ex. penambahan *asset* berupa image tanpa mengubah implementasi kode). Tidak ada peraturan khusus mengenai *pipeline status* Gitlab.
-**Contoh commit message:** `[CHORES] restructure perintah pada berkas .gitlab-ci.yml`
+
+  **Contoh commit message:** `[CHORES] restructure perintah pada berkas .gitlab-ci.yml`
 
 Pada saat pengimplementasian dari *user story*, gunakan commit yang **ringkas dan mudah dimengerti.**
 
