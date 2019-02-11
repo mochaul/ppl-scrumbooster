@@ -104,7 +104,7 @@ Pada Git Flow PPL 2019 terdapat beberapa cabang (branch), yaitu:
 
    Contoh: `coldfix-sprint_1`
 
-**Konvensi penamaan *commit***
+**Konvensi penamaan commit**
 
 Ada 3 *tag* yang akan digunakan dalam penamaan *commit* dalam Git Flow kali ini.
 
