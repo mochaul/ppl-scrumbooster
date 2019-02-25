@@ -24,7 +24,7 @@ mobile:test:
     - flutter test --coverage
     - lcov --summary coverage/lcov.info
     - genhtml coverage/lcov.info --output=coverage
-  coverage: '/lines......: \d+\.\d+\%/'
+  coverage: '/Code coverage: \d+\.\d+\%/'
   artifacts:
     name: mobile-coverage
     paths:
@@ -83,7 +83,7 @@ mobile:deploy_to_development:
     - docker
   only:
     refs:
-      - /^US-.*$/
+      - /^Task-US-.*$/
   except:
     changes:
       - scrum-booster-api/*
