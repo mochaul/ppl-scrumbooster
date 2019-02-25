@@ -4,6 +4,7 @@ RUN wget --quiet --output-document=flutter.tar.xz https://storage.googleapis.com
 
 ENV PATH=$PATH:/flutter/bin
 
+RUN apt-get update && apt-get install gnupg -y
 RUN curl -sL https://deb.nodesource.com/setup_11.x | bash - && apt-get install -y nodejs
 RUN flutter doctor -v
 
