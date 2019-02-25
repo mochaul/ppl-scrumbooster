@@ -48,7 +48,6 @@ FlutterDeployToProduction:
   script:
     - DOCKER_IMAGE_TAG=$DOCKER_IMAGE_NAME/scrumbooster-mobile/$ENV_NAME
     - docker build -t $DOCKER_IMAGE_TAG .
-    - docker tag $APP_NAME $DOCKER_IMAGE_TAG
     - docker push $DOCKER_IMAGE_TAG
   environment:
     name: production
@@ -71,7 +70,6 @@ FlutterDeployToStaging:
   script:
     - DOCKER_IMAGE_TAG=$DOCKER_IMAGE_NAME/scrumbooster-mobile/$ENV_NAME
     - docker build -t $DOCKER_IMAGE_TAG .
-    - docker tag $APP_NAME $DOCKER_IMAGE_TAG
     - docker push $DOCKER_IMAGE_TAG
   environment:
     name: staging
@@ -95,7 +93,6 @@ FlutterDeployToDevelopment:
   script:
     - DOCKER_IMAGE_TAG=$DOCKER_IMAGE_NAME/scrumbooster-mobile/$ENV_NAME
     - docker build -t $DOCKER_IMAGE_TAG .
-    - docker tag $APP_NAME $DOCKER_IMAGE_TAG
     - docker push $DOCKER_IMAGE_TAG
   environment:
     name: development
