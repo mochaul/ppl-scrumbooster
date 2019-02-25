@@ -24,7 +24,7 @@ mobile:test:
     - flutter test --coverage
     - lcov --summary coverage/lcov.info
     - genhtml coverage/lcov.info --output=coverage
-  coverage: '/Code coverage: \d+\.\d+\%/'
+  coverage: '/lines......: \d+\.\d+\%/'
   artifacts:
     name: mobile-coverage
     paths:
