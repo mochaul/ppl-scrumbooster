@@ -1,3 +1,97 @@
 stages:
   - test
-  -
+  - deploy
+
+variables:
+  DOCKER_IMAGE_NAME: "registry.docker.ppl.cs.ui.ac.id/ppld1"
+  APP_NAME: "scrumbooster-mobile"
+
+mobile:test:
+  stage: test
+  image: jro7/flutter_lcov
+  only:
+    changes:
+    - lib/*
+    - test/*
+    - .gitlab-ci.yml
+    - Dockerfile
+    except:
+      changes:
+      - scrum-booster-api/*
+  script:
+    - echo Testing $APP_NAME
+    - flutter doctor -v
+    - flutter test --coverage
+    - lcov --summary coverage/lcov.info
+    - genhtml coverage/lcov.info --output=coverage
+  coverage: '/lines......: \d+\.\d+\%/'
+  artifacts:
+    name: mobile-coverage
+    paths:
+      - $CI_PROJECT_DIR/coverage
+
+mobile:deploy_to_production:
+  variables:
+    ENV_NAME: "production"
+  image: gitlab/dind:latest
+  stage: deploy
+  tags:
+    - docker
+  only:
+    refs:
+      - master
+  except:
+    changes:
+      - scrum-booster-api/*
+  before_script:
+    - docker info
+  script:
+    - DOCKER_IMAGE_TAG=$DOCKER_IMAGE_NAME/scrumbooster-mobile/$ENV_NAME
+    - docker build -t $DOCKER_IMAGE_TAG
+    - docker push $DOCKER_IMAGE_TAG
+  environment:
+    name: production
+
+mobile:deploy_to_staging:
+  variables:
+    ENV_NAME: "staging"
+  image: gitlab/dind:latest
+  stage: deploy
+  tags:
+    - docker
+  only:
+    refs:
+      - staging
+  except:
+    changes:
+      - scrum-booster-api/*
+  before_script:
+    - docker info
+  script:
+    - DOCKER_IMAGE_TAG=$DOCKER_IMAGE_NAME/scrumbooster-mobile/$ENV_NAME
+    - docker build -t $DOCKER_IMAGE_TAG
+    - docker push $DOCKER_IMAGE_TAG
+  environment:
+    name: staging
+
+mobile:deploy_to_development:
+  variables:
+    ENV_NAME: "development"
+  IMAGE: gitlab/dind:latest
+  stage: deploy
+  tags:
+    - docker
+  only:
+    refs:
+      - /^US-.*$/
+  except:
+    changes:
+      - scrum-booster-api/*
+  before_script:
+    - docker info
+  script:
+    - DOCKER_IMAGE_TAG=$DOCKER_IMAGE_NAME/scrumbooster-mobile/$ENV_NAME
+    - docker build -t DOCKER_IMAGE_TAG
+    - DOCKER PUSH $DOCKER_IMAGE_TAG
+  environment:
+    name: development
