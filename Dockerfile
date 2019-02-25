@@ -15,6 +15,5 @@ COPY . /mobile/
 RUN ls -al
 
 RUN flutter packages get
-RUN flutter test
 
 ENTRYPOINT ["./start.sh"]

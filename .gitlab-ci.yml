@@ -4,9 +4,9 @@ stages:
 
 variables:
   DOCKER_IMAGE_NAME: "registry.docker.ppl.cs.ui.ac.id/ppld1"
-  APP_NAME: "scrumbooster-mobile"
+  APP_NAME: "ppld1/scrumbooster-mobile"
 
-mobile:test:
+FlutterTest:
   stage: test
   image: jro7/flutter_lcov
   only:
@@ -30,7 +30,7 @@ mobile:test:
     paths:
       - $CI_PROJECT_DIR/coverage
 
-mobile:deploy_to_production:
+FlutterDeployToProduction:
   variables:
     ENV_NAME: "production"
   image: gitlab/dind:latest
@@ -48,11 +48,12 @@ mobile:deploy_to_production:
   script:
     - DOCKER_IMAGE_TAG=$DOCKER_IMAGE_NAME/scrumbooster-mobile/$ENV_NAME
     - docker build -t $DOCKER_IMAGE_TAG .
+    - docker tag $APP_NAME $DOCKER_IMAGE_TAG
     - docker push $DOCKER_IMAGE_TAG
   environment:
     name: production
 
-mobile:deploy_to_staging:
+FlutterDeployToStaging:
   variables:
     ENV_NAME: "staging"
   image: gitlab/dind:latest
@@ -70,11 +71,12 @@ mobile:deploy_to_staging:
   script:
     - DOCKER_IMAGE_TAG=$DOCKER_IMAGE_NAME/scrumbooster-mobile/$ENV_NAME
     - docker build -t $DOCKER_IMAGE_TAG .
+    - docker tag $APP_NAME $DOCKER_IMAGE_TAG
     - docker push $DOCKER_IMAGE_TAG
   environment:
     name: staging
 
-mobile:deploy_to_development:
+FlutterDeployToDevelopment:
   variables:
     ENV_NAME: "development"
   image: gitlab/dind:latest
@@ -83,6 +85,7 @@ mobile:deploy_to_development:
     - docker
   only:
     refs:
+      - /^US-.*$/
       - /^Task-US-.*$/
   except:
     changes:
@@ -92,6 +95,7 @@ mobile:deploy_to_development:
   script:
     - DOCKER_IMAGE_TAG=$DOCKER_IMAGE_NAME/scrumbooster-mobile/$ENV_NAME
     - docker build -t $DOCKER_IMAGE_TAG .
-    - DOCKER PUSH $DOCKER_IMAGE_TAG
+    - docker tag $APP_NAME $DOCKER_IMAGE_TAG
+    - docker push $DOCKER_IMAGE_TAG
   environment:
     name: development
