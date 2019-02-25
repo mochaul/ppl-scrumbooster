@@ -15,9 +15,9 @@ mobile:test:
     - test/*
     - .gitlab-ci.yml
     - Dockerfile
-    except:
-      changes:
-      - scrum-booster-api/*
+  except:
+    changes:
+    - scrum-booster-api/*
   script:
     - echo Testing $APP_NAME
     - flutter doctor -v
