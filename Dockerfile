@@ -8,12 +8,13 @@ ENV PATH=$PATH:/flutter/bin
 
 RUN apt-get update
 RUN flutter doctor -v
-RUN flutter packages get
-RUN flutter test
 
 RUN ls -al
 RUN mkdir -p mobile/
 COPY . mobile/
 WORKDIR mobile/
+
+RUN flutter packages get
+RUN flutter test
 
 ENTRYPOINT ["./start.sh"]
