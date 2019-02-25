@@ -91,7 +91,7 @@ mobile:deploy_to_development:
     - docker info
   script:
     - DOCKER_IMAGE_TAG=$DOCKER_IMAGE_NAME/scrumbooster-mobile/$ENV_NAME
-    - docker build -t DOCKER_IMAGE_TAG
+    - docker build -t $DOCKER_IMAGE_TAG
     - DOCKER PUSH $DOCKER_IMAGE_TAG
   environment:
     name: development
