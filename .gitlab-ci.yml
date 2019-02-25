@@ -77,7 +77,7 @@ mobile:deploy_to_staging:
 mobile:deploy_to_development:
   variables:
     ENV_NAME: "development"
-  IMAGE: gitlab/dind:latest
+  image: gitlab/dind:latest
   stage: deploy
   tags:
     - docker
