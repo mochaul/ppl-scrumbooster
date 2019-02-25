@@ -26,7 +26,12 @@ void main() {
     scaffoldKey.currentState.openDrawer();
     await tester.pump();
 
-    // Verify the sidebar menu.
+    // Verify all the sidebar menu.
     expect(find.text(menu1), findsOneWidget);
+    expect(find.text(menu2), findsOneWidget);
+    expect(find.text(menu3), findsOneWidget);
+    expect(find.text(menu4), findsOneWidget);
+    expect(find.text(menu5), findsOneWidget);
+    expect(find.text(menu6), findsOneWidget);
   });
 }
