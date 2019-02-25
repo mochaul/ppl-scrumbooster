@@ -9,10 +9,10 @@ ENV PATH=$PATH:/flutter/bin
 RUN apt-get update
 RUN flutter doctor -v
 
-RUN ls -al
 RUN mkdir -p mobile/
-COPY . mobile/
-WORKDIR mobile/
+WORKDIR /mobile
+COPY . /mobile/
+RUN ls -al
 
 RUN flutter packages get
 RUN flutter test
