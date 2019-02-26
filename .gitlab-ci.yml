@@ -1,3 +1,8 @@
+image: docker:stable
+
+services:
+  - docker:dind
+
 stages:
   - test
   - deploy
@@ -77,7 +82,7 @@ FlutterDeployToStaging:
 FlutterDeployToDevelopment:
   variables:
     ENV_NAME: "development"
-  image: docker:dind
+  # image: docker:dind
   stage: deploy
   tags:
     - docker
