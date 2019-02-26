@@ -1,7 +1,5 @@
 #!/bin/bash
 
-echo Flutter Doctor in progress...
-
 npm install appcenter-cli
 
 flutter build apk --build-name=Scrum-Booster --build-number=1
