@@ -1,14 +1,17 @@
 from django.db import models
 
+
 class Phase(models.Model):
     title = models.CharField(max_length=255)
     detail = models.CharField(max_length=2047)
     image = models.ImageField()
 
+
 class CMMIPractices(models.Model):
     title = models.CharField(max_length=255)
     detail = models.CharField(max_length=2047)
     image = models.ImageField()
+
 
 class Ceremony(models.Model):
     title = models.CharField(max_length=255)
@@ -17,6 +20,7 @@ class Ceremony(models.Model):
     image = models.ImageField()
     can_be_enchanched_by_using = models.ManyToManyField(CMMIPractices)
 
+
 class Problem(models.Model):
     title = models.CharField(max_length=255)
     detail = models.CharField(max_length=2047)
@@ -24,12 +28,14 @@ class Problem(models.Model):
     image = models.ImageField()
     can_be_solved_by_using = models.ManyToManyField(CMMIPractices)
 
+
 class Glossary(models.Model):
     name = models.CharField(max_length=255)
     detail = models.CharField(max_length=2047)
     ceremonies_that_contain = models.ManyToManyField(Ceremony)
     problem_that_contain = models.ManyToManyField(Problem)
     image = models.ImageField()
+
 
 class QuizQuestion(models.Model):
     question_for = models.ForeignKey(Phase, models.CASCADE)

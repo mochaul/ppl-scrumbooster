@@ -3,10 +3,8 @@ from rest_framework.test import APITestCase
 from django.urls import reverse
 from rest_framework import status
 
-# Create your tests here.
 
 class ScrumBoosterTest(APITestCase):
-
     def test_phase_url_exists(self):
         response = self.client.get(reverse("phase-list"))
         self.assertEqual(response.status_code, status.HTTP_200_OK)
