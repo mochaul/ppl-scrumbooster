@@ -84,7 +84,7 @@ FlutterDeployToDevelopment:
   only:
     refs:
       - /^US-.*$/
-      - /^Task-US-.*$/
+#      - /^Task-US-.*$/
   except:
     changes:
       - scrum-booster-api/*
