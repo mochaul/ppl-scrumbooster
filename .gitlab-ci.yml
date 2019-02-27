@@ -1,7 +1,3 @@
-image: docker:stable
-services:
-  - docker:dind
-
 stages:
   - test
   - deploy
@@ -37,7 +33,7 @@ FlutterTest:
 FlutterDeployToProduction:
   variables:
     ENV_NAME: "production"
-  # image: gitlab/dind:latest
+  image: gitlab/dind:latest
   stage: deploy
   only:
     refs:
