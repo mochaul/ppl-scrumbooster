@@ -1,3 +1,7 @@
+image: docker:stable
+services:
+  - docker:dind
+
 stages:
   - test
   - deploy
@@ -33,10 +37,8 @@ FlutterTest:
 FlutterDeployToProduction:
   variables:
     ENV_NAME: "production"
-  image: gitlab/dind:latest
+  # image: gitlab/dind:latest
   stage: deploy
-  tags:
-    - docker
   only:
     refs:
       - master
@@ -49,6 +51,8 @@ FlutterDeployToProduction:
     - DOCKER_IMAGE_TAG=$DOCKER_IMAGE_NAME/scrumbooster-mobile/$ENV_NAME
     - docker build -t $DOCKER_IMAGE_TAG .
     - docker push $DOCKER_IMAGE_TAG
+  tags:
+    - docker
   environment:
     name: production
 
@@ -77,7 +81,7 @@ FlutterDeployToStaging:
 FlutterDeployToDevelopment:
   variables:
     ENV_NAME: "development"
-  image: docker:stable
+  image: gitlab/dind:latest
   stage: deploy
   tags:
     - docker
