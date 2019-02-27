@@ -6,6 +6,22 @@ variables:
   DOCKER_IMAGE_NAME: "registry.docker.ppl.cs.ui.ac.id/ppld1"
   APP_NAME: "ppld1/scrumbooster-mobile"
 
+#BackendTest:
+#  stage: test
+#  implement script test backend disini
+
+#BackendDeployToProduction:
+#  stage: deploy
+#  implement script deploy disini
+
+#BackendDeployToStaging:
+#  stage: deploy
+#  implement script deploy disini
+
+#BackendDeployToStaging:
+#  stage: deploy
+#  implement script deploy disini
+
 FlutterTest:
   stage: test
   image: jro7/flutter_lcov
