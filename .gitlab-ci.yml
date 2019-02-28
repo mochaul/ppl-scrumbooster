@@ -25,12 +25,6 @@ variables:
 FlutterTest:
   stage: test
   image: jro7/flutter_lcov
-  only:
-    changes:
-    - lib/*
-    - test/*
-    - .gitlab-ci.yml
-    - Dockerfile
   except:
     changes:
     - scrum-booster-api/*
@@ -100,7 +94,6 @@ FlutterDeployToDevelopment:
   only:
     refs:
       - /^US-.*$/
-#      - /^Task-US-.*$/
   except:
     changes:
       - scrum-booster-api/*
