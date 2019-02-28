@@ -1,8 +1,8 @@
 #!/bin/bash
 
-npm install appcenter-cli
+npm install --global appcenter-cli
 
-flutter build apk --build-name=Scrum-Booster --build-number=1
+flutter build apk --build-name=scrum-booster --build-number=1
 
 appcenter login --token $APP_CENTER_API_KEY
 
