@@ -1,0 +1,107 @@
+stages:
+  - test
+  - deploy
+
+variables:
+  DOCKER_IMAGE_NAME: "registry.docker.ppl.cs.ui.ac.id/ppld1"
+  APP_NAME: "ppld1/scrumbooster-mobile"
+
+#BackendTest:
+#  stage: test
+#  implement script test backend disini
+
+#BackendDeployToProduction:
+#  stage: deploy
+#  implement script deploy disini
+
+#BackendDeployToStaging:
+#  stage: deploy
+#  implement script deploy disini
+
+#BackendDeployToStaging:
+#  stage: deploy
+#  implement script deploy disini
+
+FlutterTest:
+  stage: test
+  image: jro7/flutter_lcov
+  except:
+    changes:
+    - scrum-booster-api/*
+  script:
+    - echo Testing $APP_NAME
+    - flutter doctor -v
+    - flutter test --coverage
+    - lcov --summary coverage/lcov.info
+    - genhtml coverage/lcov.info --output=coverage
+  coverage: '/lines......: \d+\.\d+\%/'
+  artifacts:
+    name: mobile-coverage
+    paths:
+      - $CI_PROJECT_DIR/coverage
+
+FlutterDeployToProduction:
+  variables:
+    ENV_NAME: "production"
+  image: gitlab/dind:latest
+  stage: deploy
+  only:
+    refs:
+      - master
+  except:
+    changes:
+      - scrum-booster-api/*
+  before_script:
+    - docker info
+  script:
+    - DOCKER_IMAGE_TAG=$DOCKER_IMAGE_NAME/scrumbooster-mobile/$ENV_NAME
+    - docker build -t $DOCKER_IMAGE_TAG .
+    - docker push $DOCKER_IMAGE_TAG
+  tags:
+    - docker
+  environment:
+    name: production
+
+FlutterDeployToStaging:
+  variables:
+    ENV_NAME: "staging"
+  image: gitlab/dind:latest
+  stage: deploy
+  tags:
+    - docker
+  only:
+    refs:
+      - staging
+  except:
+    changes:
+      - scrum-booster-api/*
+  before_script:
+    - docker info
+  script:
+    - DOCKER_IMAGE_TAG=$DOCKER_IMAGE_NAME/scrumbooster-mobile/$ENV_NAME
+    - docker build -t $DOCKER_IMAGE_TAG .
+    - docker push $DOCKER_IMAGE_TAG
+  environment:
+    name: staging
+
+FlutterDeployToDevelopment:
+  variables:
+    ENV_NAME: "development"
+  image: gitlab/dind:latest
+  stage: deploy
+  tags:
+    - docker
+  only:
+    refs:
+      - /^US-.*$/
+  except:
+    changes:
+      - scrum-booster-api/*
+  before_script:
+    - docker info
+  script:
+    - DOCKER_IMAGE_TAG=$DOCKER_IMAGE_NAME/scrumbooster-mobile/$ENV_NAME
+    - docker build -t $DOCKER_IMAGE_TAG .
+    - docker push $DOCKER_IMAGE_TAG
+  environment:
+    name: development
