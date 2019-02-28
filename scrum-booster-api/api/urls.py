@@ -18,6 +18,8 @@ from django.urls import path, include
 from rest_framework import routers
 from scrumboosterapi import views as scrumviews
 from . import views
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+
 
 router = routers.DefaultRouter()
 router.register(r'users', scrumviews.UserViewSet)
@@ -28,3 +30,5 @@ urlpatterns = [
     path('', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]
+
+urlpatterns += staticfiles_urlpatterns()
