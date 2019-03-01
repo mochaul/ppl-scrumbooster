@@ -16,15 +16,36 @@ class MyApp extends StatelessWidget {
 
 class MyHomePage extends StatelessWidget {
   final String title;
+  final List<String> myList = new List();
 
-  MyHomePage({Key key, this.title}) : super(key: key);
+
+  MyHomePage({Key key, this.title, List<String> myList}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    myList.add("Product Backlog");
+    myList.add("Sprint Planning");
+    myList.add("Sprint Execution");
+    myList.add("Sprint Evaluation");
+
     return Scaffold(
       appBar: AppBar(
           centerTitle: true,
           title: Text(title)),
+      body: GridView.count(
+        crossAxisCount: 2,
+        children: List.generate(4, (index) {
+          return Center(
+              child: Text(
+                myList[index],
+                style: Theme
+                    .of(context)
+                    .textTheme
+                    .headline,
+              )
+          );
+        }),
+      ),
       drawer: Drawer(
         // Add a ListView to the drawer. This ensures the user can scroll
         // through the options in the Drawer if there isn't enough vertical
