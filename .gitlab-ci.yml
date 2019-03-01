@@ -10,17 +10,68 @@ variables:
 #  stage: test
 #  implement script test backend disini
 
-#BackendDeployToProduction:
-#  stage: deploy
-#  implement script deploy disini
+BackendDeployToProduction:
+  variables:
+    ENV_NAME: "production"
+  stage: deploy
+  image: gitlab/dind:latest
+  only:
+    changes:
+      - scrum-booster-api/*
+    refs:
+      - master
+  before_script:
+    - docker info
+  script:
+    - DOCKER_IMAGE_TAG=$DOCKER_IMAGE_NAME/scrumboosterapi/$ENV_NAME
+    - docker build -t $DOCKER_IMAGE_TAG ./scrum-booster-api
+    - docker push $DOCKER_IMAGE_TAG
+  tags:
+    - docker
+  environment:
+    name: production
 
-#BackendDeployToStaging:
-#  stage: deploy
-#  implement script deploy disini
+BackendDeployToStaging:
+  variables:
+    ENV_NAME: "staging"
+  stage: deploy
+  image: gitlab/dind:latest
+  only:
+    changes:
+      - scrum-booster-api/*
+    refs:
+      - staging
+  before_script:
+    - docker info
+  script:
+    - DOCKER_IMAGE_TAG=$DOCKER_IMAGE_NAME/scrumboosterapi/$ENV_NAME
+    - docker build -t $DOCKER_IMAGE_TAG ./scrum-booster-api
+    - docker push $DOCKER_IMAGE_TAG
+  tags:
+    - docker
+  environment:
+    name: staging
 
-#BackendDeployToStaging:
-#  stage: deploy
-#  implement script deploy disini
+BackendDeployToDevelopment:
+  variables:
+    ENV_NAME: "development"
+  stage: deploy
+  image: gitlab/dind:latest
+  only:
+    changes:
+      - scrum-booster-api/*
+    refs:
+      - /^US-.*$/
+  before_script:
+    - docker info
+  script:
+    - DOCKER_IMAGE_TAG=$DOCKER_IMAGE_NAME/scrumboosterapi/$ENV_NAME
+    - docker build -t $DOCKER_IMAGE_TAG ./scrum-booster-api
+    - docker push $DOCKER_IMAGE_TAG
+  tags:
+    - docker
+  environment:
+    name: development
 
 FlutterTest:
   stage: test
