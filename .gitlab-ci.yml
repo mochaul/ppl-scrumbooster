@@ -10,6 +10,24 @@ variables:
 #  stage: test
 #  implement script test backend disini
 
+FlutterTest:
+  stage: test
+  image: jro7/flutter_lcov
+  except:
+    changes:
+    - scrum-booster-api/*
+  script:
+    - echo Testing $APP_NAME
+    - flutter doctor -v
+    - flutter test --coverage
+    - lcov --summary coverage/lcov.info
+    - genhtml coverage/lcov.info --output=coverage
+  coverage: '/lines......: \d+\.\d+\%/'
+  artifacts:
+    name: mobile-coverage
+    paths:
+      - $CI_PROJECT_DIR/coverage
+
 BackendDeployToProduction:
   variables:
     ENV_NAME: "production"
@@ -58,8 +76,6 @@ BackendDeployToDevelopment:
   stage: deploy
   image: gitlab/dind:latest
   only:
-    changes:
-      - scrum-booster-api/*
     refs:
       - /^US-.*$/
   before_script:
@@ -72,24 +88,6 @@ BackendDeployToDevelopment:
     - docker
   environment:
     name: development
-
-FlutterTest:
-  stage: test
-  image: jro7/flutter_lcov
-  except:
-    changes:
-    - scrum-booster-api/*
-  script:
-    - echo Testing $APP_NAME
-    - flutter doctor -v
-    - flutter test --coverage
-    - lcov --summary coverage/lcov.info
-    - genhtml coverage/lcov.info --output=coverage
-  coverage: '/lines......: \d+\.\d+\%/'
-  artifacts:
-    name: mobile-coverage
-    paths:
-      - $CI_PROJECT_DIR/coverage
 
 FlutterDeployToProduction:
   variables:
