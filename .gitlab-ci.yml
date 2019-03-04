@@ -9,6 +9,10 @@ variables:
 BackendTest:
   stage: test
   image: python:3.6
+  only:
+    changes:
+    - scrum-booster-api/**/*
+    - .gitlab-ci.yaml
   before_script:
     - cd scrum-booster-api
     - pip install -r requirements.txt
@@ -24,9 +28,6 @@ BackendTest:
 FlutterTest:
   stage: test
   image: jro7/flutter_lcov
-  except:
-    changes:
-    - scrum-booster-api/*
   script:
     - echo Testing $APP_NAME
     - flutter doctor -v
@@ -34,6 +35,9 @@ FlutterTest:
     - lcov --summary coverage/lcov.info
     - genhtml coverage/lcov.info --output=coverage
   coverage: '/lines......: \d+\.\d+\%/'
+  except:
+    changes:
+    - scrum-booster-api/**/*
   artifacts:
     name: mobile-coverage
     paths:
@@ -46,7 +50,8 @@ BackendDeployToProduction:
   image: gitlab/dind:latest
   only:
     changes:
-      - scrum-booster-api/*
+      - scrum-booster-api/**/*
+      - .gitlab-ci.yaml
     refs:
       - master
   before_script:
@@ -57,6 +62,7 @@ BackendDeployToProduction:
     - docker push $DOCKER_IMAGE_TAG
   tags:
     - docker
+    - build
   environment:
     name: production
 
@@ -67,7 +73,8 @@ BackendDeployToStaging:
   image: gitlab/dind:latest
   only:
     changes:
-      - scrum-booster-api/*
+      - scrum-booster-api/**/*
+      - .gitlab-ci.yaml
     refs:
       - staging
   before_script:
@@ -78,6 +85,7 @@ BackendDeployToStaging:
     - docker push $DOCKER_IMAGE_TAG
   tags:
     - docker
+    - build
   environment:
     name: staging
 
@@ -87,6 +95,9 @@ BackendDeployToDevelopment:
   stage: deploy
   image: gitlab/dind:latest
   only:
+    changes:
+      - scrum-booster-api/**/*
+      - .gitlab-ci.yaml
     refs:
       - /^US-.*$/
   before_script:
@@ -97,6 +108,7 @@ BackendDeployToDevelopment:
     - docker push $DOCKER_IMAGE_TAG
   tags:
     - docker
+    - build
   environment:
     name: development
 
@@ -108,9 +120,10 @@ FlutterDeployToProduction:
   only:
     refs:
       - master
+      - build
   except:
     changes:
-      - scrum-booster-api/*
+      - scrum-booster-api/**/*
   before_script:
     - docker info
   script:
@@ -129,12 +142,13 @@ FlutterDeployToStaging:
   stage: deploy
   tags:
     - docker
+    - build
   only:
     refs:
       - staging
   except:
     changes:
-      - scrum-booster-api/*
+      - scrum-booster-api/**/*
   before_script:
     - docker info
   script:
@@ -151,12 +165,13 @@ FlutterDeployToDevelopment:
   stage: deploy
   tags:
     - docker
+    - build
   only:
     refs:
       - /^US-.*$/
   except:
     changes:
-      - scrum-booster-api/*
+      - scrum-booster-api/**/*
   before_script:
     - docker info
   script:
