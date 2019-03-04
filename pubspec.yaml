@@ -1,5 +1,5 @@
-name: scrum_booster
-description: A new Flutter project.
+name: ScrumBooster
+description: Scrum Tutorial by PPLD1
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
@@ -19,6 +19,15 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^0.1.2
+  scoped_model:
+  flutter_launcher_icons: ^0.6.1
+  font_awesome_flutter: ^8.0.1
+  dio: ^1.0.0
+  cookie_jar: ^0.0.4
+  flutter_svg:
+  client_cookie:
+  transparent_image: ^0.1.0
+  path_provider: ^0.4.1
 
 dev_dependencies:
   flutter_test:
@@ -40,6 +49,29 @@ flutter:
   assets:
     - assets/logos/logo-color.png
     - assets/logos/logo-white.png
+
+  fonts:
+    - family: Montserrat
+      fonts:
+        - asset: assets/fonts/Montserrat-Black.ttf
+        - asset: assets/fonts/Montserrat-BlackItalic.ttf
+        - asset: assets/fonts/Montserrat-Bold.ttf
+        - asset: assets/fonts/Montserrat-BoldItalic.ttf
+        - asset: assets/fonts/Montserrat-ExtraBold.ttf
+        - asset: assets/fonts/Montserrat-ExtraBoldItalic.ttf
+        - asset: assets/fonts/Montserrat-ExtraLight.ttf
+        - asset: assets/fonts/Montserrat-ExtraLightItalic.ttf
+        - asset: assets/fonts/Montserrat-Italic.ttf
+        - asset: assets/fonts/Montserrat-Light.ttf
+        - asset: assets/fonts/Montserrat-LightItalic.ttf
+        - asset: assets/fonts/Montserrat-Medium.ttf
+        - asset: assets/fonts/Montserrat-MediumItalic.ttf
+        - asset: assets/fonts/Montserrat-Regular.ttf
+        - asset: assets/fonts/Montserrat-SemiBold.ttf
+        - asset: assets/fonts/Montserrat-SemiBoldItalic.ttf
+        - asset: assets/fonts/Montserrat-Thin.ttf
+        - asset: assets/fonts/Montserrat-ThinItalic.ttf
+
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.io/assets-and-images/#resolution-aware.
