@@ -10,8 +10,17 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   final util = new Util();
 
-  transitionToHome() async {
-    Navigator.of(context).pushReplacementNamed("");
+  Future transitionToHome() {
+    return new Future.delayed(
+      const Duration(seconds: 2),
+        () => Navigator.of(context).pushReplacementNamed('/Home'),
+    );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    transitionToHome();
   }
 
   @override
