@@ -6,9 +6,19 @@ variables:
   DOCKER_IMAGE_NAME: "registry.docker.ppl.cs.ui.ac.id/ppld1"
   APP_NAME: "ppld1/scrumbooster-mobile"
 
-#BackendTest:
-#  stage: test
-#  implement script test backend disini
+BackendTest:
+  stage: test
+  image: python:3.6
+  before_script:
+    - pip install -r requirements.txt
+    - python manage.py makemigrations
+    - python manage.py migrate
+    - python manage.py collectstatic --no-input
+    - python manage.py runserver 8000 &
+  when: on_success
+  script:
+    - coverage run manage.py test
+    - coverage report -m
 
 FlutterTest:
   stage: test
