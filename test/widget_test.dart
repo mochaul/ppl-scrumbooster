@@ -11,20 +11,37 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:scrum_booster/main.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
+  testWidgets('Find sidebar widget', (WidgetTester tester) async {
     // Build our app and trigger a frame.
+    final scaffoldKey = GlobalKey<ScaffoldState>();
+    const menu1 = "Home";
+    const menu2 = "Ceremonies";
+    const menu3 = "Problems";
+    const menu4 = "Glossary";
+    const menu5 = "Pop Quiz!";
+    const menu6 = "About";
     await tester.pumpWidget(MyApp());
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
-
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
+    // Tap the 'burger menu' icon and trigger a frame.
+    scaffoldKey.currentState.openDrawer();
     await tester.pump();
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    // Verify all the sidebar menu.
+    expect(find.text(menu1), findsOneWidget);
+    expect(find.text(menu2), findsOneWidget);
+    expect(find.text(menu3), findsOneWidget);
+    expect(find.text(menu4), findsOneWidget);
+    expect(find.text(menu5), findsOneWidget);
+    expect(find.text(menu6), findsOneWidget);
   });
-}
+
+  testWidgets('Find scrum phase', (WidgetTester tester) async {
+    // Build our app and trigger a frame.
+    const menu1 = "Product Backlog";
+    await tester.pumpWidget(MyApp());
+
+
+    // Verify all the sidebar menu.
+    expect(find.text(menu1), findsOneWidget);
+  })
+  ;}
