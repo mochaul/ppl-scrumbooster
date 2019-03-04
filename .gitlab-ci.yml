@@ -9,6 +9,9 @@ variables:
 BackendTest:
   stage: test
   image: python:3.6
+  only:
+    changes:
+    - scrum-booster-api/**/*
   before_script:
     - cd scrum-booster-api
     - pip install -r requirements.txt
@@ -26,7 +29,7 @@ FlutterTest:
   image: jro7/flutter_lcov
   except:
     changes:
-    - scrum-booster-api/*
+    - scrum-booster-api/**/*
   script:
     - echo Testing $APP_NAME
     - flutter doctor -v
@@ -46,7 +49,7 @@ BackendDeployToProduction:
   image: gitlab/dind:latest
   only:
     changes:
-      - scrum-booster-api/*
+      - scrum-booster-api/**/*
     refs:
       - master
   before_script:
@@ -67,7 +70,7 @@ BackendDeployToStaging:
   image: gitlab/dind:latest
   only:
     changes:
-      - scrum-booster-api/*
+      - scrum-booster-api/**/*
     refs:
       - staging
   before_script:
@@ -87,6 +90,8 @@ BackendDeployToDevelopment:
   stage: deploy
   image: gitlab/dind:latest
   only:
+    changes:
+      - scrum-booster-api/**/*
     refs:
       - /^US-.*$/
   before_script:
