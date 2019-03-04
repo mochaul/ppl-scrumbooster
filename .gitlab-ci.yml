@@ -35,9 +35,6 @@ FlutterTest:
     - lcov --summary coverage/lcov.info
     - genhtml coverage/lcov.info --output=coverage
   coverage: '/lines......: \d+\.\d+\%/'
-  except:
-    changes:
-    - scrum-booster-api/**/*
   artifacts:
     name: mobile-coverage
     paths:
