@@ -8,7 +8,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:scrum_booster/main.dart';
+import 'package:ScrumBooster/main.dart';
 
 void main() {
   testWidgets('Find sidebar widget', (WidgetTester tester) async {
@@ -20,7 +20,7 @@ void main() {
     const menu4 = "Glossary";
     const menu5 = "Pop Quiz!";
     const menu6 = "About";
-    await tester.pumpWidget(MyApp());
+    await tester.pumpWidget(ScrumBoosterApp());
 
     // Tap the 'burger menu' icon and trigger a frame.
     scaffoldKey.currentState.openDrawer();
@@ -38,7 +38,7 @@ void main() {
   testWidgets('Find scrum phase', (WidgetTester tester) async {
     // Build our app and trigger a frame.
     const menu1 = "Product Backlog";
-    await tester.pumpWidget(MyApp());
+    await tester.pumpWidget(ScrumBoosterApp());
 
 
     // Verify all the sidebar menu.
