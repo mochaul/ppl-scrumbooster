@@ -28,3 +28,11 @@ class ScrumBoosterTest(APITestCase):
     def test_quiz_question_url_exists(self):
         response = self.client.get(reverse("quiz-question-list"))
         self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    def test_process_area_url_exists(self):
+        response = self.client.get(reverse("process-area-list"))
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    def test_goal_url_exists(self):
+        response = self.client.get(reverse("goal-list"))
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
