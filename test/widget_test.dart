@@ -34,4 +34,14 @@ void main() {
     expect(find.text(menu5), findsOneWidget);
     expect(find.text(menu6), findsOneWidget);
   });
-}
+
+  testWidgets('Find scrum phase', (WidgetTester tester) async {
+    // Build our app and trigger a frame.
+    const menu1 = "Product Backlog";
+    await tester.pumpWidget(MyApp());
+
+
+    // Verify all the sidebar menu.
+    expect(find.text(menu1), findsOneWidget);
+  })
+  ;}
