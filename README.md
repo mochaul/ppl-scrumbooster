@@ -47,5 +47,5 @@ Untuk lebih lengkapnya, panduan konfigurasi bisa dilihat di [CONTRIBUTING.md](CO
 
 Lisensi aplikasi SCRUM Booster ini adalah [MIT/Apache 2.0 (tbd)]. Sedangkan konten-konten dalam aplikasi ini merujuk pada:
 
-1. CMMI-Dev, 
+1. <sumber 1>
 2. <sumber 2>
