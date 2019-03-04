@@ -1,0 +1,182 @@
+stages:
+  - test
+  - deploy
+
+variables:
+  DOCKER_IMAGE_NAME: "registry.docker.ppl.cs.ui.ac.id/ppld1"
+  APP_NAME: "ppld1/scrumbooster-mobile"
+
+BackendTest:
+  stage: test
+  image: python:3.6
+  only:
+    changes:
+    - scrum-booster-api/**/*
+    - .gitlab-ci.yml
+  before_script:
+    - cd scrum-booster-api
+    - pip install -r requirements.txt
+    - python manage.py makemigrations
+    - python manage.py migrate
+    - python manage.py collectstatic --no-input
+    - python manage.py runserver 8000 &
+  when: on_success
+  script:
+    - coverage run manage.py test
+    - coverage report -m
+
+FlutterTest:
+  stage: test
+  image: jro7/flutter_lcov
+  script:
+    - echo Testing $APP_NAME
+    - flutter doctor -v
+    - flutter test --coverage
+    - lcov --summary coverage/lcov.info
+    - genhtml coverage/lcov.info --output=coverage
+  coverage: '/lines......: \d+\.\d+\%/'
+  except:
+    changes:
+    - scrum-booster-api/**/*
+  artifacts:
+    name: mobile-coverage
+    paths:
+      - $CI_PROJECT_DIR/coverage
+
+BackendDeployToProduction:
+  variables:
+    ENV_NAME: "production"
+  stage: deploy
+  image: gitlab/dind:latest
+  only:
+    changes:
+      - scrum-booster-api/**/*
+      - .gitlab-ci.yml
+    refs:
+      - master
+  before_script:
+    - docker info
+  script:
+    - DOCKER_IMAGE_TAG=$DOCKER_IMAGE_NAME/scrumboosterapi/$ENV_NAME
+    - docker build -t $DOCKER_IMAGE_TAG ./scrum-booster-api
+    - docker push $DOCKER_IMAGE_TAG
+  tags:
+    - docker
+    - build
+  environment:
+    name: production
+
+BackendDeployToStaging:
+  variables:
+    ENV_NAME: "staging"
+  stage: deploy
+  image: gitlab/dind:latest
+  only:
+    changes:
+      - scrum-booster-api/**/*
+      - .gitlab-ci.yml
+    refs:
+      - staging
+  before_script:
+    - docker info
+  script:
+    - DOCKER_IMAGE_TAG=$DOCKER_IMAGE_NAME/scrumboosterapi/$ENV_NAME
+    - docker build -t $DOCKER_IMAGE_TAG ./scrum-booster-api
+    - docker push $DOCKER_IMAGE_TAG
+  tags:
+    - docker
+    - build
+  environment:
+    name: staging
+
+BackendDeployToDevelopment:
+  variables:
+    ENV_NAME: "development"
+  stage: deploy
+  image: gitlab/dind:latest
+  only:
+    changes:
+      - scrum-booster-api/**/*
+      - .gitlab-ci.yml
+    refs:
+      - /^US-.*$/
+  before_script:
+    - docker info
+  script:
+    - DOCKER_IMAGE_TAG=$DOCKER_IMAGE_NAME/scrumboosterapi/$ENV_NAME
+    - docker build -t $DOCKER_IMAGE_TAG ./scrum-booster-api
+    - docker push $DOCKER_IMAGE_TAG
+  tags:
+    - docker
+    - build
+  environment:
+    name: development
+
+FlutterDeployToProduction:
+  variables:
+    ENV_NAME: "production"
+  image: gitlab/dind:latest
+  stage: deploy
+  only:
+    refs:
+      - master
+      - build
+  except:
+    changes:
+      - scrum-booster-api/**/*
+  before_script:
+    - docker info
+  script:
+    - DOCKER_IMAGE_TAG=$DOCKER_IMAGE_NAME/scrumbooster-mobile/$ENV_NAME
+    - docker build -t $DOCKER_IMAGE_TAG .
+    - docker push $DOCKER_IMAGE_TAG
+  tags:
+    - docker
+  environment:
+    name: production
+
+FlutterDeployToStaging:
+  variables:
+    ENV_NAME: "staging"
+  image: gitlab/dind:latest
+  stage: deploy
+  tags:
+    - docker
+    - build
+  only:
+    refs:
+      - staging
+  except:
+    changes:
+      - scrum-booster-api/**/*
+  before_script:
+    - docker info
+  script:
+    - DOCKER_IMAGE_TAG=$DOCKER_IMAGE_NAME/scrumbooster-mobile/$ENV_NAME
+    - docker build -t $DOCKER_IMAGE_TAG .
+    - docker push $DOCKER_IMAGE_TAG
+  environment:
+    name: staging
+
+FlutterDeployToDevelopment:
+  variables:
+    ENV_NAME: "development"
+  image: gitlab/dind:latest
+  stage: deploy
+  tags:
+    - docker
+    - build
+  only:
+    refs:
+      - /^US-.*$/
+  except:
+    changes:
+      - scrum-booster-api/**/*
+  before_script:
+    - docker info
+  script:
+    - DOCKER_IMAGE_TAG=$DOCKER_IMAGE_NAME/scrumbooster-mobile/$ENV_NAME
+    - docker build -t $DOCKER_IMAGE_TAG .
+    - docker push $DOCKER_IMAGE_TAG
+  environment:
+    name: development
