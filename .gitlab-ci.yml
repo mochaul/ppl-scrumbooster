@@ -12,7 +12,7 @@ BackendTest:
   only:
     changes:
     - scrum-booster-api/**/*
-    - .gitlab-ci.yaml
+    - .gitlab-ci.yml
   before_script:
     - cd scrum-booster-api
     - pip install -r requirements.txt
@@ -51,7 +51,7 @@ BackendDeployToProduction:
   only:
     changes:
       - scrum-booster-api/**/*
-      - .gitlab-ci.yaml
+      - .gitlab-ci.yml
     refs:
       - master
   before_script:
@@ -74,7 +74,7 @@ BackendDeployToStaging:
   only:
     changes:
       - scrum-booster-api/**/*
-      - .gitlab-ci.yaml
+      - .gitlab-ci.yml
     refs:
       - staging
   before_script:
@@ -97,7 +97,7 @@ BackendDeployToDevelopment:
   only:
     changes:
       - scrum-booster-api/**/*
-      - .gitlab-ci.yaml
+      - .gitlab-ci.yml
     refs:
       - /^US-.*$/
   before_script:
