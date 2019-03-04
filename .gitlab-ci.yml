@@ -10,6 +10,7 @@ BackendTest:
   stage: test
   image: python:3.6
   before_script:
+    - cd scrum-booster-api
     - pip install -r requirements.txt
     - python manage.py makemigrations
     - python manage.py migrate
