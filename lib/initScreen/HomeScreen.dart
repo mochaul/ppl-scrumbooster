@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:ScrumBooster/utils/utils.dart';
 
 class HomePage extends StatelessWidget {
-  final String title;
   final List<String> myList = new List();
 
-  HomePage({Key key, this.title, List<String> myList}) : super(key: key);
+  HomePage({Key key, List<String> myList}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +16,7 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
           centerTitle: true,
-          title: Text(title)),
+          title: Text("Scrum Booster")),
       body: GridView.count(
         crossAxisCount: 2,
         children: List.generate(4, (index) {

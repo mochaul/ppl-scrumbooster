@@ -36,7 +36,7 @@ class _ScrumBoosterAppState extends State<ScrumBoosterApp> {
       ),
       home: new SplashScreen(),
       routes: <String, WidgetBuilder>{
-        '/Home': (BuildContext context) => new HomePage(title: appTitle),
+        '/Home': (BuildContext context) => new HomePage(),
       },
     );
   }
