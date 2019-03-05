@@ -6,6 +6,24 @@ variables:
   DOCKER_IMAGE_NAME: "registry.docker.ppl.cs.ui.ac.id/ppld1"
   APP_NAME: "ppld1/scrumbooster-mobile"
 
+FlutterTest:
+  stage: test
+  image: jro7/flutter_lcov
+  script:
+  - echo Testing $APP_NAME
+  - flutter doctor -v
+  - flutter test --coverage
+  - lcov --summary coverage/lcov.info
+  - genhtml coverage/lcov.info --output=coverage
+  coverage: '/lines......: \d+\.\d+\%/'
+  except:
+    changes:
+    - scrum-booster-api/**/*
+  artifacts:
+    name: mobile-coverage
+    paths:
+    - $CI_PROJECT_DIR/coverage
+
 BackendTest:
   stage: test
   image: python:3.6
@@ -24,24 +42,6 @@ BackendTest:
   script:
     - coverage run manage.py test
     - coverage report -m
-
-FlutterTest:
-  stage: test
-  image: jro7/flutter_lcov
-  script:
-    - echo Testing $APP_NAME
-    - flutter doctor -v
-    - flutter test --coverage
-    - lcov --summary coverage/lcov.info
-    - genhtml coverage/lcov.info --output=coverage
-  coverage: '/lines......: \d+\.\d+\%/'
-  except:
-    changes:
-    - scrum-booster-api/**/*
-  artifacts:
-    name: mobile-coverage
-    paths:
-      - $CI_PROJECT_DIR/coverage
 
 BackendDeployToProduction:
   variables:
@@ -121,9 +121,6 @@ FlutterDeployToProduction:
     refs:
       - master
       - build
-  except:
-    changes:
-      - scrum-booster-api/**/*
   before_script:
     - docker info
   script:
@@ -146,9 +143,6 @@ FlutterDeployToStaging:
   only:
     refs:
       - staging
-  except:
-    changes:
-      - scrum-booster-api/**/*
   before_script:
     - docker info
   script:
