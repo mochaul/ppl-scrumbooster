@@ -8,6 +8,18 @@ class PhaseSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+class ProcessAreaSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.ProcessArea
+        fields = '__all__'
+
+
+class GoalSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Goal
+        fields = '__all__'
+
+
 class CMMIPracticesSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.CMMIPractices
