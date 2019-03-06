@@ -8,22 +8,36 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:scrum_booster/main.dart';
+import 'package:ScrumBooster/main.dart';
+import 'package:ScrumBooster/initScreen/HomeScreen.dart';
+import 'package:ScrumBooster/initScreen/splashScreen.dart';
 
 void main() {
-  testWidgets('Find sidebar widget', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    final scaffoldKey = GlobalKey<ScaffoldState>();
+  final HomePage home = HomePage();
+  // final scaffoldKey = GlobalKey<ScaffoldState>();
+  final SplashScreen splash = SplashScreen();
+
+  Widget makeTestableWidget({Widget child}) {
+    return MaterialApp(
+      home: child,
+      // key: scaffoldKey,
+    );
+  }
+
+  testWidgets('Home Screen Drawer Test', (WidgetTester tester) async {
+    GlobalKey<ScaffoldState> scaffoldKey = home.getScaffoldKey();
+    await tester.pumpWidget(makeTestableWidget(child: home));
+
     const menu1 = "Home";
     const menu2 = "Ceremonies";
     const menu3 = "Problems";
     const menu4 = "Glossary";
     const menu5 = "Pop Quiz!";
     const menu6 = "About";
-    await tester.pumpWidget(MyApp());
 
     // Tap the 'burger menu' icon and trigger a frame.
     scaffoldKey.currentState.openDrawer();
+    print("berhasil yey");
     await tester.pump();
 
     // Verify all the sidebar menu.
@@ -35,13 +49,12 @@ void main() {
     expect(find.text(menu6), findsOneWidget);
   });
 
-  testWidgets('Find scrum phase', (WidgetTester tester) async {
+  testWidgets('Test Find Scrum Phase', (WidgetTester tester) async {
     // Build our app and trigger a frame.
     const menu1 = "Product Backlog";
-    await tester.pumpWidget(MyApp());
-
+    await tester.pumpWidget(makeTestableWidget(child: home));
 
     // Verify all the sidebar menu.
     expect(find.text(menu1), findsOneWidget);
-  })
-  ;}
+  });
+}
