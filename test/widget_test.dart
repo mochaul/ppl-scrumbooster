@@ -14,18 +14,24 @@ import 'package:ScrumBooster/initScreen/splashScreen.dart';
 
 void main() {
   final HomePage home = HomePage();
+  // final scaffoldKey = GlobalKey<ScaffoldState>();
   final SplashScreen splash = SplashScreen();
 
   Widget makeTestableWidget({Widget child}) {
     return MaterialApp(
       home: child,
+      // key: scaffoldKey,
     );
   }
 
-  testWidgets('Home Screen Drawer Test', (WidgetTester tester) async {
+  testWidgets('Splash Screen Test', (WidgetTester tester) async {
+    await tester.pumpWidget(makeTestableWidget(child: splash));
+    expect(find.text("SCRUM BOOSTER"), findsOneWidget);
+  });
 
+  testWidgets('Home Screen Drawer Test', (WidgetTester tester) async {
+    GlobalKey<ScaffoldState> scaffoldKey = home.getScaffoldKey();
     await tester.pumpWidget(makeTestableWidget(child: home));
-    final scaffoldKey = GlobalKey<ScaffoldState>();
 
     const menu1 = "Home";
     const menu2 = "Ceremonies";
@@ -36,6 +42,7 @@ void main() {
 
     // Tap the 'burger menu' icon and trigger a frame.
     scaffoldKey.currentState.openDrawer();
+    print("berhasil yey");
     await tester.pump();
 
     // Verify all the sidebar menu.

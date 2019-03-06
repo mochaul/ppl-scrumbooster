@@ -3,8 +3,13 @@ import 'package:ScrumBooster/utils/utils.dart';
 
 class HomePage extends StatelessWidget {
   final List<String> myList = new List();
+  final scaffoldKey = GlobalKey<ScaffoldState>();
 
-  HomePage({Key key, List<String> myList}) : super(key: key);
+  getScaffoldKey() {
+    return scaffoldKey;
+  }
+
+//  HomePage({Key key, List<String> myList}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -14,6 +19,7 @@ class HomePage extends StatelessWidget {
     myList.add("Sprint Evaluation");
 
     return Scaffold(
+      key: scaffoldKey,
       appBar: AppBar(
           centerTitle: true,
           title: Text("Scrum Booster")),
