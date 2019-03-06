@@ -7,10 +7,25 @@ class Phase(models.Model):
     image = models.ImageField()
 
 
+class ProcessArea(models.Model):
+    title = models.CharField(max_length=255)
+    purpose_statement = models.CharField(max_length=2047)
+    introductory_notes = models.CharField(max_length=2047)
+    related_process_areas = models.ManyToManyField('self')
+
+
+class Goal(models.Model):
+    title = models.CharField(max_length=255)
+    detail = models.CharField(max_length=2047)
+    image = models.ImageField()
+    to_satisfy = models.ForeignKey(ProcessArea, models.CASCADE, null=False)
+
+
 class CMMIPractices(models.Model):
     title = models.CharField(max_length=255)
     detail = models.CharField(max_length=2047)
     image = models.ImageField()
+    to_achieve = models.ForeignKey(Goal, models.CASCADE, null=True)
 
 
 class Ceremony(models.Model):
