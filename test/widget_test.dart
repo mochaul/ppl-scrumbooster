@@ -24,11 +24,6 @@ void main() {
     );
   }
 
-  testWidgets('Splash Screen Test', (WidgetTester tester) async {
-    await tester.pumpWidget(makeTestableWidget(child: splash));
-    expect(find.text("SCRUM BOOSTER"), findsOneWidget);
-  });
-
   testWidgets('Home Screen Drawer Test', (WidgetTester tester) async {
     GlobalKey<ScaffoldState> scaffoldKey = home.getScaffoldKey();
     await tester.pumpWidget(makeTestableWidget(child: home));
