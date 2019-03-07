@@ -49,6 +49,7 @@ flutter:
   assets:
     - assets/logos/logo-color.png
     - assets/logos/logo-white.png
+    - assets/logos/Makara-UI.png
 
   fonts:
     - family: Montserrat
