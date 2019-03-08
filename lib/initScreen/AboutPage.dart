@@ -6,7 +6,7 @@ class AboutPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("About Scrum Booster", style: TextStyle(color: Colors.black12),),
+        title: Text("About Scrum Booster", style: TextStyle(color: Colors.white),),
       ),
       
       //add new cotainer for page's contents
@@ -34,14 +34,14 @@ class AboutPage extends StatelessWidget {
 
                 //import University logo from the assets
                 new Image.asset(
-                  'assets/logos/logo-color.png', 
+                  'assets/logos/Makar-UI.png', 
                     height: 120,
                   ),
               ], 
             ),
 
 
-            //add padding for content 
+            //add padding for content
             Padding(
               padding: EdgeInsets.only(top: 50.0),
               child: new Column(
