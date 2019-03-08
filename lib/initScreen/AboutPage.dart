@@ -6,7 +6,7 @@ class AboutPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("About Scrum Booster", style: TextStyle(color: Colors.white,),
+        title: Text("About Scrum Booster", style: TextStyle(color: Colors.white),),
       ),
       
       //add new cotainer for page's contents
