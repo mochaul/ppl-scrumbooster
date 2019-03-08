@@ -100,6 +100,7 @@ class HomePage extends StatelessWidget {
                 // ...
                 // Then close the drawer
                 Navigator.pop(context);
+                //moving to about page
                 Navigator.of(context).pushNamed('/About');
               },
             ),
