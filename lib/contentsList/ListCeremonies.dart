@@ -62,6 +62,16 @@ var utils = new Util();
                         Text("C dummy 3", style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500, color: utils.hexToColor("#3498DB")),),
                       ],
                     ),),
+                  Text("D", style: TextStyle(fontSize: 46, fontWeight: FontWeight.w500),),
+                  Padding(
+                    padding: EdgeInsets.all(10),
+                    child: Column(
+                      children: <Widget>[
+                        Text("D dummy 1", style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500, color: utils.hexToColor("#3498DB")),),
+                        Text("D dummy 2", style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500, color: utils.hexToColor("#3498DB")),),
+                        Text("D dummy 3", style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500, color: utils.hexToColor("#3498DB")),),
+                      ],
+                    ),),
                 ],
               ),
             )
