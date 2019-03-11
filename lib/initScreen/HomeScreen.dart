@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ScrumBooster/utils/utils.dart';
 import 'package:ScrumBooster/components/ScrumPhaseBtn.dart';
+import 'package:ScrumBooster/scrumPhaseList/ProductBacklog.dart';
 
 class HomePage extends StatelessWidget {
   final List<String> myList = new List();
@@ -16,20 +17,12 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    myList.add("Product Backlog");
-    myList.add("Sprint Planning");
-    myList.add("Sprint Execution");
-    myList.add("Sprint Evaluation");
-    homeImageList.add("assets/homepage/Product_Backlog.png");
-    homeImageList.add("assets/homepage/Sprint_Planning.png");
-    homeImageList.add("assets/homepage/Sprint_Exe.png");
-    homeImageList.add("assets/homepage/Sprint_Evaluation.png");
-
     return Scaffold(
       key: scaffoldKey,
       appBar: AppBar(
           centerTitle: true,
-          title: Text("Scrum Booster")),
+          title: Text("SCRUM BOOSTER", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: utils.hexToColor("#FFFFFF")),)
+    ),
       body: new Column(
         children: <Widget>[
           new Padding(padding: EdgeInsets.all(15.0),),
@@ -42,7 +35,14 @@ class HomePage extends StatelessWidget {
                   children: <Widget>[
                     new ScrumPhaseBtn(
                       title: "Product Backlog",
-                      action: () => {},
+                      action: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ProductBacklog()
+                          )
+                        );
+                      },
                       imgUrl: "assets/homepage/Product_Backlog.png",
                     ),
                     new Padding(
@@ -56,8 +56,6 @@ class HomePage extends StatelessWidget {
                   ],
                 ),
               ),
-//              Image.asset("assets/homepage/Product_Backlog.png", height: 200,),
-//              Image.asset("assets/homepage/Sprint_Planning.png", height: 200,),
             ],
           ),
           new Row(
@@ -82,22 +80,8 @@ class HomePage extends StatelessWidget {
                   ],
                 ),
               ),
-//              Image.asset("assets/homepage/Product_Backlog.png", height: 200,),
-//              Image.asset("assets/homepage/Sprint_Planning.png", height: 200,),
             ],
-//            children: <Widget>[
-//              Image.asset("assets/homepage/Sprint_Exe.png", height: 200,),
-//              Image.asset("assets/homepage/Sprint_Evaluation.png", height: 200,),
-//            ],
           )
-//          GridView.count(
-//            crossAxisCount: 2,
-//            children: List.generate(4, (index) {
-//              return Center(
-//                child: Image.asset(homeImageList[index]),
-//              );
-//            }),
-//          ),
         ],
       ),
       drawer: Drawer(
