@@ -15,7 +15,7 @@ import 'package:ScrumBooster/contentsList/ListProblems.dart';
 
 void main() {
   final HomePage home = HomePage();
-  final ListProblems lstproblems = ListProblems();
+  final ListProblems lstProblems = ListProblems();
   // final scaffoldKey = GlobalKey<ScaffoldState>();
   final SplashScreen splash = SplashScreen();
 
