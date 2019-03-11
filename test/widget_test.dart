@@ -57,4 +57,20 @@ void main() {
     // Verify all the sidebar menu.
     expect(find.text(menu1), findsOneWidget);
   });
+
+  test('AssetImage from package', () { 
+  const AssetImage image = AssetImage( 
+  'assets/listCeremonies/ceremonies.png', 
+  package: 'test_package', 
+  ); 
+  expect(image.keyName, 'packages/test_package/assets/listCeremonies/ceremonies.png'); 
+  });
+
+  testWidgets('Test Find List Ceremonies', (WidgetTester tester) async {
+  // Build our app and trigger a frame.
+  await tester.pumpWidget(makeTestableWidget(child: home));
+  String menu1 = "Ceremonies";
+  // Verify all the sidebar menu.
+  expect(find.text(menu1), findsOneWidget);
+  });
 }
