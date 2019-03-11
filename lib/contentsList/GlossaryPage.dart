@@ -27,6 +27,8 @@ var utils = new Util();
             Padding(padding: EdgeInsets.all(10),),
             Text("GLOSSARY", style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold), textAlign: TextAlign.center,),
             Padding(padding: EdgeInsets.all(10),),
+
+            //import image from assests
             Image.asset("assets/listGlossary/glossary.png", height: 200,),
             Container(
               padding: EdgeInsets.all(20),
