@@ -88,4 +88,20 @@ void main() {
     );
     expect(image.keyName, 'packages/test_package/assets/homepage/Sprint_Evaluation.png');
   });
+
+  testWidgets('Test Find Header', (WidgetTester tester) async {
+    // Build our app and trigger a frame.
+    await tester.pumpWidget(makeTestableWidget(child: home));
+    String menu1 = "WHICH SCRUMPHASE ARE YOU IN RIGHT NOW?";
+    // Verify all the sidebar menu.
+    expect(find.text(menu1), findsOneWidget);
+  });
+
+  testWidgets('Test Find Wrong Header', (WidgetTester tester) async {
+    // Build our app and trigger a frame.
+    await tester.pumpWidget(makeTestableWidget(child: home));
+    String menu1 = "WHICH SCRUM BOOSTER ARE YOU IN RIGHT NOW?";
+    // Verify all the sidebar menu.
+    expect(find.text(menu1), findsNothing);
+  });
 }
