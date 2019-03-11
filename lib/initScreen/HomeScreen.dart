@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ScrumBooster/utils/utils.dart';
+import 'package:ScrumBooster/contents/problems.dart';
 
 class HomePage extends StatelessWidget {
   final List<String> myList = new List();
@@ -69,10 +70,16 @@ class HomePage extends StatelessWidget {
             ListTile(
               title: Text('Problems'),
               onTap: () {
-                // Update the state of the app
-                // ...
-                // Then close the drawer
-                Navigator.pop(context);
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ProblemsContentPage(
+                      title: "Lorem Ipsum",
+                      contents: "Lorem Ipsum dolor sit amet. asidhaiudhaiuxaipxnaipapiuapxiaipsxnaipfapiapisxnapisxnapidspaixnpaisxnpaiusfniauniapxnpaixnianfuiafniand",
+                      imagePath: "assets/logos/logo-color.png",
+                    )
+                  ),
+                );
               },
             ),
             ListTile(

@@ -14,7 +14,6 @@ import 'package:ScrumBooster/initScreen/splashScreen.dart';
 
 void main() {
   final HomePage home = HomePage();
-  // final scaffoldKey = GlobalKey<ScaffoldState>();
   final SplashScreen splash = SplashScreen();
 
   Widget makeTestableWidget({Widget child}) {
@@ -37,7 +36,6 @@ void main() {
 
     // Tap the 'burger menu' icon and trigger a frame.
     scaffoldKey.currentState.openDrawer();
-    print("berhasil yey");
     await tester.pump();
 
     // Verify all the sidebar menu.
