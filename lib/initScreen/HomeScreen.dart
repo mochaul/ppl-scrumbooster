@@ -10,6 +10,7 @@ class HomePage extends StatelessWidget {
   }
 
 //  HomePage({Key key, List<String> myList}) : super(key: key);
+var utils = new Util();
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +23,8 @@ class HomePage extends StatelessWidget {
       key: scaffoldKey,
       appBar: AppBar(
           centerTitle: true,
-          title: Text("Scrum Booster")),
+          title: Text("SCRUM BOOSTER", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: utils.hexToColor("#FFFFFF")),)
+      ),
       body: GridView.count(
         crossAxisCount: 2,
         children: List.generate(4, (index) {

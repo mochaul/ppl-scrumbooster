@@ -9,7 +9,6 @@ class ListCeremonies extends StatelessWidget {
     return scaffoldKey;
   }
 
-//  ListCeremonies({Key key, List<String> myList}) : super(key: key);
 var utils = new Util();
 
   @override
