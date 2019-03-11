@@ -67,25 +67,25 @@ void main() {
 
   test('AssetImage sprint planning from package', () {
     const AssetImage image = AssetImage(
-      'assets/homepage/Product_Backlog.png',
+      'assets/homepage/Sprint_Planning.png',
       package: 'test_package',
     );
-    expect(image.keyName, 'packages/test_package/assets/homepage/Product_Backlog.png');
+    expect(image.keyName, 'packages/test_package/assets/homepage/Sprint_Planning.png');
   });
 
   test('AssetImage sprint exe from package', () {
     const AssetImage image = AssetImage(
-      'assets/homepage/Product_Backlog.png',
+      'assets/homepage/Sprint_Exe.png',
       package: 'test_package',
     );
-    expect(image.keyName, 'packages/test_package/assets/homepage/Product_Backlog.png');
+    expect(image.keyName, 'packages/test_package/assets/homepage/Sprint_Exe.png');
   });
 
-  test('AssetImage sprint evaluationa from package', () {
+  test('AssetImage sprint evaluation from package', () {
     const AssetImage image = AssetImage(
-      'assets/homepage/Product_Backlog.png',
+      'assets/homepage/Sprint_Evaluation.png',
       package: 'test_package',
     );
-    expect(image.keyName, 'packages/test_package/assets/homepage/Product_Backlog.png');
+    expect(image.keyName, 'packages/test_package/assets/homepage/Sprint_Evaluation.png');
   });
 }
