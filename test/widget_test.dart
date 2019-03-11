@@ -11,9 +11,11 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:ScrumBooster/main.dart';
 import 'package:ScrumBooster/initScreen/HomeScreen.dart';
 import 'package:ScrumBooster/initScreen/splashScreen.dart';
+import 'package:ScrumBooster/contentsList/ListCeremonies.dart';
 
 void main() {
   final HomePage home = HomePage();
+  final ListCeremonies lstCeremonies = ListCeremonies();
   // final scaffoldKey = GlobalKey<ScaffoldState>();
   final SplashScreen splash = SplashScreen();
 
@@ -68,7 +70,7 @@ void main() {
 
   testWidgets('Test Find List Ceremonies', (WidgetTester tester) async {
   // Build our app and trigger a frame.
-  await tester.pumpWidget(makeTestableWidget(child: home));
+  await tester.pumpWidget(makeTestableWidget(child: lstCeremonies));
   String header1 = "CEREMONIES";
   // Verify all the sidebar menu.
   expect(find.text(header1), findsOneWidget);

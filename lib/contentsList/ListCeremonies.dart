@@ -26,17 +26,10 @@ var utils = new Util();
           children: <Widget>[
             new Padding(padding: EdgeInsets.all(10.0),),
             new Text("CEREMONIES", style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold), textAlign: TextAlign.center,),
-            // new Padding(padding: EdgeInsets.all(5.0),),
             new Image.asset("assets/listCeremonies/ceremonies.png", height: 200,),
-            // new ListView(
-            //   shrinkWrap: true,
-            //   padding: const EdgeInsets.all(20.0),
-            // children: <Widget>[
-                new Text("A", style: TextStyle(fontSize: 46, fontWeight: FontWeight.w500),),
-                new Text("B", style: TextStyle(fontSize: 46, fontWeight: FontWeight.w500),),
-                new Text("C", style: TextStyle(fontSize: 46, fontWeight: FontWeight.w500),),
-          //     ],
-          //   )
+            new Text("A", style: TextStyle(fontSize: 46, fontWeight: FontWeight.w500),),
+            new Text("B", style: TextStyle(fontSize: 46, fontWeight: FontWeight.w500),),
+            new Text("C", style: TextStyle(fontSize: 46, fontWeight: FontWeight.w500),),
           ],
         )
       ),
