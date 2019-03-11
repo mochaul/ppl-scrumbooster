@@ -64,6 +64,8 @@ class HomePage extends StatelessWidget {
                 // ...
                 // Then close the drawer
                 Navigator.pop(context);
+                // redirect
+                Navigator.of(context).pushNamed('/ListCeremonies');
               },
             ),
             ListTile(
