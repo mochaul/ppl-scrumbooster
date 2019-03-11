@@ -22,14 +22,50 @@ var utils = new Util();
           title: Text("SCRUM BOOSTER", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: utils.hexToColor("#FFFFFF")),)
       ),
       body: Center(
-        child: new ListView(
+        child: ListView(
           children: <Widget>[
-            new Padding(padding: EdgeInsets.all(10.0),),
-            new Text("CEREMONIES", style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold), textAlign: TextAlign.center,),
-            new Image.asset("assets/listCeremonies/ceremonies.png", height: 200,),
-            new Text("A", style: TextStyle(fontSize: 46, fontWeight: FontWeight.w500),),
-            new Text("B", style: TextStyle(fontSize: 46, fontWeight: FontWeight.w500),),
-            new Text("C", style: TextStyle(fontSize: 46, fontWeight: FontWeight.w500),),
+            Padding(padding: EdgeInsets.all(10),),
+            Text("CEREMONIES", style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold), textAlign: TextAlign.center,),
+            Image.asset("assets/listCeremonies/ceremonies.png", height: 200,),
+            Container(
+              padding: EdgeInsets.all(20),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text("A", style: TextStyle(fontSize: 46, fontWeight: FontWeight.w500),),
+                  Padding(
+                    padding: EdgeInsets.all(10),
+                    child: Column(
+                      children: <Widget>[
+                        Text("A dummy 1", style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500, color: utils.hexToColor("#3498DB")),),
+                        Text("A dummy 2", style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500, color: utils.hexToColor("#3498DB")),),
+                        Text("A dummy 3", style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500, color: utils.hexToColor("#3498DB")),),
+                      ],
+                    ),),
+                  Text("B", style: TextStyle(fontSize: 46, fontWeight: FontWeight.w500),),
+                  Padding(
+                    padding: EdgeInsets.all(10),
+                    child: Column(
+                      children: <Widget>[
+                        Text("B dummy 1", style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500, color: utils.hexToColor("#3498DB")),),
+                        Text("B dummy 2", style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500, color: utils.hexToColor("#3498DB")),),
+                        Text("B dummy 3", style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500, color: utils.hexToColor("#3498DB")),),
+                      ],
+                    ),),
+                  Text("C", style: TextStyle(fontSize: 46, fontWeight: FontWeight.w500),),
+                  Padding(
+                    padding: EdgeInsets.all(10),
+                    child: Column(
+                      children: <Widget>[
+                        Text("C dummy 1", style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500, color: utils.hexToColor("#3498DB")),),
+                        Text("C dummy 2", style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500, color: utils.hexToColor("#3498DB")),),
+                        Text("C dummy 3", style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500, color: utils.hexToColor("#3498DB")),),
+                      ],
+                    ),),
+                ],
+              ),
+            )
           ],
         )
       ),
