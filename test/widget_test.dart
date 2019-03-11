@@ -49,14 +49,6 @@ void main() {
     expect(find.text(menu6), findsOneWidget);
   });
 
-  testWidgets('Test Find Scrum Phase', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(makeTestableWidget(child: home));
-    String menu1 = "Product Backlog";
-    // Verify all the sidebar menu.
-    expect(find.text(menu1), findsOneWidget);
-  });
-
   test('AssetImage Product backlog from package', () {
     const AssetImage image = AssetImage(
       'assets/homepage/Product_Backlog.png',
