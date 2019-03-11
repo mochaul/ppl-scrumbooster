@@ -11,7 +11,7 @@ class HomePage extends StatelessWidget {
   }
 
 //  HomePage({Key key, List<String> myList}) : super(key: key);
-
+  final util = new Util();
   @override
   Widget build(BuildContext context) {
     myList.add("Product Backlog");
@@ -22,8 +22,31 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       key: scaffoldKey,
       appBar: AppBar(
-          centerTitle: true,
-          title: Text("Scrum Booster")),
+        leading: new Icon(
+          Icons.menu,
+          color: util.hexToColor("#FFFFFF"),
+        ),
+        centerTitle: true,
+        title: Text(
+          "Scrum Booster",
+          style: TextStyle(
+            color: util.hexToColor("#FFFFFF"),
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        actions: <Widget>[
+          new Padding(
+            padding: EdgeInsets.only(right: 6.0),
+            child: new InkWell(
+              child: new Icon(
+                Icons.search,
+                color: util.hexToColor("#FFFFFF"),
+              ),
+              onTap: () => {},
+            ),
+          ),
+        ],
+      ),
       body: GridView.count(
         crossAxisCount: 2,
         children: List.generate(4, (index) {
@@ -35,83 +58,7 @@ class HomePage extends StatelessWidget {
           );
         }),
       ),
-      drawer: Drawer(
-        // Add a ListView to the drawer. This ensures the user can scroll
-        // through the options in the Drawer if there isn't enough vertical
-        // space to fit everything.
-        child: ListView(
-          // Important: Remove any padding from the ListView.
-          padding: EdgeInsets.zero,
-          children: <Widget>[
-            DrawerHeader(
-              child: Text('Drawer Header'),
-              decoration: BoxDecoration(
-                color: Colors.blue,
-              ),
-            ),
-            ListTile(
-              title: Text('Home'),
-              onTap: () {
-                // Update the state of the app
-                // ...
-                // Then close the drawer
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              title: Text('Ceremonies'),
-              onTap: () {
-                // Update the state of the app
-                // ...
-                // Then close the drawer
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              title: Text('Problems'),
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => ProblemsContentPage(
-                      title: "Lorem Ipsum",
-                      contents: "Lorem Ipsum dolor sit amet. asidhaiudhaiuxaipxnaipapiuapxiaipsxnaipfapiapisxnapisxnapidspaixnpaisxnpaiusfniauniapxnpaixnianfuiafniand",
-                      imagePath: "assets/logos/logo-color.png",
-                    )
-                  ),
-                );
-              },
-            ),
-            ListTile(
-              title: Text('Glossary'),
-              onTap: () {
-                // Update the state of the app
-                // ...
-                // Then close the drawer
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              title: Text('Pop Quiz!'),
-              onTap: () {
-                // Update the state of the app
-                // ...
-                // Then close the drawer
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              title: Text('About'),
-              onTap: () {
-                // Update the state of the app
-                // ...
-                // Then close the drawer
-                Navigator.pop(context);
-              },
-            ),
-          ],
-        ),
-      ),
+      drawer: util.defaultDrawer(context),
     );
   }
 }
