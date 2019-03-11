@@ -51,10 +51,41 @@ void main() {
 
   testWidgets('Test Find Scrum Phase', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    const menu1 = "Product Backlog";
     await tester.pumpWidget(makeTestableWidget(child: home));
-
+    String menu1 = "Product Backlog";
     // Verify all the sidebar menu.
     expect(find.text(menu1), findsOneWidget);
+  });
+
+  test('AssetImage Product backlog from package', () {
+    const AssetImage image = AssetImage(
+      'assets/homepage/Product_Backlog.png',
+      package: 'test_package',
+    );
+    expect(image.keyName, 'packages/test_package/assets/homepage/Product_Backlog.png');
+  });
+
+  test('AssetImage sprint planning from package', () {
+    const AssetImage image = AssetImage(
+      'assets/homepage/Product_Backlog.png',
+      package: 'test_package',
+    );
+    expect(image.keyName, 'packages/test_package/assets/homepage/Product_Backlog.png');
+  });
+
+  test('AssetImage sprint exe from package', () {
+    const AssetImage image = AssetImage(
+      'assets/homepage/Product_Backlog.png',
+      package: 'test_package',
+    );
+    expect(image.keyName, 'packages/test_package/assets/homepage/Product_Backlog.png');
+  });
+
+  test('AssetImage sprint evaluationa from package', () {
+    const AssetImage image = AssetImage(
+      'assets/homepage/Product_Backlog.png',
+      package: 'test_package',
+    );
+    expect(image.keyName, 'packages/test_package/assets/homepage/Product_Backlog.png');
   });
 }
