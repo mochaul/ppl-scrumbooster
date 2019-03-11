@@ -49,12 +49,51 @@ void main() {
     expect(find.text(menu6), findsOneWidget);
   });
 
-  testWidgets('Test Find Scrum Phase', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    const menu1 = "Product Backlog";
-    await tester.pumpWidget(makeTestableWidget(child: home));
+  test('AssetImage Product backlog from package', () {
+    const AssetImage image = AssetImage(
+      'assets/homepage/Product_Backlog.png',
+      package: 'test_package',
+    );
+    expect(image.keyName, 'packages/test_package/assets/homepage/Product_Backlog.png');
+  });
 
+  test('AssetImage sprint planning from package', () {
+    const AssetImage image = AssetImage(
+      'assets/homepage/Sprint_Planning.png',
+      package: 'test_package',
+    );
+    expect(image.keyName, 'packages/test_package/assets/homepage/Sprint_Planning.png');
+  });
+
+  test('AssetImage sprint exe from package', () {
+    const AssetImage image = AssetImage(
+      'assets/homepage/Sprint_Exe.png',
+      package: 'test_package',
+    );
+    expect(image.keyName, 'packages/test_package/assets/homepage/Sprint_Exe.png');
+  });
+
+  test('AssetImage sprint evaluation from package', () {
+    const AssetImage image = AssetImage(
+      'assets/homepage/Sprint_Evaluation.png',
+      package: 'test_package',
+    );
+    expect(image.keyName, 'packages/test_package/assets/homepage/Sprint_Evaluation.png');
+  });
+
+  testWidgets('Test Find Header', (WidgetTester tester) async {
+    // Build our app and trigger a frame.
+    await tester.pumpWidget(makeTestableWidget(child: home));
+    String menu1 = "WHICH SCRUMPHASE ARE YOU IN RIGHT NOW?";
     // Verify all the sidebar menu.
     expect(find.text(menu1), findsOneWidget);
+  });
+
+  testWidgets('Test Find Wrong Header', (WidgetTester tester) async {
+    // Build our app and trigger a frame.
+    await tester.pumpWidget(makeTestableWidget(child: home));
+    String menu1 = "WHICH SCRUM BOOSTER ARE YOU IN RIGHT NOW?";
+    // Verify all the sidebar menu.
+    expect(find.text(menu1), findsNothing);
   });
 }
