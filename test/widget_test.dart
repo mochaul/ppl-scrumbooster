@@ -11,11 +11,13 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:ScrumBooster/main.dart';
 import 'package:ScrumBooster/initScreen/HomeScreen.dart';
 import 'package:ScrumBooster/initScreen/splashScreen.dart';
+import 'package:ScrumBooster/contentsList/GlossaryPage.dart';
 
 void main() {
   final HomePage home = HomePage();
   // final scaffoldKey = GlobalKey<ScaffoldState>();
   final SplashScreen splash = SplashScreen();
+  final GlossaryPage glossary =GlossaryPage();
 
   Widget makeTestableWidget({Widget child}) {
     return MaterialApp(
@@ -75,4 +77,15 @@ void main() {
       expect(makara.keyName, 'packages/test_package/assets/logos/Makara-UI.png');
       expect(glossary.keyName, 'packages/test_package/assets/listGlossary/glossary.png');
     });
+
+  testWidgets('Test Find List Glossary', (WidgetTester tester) async {
+  // Build our app and trigger a frame.
+  await tester.pumpWidget(makeTestableWidget(child: glossary));
+  String header1 = "GLOSSARY";
+  // Verify all the sidebar menu.
+  expect(find.text(header1), findsOneWidget);
+  });
+
+
+ 
 }

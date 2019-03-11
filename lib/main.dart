@@ -4,7 +4,7 @@ import 'package:ScrumBooster/initScreen/splashScreen.dart';
 import 'package:flutter/services.dart';
 import 'package:ScrumBooster/initScreen/HomeScreen.dart';
 import 'package:ScrumBooster/initScreen/AboutPage.dart';
-import 'package:ScrumBooster/initScreen/GlossaryPage.dart';
+import 'package:ScrumBooster/contentsList/GlossaryPage.dart';
 
 
 
