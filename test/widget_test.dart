@@ -69,8 +69,8 @@ void main() {
   testWidgets('Test Find List Ceremonies', (WidgetTester tester) async {
   // Build our app and trigger a frame.
   await tester.pumpWidget(makeTestableWidget(child: home));
-  String menu1 = "Ceremonies";
+  String header1 = "CEREMONIES";
   // Verify all the sidebar menu.
-  expect(find.text(menu1), findsOneWidget);
+  expect(find.text(header1), findsOneWidget);
   });
 }

@@ -22,21 +22,21 @@ var utils = new Util();
           title: Text("SCRUM BOOSTER", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: utils.hexToColor("#FFFFFF")),)
       ),
       body: Center(
-        child: new Column(
+        child: new ListView(
           children: <Widget>[
-            new Padding(padding: EdgeInsets.all(5.0),),
-            new Text("CEREMONIES", style: TextStyle(fontSize: 26, fontWeight: FontWeight.bold),),
-            new Padding(padding: EdgeInsets.all(5.0),),
+            new Padding(padding: EdgeInsets.all(10.0),),
+            new Text("CEREMONIES", style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold), textAlign: TextAlign.center,),
+            // new Padding(padding: EdgeInsets.all(5.0),),
             new Image.asset("assets/listCeremonies/ceremonies.png", height: 200,),
-            new ListView(
-              shrinkWrap: true,
-              padding: const EdgeInsets.all(20.0),
-              children: <Widget>[
-                new Text("A", style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),),
-                new Text("B", style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),),
-                new Text("C", style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),),
-              ],
-            )
+            // new ListView(
+            //   shrinkWrap: true,
+            //   padding: const EdgeInsets.all(20.0),
+            // children: <Widget>[
+                new Text("A", style: TextStyle(fontSize: 46, fontWeight: FontWeight.w500),),
+                new Text("B", style: TextStyle(fontSize: 46, fontWeight: FontWeight.w500),),
+                new Text("C", style: TextStyle(fontSize: 46, fontWeight: FontWeight.w500),),
+          //     ],
+          //   )
           ],
         )
       ),
