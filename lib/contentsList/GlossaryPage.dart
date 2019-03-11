@@ -25,7 +25,7 @@ var utils = new Util();
         child: ListView(
           children: <Widget>[
             Padding(padding: EdgeInsets.all(10),),
-            Text("CEREMONIES", style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold), textAlign: TextAlign.center,),
+            Text("GLOSSARY", style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold), textAlign: TextAlign.center,),
             Padding(padding: EdgeInsets.all(10),),
             Image.asset("assets/listGlossary/glossary.png", height: 200,),
             Container(
