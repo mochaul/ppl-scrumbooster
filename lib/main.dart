@@ -4,6 +4,8 @@ import 'package:ScrumBooster/initScreen/splashScreen.dart';
 import 'package:flutter/services.dart';
 import 'package:ScrumBooster/initScreen/HomeScreen.dart';
 import 'package:ScrumBooster/initScreen/AboutPage.dart';
+import 'package:ScrumBooster/initScreen/GlossaryPage.dart';
+
 
 
 void main() {
@@ -40,6 +42,7 @@ class _ScrumBoosterAppState extends State<ScrumBoosterApp> {
       routes: <String, WidgetBuilder>{
         '/Home': (BuildContext context) => new HomePage(),
         '/About':(BuildContext context) => new AboutPage(),
+        '/Glossary':(BuildContext context) => new GlossaryPage(),
       },
     );
   }

@@ -57,4 +57,22 @@ void main() {
     // Verify all the sidebar menu.
     expect(find.text(menu1), findsOneWidget);
   });
+
+  test('AssetImage from package', () {
+      const AssetImage logo = AssetImage(
+        'assets/logos/logo-color.png',
+        package: 'test_package',
+      );
+       const AssetImage makara = AssetImage(
+        'assets/logos/Makara-UI.png',
+        package: 'test_package',
+      );
+       const AssetImage glossary = AssetImage(
+        'assets/listGlossary/glossary.png',
+        package: 'test_package',
+      );
+      expect(logo.keyName, 'packages/test_package/assets/logos/logo-color.png');
+      expect(makara.keyName, 'packages/test_package/assets/logos/Makara-UI.png');
+      expect(glossary.keyName, 'packages/test_package/assets/listGlossary/glossary.png');
+    });
 }
