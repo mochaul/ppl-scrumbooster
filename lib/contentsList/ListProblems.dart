@@ -25,7 +25,7 @@ var utils = new Util();
           children: <Widget>[
             Padding(padding: EdgeInsets.all(10),),
             Text("PROBLEMS", style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold), textAlign: TextAlign.center,),
-            Image.asset("assets/listCeremonies/ceremonies.png", height: 200,),
+            Image.asset("assets/listProblems/problems.png", height: 200,),
             Container(
               padding: EdgeInsets.all(20),
               child: Column(
