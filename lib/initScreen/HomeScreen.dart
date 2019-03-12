@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ScrumBooster/utils/utils.dart';
+import 'package:ScrumBooster/contents/problems.dart';
 import 'package:ScrumBooster/components/ScrumPhaseBtn.dart';
 import 'package:ScrumBooster/scrumPhaseList/ProductBacklog.dart';
 
@@ -14,15 +15,37 @@ class HomePage extends StatelessWidget {
   }
 
 //  HomePage({Key key, List<String> myList}) : super(key: key);
-
+  final util = new Util();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
       appBar: AppBar(
-          centerTitle: true,
-          title: Text("SCRUM BOOSTER", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: utils.hexToColor("#FFFFFF")),)
-    ),
+        leading: new Icon(
+          Icons.menu,
+          color: util.hexToColor("#FFFFFF"),
+        ),
+        centerTitle: true,
+        title: Text(
+          "Scrum Booster",
+          style: TextStyle(
+            color: util.hexToColor("#FFFFFF"),
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        actions: <Widget>[
+          new Padding(
+            padding: EdgeInsets.only(right: 6.0),
+            child: new InkWell(
+              child: new Icon(
+                Icons.search,
+                color: util.hexToColor("#FFFFFF"),
+              ),
+              onTap: () => {},
+            ),
+          ),
+        ],
+      ),
       body: new Column(
         children: <Widget>[
           new Padding(padding: EdgeInsets.all(15.0),),
@@ -37,10 +60,10 @@ class HomePage extends StatelessWidget {
                       title: "Product Backlog",
                       action: () {
                         Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => ProductBacklog()
-                          )
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ProductBacklog()
+                            )
                         );
                       },
                       imgUrl: "assets/homepage/Product_Backlog.png",
@@ -84,84 +107,7 @@ class HomePage extends StatelessWidget {
           )
         ],
       ),
-      drawer: Drawer(
-        // Add a ListView to the drawer. This ensures the user can scroll
-        // through the options in the Drawer if there isn't enough vertical
-        // space to fit everything.
-        child: ListView(
-          // Important: Remove any padding from the ListView.
-          padding: EdgeInsets.zero,
-          children: <Widget>[
-            DrawerHeader(
-              child: Text('Drawer Header'),
-              decoration: BoxDecoration(
-                color: Colors.blue,
-              ),
-            ),
-            ListTile(
-              title: Text('Home'),
-              onTap: () {
-                // Update the state of the app
-                // ...
-                // Then close the drawer
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              title: Text('Ceremonies'),
-              onTap: () {
-                // Update the state of the app
-                // ...
-                // Then close the drawer
-                Navigator.pop(context);
-                // redirect
-                Navigator.of(context).pushNamed('/ListCeremonies');
-              },
-            ),
-            ListTile(
-              title: Text('Problems'),
-              onTap: () {
-                // Update the state of the app
-                // ...
-                // Then close the drawer
-                Navigator.pop(context);
-                //redirect
-                Navigator.of(context).pushNamed('/ListProblems');
-              },
-            ),
-            ListTile(
-              title: Text('Glossary'),
-              onTap: () {
-                // Update the state of the app
-                // ...
-                // Then close the drawer
-                Navigator.pop(context);
-                Navigator.of(context).pushNamed('/Glossary');
-              },
-            ),
-            ListTile(
-              title: Text('Pop Quiz!'),
-              onTap: () {
-                // Update the state of the app
-                // ...
-                // Then close the drawer
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              title: Text('About'),
-              onTap: () {
-                // Update the state of the app
-                // ...
-                // Then close the drawer
-                Navigator.pop(context);
-                //moving to about page
-                Navigator.of(context).pushNamed('/About');
-              },
-            ),
-          ],
-        ),
-      ),
+      drawer: util.defaultDrawer(context),
     );
   }
 }
