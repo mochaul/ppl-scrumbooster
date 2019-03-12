@@ -136,6 +136,8 @@ void main() {
   // Build our app and trigger a frame.
   await tester.pumpWidget(makeTestableWidget(child: glossary));
   String header1 = "GLOSSARY";
+  expect(find.text(header1), findsOneWidget);
+  });
 
   testWidgets('Test Not Find Product Header 1', (WidgetTester tester) async {
     // Build our app and trigger a frame.
