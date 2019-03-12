@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:ScrumBooster/initScreen/HomeScreen.dart';
+import 'package:ScrumBooster/contents/problems.dart';
 
 class Util {
+
   final Map<String, String> monthNumber = {
     "01": "Januari",
     "02": "Februari",
@@ -15,6 +18,191 @@ class Util {
     "11": "November",
     "12": "Desember",
   };
+
+  Widget defaultDrawer(BuildContext context) {
+    return Drawer(
+      child: ListView(
+        padding: EdgeInsets.zero,
+        children: <Widget>[
+          new DrawerHeader(
+            child: Center(
+              child: new Image.asset(
+                "assets/logos/logo-color.png",
+              ),
+            ),
+          ),
+          ListTile(
+            key: new Key("Home"),
+            title: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                new Icon(
+                  Icons.home,
+                  color: hexToColor("#979797"),
+                ),
+                new Padding(
+                  padding: EdgeInsets.all(10.0),
+                ),
+                new Text(
+                  "Home",
+                  style: TextStyle(
+                    color: hexToColor("#979797"),
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20.0,
+                  ),
+                ),
+              ],
+            ),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => HomePage()
+                ),
+              );
+            },
+          ),
+          ListTile(
+            key: new Key("Ceremonies"),
+            title: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                new Icon(
+                  Icons.graphic_eq,
+                  color: hexToColor("#979797"),
+                ),
+                new Padding(
+                  padding: EdgeInsets.all(10.0),
+                ),
+                new Text(
+                  "Ceremonies",
+                  style: TextStyle(
+                    color: hexToColor("#979797"),
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20.0,
+                  ),
+                ),
+              ],
+            ),
+            onTap: () {}, //TODO: Implement fungsi buat callback kalo mencet Ceremonies di drawer
+          ),
+          ListTile(
+            key: new Key("Problems"),
+            title: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                new Icon(
+                  Icons.warning,
+                  color: hexToColor("#979797"),
+                ),
+                new Padding(
+                  padding: EdgeInsets.all(10.0),
+                ),
+                new Text(
+                  "Problems",
+                  style: TextStyle(
+                    color: hexToColor("#979797"),
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20.0,
+                  ),
+                ),
+              ],
+            ),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ProblemsContentPage(
+                    title: "Lorem Ipsum",
+                    contents: "Lorem Ipsum dolor sit amet. asidhaiudhaiuxaipxnaipapiuapxiaipsxnaipfapiapisxnapisxnapidspaixnpaisxnpaiusfniauniapxnpaixnianfuiafniand",
+                    imagePath: "assets/logos/logo-color.png",
+                  )
+                ),
+              );
+            },
+          ),
+          ListTile(
+            key: new Key("Glossary"),
+            title: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                new Icon(
+                  Icons.book,
+                  color: hexToColor("#979797"),
+                ),
+                new Padding(
+                  padding: EdgeInsets.all(10.0),
+                ),
+                new Text(
+                  "Glossary",
+                  style: TextStyle(
+                    color: hexToColor("#979797"),
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20.0,
+                  ),
+                ),
+              ],
+            ),
+            onTap: () {}, //TODO: Implement fungsi buat callback kalo mencet Glossary di drawer
+          ),
+          ListTile(
+            key: new Key("Pop Quiz!"),
+            title: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                new Icon(
+                  Icons.question_answer,
+                  color: hexToColor("#979797"),
+                ),
+                new Padding(
+                  padding: EdgeInsets.all(10.0),
+                ),
+                new Text(
+                  "Pop Quiz!",
+                  style: TextStyle(
+                    color: hexToColor("#979797"),
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20.0,
+                  ),
+                ),
+              ],
+            ),
+            onTap: () {}, //TODO: Implement fungsi buat callback kalo mencet Pop Quiz di drawer
+          ),
+          ListTile(
+            key: new Key("About"),
+            title: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                new Icon(
+                  Icons.info,
+                  color: hexToColor("#979797"),
+                ),
+                new Padding(
+                  padding: EdgeInsets.all(10.0),
+                ),
+                new Text(
+                  "About",
+                  style: TextStyle(
+                    color: hexToColor("#979797"),
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20.0,
+                  ),
+                ),
+              ],
+            ),
+            onTap: () {}, //TODO: Implement fungsi buat callback kalo mencet About di drawer
+          ),
+        ],
+      ),
+    );
+  }
 
   Color hexToColor(String colorCode) {
     return new Color(int.parse(colorCode.substring(1, 7), radix: 16) + 0xFF000000);
