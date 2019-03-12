@@ -141,6 +141,7 @@ void main() {
     String header1 = "PROBLEMS";
     // Verify all the sidebar menu.
     expect(find.text(header1), findsOneWidget);
+  });
 
   test('AssetImage from package', () { 
   const AssetImage image = AssetImage( 
