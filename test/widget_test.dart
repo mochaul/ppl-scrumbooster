@@ -140,6 +140,7 @@ void main() {
   String header1 = "CEREMONIES";
   // Verify all the sidebar menu.
   expect(find.text(header1), findsOneWidget);
+  });
 
   testWidgets('Test Not Find Product Header 2', (WidgetTester tester) async {
     // Build our app and trigger a frame.

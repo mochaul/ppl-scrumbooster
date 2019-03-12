@@ -14,7 +14,6 @@ class HomePage extends StatelessWidget {
   }
 
 //  HomePage({Key key, List<String> myList}) : super(key: key);
-var utils = new Util();
 
   @override
   Widget build(BuildContext context) {
