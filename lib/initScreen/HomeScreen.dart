@@ -46,21 +46,6 @@ class HomePage extends StatelessWidget {
           ),
         ],
       ),
-      body: GridView.count(
-        crossAxisCount: 2,
-        children: List.generate(4, (index) {
-          return Center(
-              child: Text(
-                myList[index],
-                style: Theme.of(context).textTheme.headline,
-              )
-          );
-        }),
-      ),
-      drawer: util.defaultDrawer(context),
-          centerTitle: true,
-          title: Text("SCRUM BOOSTER", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: utils.hexToColor("#FFFFFF")),)
-    ),
       body: new Column(
         children: <Widget>[
           new Padding(padding: EdgeInsets.all(15.0),),
@@ -75,10 +60,10 @@ class HomePage extends StatelessWidget {
                       title: "Product Backlog",
                       action: () {
                         Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => ProductBacklog()
-                          )
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => ProductBacklog()
+                            )
                         );
                       },
                       imgUrl: "assets/homepage/Product_Backlog.png",
@@ -122,6 +107,7 @@ class HomePage extends StatelessWidget {
           )
         ],
       ),
+      drawer: util.defaultDrawer(context),
     );
   }
 }

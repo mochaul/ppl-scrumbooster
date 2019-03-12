@@ -24,11 +24,10 @@ void main() {
     imagePath: "assets/logos/logo-color.png",
     contents: "Lorem ipsum dolor sit amet.",
   );
-=======
+
   final ProductBacklog productBacklog = ProductBacklog();
   final ListProblems lstProblems = ListProblems();
   final ListCeremonies lstCeremonies = ListCeremonies();
-  final SplashScreen splash = SplashScreen();
   final GlossaryPage glossary =GlossaryPage();
 
   Widget makeTestableWidget({Widget child}) {
@@ -179,14 +178,13 @@ void main() {
     expect(find.byKey(problemsContentContainer), findsOneWidget);
     expect(find.byKey(problemsContentText), findsOneWidget);
   });
-}
 
-  test('AssetImage from package', () { 
-  const AssetImage image = AssetImage( 
-  'assets/listProblems/problems.png', 
-  package: 'test_package', 
-  ); 
-  expect(image.keyName, 'packages/test_package/assets/listProblems/problems.png'); 
+  test('AssetImage from package', () {
+    const AssetImage image = AssetImage(
+      'assets/listProblems/problems.png',
+      package: 'test_package',
+    );
+    expect(image.keyName, 'packages/test_package/assets/listProblems/problems.png');
   });
 
   testWidgets('Test Find List Problems', (WidgetTester tester) async {
@@ -197,20 +195,20 @@ void main() {
     expect(find.text(header1), findsOneWidget);
   });
 
-  test('AssetImage from package', () { 
-  const AssetImage image = AssetImage( 
-  'assets/listCeremonies/ceremonies.png', 
-  package: 'test_package', 
-  ); 
-  expect(image.keyName, 'packages/test_package/assets/listCeremonies/ceremonies.png'); 
+  test('AssetImage from package', () {
+    const AssetImage image = AssetImage(
+      'assets/listCeremonies/ceremonies.png',
+      package: 'test_package',
+    );
+    expect(image.keyName, 'packages/test_package/assets/listCeremonies/ceremonies.png');
   });
 
   testWidgets('Test Find List Ceremonies', (WidgetTester tester) async {
-  await tester.pumpWidget(makeTestableWidget(child: lstCeremonies));
-  String header1 = "CEREMONIES";
-  expect(find.text(header1), findsOneWidget);
+    await tester.pumpWidget(makeTestableWidget(child: lstCeremonies));
+    String header1 = "CEREMONIES";
+    expect(find.text(header1), findsOneWidget);
   });
-  
+
   testWidgets('Test Not Find Product Header 2', (WidgetTester tester) async {
     // Build our app and trigger a frame.
     await tester.pumpWidget(makeTestableWidget(child: productBacklog));
