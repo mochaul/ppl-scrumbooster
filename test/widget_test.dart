@@ -12,12 +12,14 @@ import 'package:ScrumBooster/main.dart';
 import 'package:ScrumBooster/initScreen/HomeScreen.dart';
 import 'package:ScrumBooster/initScreen/splashScreen.dart';
 import 'package:ScrumBooster/contentsList/ListProblems.dart';
+import 'package:ScrumBooster/contentsList/ListCeremonies.dart';
 import 'package:ScrumBooster/scrumPhaseList/ProductBacklog.dart';
-
+  
 void main() {
   final HomePage home = HomePage();
   final ProductBacklog productBacklog = ProductBacklog();
   final ListProblems lstProblems = ListProblems();
+  final ListCeremonies lstCeremonies = ListCeremonies();
   // final scaffoldKey = GlobalKey<ScaffoldState>();
   final SplashScreen splash = SplashScreen();
 
@@ -125,7 +127,6 @@ void main() {
     expect(find.text(menu1), findsOneWidget);
   });
 
-
   test('AssetImage from package', () { 
   const AssetImage image = AssetImage( 
   'assets/listProblems/problems.png', 
@@ -140,6 +141,21 @@ void main() {
     String header1 = "PROBLEMS";
     // Verify all the sidebar menu.
     expect(find.text(header1), findsOneWidget);
+
+  test('AssetImage from package', () { 
+  const AssetImage image = AssetImage( 
+  'assets/listCeremonies/ceremonies.png', 
+  package: 'test_package', 
+  ); 
+  expect(image.keyName, 'packages/test_package/assets/listCeremonies/ceremonies.png'); 
+  });
+
+  testWidgets('Test Find List Ceremonies', (WidgetTester tester) async {
+  // Build our app and trigger a frame.
+  await tester.pumpWidget(makeTestableWidget(child: lstCeremonies));
+  String header1 = "CEREMONIES";
+  // Verify all the sidebar menu.
+  expect(find.text(header1), findsOneWidget);
   });
 
   testWidgets('Test Not Find Product Header 2', (WidgetTester tester) async {

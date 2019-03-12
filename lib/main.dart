@@ -4,6 +4,7 @@ import 'package:ScrumBooster/initScreen/splashScreen.dart';
 import 'package:flutter/services.dart';
 import 'package:ScrumBooster/initScreen/HomeScreen.dart';
 import 'package:ScrumBooster/contentsList/ListProblems.dart';
+import 'package:ScrumBooster/contentsList/ListCeremonies.dart';
 
 void main() {
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
@@ -39,6 +40,7 @@ class _ScrumBoosterAppState extends State<ScrumBoosterApp> {
       routes: <String, WidgetBuilder>{
         '/Home': (BuildContext context) => new HomePage(),
         '/ListProblems': (BuildContext context) => new ListProblems(),
+        '/ListCeremonies': (BuildContext context) => new ListCeremonies(),
       },
     );
   }
