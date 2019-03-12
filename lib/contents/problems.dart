@@ -55,8 +55,10 @@ class ProblemsContentPage extends StatelessWidget {
       ),
       drawer: util.defaultDrawer(context),
       body: Stack(
+        key: new Key("Main Stack"),
         children: <Widget>[
           new Container(
+            key: new Key("Problems Content Image"),
             width: _width,
             height: util.fitScreenSize(_height, 0.45),
             decoration: BoxDecoration(
@@ -69,29 +71,35 @@ class ProblemsContentPage extends StatelessWidget {
             ),
           ),
           ListView(
+            key: new Key("Problems Content"),
             children: <Widget>[
               new Column(
+                key: new Key("Problems Content Column"),
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   new Container(
+                    key: new Key("Problems Title Container"),
                     width: _width,
                     height: util.fitScreenSize(_height, 0.45),
                     decoration: BoxDecoration(
                       color: Colors.transparent
                     ),
                     child: new Stack(
+                      key: new Key("Problems Title Stack"),
                       children: <Widget>[
                         new Align(
                           alignment: Alignment.bottomLeft,
                           child: new Padding(
                             padding: EdgeInsets.only(bottom: 30.0),
                             child: new Container(
+                              key: new Key("Problems Title Container"),
                               alignment: Alignment.center,
                               height: util.fitScreenSize(_height, 0.08),
                               width: util.fitScreenSize(_width, 0.75),
                               child: new Text(
                                 this.title,
+                                key: new Key("Problems Title"),
                                 style: TextStyle(
                                   color: util.hexToColor("#3498DB"),
                                   fontWeight: FontWeight.bold,
@@ -99,14 +107,14 @@ class ProblemsContentPage extends StatelessWidget {
                                 ),
                               ),
                               decoration: new BoxDecoration(
-                                  color: util.hexToColor("#FFFFFF"),
-                                  boxShadow: <BoxShadow>[
-                                    new BoxShadow(
-                                      color: util.hexToColor("#000000"),
-                                      offset: new Offset(15.0, 7.5),
-                                      blurRadius: 50.0,
-                                    )
-                                  ]
+                                color: util.hexToColor("#FFFFFF"),
+                                boxShadow: <BoxShadow>[
+                                  new BoxShadow(
+                                    color: util.hexToColor("#000000"),
+                                    offset: new Offset(15.0, 7.5),
+                                    blurRadius: 50.0,
+                                  )
+                                ]
                               ),
                             ),
                           ),
@@ -121,6 +129,7 @@ class ProblemsContentPage extends StatelessWidget {
                       bottom: 10.0,
                     ),
                     child: new Container(
+                      key: new Key("Problems Content Container"),
                       width: _width,
                       height: _height,
                       decoration: new BoxDecoration(
@@ -143,6 +152,7 @@ class ProblemsContentPage extends StatelessWidget {
                         ),
                         child: new Text(
                           this.contents,
+                          key: new Key("Problems Content Text"),
                           style: TextStyle(
                             fontSize: 20.0,
                           ),
