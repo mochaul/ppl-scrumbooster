@@ -135,11 +135,12 @@ void main() {
   });
 
   testWidgets('Test Find List Problems', (WidgetTester tester) async {
-  // Build our app and trigger a frame.
-  await tester.pumpWidget(makeTestableWidget(child: lstProblems));
-  String header1 = "PROBLEMS";
-  // Verify all the sidebar menu.
-  expect(find.text(header1), findsOneWidget);
+    // Build our app and trigger a frame.
+    await tester.pumpWidget(makeTestableWidget(child: lstProblems));
+    String header1 = "PROBLEMS";
+    // Verify all the sidebar menu.
+    expect(find.text(header1), findsOneWidget);
+  });
 
   testWidgets('Test Not Find Product Header 2', (WidgetTester tester) async {
     // Build our app and trigger a frame.
