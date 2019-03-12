@@ -47,25 +47,29 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-  - assets/listProblems/problems.png
-  - assets/listCeremonies/ceremonies.png
-  - assets/logos/logo-color.png
-  - assets/logos/logo-white.png
-  - assets/homepage/Product_Backlog.png
-  - assets/homepage/Sprint_Evaluation.png
-  - assets/homepage/Sprint_Exe.png
-  - assets/homepage/Sprint_Planning.png
-  - assets/scrumPhase/content_a.png
-  - assets/scrumPhase/content_b.png
-  - assets/scrumPhase/content_c.png
-  - assets/scrumPhase/content_d.png
-  - assets/scrumPhase/content_e.png
-  - assets/scrumPhase/problem_a.png
-  - assets/scrumPhase/problem_b.png
-  - assets/scrumPhase/problem_c.png
-  - assets/scrumPhase/problem_d.png
-  - assets/scrumPhase/problem_e.png
-  - assets/scrumPhase/problem_f.png
+    - assets/logos/logo-color.png
+    - assets/logos/logo-white.png
+    - assets/logos/Makara-UI.png
+    - assets/listGlossary/glossary.png
+    - assets/listProblems/problems.png
+    - assets/listCeremonies/ceremonies.png
+    - assets/logos/logo-color.png
+    - assets/logos/logo-white.png
+    - assets/homepage/Product_Backlog.png
+    - assets/homepage/Sprint_Evaluation.png
+    - assets/homepage/Sprint_Exe.png
+    - assets/homepage/Sprint_Planning.png
+    - assets/scrumPhase/content_a.png
+    - assets/scrumPhase/content_b.png
+    - assets/scrumPhase/content_c.png
+    - assets/scrumPhase/content_d.png
+    - assets/scrumPhase/content_e.png
+    - assets/scrumPhase/problem_a.png
+    - assets/scrumPhase/problem_b.png
+    - assets/scrumPhase/problem_c.png
+    - assets/scrumPhase/problem_d.png
+    - assets/scrumPhase/problem_e.png
+    - assets/scrumPhase/problem_f.png
 
   fonts:
   - family: Montserrat

@@ -11,6 +11,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:ScrumBooster/main.dart';
 import 'package:ScrumBooster/initScreen/HomeScreen.dart';
 import 'package:ScrumBooster/initScreen/splashScreen.dart';
+import 'package:ScrumBooster/contentsList/GlossaryPage.dart';
+
 import 'package:ScrumBooster/contentsList/ListProblems.dart';
 import 'package:ScrumBooster/contentsList/ListCeremonies.dart';
 import 'package:ScrumBooster/scrumPhaseList/ProductBacklog.dart';
@@ -22,6 +24,7 @@ void main() {
   final ListCeremonies lstCeremonies = ListCeremonies();
   // final scaffoldKey = GlobalKey<ScaffoldState>();
   final SplashScreen splash = SplashScreen();
+  final GlossaryPage glossary =GlossaryPage();
 
   Widget makeTestableWidget({Widget child}) {
     return MaterialApp(
@@ -111,6 +114,31 @@ void main() {
     expect(find.text(menu1), findsOneWidget);
   });
 
+  test('AssetImage from package', () {
+      const AssetImage logo = AssetImage(
+        'assets/logos/logo-color.png',
+        package: 'test_package',
+      );
+       const AssetImage makara = AssetImage(
+        'assets/logos/Makara-UI.png',
+        package: 'test_package',
+      );
+       const AssetImage glossary = AssetImage(
+        'assets/listGlossary/glossary.png',
+        package: 'test_package',
+      );
+      expect(logo.keyName, 'packages/test_package/assets/logos/logo-color.png');
+      expect(makara.keyName, 'packages/test_package/assets/logos/Makara-UI.png');
+      expect(glossary.keyName, 'packages/test_package/assets/listGlossary/glossary.png');
+    });
+
+  testWidgets('Test Find List Glossary', (WidgetTester tester) async {
+  // Build our app and trigger a frame.
+  await tester.pumpWidget(makeTestableWidget(child: glossary));
+  String header1 = "GLOSSARY";
+  expect(find.text(header1), findsOneWidget);
+  });
+
   testWidgets('Test Not Find Product Header 1', (WidgetTester tester) async {
     // Build our app and trigger a frame.
     await tester.pumpWidget(makeTestableWidget(child: productBacklog));
@@ -152,13 +180,11 @@ void main() {
   });
 
   testWidgets('Test Find List Ceremonies', (WidgetTester tester) async {
-  // Build our app and trigger a frame.
   await tester.pumpWidget(makeTestableWidget(child: lstCeremonies));
   String header1 = "CEREMONIES";
-  // Verify all the sidebar menu.
   expect(find.text(header1), findsOneWidget);
   });
-
+  
   testWidgets('Test Not Find Product Header 2', (WidgetTester tester) async {
     // Build our app and trigger a frame.
     await tester.pumpWidget(makeTestableWidget(child: productBacklog));
