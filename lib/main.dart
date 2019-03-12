@@ -3,6 +3,7 @@ import 'package:ScrumBooster/utils/utils.dart';
 import 'package:ScrumBooster/initScreen/splashScreen.dart';
 import 'package:flutter/services.dart';
 import 'package:ScrumBooster/initScreen/HomeScreen.dart';
+import 'package:ScrumBooster/contents/ceremonies.dart';
 
 void main() {
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])

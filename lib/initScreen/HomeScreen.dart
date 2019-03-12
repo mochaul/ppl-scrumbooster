@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ScrumBooster/utils/utils.dart';
+import 'package:ScrumBooster/contents/ceremonies.dart';
 
 class HomePage extends StatelessWidget {
   final List<String> myList = new List();
@@ -60,10 +61,15 @@ class HomePage extends StatelessWidget {
             ListTile(
               title: Text('Ceremonies'),
               onTap: () {
-                // Update the state of the app
-                // ...
-                // Then close the drawer
-                Navigator.pop(context);
+                Navigator.push(
+                  context, MaterialPageRoute(
+                    builder: (context) => Ceremonies(
+                      title: "BACKLOG GROOMING",
+                      imagePath: "assets/logos/logo-color.png",
+                      contents: "Backlog grooming is when the product owner and some,or all, of the rest of the team review items on the backlog to ensure the backlog contains the appropriate items, that they are prioritized, and that the items at the top of the backlog are ready for delivery",
+                    )
+                  )
+                );
               },
             ),
             ListTile(
