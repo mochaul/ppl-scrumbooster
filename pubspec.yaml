@@ -49,6 +49,9 @@ flutter:
   assets:
   - assets/logos/logo-color.png
   - assets/logos/logo-white.png
+  - assets/listCeremonies/ceremonies.png
+  - assets/logos/logo-color.png
+  - assets/logos/logo-white.png
   - assets/homepage/Product_Backlog.png
   - assets/homepage/Sprint_Evaluation.png
   - assets/homepage/Sprint_Exe.png
@@ -64,6 +67,7 @@ flutter:
   - assets/scrumPhase/problem_d.png
   - assets/scrumPhase/problem_e.png
   - assets/scrumPhase/problem_f.png
+
   fonts:
   - family: Montserrat
     fonts:
