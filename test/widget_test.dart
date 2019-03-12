@@ -11,14 +11,15 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:ScrumBooster/main.dart';
 import 'package:ScrumBooster/initScreen/HomeScreen.dart';
 import 'package:ScrumBooster/initScreen/splashScreen.dart';
+import 'package:ScrumBooster/contentsList/ListProblems.dart';
 import 'package:ScrumBooster/contentsList/ListCeremonies.dart';
 import 'package:ScrumBooster/scrumPhaseList/ProductBacklog.dart';
   
 void main() {
   final HomePage home = HomePage();
   final ProductBacklog productBacklog = ProductBacklog();
+  final ListProblems lstProblems = ListProblems();
   final ListCeremonies lstCeremonies = ListCeremonies();
-
   // final scaffoldKey = GlobalKey<ScaffoldState>();
   final SplashScreen splash = SplashScreen();
 
@@ -124,6 +125,22 @@ void main() {
     String menu1 = "Problems you might have face:";
     // Verify all the sidebar menu.
     expect(find.text(menu1), findsOneWidget);
+  });
+
+  test('AssetImage from package', () { 
+  const AssetImage image = AssetImage( 
+  'assets/listProblems/problems.png', 
+  package: 'test_package', 
+  ); 
+  expect(image.keyName, 'packages/test_package/assets/listProblems/problems.png'); 
+  });
+
+  testWidgets('Test Find List Problems', (WidgetTester tester) async {
+    // Build our app and trigger a frame.
+    await tester.pumpWidget(makeTestableWidget(child: lstProblems));
+    String header1 = "PROBLEMS";
+    // Verify all the sidebar menu.
+    expect(find.text(header1), findsOneWidget);
   });
 
   test('AssetImage from package', () { 
