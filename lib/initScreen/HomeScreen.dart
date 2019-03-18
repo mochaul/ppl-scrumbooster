@@ -45,67 +45,6 @@ class HomePage extends StatelessWidget {
               ),
               onTap: () => {},
             ),
-            ListTile(
-              title: Text('Home'),
-              onTap: () {
-                // Update the state of the app
-                // ...
-                // Then close the drawer
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              title: Text('Ceremonies'),
-              onTap: () {
-                Navigator.push(
-                  context, MaterialPageRoute(
-                    builder: (context) => Ceremonies(
-                      title: "BACKLOG GROOMING",
-                      imagePath: "assets/logos/logo-color.png",
-                      contents: "Backlog grooming is when the product owner and some,or all, of the rest of the team review items on the backlog to ensure the backlog contains the appropriate items, that they are prioritized, and that the items at the top of the backlog are ready for delivery",
-                    )
-                  )
-                );
-              },
-            ),
-            ListTile(
-              title: Text('Problems'),
-              onTap: () {
-                // Update the state of the app
-                // ...
-                // Then close the drawer
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              title: Text('Glossary'),
-              onTap: () {
-                // Update the state of the app
-                // ...
-                // Then close the drawer
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              title: Text('Pop Quiz!'),
-              onTap: () {
-                // Update the state of the app
-                // ...
-                // Then close the drawer
-                Navigator.pop(context);
-              },
-            ),
-            ListTile(
-              title: Text('About'),
-              onTap: () {
-                // Update the state of the app
-                // ...
-                // Then close the drawer
-                Navigator.pop(context);
-              },
-            ),
-          ],
-        ),
           ),
         ],
       ),

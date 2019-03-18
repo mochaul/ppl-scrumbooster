@@ -21,6 +21,11 @@ void main() {
   final HomePage home = HomePage();
   final SplashScreen splash = SplashScreen();
   final ProblemsContentPage _problemsContentPage = ProblemsContentPage(
+    title: "Lorem Ipsum",
+    imagePath: "assets/logos/logo-color.png",
+    contents: "Lorem ipsum dolor sit amet.",
+  );
+
   final Ceremonies ceremonies =  Ceremonies(
     title: "BACKLOG GROOMING",
     imagePath: "assets/logos/logo-color.png",
@@ -102,7 +107,6 @@ void main() {
     expect(find.text(menu1), findsOneWidget);
   });
 
-<<<<<<< test/widget_test.dart
   // testWidgets('Ceremonies Content Drawer Test', (WidgetTester tester) async {
   //   GlobalKey<ScaffoldState> scaffoldKey = home.getScaffoldKey();
   //   await tester.pumpWidget(makeTestableWidget(child: ceremonies));
