@@ -40,8 +40,7 @@ BackendTest:
   image: python:3.6
   only:
     changes:
-    - scrum-booster-api/**/*
-    - .gitlab-ci.yml
+      - scrum-booster-api/**/*
   before_script:
     - cd scrum-booster-api
     - pip install -r requirements.txt
@@ -62,7 +61,6 @@ BackendDeployToProduction:
   only:
     changes:
       - scrum-booster-api/**/*
-      - .gitlab-ci.yml
     refs:
       - master
   before_script:
@@ -85,7 +83,6 @@ BackendDeployToStaging:
   only:
     changes:
       - scrum-booster-api/**/*
-      - .gitlab-ci.yml
     refs:
       - staging
   before_script:
@@ -108,7 +105,6 @@ BackendDeployToDevelopment:
   only:
     changes:
       - scrum-booster-api/**/*
-      - .gitlab-ci.yml
     refs:
       - /^US-.*$/
   before_script:
@@ -128,10 +124,12 @@ FlutterDeployToProduction:
     ENV_NAME: "production"
   image: runmymind/docker-android-sdk:latest
   stage: deploy
+  tags:
+    - docker
+    - build
   only:
     refs:
       - master
-      - build
   before_script:
     - docker info
     - wget --quiet --output-document=flutter.tar.xz https://storage.googleapis.com/flutter_infra/releases/stable/linux/flutter_linux_v1.0.0-stable.tar.xz && tar xf flutter.tar.xz -C /
@@ -146,8 +144,6 @@ FlutterDeployToProduction:
     - appcenter
     - appcenter login --token $APP_CENTER_API_KEY
     - appcenter distribute release -f build/app/outputs/apk/release/app-release.apk --app $APP_CENTER_APP_NAME_PROD --group $APP_CENTER_GROUP_TARGET
-  tags:
-    - docker
   environment:
     name: production
 
