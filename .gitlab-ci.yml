@@ -131,7 +131,6 @@ FlutterDeployToProduction:
     refs:
       - master
   before_script:
-    - docker info
     - wget --quiet --output-document=flutter.tar.xz https://storage.googleapis.com/flutter_infra/releases/stable/linux/flutter_linux_v1.0.0-stable.tar.xz && tar xf flutter.tar.xz -C /
     - export PATH=$PATH:/flutter/bin
     - apt-get update && apt-get install gnupg -y
@@ -159,7 +158,6 @@ FlutterDeployToStaging:
     refs:
       - staging
   before_script:
-    - docker info
     - wget --quiet --output-document=flutter.tar.xz https://storage.googleapis.com/flutter_infra/releases/stable/linux/flutter_linux_v1.0.0-stable.tar.xz && tar xf flutter.tar.xz -C /
     - export PATH=$PATH:/flutter/bin
     - apt-get update && apt-get install gnupg -y
@@ -190,7 +188,6 @@ FlutterDeployToDevelopment:
     changes:
       - scrum-booster-api/**/*
   before_script:
-    - docker info
     - wget --quiet --output-document=flutter.tar.xz https://storage.googleapis.com/flutter_infra/releases/stable/linux/flutter_linux_v1.0.0-stable.tar.xz && tar xf flutter.tar.xz -C /
     - export PATH=$PATH:/flutter/bin
     - apt-get update && apt-get install gnupg -y
@@ -221,7 +218,6 @@ FlutterDeployToColdfix:
     changes:
       - scrum-booster-api/**/*
   before_script:
-    - docker info
     - wget --quiet --output-document=flutter.tar.xz https://storage.googleapis.com/flutter_infra/releases/stable/linux/flutter_linux_v1.0.0-stable.tar.xz && tar xf flutter.tar.xz -C /
     - export PATH=$PATH:/flutter/bin
     - apt-get update && apt-get install gnupg -y
