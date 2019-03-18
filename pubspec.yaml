@@ -27,7 +27,7 @@ dependencies:
   flutter_svg:
   client_cookie:
   transparent_image: ^0.1.0
-  path_provider: ^0.4.1
+  path_provider: ^0.5.0+1
 
 dev_dependencies:
   flutter_test:
@@ -49,29 +49,49 @@ flutter:
   assets:
     - assets/logos/logo-color.png
     - assets/logos/logo-white.png
-    - assets/images/content-b.png
+    - assets/logos/Makara-UI.png
+    - assets/listGlossary/glossary.png
+    - assets/listProblems/problems.png
+    - assets/listCeremonies/ceremonies.png
+    - assets/logos/logo-color.png
+    - assets/logos/logo-white.png
+    - assets/homepage/Product_Backlog.png
+    - assets/homepage/Sprint_Evaluation.png
+    - assets/homepage/Sprint_Exe.png
+    - assets/homepage/Sprint_Planning.png
+    - assets/scrumPhase/content_a.png
+    - assets/scrumPhase/content_b.png
+    - assets/scrumPhase/content_c.png
+    - assets/scrumPhase/content_d.png
+    - assets/scrumPhase/content_e.png
+    - assets/scrumPhase/problem_a.png
+    - assets/scrumPhase/problem_b.png
+    - assets/scrumPhase/problem_c.png
+    - assets/scrumPhase/problem_d.png
+    - assets/scrumPhase/problem_e.png
+    - assets/scrumPhase/problem_f.png
 
   fonts:
-    - family: Montserrat
-      fonts:
-        - asset: assets/fonts/Montserrat-Black.ttf
-        - asset: assets/fonts/Montserrat-BlackItalic.ttf
-        - asset: assets/fonts/Montserrat-Bold.ttf
-        - asset: assets/fonts/Montserrat-BoldItalic.ttf
-        - asset: assets/fonts/Montserrat-ExtraBold.ttf
-        - asset: assets/fonts/Montserrat-ExtraBoldItalic.ttf
-        - asset: assets/fonts/Montserrat-ExtraLight.ttf
-        - asset: assets/fonts/Montserrat-ExtraLightItalic.ttf
-        - asset: assets/fonts/Montserrat-Italic.ttf
-        - asset: assets/fonts/Montserrat-Light.ttf
-        - asset: assets/fonts/Montserrat-LightItalic.ttf
-        - asset: assets/fonts/Montserrat-Medium.ttf
-        - asset: assets/fonts/Montserrat-MediumItalic.ttf
-        - asset: assets/fonts/Montserrat-Regular.ttf
-        - asset: assets/fonts/Montserrat-SemiBold.ttf
-        - asset: assets/fonts/Montserrat-SemiBoldItalic.ttf
-        - asset: assets/fonts/Montserrat-Thin.ttf
-        - asset: assets/fonts/Montserrat-ThinItalic.ttf
+  - family: Montserrat
+    fonts:
+    - asset: assets/fonts/Montserrat-Black.ttf
+    - asset: assets/fonts/Montserrat-BlackItalic.ttf
+    - asset: assets/fonts/Montserrat-Bold.ttf
+    - asset: assets/fonts/Montserrat-BoldItalic.ttf
+    - asset: assets/fonts/Montserrat-ExtraBold.ttf
+    - asset: assets/fonts/Montserrat-ExtraBoldItalic.ttf
+    - asset: assets/fonts/Montserrat-ExtraLight.ttf
+    - asset: assets/fonts/Montserrat-ExtraLightItalic.ttf
+    - asset: assets/fonts/Montserrat-Italic.ttf
+    - asset: assets/fonts/Montserrat-Light.ttf
+    - asset: assets/fonts/Montserrat-LightItalic.ttf
+    - asset: assets/fonts/Montserrat-Medium.ttf
+    - asset: assets/fonts/Montserrat-MediumItalic.ttf
+    - asset: assets/fonts/Montserrat-Regular.ttf
+    - asset: assets/fonts/Montserrat-SemiBold.ttf
+    - asset: assets/fonts/Montserrat-SemiBoldItalic.ttf
+    - asset: assets/fonts/Montserrat-Thin.ttf
+    - asset: assets/fonts/Montserrat-ThinItalic.ttf
 
 
   # An image asset can refer to one or more resolution-specific "variants", see
