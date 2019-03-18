@@ -1,5 +1,7 @@
 # SCRUM Booster
 
+[![Mobile Coverage](https://gitlab.cs.ui.ac.id/ppl-fasilkom-ui/2019/PPLD1/badges/development/coverage.svg?job=FlutterTest)](https://gitlab.cs.ui.ac.id/ppl-fasilkom-ui/2019/PPLD1/mobile-coverage) Flutter
+
 **Proyek Perangkat Lunak @ Fakultas Ilmu Komputer Universitas Indonesia, Semester Genap 2018/2019**
 
 Contributors:
