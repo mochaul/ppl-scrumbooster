@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:ScrumBooster/utils/utils.dart';
 import 'package:ScrumBooster/components/ScrumListBtn.dart';
+import 'package:ScrumBooster/contents/ceremonies.dart';
+import 'package:ScrumBooster/contents/problems.dart';
 
 class ProductBacklog extends StatelessWidget {
   final List<String> myList = new List();
@@ -47,8 +49,19 @@ class ProductBacklog extends StatelessWidget {
                     new Column(
                       children: <Widget>[
                         new ScrumListBtn(
-                          title: "Content A",
-                          action: () => {},
+                          title: "Backlog Grooming",
+                          action: (){
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => Ceremonies(
+                                  imagePath: "assets/scrumPhase/content_a.png",
+                                  title: "BACKLOG GROOMING",
+                                  contents: "Backlog grooming is when the product owner and some, or all, of the rest of the team review items on the backlog to ensure the backlog contains the appropriate items, that they are prioritized, and that the items at the top of the backlog are ready for delivery.",
+                                )
+                              ),
+                            );
+                          },
                           imgUrl: "assets/scrumPhase/content_a.png",
                         ),
                         new Text("content a", textAlign: TextAlign.center,)
@@ -153,7 +166,18 @@ class ProductBacklog extends StatelessWidget {
                       children: <Widget>[
                         new ScrumListBtn(
                           title: "Problem A",
-                          action: () => {},
+                          action: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => ProblemsContentPage(
+                                  imagePath: "assets/scrumPhase/problem_a.png",
+                                  title: "POOR PROJECT COMMUNICATION",
+                                  contents: "One of the primary advantages of adopting agile approaches is the superior way it deals with real-time communications. Agile ceremonies and techniques such as Release / Sprint Planning, Daily Stand Up, Spring Demo / Reviews, and Retrospectives encourage communication between team members on a daily, incremental basis. Any additional decisions regarding frequency of communication can be captured in the Team Agreement.",
+                                )
+                              ),
+                            );
+                          },
                           imgUrl: "assets/scrumPhase/problem_a.png",
                         ),
                         new Text("problem a", textAlign: TextAlign.center,)

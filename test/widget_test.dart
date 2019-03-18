@@ -10,6 +10,7 @@ import 'package:flutter_test/flutter_test.dart';
 
 import 'package:ScrumBooster/initScreen/HomeScreen.dart';
 import 'package:ScrumBooster/initScreen/splashScreen.dart';
+import 'package:ScrumBooster/contents/ceremonies.dart';
 import 'package:ScrumBooster/contents/problems.dart';
 import 'package:ScrumBooster/contentsList/GlossaryPage.dart';
 import 'package:ScrumBooster/contentsList/ListProblems.dart';
@@ -24,6 +25,13 @@ void main() {
     imagePath: "assets/logos/logo-color.png",
     contents: "Lorem ipsum dolor sit amet.",
   );
+
+  final Ceremonies ceremonies =  Ceremonies(
+    title: "BACKLOG GROOMING",
+    imagePath: "assets/logos/logo-color.png",
+    contents: "testing",
+  );
+  // final scaffoldKey = GlobalKey<ScaffoldState>();
 
   final ProductBacklog productBacklog = ProductBacklog();
   final ListProblems lstProblems = ListProblems();
@@ -97,6 +105,45 @@ void main() {
     String menu1 = "WHICH SCRUMPHASE ARE YOU IN RIGHT NOW?";
     // Verify all the sidebar menu.
     expect(find.text(menu1), findsOneWidget);
+  });
+
+  // testWidgets('Ceremonies Content Drawer Test', (WidgetTester tester) async {
+  //   GlobalKey<ScaffoldState> scaffoldKey = home.getScaffoldKey();
+  //   await tester.pumpWidget(makeTestableWidget(child: ceremonies));
+
+  //   const menu1 = "Home";
+  //   const menu2 = "Ceremonies";
+  //   const menu3 = "Problems";
+  //   const menu4 = "Glossary";
+  //   const menu5 = "Pop Quiz!";
+  //   const menu6 = "About";
+
+  //   // Tap the 'burger menu' icon and trigger a frame.
+  //   scaffoldKey.currentState.openDrawer();
+  //   print("berhasil yey");
+  //   await tester.pump();
+
+  //   // Verify all the sidebar menu.
+  //   expect(find.text(menu1), findsOneWidget);
+  //   expect(find.text(menu2), findsOneWidget);
+  //   expect(find.text(menu3), findsOneWidget);
+  //   expect(find.text(menu4), findsOneWidget);
+  //   expect(find.text(menu5), findsOneWidget);
+  //   expect(find.text(menu6), findsOneWidget);
+  // });
+
+  testWidgets('Test Find Title Ceremonies', (WidgetTester tester) async {
+    // Build our app and trigger a frame.
+    await tester.pumpWidget(makeTestableWidget(child: ceremonies));
+    String title = "BACKLOG GROOMING";
+    expect(find.text(title), findsOneWidget);
+  });
+
+  testWidgets('Test Find Content Ceremonies', (WidgetTester tester) async {
+    // Build our app and trigger a frame.
+    await tester.pumpWidget(makeTestableWidget(child: ceremonies));
+    String content = "testing";
+    expect(find.text(content), findsOneWidget);
   });
 
   testWidgets('Test Find Wrong Header', (WidgetTester tester) async {
