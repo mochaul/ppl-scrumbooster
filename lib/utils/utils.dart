@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:ScrumBooster/initScreen/HomeScreen.dart';
 import 'package:ScrumBooster/contents/problems.dart';
+import 'package:ScrumBooster/contentsList/ListCeremonies.dart';
+import 'package:ScrumBooster/contentsList/ListProblems.dart';
+import 'package:ScrumBooster/contentsList/GlossaryPage.dart';
+import 'package:ScrumBooster/initScreen/AboutPage.dart';
 
 class Util {
 
@@ -86,7 +90,14 @@ class Util {
                 ),
               ],
             ),
-            onTap: () {}, //TODO: Implement fungsi buat callback kalo mencet Ceremonies di drawer
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ListCeremonies()
+                ),
+              );
+            }, //TODO: Implement fungsi buat callback kalo mencet Ceremonies di drawer
           ),
           ListTile(
             key: new Key("Problems"),
@@ -115,11 +126,7 @@ class Util {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => ProblemsContentPage(
-                    title: "Lorem Ipsum",
-                    contents: "Lorem Ipsum dolor sit amet. asidhaiudhaiuxaipxnaipapiuapxiaipsxnaipfapiapisxnapisxnapidspaixnpaisxnpaiusfniauniapxnpaixnianfuiafniand",
-                    imagePath: "assets/logos/logo-color.png",
-                  )
+                  builder: (context) => ListProblems()
                 ),
               );
             },
@@ -147,7 +154,14 @@ class Util {
                 ),
               ],
             ),
-            onTap: () {}, //TODO: Implement fungsi buat callback kalo mencet Glossary di drawer
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => GlossaryPage()
+                ),
+              );
+            }, //TODO: Implement fungsi buat callback kalo mencet Glossary di drawer
           ),
           ListTile(
             key: new Key("Pop Quiz!"),
@@ -197,7 +211,14 @@ class Util {
                 ),
               ],
             ),
-            onTap: () {}, //TODO: Implement fungsi buat callback kalo mencet About di drawer
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => AboutPage()
+                ),
+              );
+            }, //TODO: Implement fungsi buat callback kalo mencet About di drawer
           ),
         ],
       ),

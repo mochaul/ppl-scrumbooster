@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:ScrumBooster/utils/utils.dart';
+import 'package:ScrumBooster/contents/ceremonies.dart';
 import 'package:ScrumBooster/contents/problems.dart';
 import 'package:ScrumBooster/components/ScrumPhaseBtn.dart';
 import 'package:ScrumBooster/scrumPhaseList/ProductBacklog.dart';
+
 
 class HomePage extends StatelessWidget {
   final List<String> myList = new List();
@@ -105,7 +107,7 @@ class HomePage extends StatelessWidget {
               ),
             ],
           )
-        ],
+        ]
       ),
       drawer: util.defaultDrawer(context),
     );
