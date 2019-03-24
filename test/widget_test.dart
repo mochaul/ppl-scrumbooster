@@ -26,14 +26,11 @@ void main() {
     imagePath: "assets/logos/logo-color.png",
     contents: "Lorem ipsum dolor sit amet.",
   );
-
   final Ceremonies ceremonies =  Ceremonies(
     title: "BACKLOG GROOMING",
     imagePath: "assets/logos/logo-color.png",
     contents: "testing",
   );
-  // final scaffoldKey = GlobalKey<ScaffoldState>();
-
   final ProductBacklog productBacklog = ProductBacklog();
   final ListProblems lstProblems = ListProblems();
   final ListCeremonies lstCeremonies = ListCeremonies();
@@ -46,6 +43,7 @@ void main() {
     );
   }
 
+  //Home Page Widget Tests
   testWidgets('Home Screen Drawer Test', (WidgetTester tester) async {
     GlobalKey<ScaffoldState> scaffoldKey = home.getScaffoldKey();
     await tester.pumpWidget(makeTestableWidget(child: home));
@@ -56,11 +54,9 @@ void main() {
     Key menu5 = new Key("Pop Quiz!");
     Key menu6 = new Key("About");
 
-    // Tap the 'burger menu' icon and trigger a frame.
     scaffoldKey.currentState.openDrawer();
     await tester.pump();
 
-    // Verify all the sidebar menu.
     expect(find.byKey(menu1), findsOneWidget);
     expect(find.byKey(menu2), findsOneWidget);
     expect(find.byKey(menu3), findsOneWidget);
@@ -69,118 +65,58 @@ void main() {
     expect(find.byKey(menu6), findsOneWidget);
   });
 
-  test('AssetImage Product backlog from package', () {
-    const AssetImage image = AssetImage(
-      'assets/homepage/Product_Backlog.png',
-      package: 'test_package',
-    );
-    expect(image.keyName, 'packages/test_package/assets/homepage/Product_Backlog.png');
-  });
-
-  test('AssetImage sprint planning from package', () {
-    const AssetImage image = AssetImage(
-      'assets/homepage/Sprint_Planning.png',
-      package: 'test_package',
-    );
-    expect(image.keyName, 'packages/test_package/assets/homepage/Sprint_Planning.png');
-  });
-
-  test('AssetImage sprint exe from package', () {
-    const AssetImage image = AssetImage(
-      'assets/homepage/Sprint_Exe.png',
-      package: 'test_package',
-    );
-    expect(image.keyName, 'packages/test_package/assets/homepage/Sprint_Exe.png');
-  });
-
-  test('AssetImage sprint evaluation from package', () {
-    const AssetImage image = AssetImage(
-      'assets/homepage/Sprint_Evaluation.png',
-      package: 'test_package',
-    );
-    expect(image.keyName, 'packages/test_package/assets/homepage/Sprint_Evaluation.png');
-  });
-
   testWidgets('Test Find Header', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
     await tester.pumpWidget(makeTestableWidget(child: home));
     String menu1 = "WHICH SCRUM PHASE ARE YOU IN RIGHT NOW?";
-    // Verify all the sidebar menu.
     expect(find.text(menu1), findsOneWidget);
   });
 
+  testWidgets('Test Find Wrong Header', (WidgetTester tester) async {
+    await tester.pumpWidget(makeTestableWidget(child: home));
+    String menu1 = "WHICH SCRUM BOOSTER ARE YOU IN RIGHT NOW?";
+    expect(find.text(menu1), findsNothing);
+  });
+
+  //Ceremony Page Widget Tests
   testWidgets('Test Find Title Ceremonies', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
     await tester.pumpWidget(makeTestableWidget(child: ceremonies));
     String title = "BACKLOG GROOMING";
     expect(find.text(title), findsOneWidget);
   });
 
   testWidgets('Test Find Content Ceremonies', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
     await tester.pumpWidget(makeTestableWidget(child: ceremonies));
     String content = "testing";
     expect(find.text(content), findsOneWidget);
   });
 
-  testWidgets('Test Find Wrong Header', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(makeTestableWidget(child: home));
-    String menu1 = "WHICH SCRUM BOOSTER ARE YOU IN RIGHT NOW?";
-    // Verify all the sidebar menu.
-    expect(find.text(menu1), findsNothing);
-  });
-
-  testWidgets('Test Find Product Header 1', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(makeTestableWidget(child: productBacklog));
-    String menu1 = "Things you should be doing:";
-    // Verify all the sidebar menu.
-    expect(find.text(menu1), findsOneWidget);
-  });
-
-  test('AssetImage from package', () {
-      const AssetImage logo = AssetImage(
-        'assets/logos/logo-color.png',
-        package: 'test_package',
-      );
-       const AssetImage makara = AssetImage(
-        'assets/logos/Makara-UI.png',
-        package: 'test_package',
-      );
-       const AssetImage glossary = AssetImage(
-        'assets/listGlossary/glossary.png',
-        package: 'test_package',
-      );
-      expect(logo.keyName, 'packages/test_package/assets/logos/logo-color.png');
-      expect(makara.keyName, 'packages/test_package/assets/logos/Makara-UI.png');
-      expect(glossary.keyName, 'packages/test_package/assets/listGlossary/glossary.png');
-    });
-
+  //Glossary Page Widget Tests
   testWidgets('Test Find List Glossary', (WidgetTester tester) async {
-  // Build our app and trigger a frame.
   await tester.pumpWidget(makeTestableWidget(child: glossary));
   String header1 = "GLOSSARY";
   expect(find.text(header1), findsOneWidget);
   });
 
+  //Product Backlog Phase Widget Tests
+  testWidgets('Test Find Product Header 1', (WidgetTester tester) async {
+    await tester.pumpWidget(makeTestableWidget(child: productBacklog));
+    String menu1 = "Things you should be doing:";
+    expect(find.text(menu1), findsOneWidget);
+  });
+
   testWidgets('Test Not Find Product Header 1', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
     await tester.pumpWidget(makeTestableWidget(child: productBacklog));
     String menu1 = "Things you shouldn't be doing:";
-    // Verify all the sidebar menu.
     expect(find.text(menu1), findsNothing);
   });
 
   testWidgets('Test Find Product Header 2', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
     await tester.pumpWidget(makeTestableWidget(child: productBacklog));
     String menu1 = "Problems you might have face:";
-    // Verify all the sidebar menu.
     expect(find.text(menu1), findsOneWidget);
   });
 
-
+  //Problem Content Page Widget Tests
   testWidgets('Test Problems Content Page', (WidgetTester tester) async {
     await tester.pumpWidget(makeTestableWidget(child: _problemsContentPage));
 
@@ -203,49 +139,30 @@ void main() {
     expect(find.byKey(problemsContentText), findsOneWidget);
   });
 
-  test('AssetImage from package', () {
-    const AssetImage image = AssetImage(
-      'assets/listProblems/problems.png',
-      package: 'test_package',
-    );
-    expect(image.keyName, 'packages/test_package/assets/listProblems/problems.png');
-  });
-
+  //Problems Widget Tests
   testWidgets('Test Find List Problems', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
     await tester.pumpWidget(makeTestableWidget(child: lstProblems));
     String header1 = "PROBLEMS";
-    // Verify all the sidebar menu.
     expect(find.text(header1), findsOneWidget);
   });
 
-  test('AssetImage from package', () {
-    const AssetImage image = AssetImage(
-      'assets/listCeremonies/ceremonies.png',
-      package: 'test_package',
-    );
-    expect(image.keyName, 'packages/test_package/assets/listCeremonies/ceremonies.png');
-  });
-
+  //Ceremonies Widget Tests
   testWidgets('Test Find List Ceremonies', (WidgetTester tester) async {
     await tester.pumpWidget(makeTestableWidget(child: lstCeremonies));
     String header1 = "CEREMONIES";
     expect(find.text(header1), findsOneWidget);
   });
 
+  //Product Backlog Widget Tests
   testWidgets('Test Not Find Product Header 2', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
     await tester.pumpWidget(makeTestableWidget(child: productBacklog));
     String menu1 = "Problems you might have not face:";
-    // Verify all the sidebar menu.
     expect(find.text(menu1), findsNothing);
   });
 
   testWidgets('Test Find 6 Number of Contents', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
     await tester.pumpWidget(makeTestableWidget(child: productBacklog));
     String menu1 = "content";
-    // Verify all the sidebar menu.
     expect(find.byWidgetPredicate((widget) {
       if (widget is Text) {
         final Text textWidget = widget;
@@ -258,10 +175,8 @@ void main() {
   });
 
   testWidgets('Test Find 3 Number of Problems Before Scrolled', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
     await tester.pumpWidget(makeTestableWidget(child: productBacklog));
     String menu1 = "problem";
-    // Verify all the sidebar menu.
     expect(find.byWidgetPredicate((widget) {
       if (widget is Text) {
         final Text textWidget = widget;
@@ -306,5 +221,72 @@ void main() {
     Key key = new Key("Explanation");
     await tester.pumpWidget(makeTestableWidget(child: about));
     expect(find.byKey(key), findsOneWidget);
+  });
+
+  //Image Assets Widget Testing
+  test('AssetImage Product backlog from package', () {
+    const AssetImage image = AssetImage(
+      'assets/homepage/Product_Backlog.png',
+      package: 'test_package',
+    );
+    expect(image.keyName, 'packages/test_package/assets/homepage/Product_Backlog.png');
+  });
+
+  test('AssetImage sprint planning from package', () {
+    const AssetImage image = AssetImage(
+      'assets/homepage/Sprint_Planning.png',
+      package: 'test_package',
+    );
+    expect(image.keyName, 'packages/test_package/assets/homepage/Sprint_Planning.png');
+  });
+
+  test('AssetImage from package', () {
+    const AssetImage image = AssetImage(
+      'assets/listCeremonies/ceremonies.png',
+      package: 'test_package',
+    );
+    expect(image.keyName, 'packages/test_package/assets/listCeremonies/ceremonies.png');
+  });
+
+  test('AssetImage from package', () {
+    const AssetImage image = AssetImage(
+      'assets/listProblems/problems.png',
+      package: 'test_package',
+    );
+    expect(image.keyName, 'packages/test_package/assets/listProblems/problems.png');
+  });
+
+  test('AssetImage from package', () {
+    const AssetImage logo = AssetImage(
+      'assets/logos/logo-color.png',
+      package: 'test_package',
+    );
+    const AssetImage makara = AssetImage(
+      'assets/logos/Makara-UI.png',
+      package: 'test_package',
+    );
+    const AssetImage glossary = AssetImage(
+      'assets/listGlossary/glossary.png',
+      package: 'test_package',
+    );
+    expect(logo.keyName, 'packages/test_package/assets/logos/logo-color.png');
+    expect(makara.keyName, 'packages/test_package/assets/logos/Makara-UI.png');
+    expect(glossary.keyName, 'packages/test_package/assets/listGlossary/glossary.png');
+  });
+
+  test('AssetImage sprint exe from package', () {
+    const AssetImage image = AssetImage(
+      'assets/homepage/Sprint_Exe.png',
+      package: 'test_package',
+    );
+    expect(image.keyName, 'packages/test_package/assets/homepage/Sprint_Exe.png');
+  });
+
+  test('AssetImage sprint evaluation from package', () {
+    const AssetImage image = AssetImage(
+      'assets/homepage/Sprint_Evaluation.png',
+      package: 'test_package',
+    );
+    expect(image.keyName, 'packages/test_package/assets/homepage/Sprint_Evaluation.png');
   });
 }
