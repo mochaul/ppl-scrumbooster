@@ -16,7 +16,8 @@ import 'package:ScrumBooster/contentsList/GlossaryPage.dart';
 import 'package:ScrumBooster/contentsList/ListProblems.dart';
 import 'package:ScrumBooster/contentsList/ListCeremonies.dart';
 import 'package:ScrumBooster/scrumPhaseList/ProductBacklog.dart';
-  
+import 'package:ScrumBooster/initScreen/AboutPage.dart';
+
 void main() {
   final HomePage home = HomePage();
   final SplashScreen splash = SplashScreen();
@@ -37,6 +38,7 @@ void main() {
   final ListProblems lstProblems = ListProblems();
   final ListCeremonies lstCeremonies = ListCeremonies();
   final GlossaryPage glossary =GlossaryPage();
+  final AboutPage about = AboutPage();
 
   Widget makeTestableWidget({Widget child}) {
     return MaterialApp(
@@ -269,5 +271,17 @@ void main() {
       }
       return false;
     }), findsNWidgets(3));
+  });
+
+  testWidgets('About Page: Find Logos', (WidgetTester tester) async {
+    List<String> keys = <String>[
+      "Scrum Booster Logo",
+      "Makara UI Logo",
+    ];
+
+    await tester.pumpWidget(makeTestableWidget(child: about));
+    for (int i = 0; i < keys.length; i++) {
+      expect(find.byKey(new Key(keys[i])), findsOneWidget);
+    }
   });
 }

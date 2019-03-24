@@ -22,13 +22,15 @@ class AboutPage extends StatelessWidget {
               children: <Widget>[
                 new Image.asset(
                   'assets/logos/logo-color.png', 
-                    height: 120,
+                  height: 120,
+                  key: new Key("Scrum Booster Logo"),
                 ),
                 Padding(padding: EdgeInsets.all(10.0),),
                 new Image.asset(
                   'assets/logos/Makara-UI.png', 
-                    height: 120,
-                  ),
+                  height: 120,
+                  key: new Key("Makara UI Logo"),
+                ),
               ], 
             ),
             Padding(
