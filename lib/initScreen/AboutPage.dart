@@ -83,7 +83,7 @@ class AboutPage extends StatelessWidget {
                     ),
                   ),
                   new Text(
-                    'Khoirul Kholuqi Abdulloh',
+                    'Khoirul Khuluqi Abdulloh',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 16,

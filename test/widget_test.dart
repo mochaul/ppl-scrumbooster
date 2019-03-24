@@ -273,6 +273,7 @@ void main() {
     }), findsNWidgets(3));
   });
 
+  //About Page Widget Tests
   testWidgets('About Page: Find Logos', (WidgetTester tester) async {
     List<String> keys = <String>[
       "Scrum Booster Logo",
@@ -282,6 +283,22 @@ void main() {
     await tester.pumpWidget(makeTestableWidget(child: about));
     for (int i = 0; i < keys.length; i++) {
       expect(find.byKey(new Key(keys[i])), findsOneWidget);
+    }
+  });
+
+  testWidgets('About Page: Find Team Members Text', (WidgetTester tester) async {
+    List<String> teamMembers = <String>[
+      "Mochamad Aulia Akbar Praditomo",
+      "Fajrin Maulana Kingwijati",
+      "Izzan Fakhril Islam",
+      "Muhammad Rezki",
+      "Khoirul Khuluqi Abdulloh",
+      "Wildan Fahmi Gunawan",
+    ];
+
+    await tester.pumpWidget(makeTestableWidget(child: about));
+    for (int i = 0; i < teamMembers.length; i++) {
+      expect(find.text(teamMembers[i]), findsOneWidget);
     }
   });
 }
