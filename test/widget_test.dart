@@ -301,4 +301,10 @@ void main() {
       expect(find.text(teamMembers[i]), findsOneWidget);
     }
   });
+
+  testWidgets('About Page: Find Explanation words', (WidgetTester tester) async {
+    Key key = new Key("Explanation");
+    await tester.pumpWidget(makeTestableWidget(child: about));
+    expect(find.byKey(key), findsOneWidget);
+  });
 }

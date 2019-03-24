@@ -45,6 +45,7 @@ class AboutPage extends StatelessWidget {
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
                     ),
+                    key: new Key("Explanation"),
                   ),
                   Padding(
                     padding: EdgeInsets.all(10.0),
