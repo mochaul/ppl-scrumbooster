@@ -41,7 +41,7 @@ class BoardingPage extends StatelessWidget {
                     border: new Border.all(color: Colors.white, width: 2.0),
                     borderRadius: new BorderRadius.circular(20.0),
                   ),
-                  child: new Center(child: new Text('Get Started', style: new TextStyle(fontSize: 18.0, color: Colors.white),),),
+                  child: new Center(child: new Text('Get Started!', style: new TextStyle(fontSize: 18.0, color: Colors.white),),),
                 ),
               ),
             ],
