@@ -2,15 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:ScrumBooster/utils/utils.dart';
 
 class GlossaryPage extends StatelessWidget {
-  final List<String> myList = new List();
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   getScaffoldKey() {
     return scaffoldKey;
   }
 
-//  ListCeremonies({Key key, List<String> myList}) : super(key: key);
-var utils = new Util();
+  var utils = new Util();
 
   @override
   Widget build(BuildContext context) {
