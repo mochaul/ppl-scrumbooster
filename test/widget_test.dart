@@ -160,32 +160,56 @@ void main() {
     expect(find.text(menu1), findsNothing);
   });
 
-  testWidgets('Test Find 6 Number of Contents', (WidgetTester tester) async {
+  testWidgets('Test Find Content Names', (WidgetTester tester) async {
+    //TODO: Ubah jadi nama judul content
+    List<String> contentNames = <String>[
+      "Backlog Grooming",
+      "content b",
+      "content c",
+      "content d",
+      "content e",
+      "content f",
+    ];
+
     await tester.pumpWidget(makeTestableWidget(child: productBacklog));
-    String menu1 = "content";
-    expect(find.byWidgetPredicate((widget) {
-      if (widget is Text) {
-        final Text textWidget = widget;
-        if (textWidget.data != null)
-          return textWidget.data.contains(menu1);
-        return textWidget.textSpan.toPlainText().contains(menu1);
-      }
-      return false;
-    }), findsNWidgets(6));
+    for (int i = 0; i < contentNames.length; i++) {
+      expect(find.byWidgetPredicate((widget) {
+        if (widget is Text) {
+          final Text textWidget = widget;
+          if (textWidget.data != null) {
+            return textWidget.data.contains(contentNames[i]);
+          }
+          return textWidget.textSpan.toPlainText().contains(contentNames[i]);
+        }
+        return false;
+      }), findsOneWidget);
+    }
   });
 
-  testWidgets('Test Find 3 Number of Problems Before Scrolled', (WidgetTester tester) async {
+  testWidgets('Test Find First 3 Problem Names', (WidgetTester tester) async {
+    //TODO: Ubah jadi nama judul problem
+    List<String> problemNames = <String>[
+      "Poor Project Communication",
+      "problem b",
+      "problem c",
+      "problem d",
+      "problem e",
+      "problem f",
+    ];
+
     await tester.pumpWidget(makeTestableWidget(child: productBacklog));
-    String menu1 = "problem";
-    expect(find.byWidgetPredicate((widget) {
-      if (widget is Text) {
-        final Text textWidget = widget;
-        if (textWidget.data != null)
-          return textWidget.data.contains(menu1);
-        return textWidget.textSpan.toPlainText().contains(menu1);
-      }
-      return false;
-    }), findsNWidgets(3));
+    for (int i = 0; i < 3; i++) {
+      expect(find.byWidgetPredicate((widget) {
+        if (widget is Text) {
+          final Text textWidget = widget;
+          if (textWidget.data != null) {
+            return textWidget.data.contains(problemNames[i]);
+          }
+          return textWidget.textSpan.toPlainText().contains(problemNames[i]);
+        }
+        return false;
+      }), findsOneWidget);
+    }
   });
 
   //About Page Widget Tests
