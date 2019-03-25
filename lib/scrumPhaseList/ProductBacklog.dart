@@ -5,7 +5,6 @@ import 'package:ScrumBooster/contents/ceremonies.dart';
 import 'package:ScrumBooster/contents/problems.dart';
 
 class ProductBacklog extends StatelessWidget {
-  final List<String> myList = new List();
   final List<String> homeImageList = new List();
   final scaffoldKey = GlobalKey<ScaffoldState>();
   var utils = new Util();
