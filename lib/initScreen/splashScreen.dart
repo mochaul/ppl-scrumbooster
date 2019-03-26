@@ -13,7 +13,7 @@ class _SplashScreenState extends State<SplashScreen> {
   Future transitionToHome() {
     return new Future.delayed(
       const Duration(seconds: 2),
-        () => Navigator.of(context).pushReplacementNamed('/Home'),
+        () => Navigator.of(context).pushReplacementNamed('/Boarding'),
     );
   }
 

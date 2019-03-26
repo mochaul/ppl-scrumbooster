@@ -70,6 +70,8 @@ flutter:
     - assets/scrumPhase/problem_d.png
     - assets/scrumPhase/problem_e.png
     - assets/scrumPhase/problem_f.png
+    - assets/scrum-board.png
+    - assets/scrum-board-cloud.png
 
   fonts:
   - family: Montserrat
