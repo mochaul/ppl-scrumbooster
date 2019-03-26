@@ -16,20 +16,24 @@ class HomePage extends StatelessWidget {
     return scaffoldKey;
   }
 
-//  HomePage({Key key, List<String> myList}) : super(key: key);
   final util = new Util();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: scaffoldKey,
       appBar: AppBar(
-        leading: new Icon(
-          Icons.menu,
-          color: util.hexToColor("#FFFFFF"),
+        leading: new InkWell(
+          child: new Icon(
+            Icons.menu,
+            color: util.hexToColor("#FFFFFF"),
+          ),
+          onTap: () {
+            scaffoldKey.currentState.openDrawer();
+          },
         ),
         centerTitle: true,
         title: Text(
-          "Scrum Booster",
+          "Scrum Booster".toUpperCase(),
           style: TextStyle(
             color: util.hexToColor("#FFFFFF"),
             fontWeight: FontWeight.bold,
@@ -48,66 +52,76 @@ class HomePage extends StatelessWidget {
           ),
         ],
       ),
-      body: new Column(
-        children: <Widget>[
-          new Padding(padding: EdgeInsets.all(15.0),),
-          new Text("WHICH SCRUMPHASE ARE YOU IN RIGHT NOW?", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: utils.hexToColor("#000000")), textAlign: TextAlign.center,),
-          new Row(
-            children: <Widget>[
-              new Padding(
-                padding: EdgeInsets.only(right: 0),
-                child: new Row(
-                  children: <Widget>[
-                    new ScrumPhaseBtn(
-                      title: "Product Backlog",
-                      action: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => ProductBacklog()
-                            )
-                        );
-                      },
-                      imgUrl: "assets/homepage/Product_Backlog.png",
-                    ),
-                    new Padding(
-                      padding: EdgeInsets.all(0),
-                    ),
-                    new ScrumPhaseBtn(
-                      title: "Sprint Planning",
-                      action: () => {},
-                      imgUrl: "assets/homepage/Sprint_Planning.png",
-                    )
-                  ],
+      body: new Container(
+        child: new Column(
+          children: <Widget>[
+            new Padding(
+              padding: EdgeInsets.only(top: 20.0, bottom: 15.0),
+              child: new Text(
+                "WHICH SCRUM PHASE ARE YOU IN RIGHT NOW?",
+                style: TextStyle(
+                  fontSize: 25.0,
+                  fontWeight: FontWeight.bold,
+                  color: utils.hexToColor("#000000"),
                 ),
+                textAlign: TextAlign.center,
               ),
-            ],
-          ),
-          new Row(
-            children: <Widget>[
-              new Padding(
-                padding: EdgeInsets.only(right: 10),
-                child: new Row(
-                  children: <Widget>[
-                    new ScrumPhaseBtn(
-                      title: "Sprint Execution",
-                      action: () => {},
-                      imgUrl: "assets/homepage/Sprint_Exe.png",
-                    ),
-                    new Padding(
-                      padding: EdgeInsets.all(0),
-                    ),
-                    new ScrumPhaseBtn(
-                      title: "Sprint Evaluation",
-                      action: () => {},
-                      imgUrl: "assets/homepage/Sprint_Evaluation.png",
-                    )
-                  ],
+            ),
+            new Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                new ScrumPhaseBtn(
+                  title: "Product Backlog",
+                  action: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ProductBacklog()
+                      ),
+                    );
+                  },
+                  imgUrl: "assets/homepage/Product_Backlog.png",
                 ),
-              ),
-            ],
-          )
-        ]
+                new Padding(
+                  padding: EdgeInsets.all(20.0),
+                ),
+                new ScrumPhaseBtn(
+                  title: "Sprint Planning",
+                  action: () {},
+                  imgUrl: "assets/homepage/Sprint_Planning.png",
+                ),
+              ],
+            ),
+            new Padding(
+              padding: EdgeInsets.all(10.0),
+            ),
+            new Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                new ScrumPhaseBtn(
+                  title: "Sprint Execution",
+                  action: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => ProductBacklog()
+                      ),
+                    );
+                  },
+                  imgUrl: "assets/homepage/Sprint_Exe.png",
+                ),
+                new Padding(
+                  padding: EdgeInsets.all(20.0),
+                ),
+                new ScrumPhaseBtn(
+                  title: "Sprint Evaluation",
+                  action: () {},
+                  imgUrl: "assets/homepage/Sprint_Evaluation.png",
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
       drawer: util.defaultDrawer(context),
     );
