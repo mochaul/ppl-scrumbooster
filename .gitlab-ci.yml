@@ -59,7 +59,7 @@ BackendLinterTest:
   script:
     - cd scrum-booster-api
     - pip install pylint
-    - pylint ./
+    - pylint /rest_api
 
 BackendDeployToProduction:
   variables:
