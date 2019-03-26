@@ -53,13 +53,13 @@ BackendTest:
     - coverage run manage.py test
     - coverage report -m
 
-BackendLinterTest:
-  stage: test
-  image: python:3.6
-  script:
-    - cd scrum-booster-api
-    - pip install pylint
-    - pylint /rest_api/views.py
+# BackendLinterTest:
+#   stage: test
+#   image: python:3.6
+#   script:
+#     - cd scrum-booster-api
+#     - pip install pylint
+#     - pylint /rest_api/views.py
 
 BackendDeployToProduction:
   variables:
