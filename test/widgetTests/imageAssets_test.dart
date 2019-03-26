@@ -1,10 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/material.dart';
-import 'package:ScrumBooster/utils/utils.dart';
 
 void main() {
-  final util = new Util();
-
   //Image Assets Widget Testing
   test('AssetImage Product backlog from package', () {
     const AssetImage image = AssetImage(
