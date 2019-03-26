@@ -26,9 +26,9 @@ class ScrumListBtn extends StatelessWidget {
       width: 120.0,
       height: 120.0,
       child: InkWell(
-          onTap: this.action,
-      child: null,
-    ),
+        onTap: this.action,
+        child: null,
+      ),
     );
   }
 }
