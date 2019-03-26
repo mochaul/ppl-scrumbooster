@@ -54,7 +54,7 @@ BackendTest:
     - coverage report -m
 
 BackendLinterTest:
-  stage: testl
+  stage: test
   image: python:3.6
   script:
     - cd scrum-booster-api
