@@ -1,5 +1,5 @@
 #!/bin/bash
-
+python manage.py migrate
 # Start Gunicorn processes
 echo Starting Gunicorn.
 exec gunicorn api.wsgi:application \
