@@ -24,17 +24,21 @@ class ProblemsContentPage extends StatelessWidget {
   Widget build(BuildContext context) {
     double _height = MediaQuery.of(context).size.height;
     double _width = MediaQuery.of(context).size.width;
-
     return Scaffold(
       key: scaffoldKey,
       appBar: AppBar(
-        leading: new Icon(
-          Icons.menu,
-          color: util.hexToColor("#FFFFFF"),
+        leading: new InkWell(
+          child: Icon(
+            Icons.menu,
+            color: util.hexToColor("#FFFFFF"),
+          ),
+          onTap: () {
+            scaffoldKey.currentState.openDrawer();
+          },
         ),
         centerTitle: true,
         title: Text(
-          "Scrum Booster",
+          "Scrum Booster".toUpperCase(),
           style: TextStyle(
             color: util.hexToColor("#FFFFFF"),
             fontWeight: FontWeight.bold,
@@ -105,6 +109,7 @@ class ProblemsContentPage extends StatelessWidget {
                                   fontWeight: FontWeight.bold,
                                   fontSize: 25.0,
                                 ),
+                                textAlign: TextAlign.center,
                               ),
                               decoration: new BoxDecoration(
                                 color: util.hexToColor("#FFFFFF"),
