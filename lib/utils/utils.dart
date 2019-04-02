@@ -23,6 +23,12 @@ class Util {
     "12": "Desember",
   };
 
+  Widget makeTestableWidget({Widget child}) {
+    return MaterialApp(
+      home: child,
+    );
+  }
+
   Widget defaultDrawer(BuildContext context) {
     return Drawer(
       child: ListView(
