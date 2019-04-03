@@ -4,6 +4,10 @@ import 'package:ScrumBooster/contents/ceremonies.dart';
 import 'package:ScrumBooster/contents/problems.dart';
 import 'package:ScrumBooster/components/ScrumPhaseBtn.dart';
 import 'package:ScrumBooster/scrumPhaseList/ProductBacklog.dart';
+import 'package:ScrumBooster/scrumPhaseList/SprintEvaluation.dart';
+import 'package:ScrumBooster/scrumPhaseList/SprintExecution.dart';
+import 'package:ScrumBooster/scrumPhaseList/SprintPlanning.dart';
+
 
 
 class HomePage extends StatelessWidget {
@@ -75,7 +79,14 @@ class HomePage extends StatelessWidget {
                     ),
                     new ScrumPhaseBtn(
                       title: "Sprint Planning",
-                      action: () => {},
+                      action: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => SprintPlanning()
+                            )
+                        );
+                      },
                       imgUrl: "assets/homepage/Sprint_Planning.png",
                     )
                   ],
@@ -91,7 +102,14 @@ class HomePage extends StatelessWidget {
                   children: <Widget>[
                     new ScrumPhaseBtn(
                       title: "Sprint Execution",
-                      action: () => {},
+                      action: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => SprintExecution()
+                            )
+                        );
+                      },
                       imgUrl: "assets/homepage/Sprint_Exe.png",
                     ),
                     new Padding(
@@ -99,7 +117,14 @@ class HomePage extends StatelessWidget {
                     ),
                     new ScrumPhaseBtn(
                       title: "Sprint Evaluation",
-                      action: () => {},
+                      action: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => SprintEvaluation()
+                            )
+                        );
+                      },
                       imgUrl: "assets/homepage/Sprint_Evaluation.png",
                     )
                   ],

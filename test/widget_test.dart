@@ -16,6 +16,9 @@ import 'package:ScrumBooster/contentsList/GlossaryPage.dart';
 import 'package:ScrumBooster/contentsList/ListProblems.dart';
 import 'package:ScrumBooster/contentsList/ListCeremonies.dart';
 import 'package:ScrumBooster/scrumPhaseList/ProductBacklog.dart';
+import 'package:ScrumBooster/scrumPhaseList/SprintEvaluation.dart';
+import 'package:ScrumBooster/scrumPhaseList/SprintExecution.dart';
+import 'package:ScrumBooster/scrumPhaseList/SprintPlanning.dart';
   
 void main() {
   final HomePage home = HomePage();
@@ -34,6 +37,9 @@ void main() {
   // final scaffoldKey = GlobalKey<ScaffoldState>();
 
   final ProductBacklog productBacklog = ProductBacklog();
+  final SprintEvaluation sprintEvaluation = SprintEvaluation();
+  final SprintExecution sprintExecution = SprintExecution();
+  final SprintPlanning sprintPlanning = SprintPlanning();
   final ListProblems lstProblems = ListProblems();
   final ListCeremonies lstCeremonies = ListCeremonies();
   final GlossaryPage glossary =GlossaryPage();
@@ -162,6 +168,30 @@ void main() {
     expect(find.text(menu1), findsOneWidget);
   });
 
+  testWidgets('Test Find Product Header 2', (WidgetTester tester) async {
+    // Build our app and trigger a frame.
+    await tester.pumpWidget(makeTestableWidget(child: sprintEvaluation));
+    String menu1 = "Things you should be doing:";
+    // Verify all the sidebar menu.
+    expect(find.text(menu1), findsOneWidget);
+  });
+
+  testWidgets('Test Find Product Header 3', (WidgetTester tester) async {
+    // Build our app and trigger a frame.
+    await tester.pumpWidget(makeTestableWidget(child: sprintExecution));
+    String menu1 = "Things you should be doing:";
+    // Verify all the sidebar menu.
+    expect(find.text(menu1), findsOneWidget);
+  });
+
+  testWidgets('Test Find Product Header 4', (WidgetTester tester) async {
+    // Build our app and trigger a frame.
+    await tester.pumpWidget(makeTestableWidget(child: sprintPlanning));
+    String menu1 = "Things you should be doing:";
+    // Verify all the sidebar menu.
+    expect(find.text(menu1), findsOneWidget);
+  });
+
   test('AssetImage from package', () {
       const AssetImage logo = AssetImage(
         'assets/logos/logo-color.png',
@@ -195,7 +225,31 @@ void main() {
     expect(find.text(menu1), findsNothing);
   });
 
-  testWidgets('Test Find Product Header 2', (WidgetTester tester) async {
+  testWidgets('Test Not Find Product Header 2', (WidgetTester tester) async {
+    // Build our app and trigger a frame.
+    await tester.pumpWidget(makeTestableWidget(child: sprintEvaluation));
+    String menu1 = "Things you shouldn't be doing:";
+    // Verify all the sidebar menu.
+    expect(find.text(menu1), findsNothing);
+  });
+
+  testWidgets('Test Not Find Product Header 3', (WidgetTester tester) async {
+    // Build our app and trigger a frame.
+    await tester.pumpWidget(makeTestableWidget(child: sprintExecution));
+    String menu1 = "Things you shouldn't be doing:";
+    // Verify all the sidebar menu.
+    expect(find.text(menu1), findsNothing);
+  });
+
+  testWidgets('Test Not Find Product Header 4', (WidgetTester tester) async {
+    // Build our app and trigger a frame.
+    await tester.pumpWidget(makeTestableWidget(child: sprintPlanning));
+    String menu1 = "Things you shouldn't be doing:";
+    // Verify all the sidebar menu.
+    expect(find.text(menu1), findsNothing);
+  });
+
+  testWidgets('Test Find Product Header Problems 1', (WidgetTester tester) async {
     // Build our app and trigger a frame.
     await tester.pumpWidget(makeTestableWidget(child: productBacklog));
     String menu1 = "Problems you might have face:";
@@ -203,6 +257,29 @@ void main() {
     expect(find.text(menu1), findsOneWidget);
   });
 
+  testWidgets('Test Find Product Header Problems 2', (WidgetTester tester) async {
+    // Build our app and trigger a frame.
+    await tester.pumpWidget(makeTestableWidget(child: sprintEvaluation));
+    String menu1 = "Problems you might have face:";
+    // Verify all the sidebar menu.
+    expect(find.text(menu1), findsOneWidget);
+  });
+
+  testWidgets('Test Find Product Header Problems 3', (WidgetTester tester) async {
+    // Build our app and trigger a frame.
+    await tester.pumpWidget(makeTestableWidget(child: sprintExecution));
+    String menu1 = "Problems you might have face:";
+    // Verify all the sidebar menu.
+    expect(find.text(menu1), findsOneWidget);
+  });
+
+  testWidgets('Test Find Product Header Problems 4', (WidgetTester tester) async {
+    // Build our app and trigger a frame.
+    await tester.pumpWidget(makeTestableWidget(child: sprintPlanning));
+    String menu1 = "Problems you might have face:";
+    // Verify all the sidebar menu.
+    expect(find.text(menu1), findsOneWidget);
+  });
 
   testWidgets('Test Problems Content Page', (WidgetTester tester) async {
     await tester.pumpWidget(makeTestableWidget(child: _problemsContentPage));
@@ -256,7 +333,7 @@ void main() {
     expect(find.text(header1), findsOneWidget);
   });
 
-  testWidgets('Test Not Find Product Header 2', (WidgetTester tester) async {
+  testWidgets('Test Not Find Product Header Problems 1', (WidgetTester tester) async {
     // Build our app and trigger a frame.
     await tester.pumpWidget(makeTestableWidget(child: productBacklog));
     String menu1 = "Problems you might have not face:";
@@ -264,7 +341,31 @@ void main() {
     expect(find.text(menu1), findsNothing);
   });
 
-  testWidgets('Test Find 6 Number of Contents', (WidgetTester tester) async {
+  testWidgets('Test Not Find Product Header Problems 2', (WidgetTester tester) async {
+    // Build our app and trigger a frame.
+    await tester.pumpWidget(makeTestableWidget(child: sprintEvaluation));
+    String menu1 = "Problems you might have not face:";
+    // Verify all the sidebar menu.
+    expect(find.text(menu1), findsNothing);
+  });
+
+  testWidgets('Test Not Find Product Header Problems 3', (WidgetTester tester) async {
+    // Build our app and trigger a frame.
+    await tester.pumpWidget(makeTestableWidget(child: sprintExecution));
+    String menu1 = "Problems you might have not face:";
+    // Verify all the sidebar menu.
+    expect(find.text(menu1), findsNothing);
+  });
+
+  testWidgets('Test Not Find Product Header Problems 4', (WidgetTester tester) async {
+    // Build our app and trigger a frame.
+    await tester.pumpWidget(makeTestableWidget(child: sprintPlanning));
+    String menu1 = "Problems you might have not face:";
+    // Verify all the sidebar menu.
+    expect(find.text(menu1), findsNothing);
+  });
+
+  testWidgets('Test Find 6 Number of Contents Backlog', (WidgetTester tester) async {
     // Build our app and trigger a frame.
     await tester.pumpWidget(makeTestableWidget(child: productBacklog));
     String menu1 = "content";
@@ -280,9 +381,105 @@ void main() {
     }), findsNWidgets(6));
   });
 
-  testWidgets('Test Find 3 Number of Problems Before Scrolled', (WidgetTester tester) async {
+  testWidgets('Test Find 6 Number of Contents Evaluation', (WidgetTester tester) async {
+    // Build our app and trigger a frame.
+    await tester.pumpWidget(makeTestableWidget(child: sprintEvaluation));
+    String menu1 = "content";
+    // Verify all the sidebar menu.
+    expect(find.byWidgetPredicate((widget) {
+      if (widget is Text) {
+        final Text textWidget = widget;
+        if (textWidget.data != null)
+          return textWidget.data.contains(menu1);
+        return textWidget.textSpan.toPlainText().contains(menu1);
+      }
+      return false;
+    }), findsNWidgets(6));
+  });
+
+  testWidgets('Test Find 6 Number of Contents Execution', (WidgetTester tester) async {
+    // Build our app and trigger a frame.
+    await tester.pumpWidget(makeTestableWidget(child: sprintExecution));
+    String menu1 = "content";
+    // Verify all the sidebar menu.
+    expect(find.byWidgetPredicate((widget) {
+      if (widget is Text) {
+        final Text textWidget = widget;
+        if (textWidget.data != null)
+          return textWidget.data.contains(menu1);
+        return textWidget.textSpan.toPlainText().contains(menu1);
+      }
+      return false;
+    }), findsNWidgets(6));
+  });
+
+  testWidgets('Test Find 6 Number of Contents Planning', (WidgetTester tester) async {
+    // Build our app and trigger a frame.
+    await tester.pumpWidget(makeTestableWidget(child: sprintPlanning));
+    String menu1 = "content";
+    // Verify all the sidebar menu.
+    expect(find.byWidgetPredicate((widget) {
+      if (widget is Text) {
+        final Text textWidget = widget;
+        if (textWidget.data != null)
+          return textWidget.data.contains(menu1);
+        return textWidget.textSpan.toPlainText().contains(menu1);
+      }
+      return false;
+    }), findsNWidgets(6));
+  });
+
+  testWidgets('Test Find 3 Number of Problems Before Scrolled Backlog', (WidgetTester tester) async {
     // Build our app and trigger a frame.
     await tester.pumpWidget(makeTestableWidget(child: productBacklog));
+    String menu1 = "problem";
+    // Verify all the sidebar menu.
+    expect(find.byWidgetPredicate((widget) {
+      if (widget is Text) {
+        final Text textWidget = widget;
+        if (textWidget.data != null)
+          return textWidget.data.contains(menu1);
+        return textWidget.textSpan.toPlainText().contains(menu1);
+      }
+      return false;
+    }), findsNWidgets(3));
+  });
+
+  testWidgets('Test Find 3 Number of Problems Before Scrolled Evaluation', (WidgetTester tester) async {
+    // Build our app and trigger a frame.
+    await tester.pumpWidget(makeTestableWidget(child: sprintEvaluation));
+    String menu1 = "problem";
+    // Verify all the sidebar menu.
+    expect(find.byWidgetPredicate((widget) {
+      if (widget is Text) {
+        final Text textWidget = widget;
+        if (textWidget.data != null)
+          return textWidget.data.contains(menu1);
+        return textWidget.textSpan.toPlainText().contains(menu1);
+      }
+      return false;
+    }), findsNWidgets(3));
+  });
+
+  testWidgets('Test Find 3 Number of Problems Before Scrolled Execution', (WidgetTester tester) async {
+    // Build our app and trigger a frame.
+    await tester.pumpWidget(makeTestableWidget(child: sprintExecution));
+    String menu1 = "problem";
+    // Verify all the sidebar menu.
+    expect(find.byWidgetPredicate((widget) {
+      if (widget is Text) {
+        final Text textWidget = widget;
+        if (textWidget.data != null)
+          return textWidget.data.contains(menu1);
+        return textWidget.textSpan.toPlainText().contains(menu1);
+      }
+      return false;
+    }), findsNWidgets(3));
+  });
+
+  testWidgets('Test Find 3 Number of Problems Before Scrolled Planning', (WidgetTester tester) async {
+    // Build our app and trigger a frame.
+    await tester.pumpWidget(makeTestableWidget(child: sprintPlanning));
     String menu1 = "problem";
     // Verify all the sidebar menu.
     expect(find.byWidgetPredicate((widget) {
