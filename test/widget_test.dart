@@ -10,12 +10,14 @@ import 'package:flutter_test/flutter_test.dart';
 
 import 'package:ScrumBooster/initScreen/HomeScreen.dart';
 import 'package:ScrumBooster/initScreen/splashScreen.dart';
+import 'package:ScrumBooster/initScreen/BoardingPage.dart';
 import 'package:ScrumBooster/contents/ceremonies.dart';
 import 'package:ScrumBooster/contents/problems.dart';
 import 'package:ScrumBooster/contentsList/GlossaryPage.dart';
 import 'package:ScrumBooster/contentsList/ListProblems.dart';
 import 'package:ScrumBooster/contentsList/ListCeremonies.dart';
 import 'package:ScrumBooster/scrumPhaseList/ProductBacklog.dart';
+
   
 void main() {
   final HomePage home = HomePage();
@@ -37,6 +39,7 @@ void main() {
   final ListProblems lstProblems = ListProblems();
   final ListCeremonies lstCeremonies = ListCeremonies();
   final GlossaryPage glossary =GlossaryPage();
+  final BoardingPage boarding = BoardingPage();
 
   Widget makeTestableWidget({Widget child}) {
     return MaterialApp(
@@ -294,5 +297,26 @@ void main() {
       }
       return false;
     }), findsNWidgets(3));
+  });
+
+  //test for boarding page
+  test('AssetImage boarding page from package', () {
+    const AssetImage image = AssetImage(
+      'assets/scrum-board-cloud.png',
+      package: 'test_package',
+    );
+    expect(image.keyName, 'packages/test_package/assets/scrum-board-cloud.png');
+  });
+
+    testWidgets('Test Find Header', (WidgetTester tester) async {
+    // Build our app and trigger a frame.
+    await tester.pumpWidget(makeTestableWidget(child: boarding));
+    String firstLine  = "WELCOME TO SCRUM BOOSTER!";
+    String secondLine = "WE'RE HERE TO HELP YOU";
+    String thirdLine  = "TO MAXIMIZE";
+    String fourthLine = "YOUR SCRUM CEREMONY";
+    
+    // Verify all the sidebar menu.
+    expect(find.text(firstLine), findsOneWidget);
   });
 }
