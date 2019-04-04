@@ -20,7 +20,7 @@ from rest_api import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    re_path(r'^phase/(?P<id>\d+)/details/$', views.GetCeremonyAndProblemByPhase.as_view()),
+    re_path(r'^phase/(?P<id>\d+)/details/$', views.GetCeremonyAndProblemByPhase.as_view(), name='phase-ceremony-problem'),
     path('', include('rest_api.urls'), name='api'),
 ]
 
