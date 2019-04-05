@@ -12,231 +12,92 @@ class BoardingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     double _width = MediaQuery.of(context).size.width;
     return Scaffold(
+
+      //add container 
       body: Container(
+        //change background color to blue
         color: utils.hexToColor("#3498DB"),
         child: Center(
           child: Column(
             children: <Widget>[
               Padding(
-                padding: EdgeInsets.all(35.0),
+                padding: EdgeInsets.all(20.0),
               ),
+              //add image asset
               Image.asset(
                 "assets/logos/logo-color.png",
-                height: 75.0,
-                width: 75.0,
+                height: 50,
               ),
               Padding(
                 padding: EdgeInsets.only(
-                  bottom: 35.0,
+                  bottom: 20.0,
                 ),
               ),
-              new Padding(
-                padding: EdgeInsets.only(left: 7.5),
-                child: new Stack(
-                  children: <Widget>[
-                    new Container(
-                      width: _width,
-                      child: new Text(
-                        "WELCOME !",
-                        style: TextStyle(
-                          color: utils.hexToColor("#4DB6AC"),
-                          fontWeight: FontWeight.bold,
-                          fontSize: 75.0,
-                        ),
-                        textAlign: TextAlign.start,
-                      ),
-                    ),
-                    new Positioned(
-                      left: utils.fitScreenSize(_width, 0.04),
-                      child: new Text(
-                        "WELCOME !",
-                        style: TextStyle(
-                          color: utils.hexToColor("#FFFFFF"),
-                          fontSize: 75.0,
-                          fontWeight: FontWeight.bold,
-                        ),
-                        textAlign: TextAlign.start,
-                      ),
-                    ),
-                  ],
+              Image.asset(
+                "assets/scrum-board-cloud.png",
+                height: 200,
+              ),
+              Padding(
+                padding: EdgeInsets.all(10.0),
+              ),
+              //add content text of boardingpage 
+              Text(
+                "WELCOME TO SCRUM BOOSTER!",
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: utils.hexToColor("#ffffff"),
                 ),
               ),
-              new Padding(
-                padding: EdgeInsets.only(left: 7.5),
-                child: new Stack(
-                  children: <Widget>[
-                    new Container(
-                      width: _width,
-                      child: new Text(
-                        "WE'RE HERE",
-                        style: TextStyle(
-                          color: utils.hexToColor("#4DB6AC"),
-                          fontWeight: FontWeight.bold,
-                          fontSize: 75.0,
-                        ),
-                        textAlign: TextAlign.start,
-                      ),
-                    ),
-                    new Positioned(
-                      left: utils.fitScreenSize(_width, 0.04),
-                      child: new Text(
-                        "WE'RE HERE",
-                        style: TextStyle(
-                          color: utils.hexToColor("#FFFFFF"),
-                          fontSize: 75.0,
-                          fontWeight: FontWeight.bold,
-                        ),
-                        textAlign: TextAlign.start,
-                      ),
-                    ),
-                  ],
+              Text(
+                "WE'RE HERE TO HELP YOU",
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: utils.hexToColor("#ffffff"),
                 ),
               ),
-              new Padding(
-                padding: EdgeInsets.only(left: 7.5),
-                child: new Stack(
-                  children: <Widget>[
-                    new Container(
-                      width: _width,
-                      child: new Text(
-                        "TO HELP YOU",
-                        style: TextStyle(
-                          color: utils.hexToColor("#4DB6AC"),
-                          fontWeight: FontWeight.bold,
-                          fontSize: 75.0,
-                        ),
-                        textAlign: TextAlign.start,
-                      ),
-                    ),
-                    new Positioned(
-                      left: utils.fitScreenSize(_width, 0.04),
-                      child: new Text(
-                        "TO HELP YOU",
-                        style: TextStyle(
-                          color: utils.hexToColor("#FFFFFF"),
-                          fontSize: 75.0,
-                          fontWeight: FontWeight.bold,
-                        ),
-                        textAlign: TextAlign.start,
-                      ),
-                    ),
-                  ],
+              Text(
+                "TO MAXIMIZE",
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: utils.hexToColor("#ffffff"),
                 ),
               ),
-              new Padding(
-                padding: EdgeInsets.only(left: 7.5),
-                child: new Stack(
-                  children: <Widget>[
-                    new Container(
-                      width: _width,
-                      child: new Text(
-                        "MAXIMIZE",
-                        style: TextStyle(
-                          color: utils.hexToColor("#4DB6AC"),
-                          fontWeight: FontWeight.bold,
-                          fontSize: 75.0,
-                        ),
-                        textAlign: TextAlign.start,
-                      ),
-                    ),
-                    new Positioned(
-                      left: utils.fitScreenSize(_width, 0.04),
-                      child: new Text(
-                        "MAXIMIZE",
-                        style: TextStyle(
-                          color: utils.hexToColor("#FFFFFF"),
-                          fontSize: 75.0,
-                          fontWeight: FontWeight.bold,
-                        ),
-                        textAlign: TextAlign.start,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              new Padding(
-                padding: EdgeInsets.only(left: 7.5),
-                child: new Stack(
-                  children: <Widget>[
-                    new Container(
-                      width: _width,
-                      child: new Text(
-                        "YOUR SCRUM",
-                        style: TextStyle(
-                          color: utils.hexToColor("#4DB6AC"),
-                          fontWeight: FontWeight.bold,
-                          fontSize: 75.0,
-                        ),
-                        textAlign: TextAlign.start,
-                      ),
-                    ),
-                    new Positioned(
-                      left: utils.fitScreenSize(_width, 0.04),
-                      child: new Text(
-                        "YOUR SCRUM",
-                        style: TextStyle(
-                          color: utils.hexToColor("#FFFFFF"),
-                          fontSize: 75.0,
-                          fontWeight: FontWeight.bold,
-                        ),
-                        textAlign: TextAlign.start,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-              new Padding(
-                padding: EdgeInsets.only(left: 7.5),
-                child: new Stack(
-                  children: <Widget>[
-                    new Container(
-                      width: _width,
-                      child: new Text(
-                        "CEREMONY",
-                        style: TextStyle(
-                          color: utils.hexToColor("#4DB6AC"),
-                          fontWeight: FontWeight.bold,
-                          fontSize: 75.0,
-                        ),
-                        textAlign: TextAlign.start,
-                      ),
-                    ),
-                    new Positioned(
-                      left: utils.fitScreenSize(_width, 0.04),
-                      child: new Text(
-                        "CEREMONY",
-                        style: TextStyle(
-                          color: utils.hexToColor("#FFFFFF"),
-                          fontSize: 75.0,
-                          fontWeight: FontWeight.bold,
-                        ),
-                        textAlign: TextAlign.start,
-                      ),
-                    ),
-                  ],
+              Text(
+                "YOUR SCRUM CEREMONY",
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: utils.hexToColor("#ffffff"),
                 ),
               ),
               Padding(
                 padding: EdgeInsets.all(20.0),
               ),
+              //add button to navigate to homepage
               new InkWell(
                 onTap: () {
                   Navigator.of(context).pushReplacementNamed('/Home');
-                },
+                }, //navigate to homepage
                 child: new Container(
                   width: 200.0,
                   height: 50.0,
                   decoration: new BoxDecoration(
-                    color: utils.hexToColor("#4DB6AC"),
+                    color: utils.hexToColor("#FF0000"),
+                    border: new Border.all(
+                      color: utils.hexToColor("#FFFFFF"),
+                      width: 2.0,
+                    ),
                     borderRadius: new BorderRadius.circular(20.0),
                   ),
                   child: new Center(
                     child: new Text(
-                      'Get Started',
+                      'Get Started!',
                       style: new TextStyle(
                         fontSize: 18.0,
                         color: utils.hexToColor("#FFFFFF"),
-                        fontWeight: FontWeight.bold,
                       ),
                     ),
                   ),
