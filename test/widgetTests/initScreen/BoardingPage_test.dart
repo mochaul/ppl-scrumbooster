@@ -11,56 +11,36 @@ void main() {
   final util = new Util();
 
   testWidgets('Find first line of word', (WidgetTester tester) async {
-    await binding.setSurfaceSize(Size(5000, 5000));
-    final String firstLine = "WELCOME !";
+    final String firstLine = "WELCOME TO SCRUM BOOSTER!";
 
     await tester.pumpWidget(util.makeTestableWidget(child: boardingPage));
-    expect(find.text(firstLine), findsNWidgets(2));
+    expect(find.text(firstLine), findsOneWidget);
   });
 
   testWidgets('Find second line of word', (WidgetTester tester) async {
-    await binding.setSurfaceSize(Size(5000, 5000));
-    final String firstLine = "WE'RE HERE";
+    final String firstLine = "WE'RE HERE TO HELP YOU";
 
     await tester.pumpWidget(util.makeTestableWidget(child: boardingPage));
-    expect(find.text(firstLine), findsNWidgets(2));
+    expect(find.text(firstLine), findsOneWidget);
   });
 
   testWidgets('Find third line of word', (WidgetTester tester) async {
-    await binding.setSurfaceSize(Size(5000, 5000));
-    final String firstLine = "TO HELP YOU";
+    final String firstLine = "TO MAXIMIZE";
 
     await tester.pumpWidget(util.makeTestableWidget(child: boardingPage));
-    expect(find.text(firstLine), findsNWidgets(2));
+    expect(find.text(firstLine), findsOneWidget);
   });
 
   testWidgets('Find fourth line of word', (WidgetTester tester) async {
-    await binding.setSurfaceSize(Size(5000, 5000));
-    final String firstLine = "MAXIMIZE";
+    final String firstLine = "YOUR SCRUM CEREMONY";
 
     await tester.pumpWidget(util.makeTestableWidget(child: boardingPage));
-    expect(find.text(firstLine), findsNWidgets(2));
+    expect(find.text(firstLine), findsOneWidget);
   });
 
-  testWidgets('Find fifth line of word', (WidgetTester tester) async {
-    await binding.setSurfaceSize(Size(5000, 5000));
-    final String firstLine = "YOUR SCRUM";
-
-    await tester.pumpWidget(util.makeTestableWidget(child: boardingPage));
-    expect(find.text(firstLine), findsNWidgets(2));
-  });
-
-  testWidgets('Find sixth line of word', (WidgetTester tester) async {
-    await binding.setSurfaceSize(Size(5000, 5000));
-    final String firstLine = "CEREMONY";
-
-    await tester.pumpWidget(util.makeTestableWidget(child: boardingPage));
-    expect(find.text(firstLine), findsNWidgets(2));
-  });
 
   testWidgets('Find button text', (WidgetTester tester) async {
-    await binding.setSurfaceSize(Size(5000, 5000));
-    final String buttonText = "Get Started";
+    final String buttonText = "Get Started!";
 
     await tester.pumpWidget(util.makeTestableWidget(child: boardingPage));
     expect(find.text(buttonText), findsOneWidget);
