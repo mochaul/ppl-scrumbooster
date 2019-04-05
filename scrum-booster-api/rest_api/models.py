@@ -11,14 +11,14 @@ class ProcessArea(models.Model):
     title = models.CharField(max_length=255)
     purpose_statement = models.CharField(max_length=2047)
     introductory_notes = models.CharField(max_length=2047)
-    related_process_areas = models.ManyToManyField('self')
+    related_process_areas = models.ManyToManyField('self', blank=True)
 
 
 class Goal(models.Model):
     title = models.CharField(max_length=255)
     detail = models.CharField(max_length=2047)
     image = models.ImageField()
-    to_satisfy = models.ForeignKey(ProcessArea, models.CASCADE, null=False)
+    to_satisfy = models.ForeignKey(ProcessArea, models.CASCADE)
 
 
 class CMMIPractices(models.Model):
@@ -33,7 +33,7 @@ class Ceremony(models.Model):
     detail = models.CharField(max_length=2047)
     phase = models.ForeignKey(Phase, models.CASCADE)
     image = models.ImageField()
-    can_be_enchanched_by_using = models.ManyToManyField(CMMIPractices)
+    can_be_enchanched_by_using = models.ManyToManyField(CMMIPractices, blank=True)
 
 
 class Problem(models.Model):
@@ -41,14 +41,14 @@ class Problem(models.Model):
     detail = models.CharField(max_length=2047)
     may_be_happen_at = models.ManyToManyField(Ceremony)
     image = models.ImageField()
-    can_be_solved_by_using = models.ManyToManyField(CMMIPractices)
+    can_be_solved_by_using = models.ManyToManyField(CMMIPractices, blank=True)
 
 
 class Glossary(models.Model):
     name = models.CharField(max_length=255)
     detail = models.CharField(max_length=2047)
-    ceremonies_that_contain = models.ManyToManyField(Ceremony)
-    problem_that_contain = models.ManyToManyField(Problem)
+    ceremonies_that_contain = models.ManyToManyField(Ceremony, blank=True)
+    problem_that_contain = models.ManyToManyField(Problem, blank=True)
     image = models.ImageField()
 
 
