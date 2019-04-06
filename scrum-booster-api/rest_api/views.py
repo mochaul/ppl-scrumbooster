@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from rest_framework import viewsets
 from . import serializers, models
+from rest_framework import views, status
+from rest_framework.response import Response
 
 
 class PhaseViewSet(viewsets.ReadOnlyModelViewSet):
@@ -41,3 +43,19 @@ class GlossaryViewSet(viewsets.ReadOnlyModelViewSet):
 class QuizQuestionViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = models.QuizQuestion.objects.all()
     serializer_class = serializers.QuizQuestionSerializer
+
+class GetCeremonyAndProblemByPhase(views.APIView):
+    def get(self, request, id):
+        try:
+            phase = models.Phase.objects.get(id=id)
+        except models.Phase.DoesNotExist:
+            return Response({'detail': 'Invalid id'}, status=status.HTTP_400_BAD_REQUEST)
+
+        ceremonies = phase.ceremony_set.all()
+        problems = models.Problem.objects.filter(may_be_happen_at__in=ceremonies).distinct()
+
+        ceremonies_serializer = serializers.CeremonySerializer(ceremonies, many=True, context={'request': request})
+        problems_serializer = serializers.ProblemSerializer(problems, many=True, context={'request': request})
+
+        return Response({'ceremonies':ceremonies_serializer.data, 'problems':problems_serializer.data},
+                        status=status.HTTP_200_OK)

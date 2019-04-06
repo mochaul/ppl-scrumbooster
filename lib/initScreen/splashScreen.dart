@@ -13,7 +13,7 @@ class _SplashScreenState extends State<SplashScreen> {
   Future transitionToHome() {
     return new Future.delayed(
       const Duration(seconds: 2),
-        () => Navigator.of(context).pushReplacementNamed('/Boarding'),
+        () => Navigator.of(context).pushReplacementNamed('/Boarding'), //navigate to boarding page
     );
   }
 
@@ -46,15 +46,20 @@ class _SplashScreenState extends State<SplashScreen> {
                 height: util.fitScreenSize(_height, 0.5),
                 width: util.fitScreenSize(_width, 0.5),
               ),
-              new Padding(
-                padding: EdgeInsets.all(util.fitScreenSize(_height, 0.075)),
-              ),
               new Text(
-                "SCRUM BOOSTER",
+                "SCRUM",
                 style: new TextStyle(
                   fontWeight: FontWeight.bold,
                   color: util.hexToColor("#FFFFFF"),
-                  fontSize: 25.0,
+                  fontSize: 50.0,
+                ),
+              ),
+              new Text(
+                "BOOSTER",
+                style: new TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: util.hexToColor("#FFFFFF"),
+                  fontSize: 50.0,
                 ),
               ),
             ],
