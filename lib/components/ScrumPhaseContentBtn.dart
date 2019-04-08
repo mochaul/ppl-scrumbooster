@@ -18,6 +18,9 @@ class ScrumPhaseContentBtn extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double _height = MediaQuery.of(context).size.height;
+    double _width = MediaQuery.of(context).size.width;
+
     return new Column(
       children: <Widget>[
         new ScrumListBtn(
@@ -26,8 +29,8 @@ class ScrumPhaseContentBtn extends StatelessWidget {
           imgUrl: this.imageAssetURL,
         ),
         new Container(
-          height: 10.5,
-          width: 150.0,
+          height: util.fitScreenSize(_height, 0.05),
+          width: util.fitScreenSize(_width, 0.3),
           child: new Text(
             this.title,
             textAlign: TextAlign.center,
