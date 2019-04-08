@@ -4,7 +4,9 @@ import 'package:ScrumBooster/contents/ceremonies.dart';
 import 'package:ScrumBooster/contents/problems.dart';
 import 'package:ScrumBooster/components/ScrumPhaseBtn.dart';
 import 'package:ScrumBooster/scrumPhaseList/ProductBacklog.dart';
-
+import 'package:ScrumBooster/scrumPhaseList/SprintEvaluation.dart';
+import 'package:ScrumBooster/scrumPhaseList/SprintExecution.dart';
+import 'package:ScrumBooster/scrumPhaseList/SprintPlanning.dart';
 
 class HomePage extends StatelessWidget {
   final List<String> myList = new List();
@@ -87,7 +89,14 @@ class HomePage extends StatelessWidget {
                 ),
                 new ScrumPhaseBtn(
                   title: "Sprint Planning",
-                  action: () {},
+                  action: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => SprintPlanning()
+                      ),
+                    );
+                  },
                   imgUrl: "assets/homepage/Sprint_Planning.png",
                 ),
               ],
@@ -104,7 +113,7 @@ class HomePage extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => ProductBacklog()
+                          builder: (context) => SprintExecution()
                       ),
                     );
                   },
@@ -115,7 +124,14 @@ class HomePage extends StatelessWidget {
                 ),
                 new ScrumPhaseBtn(
                   title: "Sprint Evaluation",
-                  action: () {},
+                  action: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => SprintEvaluation()
+                      ),
+                    );
+                  },
                   imgUrl: "assets/homepage/Sprint_Evaluation.png",
                 ),
               ],
