@@ -12,6 +12,9 @@ class ListProblems extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double _height = MediaQuery.of(context).size.height;
+    double _width = MediaQuery.of(context).size.width;
+
     return Scaffold(
       drawer: utils.defaultDrawer(context),
       key: scaffoldKey,
@@ -56,7 +59,7 @@ class ListProblems extends StatelessWidget {
             Text(
               "PROBLEMS",
               style: TextStyle(
-                fontSize: 30,
+                fontSize: utils.fitScreenSize(_height, 0.04),
                 fontWeight: FontWeight.bold,
               ),
               textAlign: TextAlign.center,
@@ -66,7 +69,8 @@ class ListProblems extends StatelessWidget {
             ),
             Image.asset(
               "assets/listProblems/problems.png",
-              height: 200,
+              height: utils.fitScreenSize(_height, 0.3),
+              width: utils.fitScreenSize(_width, 0.3),
             ),
             Container(
               padding: EdgeInsets.all(20),
@@ -77,190 +81,202 @@ class ListProblems extends StatelessWidget {
                   Text(
                     "A",
                     style: TextStyle(
-                      fontSize: 46,
+                      fontSize: utils.fitScreenSize(_height, 0.06),
                       fontWeight: FontWeight.w500,
                     ),
                   ),
-                  Padding(
-                    padding: EdgeInsets.all(10),
-                    child: Column(
-                      children: <Widget>[
-                        new InkWell(
-                          child: Text(
-                            "A dummy 1",
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.w500,
-                              color: utils.hexToColor("#3498DB"),
-                            ),
-                          ),
-                          onTap: () {},
-                        ),
-                        new InkWell(
-                          child: Text(
-                            "A dummy 2",
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.w500,
-                              color: utils.hexToColor("#3498DB"),
-                            ),
-                          ),
-                          onTap: () {},
-                        ),
-                        new InkWell(
-                          child: Text(
-                            "A dummy 3",
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.w500,
-                              color: utils.hexToColor("#3498DB"),
-                            ),
-                          ),
-                          onTap: () {},
-                        ),
-                      ],
+                  new InkWell(
+                    child: Text(
+                      "A dummy 1",
+                      style: TextStyle(
+                        fontSize: utils.fitScreenSize(_height, 0.03),
+                        fontWeight: FontWeight.w500,
+                        color: utils.hexToColor("#3498DB"),
+                      ),
                     ),
+                    onTap: () {},
+                  ),
+                  new Divider(
+                    color: utils.hexToColor("#000000"),
+                  ),
+                  new InkWell(
+                    child: Text(
+                      "A dummy 2",
+                      style: TextStyle(
+                        fontSize: utils.fitScreenSize(_height, 0.03),
+                        fontWeight: FontWeight.w500,
+                        color: utils.hexToColor("#3498DB"),
+                      ),
+                    ),
+                    onTap: () {},
+                  ),
+                  new Divider(
+                    color: utils.hexToColor("#000000"),
+                  ),
+                  new InkWell(
+                    child: Text(
+                      "A dummy 3",
+                      style: TextStyle(
+                        fontSize: utils.fitScreenSize(_height, 0.03),
+                        fontWeight: FontWeight.w500,
+                        color: utils.hexToColor("#3498DB"),
+                      ),
+                    ),
+                    onTap: () {},
+                  ),
+                  new Divider(
+                    color: utils.hexToColor("#000000"),
                   ),
                   Text(
                     "B",
                     style: TextStyle(
-                      fontSize: 46,
+                      fontSize: utils.fitScreenSize(_height, 0.06),
                       fontWeight: FontWeight.w500,
                     ),
                   ),
-                  Padding(
-                    padding: EdgeInsets.all(10),
-                    child: Column(
-                      children: <Widget>[
-                        new InkWell(
-                          child: Text(
-                            "B dummy 1",
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.w500,
-                              color: utils.hexToColor("#3498DB"),
-                            ),
-                          ),
-                          onTap: () {},
-                        ),
-                        new InkWell(
-                          child: Text(
-                            "B dummy 2",
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.w500,
-                              color: utils.hexToColor("#3498DB"),
-                            ),
-                          ),
-                          onTap: () {},
-                        ),
-                        new InkWell(
-                          child: Text(
-                            "B dummy 3",
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.w500,
-                              color: utils.hexToColor("#3498DB"),
-                            ),
-                          ),
-                          onTap: () {},
-                        ),
-                      ],
+                  new InkWell(
+                    child: Text(
+                      "B dummy 1",
+                      style: TextStyle(
+                        fontSize: utils.fitScreenSize(_height, 0.03),
+                        fontWeight: FontWeight.w500,
+                        color: utils.hexToColor("#3498DB"),
+                      ),
                     ),
+                    onTap: () {},
+                  ),
+                  new Divider(
+                    color: utils.hexToColor("#000000"),
+                  ),
+                  new InkWell(
+                    child: Text(
+                      "B dummy 2",
+                      style: TextStyle(
+                        fontSize: utils.fitScreenSize(_height, 0.03),
+                        fontWeight: FontWeight.w500,
+                        color: utils.hexToColor("#3498DB"),
+                      ),
+                    ),
+                    onTap: () {},
+                  ),
+                  new Divider(
+                    color: utils.hexToColor("#000000"),
+                  ),
+                  new InkWell(
+                    child: Text(
+                      "B dummy 3",
+                      style: TextStyle(
+                        fontSize: utils.fitScreenSize(_height, 0.03),
+                        fontWeight: FontWeight.w500,
+                        color: utils.hexToColor("#3498DB"),
+                      ),
+                    ),
+                    onTap: () {},
+                  ),
+                  new Divider(
+                    color: utils.hexToColor("#000000"),
                   ),
                   Text(
                     "C",
                     style: TextStyle(
-                      fontSize: 46,
+                      fontSize: utils.fitScreenSize(_height, 0.06),
                       fontWeight: FontWeight.w500,
                     ),
                   ),
-                  Padding(
-                    padding: EdgeInsets.all(10),
-                    child: Column(
-                      children: <Widget>[
-                        new InkWell(
-                          child: Text(
-                            "C dummy 1",
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.w500,
-                              color: utils.hexToColor("#3498DB"),
-                            ),
-                          ),
-                          onTap: () {},
-                        ),
-                        new InkWell(
-                          child: Text(
-                            "C dummy 2",
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.w500,
-                              color: utils.hexToColor("#3498DB"),
-                            ),
-                          ),
-                          onTap: () {},
-                        ),
-                        new InkWell(
-                          child: Text(
-                            "C dummy 3",
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.w500,
-                              color: utils.hexToColor("#3498DB"),
-                            ),
-                          ),
-                          onTap: () {},
-                        ),
-                      ],
+                  new InkWell(
+                    child: Text(
+                      "C dummy 1",
+                      style: TextStyle(
+                        fontSize: utils.fitScreenSize(_height, 0.03),
+                        fontWeight: FontWeight.w500,
+                        color: utils.hexToColor("#3498DB"),
+                      ),
                     ),
+                    onTap: () {},
                   ),
+                  new Divider(
+                    color: utils.hexToColor("#000000"),
+                  ),
+                  new InkWell(
+                    child: Text(
+                      "C dummy 2",
+                      style: TextStyle(
+                        fontSize: utils.fitScreenSize(_height, 0.03),
+                        fontWeight: FontWeight.w500,
+                        color: utils.hexToColor("#3498DB"),
+                      ),
+                    ),
+                    onTap: () {},
+                  ),
+                  new Divider(
+                    color: utils.hexToColor("#000000"),
+                  ),
+                  new InkWell(
+                    child: Text(
+                      "C dummy 3",
+                      style: TextStyle(
+                        fontSize: utils.fitScreenSize(_height, 0.03),
+                        fontWeight: FontWeight.w500,
+                        color: utils.hexToColor("#3498DB"),
+                      ),
+                    ),
+                    onTap: () {},
+                  ),
+                  new Divider(
+                    color: utils.hexToColor("#000000"),
+                  ),
+
                   Text(
                     "D",
                     style: TextStyle(
-                      fontSize: 46,
+                      fontSize: utils.fitScreenSize(_height, 0.06),
                       fontWeight: FontWeight.w500,
                     ),
                   ),
-                  Padding(
-                    padding: EdgeInsets.all(10),
-                    child: Column(
-                      children: <Widget>[
-                        new InkWell(
-                          child: Text(
-                            "D dummy 1",
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.w500,
-                              color: utils.hexToColor("#3498DB"),
-                            ),
-                          ),
-                          onTap: () {},
-                        ),
-                        new InkWell(
-                          child: Text(
-                            "D dummy 2",
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.w500,
-                              color: utils.hexToColor("#3498DB"),
-                            ),
-                          ),
-                          onTap: () {},
-                        ),
-                        new InkWell(
-                          child: Text(
-                            "D dummy 3",
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.w500,
-                              color: utils.hexToColor("#3498DB"),
-                            ),
-                          ),
-                          onTap: () {},
-                        ),
-                      ],
+                  new InkWell(
+                    child: Text(
+                      "D dummy 1",
+                      style: TextStyle(
+                        fontSize: utils.fitScreenSize(_height, 0.03),
+                        fontWeight: FontWeight.w500,
+                        color: utils.hexToColor("#3498DB"),
+                      ),
+                      textAlign: TextAlign.start,
                     ),
+                    onTap: () {},
+                  ),
+                  new Divider(
+                    color: utils.hexToColor("#000000"),
+                  ),
+                  new InkWell(
+                    child: Text(
+                      "D dummy 2",
+                      style: TextStyle(
+                        fontSize: utils.fitScreenSize(_height, 0.03),
+                        fontWeight: FontWeight.w500,
+                        color: utils.hexToColor("#3498DB"),
+                      ),
+                      textAlign: TextAlign.start,
+                    ),
+                    onTap: () {},
+                  ),
+                  new Divider(
+                    color: utils.hexToColor("#000000"),
+                  ),
+                  new InkWell(
+                    child: Text(
+                      "D dummy 3",
+                      style: TextStyle(
+                        fontSize: utils.fitScreenSize(_height, 0.03),
+                        fontWeight: FontWeight.w500,
+                        color: utils.hexToColor("#3498DB"),
+                      ),
+                      textAlign: TextAlign.start,
+                    ),
+                    onTap: () {},
+                  ),
+                  new Divider(
+                    color: utils.hexToColor("#000000"),
                   ),
                 ],
               ),
