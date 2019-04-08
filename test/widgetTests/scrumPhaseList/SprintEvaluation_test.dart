@@ -2,39 +2,39 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:ScrumBooster/utils/utils.dart';
-import 'package:ScrumBooster/scrumPhaseList/ProductBacklog.dart';
+import 'package:ScrumBooster/scrumPhaseList/SprintEvaluation.dart';
 
 void main() {
-  final ProductBacklog productBacklog = ProductBacklog();
+  final SprintEvaluation sprintEvaluation = SprintEvaluation();
   final util = new Util();
 
   testWidgets('Find Header', (WidgetTester tester) async {
-    await tester.pumpWidget(util.makeTestableWidget(child: productBacklog));
-    String menu1 = "PRODUCT BACKLOG";
+    await tester.pumpWidget(util.makeTestableWidget(child: sprintEvaluation));
+    String menu1 = "SPRINT EVALUATION";
     expect(find.text(menu1), findsOneWidget);
   });
 
-  //Product Backlog Phase Widget Tests
+  //Sprint Evaluation Phase Widget Tests
   testWidgets('Test Find Product Header 1', (WidgetTester tester) async {
-    await tester.pumpWidget(util.makeTestableWidget(child: productBacklog));
+    await tester.pumpWidget(util.makeTestableWidget(child: sprintEvaluation));
     String menu1 = "Things you should be doing:";
     expect(find.text(menu1), findsOneWidget);
   });
 
   testWidgets('Test Not Find Product Header 1', (WidgetTester tester) async {
-    await tester.pumpWidget(util.makeTestableWidget(child: productBacklog));
+    await tester.pumpWidget(util.makeTestableWidget(child: sprintEvaluation));
     String menu1 = "Things you shouldn't be doing:";
     expect(find.text(menu1), findsNothing);
   });
 
   testWidgets('Test Find Product Header 2', (WidgetTester tester) async {
-    await tester.pumpWidget(util.makeTestableWidget(child: productBacklog));
+    await tester.pumpWidget(util.makeTestableWidget(child: sprintEvaluation));
     String menu1 = "Problems you might have face:";
     expect(find.text(menu1), findsOneWidget);
   });
 
   testWidgets('Test Not Find Product Header 2', (WidgetTester tester) async {
-    await tester.pumpWidget(util.makeTestableWidget(child: productBacklog));
+    await tester.pumpWidget(util.makeTestableWidget(child: sprintEvaluation));
     String menu1 = "Problems you might have not face:";
     expect(find.text(menu1), findsNothing);
   });
@@ -50,7 +50,7 @@ void main() {
       "content f",
     ];
 
-    await tester.pumpWidget(util.makeTestableWidget(child: productBacklog));
+    await tester.pumpWidget(util.makeTestableWidget(child: sprintEvaluation));
     for (int i = 0; i < contentNames.length; i++) {
       expect(find.byWidgetPredicate((widget) {
         if (widget is Text) {
@@ -76,7 +76,7 @@ void main() {
       "problem f",
     ];
 
-    await tester.pumpWidget(util.makeTestableWidget(child: productBacklog));
+    await tester.pumpWidget(util.makeTestableWidget(child: sprintEvaluation));
     for (int i = 0; i < 3; i++) {
       expect(find.byWidgetPredicate((widget) {
         if (widget is Text) {
@@ -92,8 +92,8 @@ void main() {
   });
 
   testWidgets('Home Screen Drawer Test', (WidgetTester tester) async {
-    GlobalKey<ScaffoldState> scaffoldKey = productBacklog.getScaffoldKey();
-    await tester.pumpWidget(util.makeTestableWidget(child: productBacklog));
+    GlobalKey<ScaffoldState> scaffoldKey = sprintEvaluation.getScaffoldKey();
+    await tester.pumpWidget(util.makeTestableWidget(child: sprintEvaluation));
     Key menu1 = new Key("Home");
     Key menu2 = new Key("Ceremonies");
     Key menu3 = new Key("Problems");
@@ -111,5 +111,4 @@ void main() {
     expect(find.byKey(menu5), findsOneWidget);
     expect(find.byKey(menu6), findsOneWidget);
   });
-
 }

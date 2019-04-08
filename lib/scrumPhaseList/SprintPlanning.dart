@@ -5,7 +5,7 @@ import 'package:ScrumBooster/contents/ceremonies.dart';
 import 'package:ScrumBooster/contents/problems.dart';
 import 'package:ScrumBooster/components/ScrumPhaseContentBtn.dart';
 
-class ProductBacklog extends StatelessWidget {
+class SprintPlanning extends StatelessWidget {
   final scaffoldKey = GlobalKey<ScaffoldState>();
   var utils = new Util();
 
@@ -57,7 +57,7 @@ class ProductBacklog extends StatelessWidget {
             padding: EdgeInsets.all(15.0),
           ),
           new Text(
-            "PRODUCT BACKLOG",
+            "SPRINT PLANNING",
             style: TextStyle(
               fontSize: utils.fitScreenSize(_height, 0.03),
               fontWeight: FontWeight.bold,
