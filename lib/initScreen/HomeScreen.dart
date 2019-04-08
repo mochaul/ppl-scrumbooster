@@ -17,8 +17,12 @@ class HomePage extends StatelessWidget {
   }
 
   final util = new Util();
+
   @override
   Widget build(BuildContext context) {
+    double _height = MediaQuery.of(context).size.height;
+    double _width = MediaQuery.of(context).size.width;
+
     return Scaffold(
       key: scaffoldKey,
       appBar: AppBar(
@@ -60,7 +64,7 @@ class HomePage extends StatelessWidget {
               child: new Text(
                 "WHICH SCRUM PHASE ARE YOU IN RIGHT NOW?",
                 style: TextStyle(
-                  fontSize: 25.0,
+                  fontSize: util.fitScreenSize(_height, 0.035),
                   fontWeight: FontWeight.bold,
                   color: utils.hexToColor("#000000"),
                 ),
