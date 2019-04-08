@@ -13,6 +13,8 @@ class ListCeremonies extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double _height = MediaQuery.of(context).size.height;
+    double _width = MediaQuery.of(context).size.width;
+
     return Scaffold(
       key: scaffoldKey,
       appBar: AppBar(
@@ -64,7 +66,7 @@ class ListCeremonies extends StatelessWidget {
             Image.asset(
               "assets/listCeremonies/ceremonies.png",
               height: utils.fitScreenSize(_height, 0.3),
-              width: utils.fitScreenSize(_height, 0.3),
+              width: utils.fitScreenSize(_width, 0.3),
             ),
             Container(
               padding: EdgeInsets.only(
