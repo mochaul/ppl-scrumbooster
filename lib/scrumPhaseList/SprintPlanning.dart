@@ -6,7 +6,6 @@ import 'package:ScrumBooster/contents/problems.dart';
 import 'package:ScrumBooster/components/ScrumPhaseContentBtn.dart';
 
 class SprintPlanning extends StatelessWidget {
-  final List<String> homeImageList = new List();
   final scaffoldKey = GlobalKey<ScaffoldState>();
   var utils = new Util();
 

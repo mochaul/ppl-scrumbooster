@@ -9,8 +9,6 @@ import 'package:ScrumBooster/scrumPhaseList/SprintExecution.dart';
 import 'package:ScrumBooster/scrumPhaseList/SprintPlanning.dart';
 
 class HomePage extends StatelessWidget {
-  final List<String> myList = new List();
-  final List<String> homeImageList = new List();
   final scaffoldKey = GlobalKey<ScaffoldState>();
   var utils = new Util();
 

@@ -90,4 +90,26 @@ void main() {
       }), findsOneWidget);
     }
   });
+
+  testWidgets('Home Screen Drawer Test', (WidgetTester tester) async {
+    GlobalKey<ScaffoldState> scaffoldKey = productBacklog.getScaffoldKey();
+    await tester.pumpWidget(util.makeTestableWidget(child: productBacklog));
+    Key menu1 = new Key("Home");
+    Key menu2 = new Key("Ceremonies");
+    Key menu3 = new Key("Problems");
+    Key menu4 = new Key("Glossary");
+    Key menu5 = new Key("Pop Quiz!");
+    Key menu6 = new Key("About");
+
+    scaffoldKey.currentState.openDrawer();
+    await tester.pump();
+
+    expect(find.byKey(menu1), findsOneWidget);
+    expect(find.byKey(menu2), findsOneWidget);
+    expect(find.byKey(menu3), findsOneWidget);
+    expect(find.byKey(menu4), findsOneWidget);
+    expect(find.byKey(menu5), findsOneWidget);
+    expect(find.byKey(menu6), findsOneWidget);
+  });
+
 }
