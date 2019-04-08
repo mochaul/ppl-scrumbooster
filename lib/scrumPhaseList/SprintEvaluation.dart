@@ -59,7 +59,7 @@ class SprintEvaluation extends StatelessWidget {
           new Text(
             "SPRINT EVALUATION",
             style: TextStyle(
-              fontSize: 20,
+              fontSize: utils.fitScreenSize(_height, 0.03),
               fontWeight: FontWeight.bold,
               color: utils.hexToColor("#3498DB"),
             ),
