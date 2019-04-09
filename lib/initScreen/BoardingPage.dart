@@ -11,8 +11,9 @@ class BoardingPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double _width = MediaQuery.of(context).size.width;
-    return Scaffold(
+    double _height = MediaQuery.of(context).size.width;
 
+    return Scaffold(
       //add container 
       body: Container(
         //change background color to blue
@@ -26,7 +27,7 @@ class BoardingPage extends StatelessWidget {
               //add image asset
               Image.asset(
                 "assets/logos/logo-color.png",
-                height: 50,
+                height: utils.fitScreenSize(_height,0.1),
               ),
               Padding(
                 padding: EdgeInsets.only(
@@ -35,7 +36,7 @@ class BoardingPage extends StatelessWidget {
               ),
               Image.asset(
                 "assets/scrum-board-cloud.png",
-                height: 200,
+                height: utils.fitScreenSize(_height, 0.5),
               ),
               Padding(
                 padding: EdgeInsets.all(10.0),
@@ -44,7 +45,7 @@ class BoardingPage extends StatelessWidget {
               Text(
                 "WELCOME TO SCRUM BOOSTER!",
                 style: TextStyle(
-                  fontSize: 20,
+                  fontSize: utils.fitScreenSize(_height, 0.05),
                   fontWeight: FontWeight.bold,
                   color: utils.hexToColor("#ffffff"),
                 ),
@@ -52,7 +53,7 @@ class BoardingPage extends StatelessWidget {
               Text(
                 "WE'RE HERE TO HELP YOU",
                 style: TextStyle(
-                  fontSize: 20,
+                  fontSize: utils.fitScreenSize(_height, 0.05),
                   fontWeight: FontWeight.bold,
                   color: utils.hexToColor("#ffffff"),
                 ),
@@ -60,7 +61,7 @@ class BoardingPage extends StatelessWidget {
               Text(
                 "TO MAXIMIZE",
                 style: TextStyle(
-                  fontSize: 20,
+                  fontSize: utils.fitScreenSize(_height, 0.05),
                   fontWeight: FontWeight.bold,
                   color: utils.hexToColor("#ffffff"),
                 ),
@@ -68,7 +69,7 @@ class BoardingPage extends StatelessWidget {
               Text(
                 "YOUR SCRUM CEREMONY",
                 style: TextStyle(
-                  fontSize: 20,
+                  fontSize: utils.fitScreenSize(_height, 0.05),
                   fontWeight: FontWeight.bold,
                   color: utils.hexToColor("#ffffff"),
                 ),
@@ -82,8 +83,8 @@ class BoardingPage extends StatelessWidget {
                   Navigator.of(context).pushReplacementNamed('/Home');
                 }, //navigate to homepage
                 child: new Container(
-                  width: 200.0,
-                  height: 50.0,
+                  width: utils.fitScreenSize(_width, 0.7),
+                  height: utils.fitScreenSize(_height, 0.1),
                   decoration: new BoxDecoration(
                     color: utils.hexToColor("#FF0000"),
                     border: new Border.all(

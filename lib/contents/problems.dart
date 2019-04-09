@@ -107,7 +107,7 @@ class ProblemsContentPage extends StatelessWidget {
                                 style: TextStyle(
                                   color: util.hexToColor("#3498DB"),
                                   fontWeight: FontWeight.bold,
-                                  fontSize: 25.0,
+                                  fontSize: util.fitScreenSize(_height, 0.03),
                                 ),
                                 textAlign: TextAlign.center,
                               ),
@@ -159,7 +159,7 @@ class ProblemsContentPage extends StatelessWidget {
                           this.contents,
                           key: new Key("Problems Content Text"),
                           style: TextStyle(
-                            fontSize: 20.0,
+                            fontSize: util.fitScreenSize(_height, 0.025),
                           ),
                         ),
                       ),

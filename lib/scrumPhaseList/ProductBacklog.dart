@@ -6,7 +6,6 @@ import 'package:ScrumBooster/contents/problems.dart';
 import 'package:ScrumBooster/components/ScrumPhaseContentBtn.dart';
 
 class ProductBacklog extends StatelessWidget {
-  final List<String> homeImageList = new List();
   final scaffoldKey = GlobalKey<ScaffoldState>();
   var utils = new Util();
 
@@ -60,7 +59,7 @@ class ProductBacklog extends StatelessWidget {
           new Text(
             "PRODUCT BACKLOG",
             style: TextStyle(
-              fontSize: 20,
+              fontSize: utils.fitScreenSize(_height, 0.03),
               fontWeight: FontWeight.bold,
               color: utils.hexToColor("#3498DB"),
             ),
