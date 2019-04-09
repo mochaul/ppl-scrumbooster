@@ -38,7 +38,7 @@ class Command(BaseCommand):
                             continue
 
                         if lst[i] in self.dct_manytomany:
-                            many_to_many[lst[i]] = row[i]
+                            many_to_many[lst[i]] = row[i].split(';')
 
                         elif lst[i] in self.dct_foreignkey:
                             attr[lst[i]] = self.dct_foreignkey[lst[i]].objects.get(title=row[i])
@@ -48,14 +48,18 @@ class Command(BaseCommand):
 
                     try:
                         obj = models.objects.create(**attr)
+                        if (many_to_many):
+                            for key, values in many_to_many.items():
+                                many_to_many_field = getattr(obj, key)
+                                for value in values:
+                                    value_class = self.dct_manytomany[key]
+                                    value_obj = value_class.objects.get(title=value)
+                                    many_to_many_field.add(value_obj)
+
                         print(models.__name__, obj.title, 'has been created successfully')
 
                     except IntegrityError:
                         print(models.__name__, attr[lst[0]], 'has already been created')
-
-                    if (many_to_many):
-                        # TODO
-                        pass
 
     def handle(self, *args, **options):
         print("POPULATE DATABASE BEGIN!")
