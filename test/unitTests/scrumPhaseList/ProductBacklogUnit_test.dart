@@ -7,7 +7,7 @@ import 'package:ScrumBooster/scrumPhaseList/ProductBacklog.dart';
 void main() {
   final ProductBacklog productBacklog = ProductBacklog();
   test('Util value', () {
-    final util = productBacklog.utils;
+    final util = productBacklog.util;
 
     util.callUtil();
 

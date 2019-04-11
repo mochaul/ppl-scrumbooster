@@ -32,6 +32,12 @@ class Util {
     );
   }
 
+  Map<String, String> getConfiguration() {
+    return {
+      'base_url': "http://152.118.201.222:24150/",
+    }; //Staging API
+  }
+
   Widget defaultDrawer(BuildContext context) {
     return Drawer(
       child: ListView(
