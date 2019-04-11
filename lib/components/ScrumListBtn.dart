@@ -21,7 +21,9 @@ class ScrumListBtn extends StatelessWidget {
     double _width = MediaQuery.of(context).size.width;
 
     return Ink.image(
-      image: NetworkImage(this.imgUrl),
+      image: this.imgUrl.contains('https://')
+        ? NetworkImage(this.imgUrl)
+        : AssetImage(this.imgUrl),
       fit: BoxFit.cover,
       width: 120.0,
       height: 120.0,
