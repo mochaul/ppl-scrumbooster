@@ -15,9 +15,9 @@ class ProcessAreaViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = serializers.ProcessAreaSerializer
 
 
-class GoalViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = models.Goal.objects.all()
-    serializer_class = serializers.GoalSerializer
+# class GoalViewSet(viewsets.ReadOnlyModelViewSet):
+#     queryset = models.Goal.objects.all()
+#     serializer_class = serializers.GoalSerializer
 
 
 class CMMIPracticesViewSet(viewsets.ReadOnlyModelViewSet):

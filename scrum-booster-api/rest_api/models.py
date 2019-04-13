@@ -26,14 +26,14 @@ class ProcessArea(models.Model):
     # purpose_statement = models.CharField(max_length=2047)
     # introductory_notes = models.CharField(max_length=2047)
     # related_process_areas = models.ManyToManyField('self', blank=True)
-    ceremony = models.ForeignKey(Ceremony)
+    ceremony = models.ForeignKey(Ceremony, models.CASCADE)
 
 class CMMIPractices(models.Model):
     title = models.CharField(max_length=255, unique=True)
     detail = models.CharField(max_length=2047)
     image = models.URLField()
     # to_achieve = models.ForeignKey(Goal, models.CASCADE, null=True)
-    process_area =  models.ForeignKey(ProcessArea)
+    process_area =  models.ForeignKey(ProcessArea, models.CASCADE)
 
 class Problem(models.Model):
     title = models.CharField(max_length=255, unique=True)
