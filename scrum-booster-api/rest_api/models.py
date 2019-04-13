@@ -7,25 +7,11 @@ class Phase(models.Model):
     image = models.URLField()
 
 
-class ProcessArea(models.Model):
-    title = models.CharField(max_length=255, unique=True)
-    purpose_statement = models.CharField(max_length=2047)
-    introductory_notes = models.CharField(max_length=2047)
-    related_process_areas = models.ManyToManyField('self', blank=True)
-
-
-class Goal(models.Model):
-    title = models.CharField(max_length=255, unique=True)
-    detail = models.CharField(max_length=2047)
-    image = models.URLField()
-    to_satisfy = models.ForeignKey(ProcessArea, models.CASCADE)
-
-
-class CMMIPractices(models.Model):
-    title = models.CharField(max_length=255, unique=True)
-    detail = models.CharField(max_length=2047)
-    image = models.URLField()
-    to_achieve = models.ForeignKey(Goal, models.CASCADE, null=True)
+# class Goal(models.Model):
+#     title = models.CharField(max_length=255, unique=True)
+#     detail = models.CharField(max_length=2047)
+#     image = models.URLField()
+#     to_satisfy = models.ForeignKey(ProcessArea, models.CASCADE)
 
 
 class Ceremony(models.Model):
@@ -33,8 +19,21 @@ class Ceremony(models.Model):
     detail = models.CharField(max_length=2047)
     phase = models.ForeignKey(Phase, models.CASCADE)
     image = models.URLField()
-    can_be_enchanched_by_using = models.ManyToManyField(CMMIPractices, blank=True)
+    # can_be_enchanched_by_using = models.ManyToManyField(CMMIPractices, blank=True)
 
+class ProcessArea(models.Model):
+    title = models.CharField(max_length=255)
+    # purpose_statement = models.CharField(max_length=2047)
+    # introductory_notes = models.CharField(max_length=2047)
+    # related_process_areas = models.ManyToManyField('self', blank=True)
+    ceremony = models.ForeignKey(Ceremony)
+
+class CMMIPractices(models.Model):
+    title = models.CharField(max_length=255, unique=True)
+    detail = models.CharField(max_length=2047)
+    image = models.URLField()
+    # to_achieve = models.ForeignKey(Goal, models.CASCADE, null=True)
+    process_area =  models.ForeignKey(ProcessArea)
 
 class Problem(models.Model):
     title = models.CharField(max_length=255, unique=True)
