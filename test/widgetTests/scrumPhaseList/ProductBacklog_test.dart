@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:ScrumBooster/utils/utils.dart';
-import 'package:ScrumBooster/scrumPhaseList/ProductBacklog.dart';
+import 'package:ScrumBooster/Utils/utils.dart';
+import 'package:ScrumBooster/ScrumPhase/ProductBacklog/ProductBacklog.dart';
 
 void main() {
   final ProductBacklog productBacklog = ProductBacklog();
   final util = new Util();
 
   testWidgets('Find Header', (WidgetTester tester) async {
+    await tester.pumpAndSettle(Duration(seconds: 15));
     await tester.pumpWidget(util.makeTestableWidget(child: productBacklog));
     String menu1 = "PRODUCT BACKLOG";
     expect(find.text(menu1), findsOneWidget);

@@ -1,17 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:ScrumBooster/utils/utils.dart';
-import 'package:ScrumBooster/contents/ceremonies.dart';
-import 'package:ScrumBooster/contents/problems.dart';
+import 'package:ScrumBooster/Utils/utils.dart';
 import 'package:ScrumBooster/components/ScrumPhaseBtn.dart';
-import 'package:ScrumBooster/scrumPhaseList/ProductBacklog.dart';
-import 'package:ScrumBooster/scrumPhaseList/SprintEvaluation.dart';
-import 'package:ScrumBooster/scrumPhaseList/SprintExecution.dart';
-import 'package:ScrumBooster/scrumPhaseList/SprintPlanning.dart';
+import 'package:ScrumBooster/ScrumPhase/ProductBacklog/ProductBacklog.dart';
+import 'package:ScrumBooster/ScrumPhase/SprintEvaluation.dart';
+import 'package:ScrumBooster/ScrumPhase/SprintExecution.dart';
+import 'package:ScrumBooster/ScrumPhase/SprintPlanning.dart';
 
 class HomePage extends StatelessWidget {
   final scaffoldKey = GlobalKey<ScaffoldState>();
   var utils = new Util();
-
   getScaffoldKey() {
     return scaffoldKey;
   }
@@ -21,7 +18,6 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double _height = MediaQuery.of(context).size.height;
-    double _width = MediaQuery.of(context).size.width;
 
     return Scaffold(
       key: scaffoldKey,

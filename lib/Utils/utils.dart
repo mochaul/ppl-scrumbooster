@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:ScrumBooster/initScreen/HomeScreen.dart';
+import 'package:ScrumBooster/InitialScreen/HomeScreen.dart';
 import 'package:ScrumBooster/contents/problems.dart';
 import 'package:ScrumBooster/contentsList/ListCeremonies.dart';
 import 'package:ScrumBooster/contentsList/ListProblems.dart';
 import 'package:ScrumBooster/contentsList/GlossaryPage.dart';
-import 'package:ScrumBooster/initScreen/AboutPage.dart';
+import 'package:ScrumBooster/InitialScreen/AboutPage.dart';
 
 class Util {
   String call;

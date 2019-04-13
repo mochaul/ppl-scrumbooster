@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:ScrumBooster/utils/utils.dart';
-import 'package:ScrumBooster/scrumPhaseList/SprintPlanning.dart';
+import 'package:ScrumBooster/Utils/utils.dart';
+import 'package:ScrumBooster/ScrumPhase/SprintPlanning.dart';
 
 void main() {
   final SprintPlanning sprintPlanning = SprintPlanning();
