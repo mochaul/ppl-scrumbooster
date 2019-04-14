@@ -1,11 +1,11 @@
-import 'package:http/http.dart' as http;
+import 'package:http/http.dart' show Client;
 import 'package:ScrumBooster/ScrumPhase/ProductBacklog/Model.dart';
 import 'dart:convert';
 import 'package:ScrumBooster/Utils/utils.dart';
 
 class ProductBacklogApiProvider {
   static const int PHASE_ID = 1;
-
+  Client client = Client();
   var response;
   var util = new Util();
   ProductBacklogModel model;
@@ -13,7 +13,7 @@ class ProductBacklogApiProvider {
   List<ProblemItem> problemItemModels;
 
   fetchPosts() async {
-    response = await http.get(
+    response = await client.get(
       util.getConfiguration()['base_url']+"phase/$PHASE_ID/details"
     );
 

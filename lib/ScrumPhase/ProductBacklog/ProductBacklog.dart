@@ -11,8 +11,9 @@ import 'package:ScrumBooster/components/loading/loadingData.dart';
 
 _ProductBacklogState _productBacklogState;
 class ProductBacklog extends StatefulWidget {
-  final scaffoldKey = GlobalKey<ScaffoldState>();
+
   List<dynamic> cookies;
+  final ProductBacklogApiProvider apiProvider;
   final util = new Util();
   List<Widget> listView = [new Container(),];
 
@@ -20,9 +21,10 @@ class ProductBacklog extends StatefulWidget {
   var phaseCeremoniesDataJSON;
   var phaseProblemsDataJSON;
 
-  getScaffoldKey() {
-    return scaffoldKey;
-  }
+  ProductBacklog({
+    Key key,
+    this.apiProvider,
+  }) : super(key: key);
 
   @override
   _ProductBacklogState createState() {
@@ -34,9 +36,11 @@ class ProductBacklog extends StatefulWidget {
 class _ProductBacklogState extends State<ProductBacklog> {
 
   final util = new Util();
-  static const int PHASE_ID = 1;
 
-  final apiProvider = ProductBacklogApiProvider();
+  GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+  getScaffoldKey() {
+    return scaffoldKey;
+  }
 
   double loading = 0.0;
   int ceremoniesRowCount = 0;
@@ -51,6 +55,9 @@ class _ProductBacklogState extends State<ProductBacklog> {
   }
 
   Future<Null> loadProductBacklog(bool refresh) async {
+    final productBacklogApiProvider = widget.apiProvider == null
+        ? new ProductBacklogApiProvider()
+        : widget.apiProvider;
     widget.listView = [];
 
     final _height = MediaQuery.of(context).size.height;
@@ -63,19 +70,18 @@ class _ProductBacklogState extends State<ProductBacklog> {
     }
 
     //Get Phase Details
-    await apiProvider.fetchPosts();
+    await productBacklogApiProvider.fetchPosts();
 
-    widget.phaseDetailsDataJSON = apiProvider.getModel();
+    widget.phaseDetailsDataJSON = productBacklogApiProvider.getModel();
 
     //Get Phase Ceremonies Details
-    widget.phaseCeremoniesDataJSON = apiProvider.getCeremonyItemModel();
+    widget.phaseCeremoniesDataJSON = productBacklogApiProvider.getCeremonyItemModel();
     _productBacklogState.setState(() {
-//      ceremoniesRowCount = (widget.phaseCeremoniesDataJSON.length/3).ceil();
       ceremoniesCount = widget.phaseCeremoniesDataJSON.length;
     });
 
     //Get Phase Problems Details
-    widget.phaseProblemsDataJSON = apiProvider.getProblemItemModel();
+    widget.phaseProblemsDataJSON = productBacklogApiProvider.getProblemItemModel();
     _productBacklogState.setState(() {
       problemsCount = widget.phaseProblemsDataJSON.length;
     });
@@ -244,9 +250,8 @@ class _ProductBacklogState extends State<ProductBacklog> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
-      key: widget.scaffoldKey,
+      key: scaffoldKey,
       appBar: AppBar(
         centerTitle: true,
         leading: new InkWell(
@@ -255,7 +260,7 @@ class _ProductBacklogState extends State<ProductBacklog> {
             color: util.hexToColor("#FFFFFF"),
           ),
           onTap: () {
-            widget.scaffoldKey.currentState.openDrawer();
+            scaffoldKey.currentState.openDrawer();
           },
         ),
         title: Text(
@@ -290,6 +295,7 @@ class _ProductBacklogState extends State<ProductBacklog> {
             ),
           ),
           new LoadingData(
+            key: new Key("Loading Data"),
             height: loading,
           ),
         ],
