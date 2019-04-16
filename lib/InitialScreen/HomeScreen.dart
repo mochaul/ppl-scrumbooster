@@ -4,7 +4,7 @@ import 'package:ScrumBooster/components/ScrumPhaseBtn.dart';
 import 'package:ScrumBooster/ScrumPhase/ProductBacklog/ProductBacklog.dart';
 import 'package:ScrumBooster/ScrumPhase/SprintEvaluation/SprintEvaluation.dart';
 import 'package:ScrumBooster/ScrumPhase/SprintExecution/SprintExecution.dart';
-import 'package:ScrumBooster/ScrumPhase/SprintPlanning.dart';
+import 'package:ScrumBooster/ScrumPhase/SprintPlanning/SprintPlanning.dart';
 
 class HomePage extends StatelessWidget {
   final scaffoldKey = GlobalKey<ScaffoldState>();
