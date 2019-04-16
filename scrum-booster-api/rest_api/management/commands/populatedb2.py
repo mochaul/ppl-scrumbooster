@@ -1,5 +1,5 @@
 from django.core.management.base import BaseCommand
-from rest_api.models import (Phase, ProcessArea, Goal, CMMIPractices, Ceremony,
+from rest_api.models import (Phase, ProcessArea, CMMIPractices, Ceremony,
                              Problem, Glossary, QuizQuestion)
 from django.db import IntegrityError
 import csv
@@ -10,13 +10,12 @@ import csv
 # for i in phaseTitle:
 
 class Command(BaseCommand):
-    dct_manytomany = {'related_process_areas': ProcessArea, 'can_be_enchanched_by_using': CMMIPractices,
-                      'may_be_happen_at': Ceremony, 'can_be_solved_by_using': CMMIPractices,
-                      'ceremonies_that_contain': Ceremony, 'problem_that_contain': Problem}
-    dct_foreignkey = {'to_satisfy': ProcessArea, 'to_achieve': Goal, 'phase': Phase, 'question_for': Phase}
+    dct_manytomany = {'may_be_happen_at': Ceremony,'ceremonies_that_contain': Ceremony, 'problem_that_contain': Problem}
+    dct_foreignkey = {'to_satisfy': ProcessArea, 'phase': Phase, 'question_for': Phase,
+                      'related_ceremony': Ceremony,'process_area':ProcessArea}
 
     def _create_models(self, models, file_name):
-
+        
         with open(file_name) as csv_file:
             csv_reader = csv.reader(csv_file, delimiter=',')
             line_count = 0
@@ -66,6 +65,7 @@ class Command(BaseCommand):
         self._create_models(Phase, 'rest_api/management/commands/Phase.csv')
         self._create_models(Ceremony, 'rest_api/management/commands/Ceremony.csv')
         self._create_models(Problem, 'rest_api/management/commands/Problem.csv')
+        self._create_models(ProcessArea, 'rest_api/management/commands/ProcessArea.csv')
         print("POPULATE DATABASE COMPLETE!")
         print("""``````¶0````1¶1_```````````````````````````````````````
 ```````¶¶¶0_`_¶¶¶0011100¶¶¶¶¶¶¶001_````````````````````

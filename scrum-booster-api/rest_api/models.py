@@ -26,7 +26,7 @@ class ProcessArea(models.Model):
     # purpose_statement = models.CharField(max_length=2047)
     # introductory_notes = models.CharField(max_length=2047)
     # related_process_areas = models.ManyToManyField('self', blank=True)
-    ceremony = models.ForeignKey(Ceremony, models.CASCADE)
+    related_ceremony = models.ForeignKey(Ceremony, models.CASCADE)
 
 class CMMIPractices(models.Model):
     title = models.CharField(max_length=255, unique=True)
@@ -42,7 +42,7 @@ class Problem(models.Model):
     detail = models.CharField(max_length=2047)
     may_be_happen_at = models.ManyToManyField(Ceremony)
     image = models.URLField()
-    can_be_solved_by_using = models.ManyToManyField(CMMIPractices, blank=True)
+    # can_be_solved_by_using = models.ManyToManyField(CMMIPractices, blank=True)
 
 
 class Glossary(models.Model):
