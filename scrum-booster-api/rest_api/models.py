@@ -30,7 +30,9 @@ class ProcessArea(models.Model):
 
 class CMMIPractices(models.Model):
     title = models.CharField(max_length=255, unique=True)
-    detail = models.CharField(max_length=2047)
+    strengthens = models.CharField(max_length=2047)
+    satisfy = models.CharField(max_length=2047)
+    demonstrated = models.CharField(max_length=2047)
     image = models.URLField()
     # to_achieve = models.ForeignKey(Goal, models.CASCADE, null=True)
     process_area =  models.ForeignKey(ProcessArea, models.CASCADE)

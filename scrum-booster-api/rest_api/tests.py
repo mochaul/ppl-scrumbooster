@@ -7,12 +7,10 @@ from . import models
 class ScrumBoosterTest(APITestCase):
     def setUp(self):
         self.phase_test = models.Phase.objects.create(title="test", detail="test")
-        self.process_area_test = models.ProcessArea.objects.create(title="test", purpose_statement="test",
-                                                                   introductory_notes="test")
-        self.goal_test = models.Goal.objects.create(title="test", detail="test", to_satisfy=self.process_area_test)
-        self.cmmi_practices_test = models.CMMIPractices.objects.create(title="test", detail="test",
-                                                                       to_achieve=self.goal_test)
         self.ceremony_test = models.Ceremony.objects.create(title="test", detail="test", phase=self.phase_test)
+        self.process_area_test = models.ProcessArea.objects.create(title="test", ceremony=self.ceremony_test)
+        # self.goal_test = models.Goal.objects.create(title="test", detail="test", to_satisfy=self.process_area_test)
+        self.cmmi_practices_test = models.CMMIPractices.objects.create(title="test", strengthens="test",satisfy="test",demonstrated="test",process_area=self.process_area_test)
         self.problem_test = models.Problem.objects.create(title="test", detail="test")
         self.glossary_test = models.Glossary.objects.create(name="test", detail="test")
         self.quiz_question_test = models.QuizQuestion.objects.create(question_for=self.phase_test, question="test",
@@ -35,13 +33,13 @@ class ScrumBoosterTest(APITestCase):
         response = self.client.get(reverse('process-area-detail', args=[self.process_area_test.id]))
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
-    def test_goal_url_exists(self):
-        response = self.client.get(reverse("goal-list"))
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
+    # def test_goal_url_exists(self):
+    #     response = self.client.get(reverse("goal-list"))
+    #     self.assertEqual(response.status_code, status.HTTP_200_OK)
 
-    def test_can_read_goal_detail(self):
-        response = self.client.get(reverse('goal-detail', args=[self.goal_test.id]))
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
+    # def test_can_read_goal_detail(self):
+    #     response = self.client.get(reverse('goal-detail', args=[self.goal_test.id]))
+    #     self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_cmmi_practices_url_exists(self):
         response = self.client.get(reverse("cmmi-practices-list"))
