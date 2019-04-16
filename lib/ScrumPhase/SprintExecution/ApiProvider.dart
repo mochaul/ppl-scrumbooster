@@ -1,25 +1,25 @@
 import 'package:http/http.dart' show Client;
-import 'package:ScrumBooster/ScrumPhase/SprintEvaluation/Model.dart';
+import 'package:ScrumBooster/ScrumPhase/SprintExecution/Model.dart';
 import 'dart:convert';
 import 'package:ScrumBooster/Utils/utils.dart';
 
-class SprintEvaluationApiProvider {
-  static const int PHASE_ID = 4;
+class SprintExecutionApiProvider {
+  static const int PHASE_ID = 3;
   Client client = Client();
   var response;
-  var util = Util();
-  SprintEvaluationModel model;
+  var util = new Util();
+  SprintExecutionModel model;
   List<CeremonyItem> ceremonyItemModels;
   List<ProblemItem> problemItemModels;
 
   fetchPosts() async {
     response = await client.get(
-      util.getConfiguration()['base_url']+"phase/$PHASE_ID/details"
+        util.getConfiguration()['base_url']+"phase/$PHASE_ID/details"
     );
 
     var jsonBody = json.decode(response.body);
 
-    model = SprintEvaluationModel.fromJson(jsonBody);
+    model = SprintExecutionModel.fromJson(jsonBody);
 
     ceremonyItemModels = [];
     for (Map<String, dynamic> ceremony in model.ceremonies) {
@@ -27,12 +27,12 @@ class SprintEvaluationApiProvider {
     }
 
     problemItemModels = [];
-    for (Map<String, dynamic> problem in model.problems) {
+    for (var problem in model.problems) {
       problemItemModels.add(ProblemItem.fromJson(problem));
     }
   }
 
-  SprintEvaluationModel getModel() {
+  SprintExecutionModel getModel() {
     return model;
   }
 
