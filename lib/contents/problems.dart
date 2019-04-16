@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ScrumBooster/utils/utils.dart';
+import 'package:ScrumBooster/Utils/utils.dart';
 
 class ProblemsContentPage extends StatelessWidget {
   final String title;
@@ -68,7 +68,7 @@ class ProblemsContentPage extends StatelessWidget {
             decoration: BoxDecoration(
               image: DecorationImage(
                   fit: BoxFit.cover,
-                  image: AssetImage(
+                  image: NetworkImage(
                     this.imagePath,
                   )
               ),
@@ -107,7 +107,7 @@ class ProblemsContentPage extends StatelessWidget {
                                 style: TextStyle(
                                   color: util.hexToColor("#3498DB"),
                                   fontWeight: FontWeight.bold,
-                                  fontSize: 25.0,
+                                  fontSize: util.fitScreenSize(_height, 0.03),
                                 ),
                                 textAlign: TextAlign.center,
                               ),
@@ -159,7 +159,7 @@ class ProblemsContentPage extends StatelessWidget {
                           this.contents,
                           key: new Key("Problems Content Text"),
                           style: TextStyle(
-                            fontSize: 20.0,
+                            fontSize: util.fitScreenSize(_height, 0.025),
                           ),
                         ),
                       ),

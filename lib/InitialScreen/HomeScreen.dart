@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:ScrumBooster/utils/utils.dart';
-import 'package:ScrumBooster/contents/ceremonies.dart';
-import 'package:ScrumBooster/contents/problems.dart';
+import 'package:ScrumBooster/Utils/utils.dart';
 import 'package:ScrumBooster/components/ScrumPhaseBtn.dart';
-import 'package:ScrumBooster/scrumPhaseList/ProductBacklog.dart';
-
+import 'package:ScrumBooster/ScrumPhase/ProductBacklog/ProductBacklog.dart';
+import 'package:ScrumBooster/ScrumPhase/SprintEvaluation/SprintEvaluation.dart';
+import 'package:ScrumBooster/ScrumPhase/SprintExecution/SprintExecution.dart';
+import 'package:ScrumBooster/ScrumPhase/SprintPlanning/SprintPlanning.dart';
 
 class HomePage extends StatelessWidget {
-  final List<String> myList = new List();
-  final List<String> homeImageList = new List();
   final scaffoldKey = GlobalKey<ScaffoldState>();
   var utils = new Util();
-
   getScaffoldKey() {
     return scaffoldKey;
   }
 
   final util = new Util();
+
   @override
   Widget build(BuildContext context) {
+    double _height = MediaQuery.of(context).size.height;
+
     return Scaffold(
       key: scaffoldKey,
       appBar: AppBar(
@@ -60,7 +60,7 @@ class HomePage extends StatelessWidget {
               child: new Text(
                 "WHICH SCRUM PHASE ARE YOU IN RIGHT NOW?",
                 style: TextStyle(
-                  fontSize: 25.0,
+                  fontSize: util.fitScreenSize(_height, 0.035),
                   fontWeight: FontWeight.bold,
                   color: utils.hexToColor("#000000"),
                 ),
@@ -87,7 +87,14 @@ class HomePage extends StatelessWidget {
                 ),
                 new ScrumPhaseBtn(
                   title: "Sprint Planning",
-                  action: () {},
+                  action: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => SprintPlanning()
+                      ),
+                    );
+                  },
                   imgUrl: "assets/homepage/Sprint_Planning.png",
                 ),
               ],
@@ -104,7 +111,7 @@ class HomePage extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => ProductBacklog()
+                          builder: (context) => SprintExecution()
                       ),
                     );
                   },
@@ -115,7 +122,14 @@ class HomePage extends StatelessWidget {
                 ),
                 new ScrumPhaseBtn(
                   title: "Sprint Evaluation",
-                  action: () {},
+                  action: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => SprintEvaluation()
+                      ),
+                    );
+                  },
                   imgUrl: "assets/homepage/Sprint_Evaluation.png",
                 ),
               ],
