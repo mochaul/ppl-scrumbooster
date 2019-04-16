@@ -9,6 +9,7 @@ void main() {
     TestWidgetsFlutterBinding.ensureInitialized();
   final BoardingPage boardingPage = BoardingPage();
   final util = new Util();
+  
 
   testWidgets('Find first line of word', (WidgetTester tester) async {
     final String firstLine = "WELCOME TO SCRUM BOOSTER!";
