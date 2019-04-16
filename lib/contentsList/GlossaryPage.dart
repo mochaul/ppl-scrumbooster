@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ScrumBooster/utils/utils.dart';
+import 'package:ScrumBooster/Utils/utils.dart';
 
 class GlossaryPage extends StatelessWidget {
   final scaffoldKey = GlobalKey<ScaffoldState>();
