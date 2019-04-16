@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:ScrumBooster/utils/utils.dart';
+import 'package:ScrumBooster/Utils/utils.dart';
 
-import 'package:ScrumBooster/initScreen/HomeScreen.dart';
+import 'package:ScrumBooster/InitialScreen/HomeScreen.dart';
 
 void main() {
   final HomePage home = HomePage();

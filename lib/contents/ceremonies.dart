@@ -1,4 +1,4 @@
-import 'package:ScrumBooster/utils/utils.dart';
+import 'package:ScrumBooster/Utils/utils.dart';
 import 'package:flutter/material.dart';
 
 class Ceremonies extends StatelessWidget {
@@ -66,7 +66,7 @@ class Ceremonies extends StatelessWidget {
             decoration: BoxDecoration(
               image: DecorationImage(
                 fit: BoxFit.cover,
-                image: AssetImage(
+                image: NetworkImage(
                   this.imagePath,
                 )
               )
@@ -82,7 +82,7 @@ class Ceremonies extends StatelessWidget {
                     width: _width,
                     height: util.fitScreenSize(_height, 0.45),
                     decoration: BoxDecoration(
-                      color: Colors.transparent
+                      color: Colors.transparent,
                     ),
                     child: new Stack(
                       children: <Widget>[
@@ -99,7 +99,7 @@ class Ceremonies extends StatelessWidget {
                                 style:TextStyle(
                                   color:util.hexToColor("#3498DB"),
                                   fontWeight:FontWeight.bold,
-                                  fontSize: 25.0,
+                                  fontSize: util.fitScreenSize(_height, 0.03),
                                 ),
                                 textAlign: TextAlign.center,
                               ),
@@ -117,7 +117,7 @@ class Ceremonies extends StatelessWidget {
                           ),
                         )
                       ],
-                      ),
+                    ),
                   ),
                   new Padding(
                     padding: EdgeInsets.only(
@@ -149,7 +149,7 @@ class Ceremonies extends StatelessWidget {
                         child: new Text(
                           this.contents,
                           style:TextStyle(
-                            fontSize: 20.0,
+                            fontSize: util.fitScreenSize(_height, 0.025),
                           )
                         ),
                       ),

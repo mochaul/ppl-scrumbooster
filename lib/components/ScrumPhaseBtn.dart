@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ScrumBooster/utils/utils.dart';
+import 'package:ScrumBooster/Utils/utils.dart';
 
 class ScrumPhaseBtn extends StatelessWidget {
   final String title;
@@ -23,12 +23,11 @@ class ScrumPhaseBtn extends StatelessWidget {
     return Ink.image(
       image: AssetImage(this.imgUrl),
       fit: BoxFit.cover,
-      width: 200.0,
-      height: 200.0,
+      width: util.fitScreenSize(_width, 0.4),
+      height: util.fitScreenSize(_height, 0.3),
       child: InkWell(
-          onTap: this.action,
-      child: null,
-    ),
+        onTap: this.action,
+      ),
     );
   }
 }
