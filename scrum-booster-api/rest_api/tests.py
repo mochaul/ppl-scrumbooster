@@ -8,7 +8,7 @@ class ScrumBoosterTest(APITestCase):
     def setUp(self):
         self.phase_test = models.Phase.objects.create(title="test", detail="test")
         self.ceremony_test = models.Ceremony.objects.create(title="test", detail="test", phase=self.phase_test)
-        self.process_area_test = models.ProcessArea.objects.create(title="test", ceremony=self.ceremony_test)
+        self.process_area_test = models.ProcessArea.objects.create(title="test", related_ceremony=self.ceremony_test)
         # self.goal_test = models.Goal.objects.create(title="test", detail="test", to_satisfy=self.process_area_test)
         self.cmmi_practices_test = models.CMMIPractices.objects.create(title="test", strengthens="test",satisfy="test",demonstrated="test",process_area=self.process_area_test)
         self.problem_test = models.Problem.objects.create(title="test", detail="test")
