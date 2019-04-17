@@ -14,10 +14,10 @@ class ProcessAreaSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
-class GoalSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = models.Goal
-        fields = '__all__'
+# class GoalSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = models.Goal
+#         fields = '__all__'
 
 
 class CMMIPracticesSerializer(serializers.ModelSerializer):
