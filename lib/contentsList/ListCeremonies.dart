@@ -278,6 +278,56 @@ class ListCeremonies extends StatelessWidget {
                   new Divider(
                     color: utils.hexToColor("#000000"),
                   ),
+                  Text(
+                    "E",
+                    style: TextStyle(
+                      fontSize: utils.fitScreenSize(_height, 0.06),
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  new InkWell(
+                    child: Text(
+                      "C dummy 1",
+                      style: TextStyle(
+                        fontSize: utils.fitScreenSize(_height, 0.03),
+                        fontWeight: FontWeight.w500,
+                        color: utils.hexToColor("#3498DB"),
+                      ),
+                    ),
+                    onTap: () {},
+                  ),
+                  new Divider(
+                    color: utils.hexToColor("#000000"),
+                  ),
+                  new InkWell(
+                    child: Text(
+                      "C dummy 2",
+                      style: TextStyle(
+                        fontSize: utils.fitScreenSize(_height, 0.03),
+                        fontWeight: FontWeight.w500,
+                        color: utils.hexToColor("#3498DB"),
+                      ),
+                    ),
+                    onTap: () {},
+                  ),
+                  new Divider(
+                    color: utils.hexToColor("#000000"),
+                  ),
+                  new InkWell(
+                    child: Text(
+                      "C dummy 3",
+                      style: TextStyle(
+                        fontSize: utils.fitScreenSize(_height, 0.03),
+                        fontWeight: FontWeight.w500,
+                        color: utils.hexToColor("#3498DB"),
+                      ),
+                    ),
+                    onTap: () {},
+                  ),
+                  new Divider(
+                    color: utils.hexToColor("#000000"),
+                  ),
+
                 ],
               ),
             )
