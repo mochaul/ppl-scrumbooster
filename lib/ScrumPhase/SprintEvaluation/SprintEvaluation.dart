@@ -3,37 +3,35 @@ import 'package:ScrumBooster/Utils/utils.dart';
 import 'package:ScrumBooster/contents/ceremonies.dart';
 import 'package:ScrumBooster/contents/problems.dart';
 import 'package:ScrumBooster/components/ScrumPhaseContentBtn.dart';
-import 'package:ScrumBooster/ScrumPhase/ProductBacklog/ApiProvider.dart';
-import 'package:ScrumBooster/ScrumPhase/ProductBacklog/Model.dart';
+import 'package:ScrumBooster/ScrumPhase/SprintEvaluation/ApiProvider.dart';
+import 'package:ScrumBooster/ScrumPhase/SprintEvaluation/Model.dart';
 
 import 'dart:async';
 import 'package:ScrumBooster/components/loading/loadingData.dart';
 
-_ProductBacklogState _productBacklogState;
-class ProductBacklog extends StatefulWidget {
-
-  final ProductBacklogApiProvider apiProvider;
+_SprintEvaluationState _sprintEvaluationState;
+class SprintEvaluation extends StatefulWidget {
   final util = new Util();
+  final SprintEvaluationApiProvider apiProvider;
   List<Widget> listView = [new Container(),];
 
-  ProductBacklogModel phaseDetailsDataJSON;
+  SprintEvaluationModel phaseDetailsDataJSON;
   var phaseCeremoniesDataJSON;
   var phaseProblemsDataJSON;
 
-  ProductBacklog({
+  SprintEvaluation({
     Key key,
     this.apiProvider,
   }) : super(key: key);
 
   @override
-  _ProductBacklogState createState() {
-    _productBacklogState = new _ProductBacklogState();
-    return _productBacklogState;
+  _SprintEvaluationState createState() {
+    _sprintEvaluationState = new _SprintEvaluationState();
+    return _sprintEvaluationState;
   }
 }
 
-class _ProductBacklogState extends State<ProductBacklog> {
-
+class _SprintEvaluationState extends State<SprintEvaluation> {
   final util = new Util();
 
   GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
@@ -49,13 +47,13 @@ class _ProductBacklogState extends State<ProductBacklog> {
   int problemsCount;
 
   Future<Null> refresh() async {
-    await loadProductBacklog(true);
+    await loadSprintEvaluation(true);
     return null;
   }
 
-  Future<Null> loadProductBacklog(bool refresh) async {
-    final productBacklogApiProvider = widget.apiProvider == null
-        ? new ProductBacklogApiProvider()
+  Future<Null> loadSprintEvaluation(bool refresh) async {
+    final sprintEvaluationApiProvider = widget.apiProvider == null
+        ? new SprintEvaluationApiProvider()
         : widget.apiProvider;
     widget.listView = [];
 
@@ -63,25 +61,25 @@ class _ProductBacklogState extends State<ProductBacklog> {
     final _width = MediaQuery.of(context).size.width;
 
     if (!refresh) {
-      _productBacklogState.setState(() {
+      _sprintEvaluationState.setState(() {
         loading = _height;
       });
     }
 
     //Get Phase Details
-    await productBacklogApiProvider.fetchPosts();
+    await sprintEvaluationApiProvider.fetchPosts();
 
-    widget.phaseDetailsDataJSON = productBacklogApiProvider.getModel();
+    widget.phaseDetailsDataJSON = sprintEvaluationApiProvider.getModel();
 
     //Get Phase Ceremonies Details
-    widget.phaseCeremoniesDataJSON = productBacklogApiProvider.getCeremonyItemModel();
-    _productBacklogState.setState(() {
+    widget.phaseCeremoniesDataJSON = sprintEvaluationApiProvider.getCeremonyItemModel();
+    _sprintEvaluationState.setState(() {
       ceremoniesCount = widget.phaseCeremoniesDataJSON.length;
     });
 
     //Get Phase Problems Details
-    widget.phaseProblemsDataJSON = productBacklogApiProvider.getProblemItemModel();
-    _productBacklogState.setState(() {
+    widget.phaseProblemsDataJSON = sprintEvaluationApiProvider.getProblemItemModel();
+    _sprintEvaluationState.setState(() {
       problemsCount = widget.phaseProblemsDataJSON.length;
     });
 
@@ -95,7 +93,7 @@ class _ProductBacklogState extends State<ProductBacklog> {
             padding: EdgeInsets.all(15.0),
           ),
           new Text(
-            "Product Backlog".toUpperCase(),
+            "Sprint Evaluation".toUpperCase(),
             style: TextStyle(
               fontSize: util.fitScreenSize(_height, 0.03),
               fontWeight: FontWeight.bold,
@@ -183,7 +181,7 @@ class _ProductBacklogState extends State<ProductBacklog> {
 
     widget.listView.addAll(listView);
 
-    _productBacklogState.setState(() {
+    _sprintEvaluationState.setState(() {
       loading = 0.0;
     });
   }
@@ -243,7 +241,7 @@ class _ProductBacklogState extends State<ProductBacklog> {
   @override
   void didChangeDependencies() {
     if (widget.listView.length == 1) {
-      loadProductBacklog(false);
+      loadSprintEvaluation(false);
     }
   }
 
@@ -265,9 +263,9 @@ class _ProductBacklogState extends State<ProductBacklog> {
         title: Text(
           "Scrum Booster".toUpperCase(),
           style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-              color: util.hexToColor("#FFFFFF"),
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+            color: util.hexToColor("#FFFFFF"),
           ),
         ),
         actions: <Widget>[

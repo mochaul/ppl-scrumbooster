@@ -90,28 +90,25 @@ void main() {
       }), findsOneWidget);
     }
   });
-<<<<<<< HEAD:test/widgetTests/scrumPhaseList/ProductBacklog_test.dart
-=======
 
-  testWidgets('Home Screen Drawer Test', (WidgetTester tester) async {
-    GlobalKey<ScaffoldState> scaffoldKey = sprintPlanning.getScaffoldKey();
-    await tester.pumpWidget(util.makeTestableWidget(child: sprintPlanning));
-    Key menu1 = new Key("Home");
-    Key menu2 = new Key("Ceremonies");
-    Key menu3 = new Key("Problems");
-    Key menu4 = new Key("Glossary");
-    Key menu5 = new Key("Pop Quiz!");
-    Key menu6 = new Key("About");
+  // testWidgets('Home Screen Drawer Test', (WidgetTester tester) async {
+  //   GlobalKey<ScaffoldState> scaffoldKey = sprintPlanning.getScaffoldKey();
+  //   await tester.pumpWidget(util.makeTestableWidget(child: sprintPlanning));
+  //   Key menu1 = new Key("Home");
+  //   Key menu2 = new Key("Ceremonies");
+  //   Key menu3 = new Key("Problems");
+  //   Key menu4 = new Key("Glossary");
+  //   Key menu5 = new Key("Pop Quiz!");
+  //   Key menu6 = new Key("About");
 
-    scaffoldKey.currentState.openDrawer();
-    await tester.pump();
+  //   scaffoldKey.currentState.openDrawer();
+  //   await tester.pump();
 
-    expect(find.byKey(menu1), findsOneWidget);
-    expect(find.byKey(menu2), findsOneWidget);
-    expect(find.byKey(menu3), findsOneWidget);
-    expect(find.byKey(menu4), findsOneWidget);
-    expect(find.byKey(menu5), findsOneWidget);
-    expect(find.byKey(menu6), findsOneWidget);
-  });
->>>>>>> b0c9b2788228b59112ebbc8f103133cc6c2143b9:test/widgetTests/ScrumPhase/SprintPlanning_test.dart
+  //   expect(find.byKey(menu1), findsOneWidget);
+  //   expect(find.byKey(menu2), findsOneWidget);
+  //   expect(find.byKey(menu3), findsOneWidget);
+  //   expect(find.byKey(menu4), findsOneWidget);
+  //   expect(find.byKey(menu5), findsOneWidget);
+  //   expect(find.byKey(menu6), findsOneWidget);
+  // });
 }

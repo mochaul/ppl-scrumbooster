@@ -5,13 +5,13 @@ import 'package:http/testing.dart';
 import 'dart:convert';
 import 'package:image_test_utils/image_test_utils.dart';
 
-import 'package:ScrumBooster/ScrumPhase/ProductBacklog/ApiProvider.dart';
+import 'package:ScrumBooster/ScrumPhase/SprintExecution/ApiProvider.dart';
 import 'package:ScrumBooster/Utils/utils.dart';
-import 'package:ScrumBooster/ScrumPhase/ProductBacklog/ProductBacklog.dart';
+import 'package:ScrumBooster/ScrumPhase/SprintExecution/SprintExecution.dart';
 
 void main() {
   final util = new Util();
-  final widgetTestingApiProvider = ProductBacklogApiProvider();
+  final widgetTestingApiProvider = SprintExecutionApiProvider();
 
   //Test Mocking Initialization
   widgetTestingApiProvider.client = MockClient((request) async {
@@ -19,15 +19,15 @@ void main() {
     return Response(json.encode(mapJSON), 200);
   });
 
-  final ProductBacklog productBacklog = ProductBacklog(
+  final SprintExecution sprintExecution = SprintExecution(
     apiProvider: widgetTestingApiProvider,
   );
 
-  //Product Backlog Phase Widget Tests
+  //Sprint Execution Phase Widget Test
   testWidgets('Detect Loading Animation', (WidgetTester tester) async {
     provideMockedNetworkImages(() async {
       await tester.pumpWidget(
-        util.makeTestableWidget(child: productBacklog)
+          util.makeTestableWidget(child: sprintExecution)
       );
       String key = "Loading Data";
       expect(find.byKey(Key(key)), findsOneWidget);
@@ -37,11 +37,11 @@ void main() {
   testWidgets('Find Header', (WidgetTester tester) async {
     provideMockedNetworkImages(() async {
       await tester.pumpWidget(
-        util.makeTestableWidget(child: productBacklog)
+          util.makeTestableWidget(child: sprintExecution)
       );
       await tester.pump();
 
-      String header = "PRODUCT BACKLOG";
+      String header = "SPRINT EXECUTION";
       expect(find.text(header), findsOneWidget);
     });
   });
@@ -49,7 +49,7 @@ void main() {
   testWidgets('Test Find Product Header 1', (WidgetTester tester) async {
     provideMockedNetworkImages(() async {
       await tester.pumpWidget(
-          util.makeTestableWidget(child: productBacklog)
+          util.makeTestableWidget(child: sprintExecution)
       );
       await tester.pump();
       String menu1 = "Things you should be doing:";
@@ -60,7 +60,7 @@ void main() {
   testWidgets('Test Not Find Product Header 1', (WidgetTester tester) async {
     provideMockedNetworkImages(() async {
       await tester.pumpWidget(
-          util.makeTestableWidget(child: productBacklog)
+          util.makeTestableWidget(child: sprintExecution)
       );
       await tester.pump();
       String menu1 = "Things you shouldn't be doing:";
@@ -71,7 +71,7 @@ void main() {
   testWidgets('Test Find Product Header 2', (WidgetTester tester) async {
     provideMockedNetworkImages(() async {
       await tester.pumpWidget(
-        util.makeTestableWidget(child: productBacklog)
+          util.makeTestableWidget(child: sprintExecution)
       );
       await tester.pump();
       String menu1 = "Problems you might have face:";
@@ -82,7 +82,7 @@ void main() {
   testWidgets('Test Not Find Product Header 2', (WidgetTester tester) async {
     provideMockedNetworkImages(() async {
       await tester.pumpWidget(
-        util.makeTestableWidget(child: productBacklog)
+          util.makeTestableWidget(child: sprintExecution)
       );
       await tester.pump();
       String menu1 = "Problems you might have not face:";
@@ -97,7 +97,7 @@ void main() {
       ];
 
       await tester.pumpWidget(
-        util.makeTestableWidget(child: productBacklog)
+          util.makeTestableWidget(child: sprintExecution)
       );
       await tester.pump();
 
@@ -116,6 +116,7 @@ void main() {
     });
   });
 
+
   testWidgets('Test Find Problem Names', (WidgetTester tester) async {
     provideMockedNetworkImages(() async {
       List<String> problemNames = <String>[
@@ -123,7 +124,7 @@ void main() {
       ];
 
       await tester.pumpWidget(
-        util.makeTestableWidget(child: productBacklog),
+        util.makeTestableWidget(child: sprintExecution),
       );
       await tester.pump();
 
@@ -143,27 +144,23 @@ void main() {
   });
 
 //  testWidgets('Home Screen Drawer Test', (WidgetTester tester) async {
-//    provideMockedNetworkImages(() async {
-//      GlobalKey<ScaffoldState> scaffoldKey = productBacklog.getScaffoldKey();
-//      await tester.pumpWidget(util.makeTestableWidget(child: productBacklog));
-//      await tester.pump();
+//    GlobalKey<ScaffoldState> scaffoldKey = sprintExecution.getScaffoldKey();
+//    await tester.pumpWidget(util.makeTestableWidget(child: sprintExecution));
+//    Key menu1 = new Key("Home");
+//    Key menu2 = new Key("Ceremonies");
+//    Key menu3 = new Key("Problems");
+//    Key menu4 = new Key("Glossary");
+//    Key menu5 = new Key("Pop Quiz!");
+//    Key menu6 = new Key("About");
 //
-//      Key menu1 = new Key("Home");
-//      Key menu2 = new Key("Ceremonies");
-//      Key menu3 = new Key("Problems");
-//      Key menu4 = new Key("Glossary");
-//      Key menu5 = new Key("Pop Quiz!");
-//      Key menu6 = new Key("About");
+//    scaffoldKey.currentState.openDrawer();
+//    await tester.pump();
 //
-//      scaffoldKey.currentState.openDrawer();
-//      await tester.pump();
-//
-//      expect(find.byKey(menu1), findsOneWidget);
-//      expect(find.byKey(menu2), findsOneWidget);
-//      expect(find.byKey(menu3), findsOneWidget);
-//      expect(find.byKey(menu4), findsOneWidget);
-//      expect(find.byKey(menu5), findsOneWidget);
-//      expect(find.byKey(menu6), findsOneWidget);
-//    });
+//    expect(find.byKey(menu1), findsOneWidget);
+//    expect(find.byKey(menu2), findsOneWidget);
+//    expect(find.byKey(menu3), findsOneWidget);
+//    expect(find.byKey(menu4), findsOneWidget);
+//    expect(find.byKey(menu5), findsOneWidget);
+//    expect(find.byKey(menu6), findsOneWidget);
 //  });
 }

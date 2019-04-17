@@ -1,204 +1,136 @@
 from django.core.management.base import BaseCommand
-from django.conf import settings
-from rest_api.models import (Phase, ProcessArea, Goal, CMMIPractices, Ceremony,
-                        Problem, Glossary, QuizQuestion)
+from rest_api.models import (Phase, ProcessArea, CMMIPractices, Ceremony,
+                             Problem, Glossary, QuizQuestion)
 from django.db import IntegrityError
-from PIL import Image
 import csv
 
+
+# phaseTitle = ["Product Backlog","Sprint Planning","Sprint Execution","Sprint Evaluation"]
+
+# for i in phaseTitle:
+
 class Command(BaseCommand):
+    dct_manytomany = {'may_be_happen_at': Ceremony,'ceremonies_that_contain': Ceremony, 'problem_that_contain': Problem}
+    dct_foreignkey = {'to_satisfy': ProcessArea, 'phase': Phase, 'question_for': Phase,
+                      'related_ceremony': Ceremony,'process_area':ProcessArea}
 
-    def _create_phase(self):
-        print("Creating phase")
-        with open('phase.csv') as csv_file:
-            print("Opening phase.csv file")
-            csv_reader = csv.DictReader(csv_file, delimiter=',')
+    def _create_models(self, models, file_name):
+        
+        with open(file_name) as csv_file:
+            csv_reader = csv.reader(csv_file, delimiter=',')
             line_count = 0
-            for row in csv_reader:
-                if line_count = 0:
-                    line_count += 1
-                    continue
-                try:
-                    Phase.objects.create(title=row["title"], detail=row["detail"])
-                    print(f'Phase {row["title"]} has been created successfully')
-                except IntegrityError:
-                    print(f'Phase {row["title"]} has already been created')
-            print("Finish create phase")
-            print("===================")
-        return
+            lst = []
 
-    def _create_process_areas(self):
-        print("Creating process area")
-        with open('processarea.csv') as csv_file:
-            print("Opening processarea.csv")
-            csv_reader = csv.DictReader(csv_file, delimiter=',')
-            line_count = 0
             for row in csv_reader:
-                if line_count = 0:
-                    line_count += 1
-                    continue
-                try:
-                    ProcessArea.objects.create(title=row["title"],purpose_statement=row["purpose_statement"],introductory_notes=row["introductory_notes"])
-                    print(f'Process Area {row["title"]} has been created successfully')
-                except IntegrityError:
-                    print(f'Process Area {row["title"]} has already been created')
-            line_count = 0
-            for row in csv_reader:
-                if line_count = 0:
-                    line_count += 1
-                    continue
-                related_process_areas = row["related_process_areas"].split(";")
-                for process_area in related_process_areas:
-                    ProcessArea.objects.get(title=row["title"]).related_process_areas.add(ProcessArea.objects.get(title=process_area))
-            print("Finish create process area")
-            print("===================")
-        return
-    
-    def _create_goal(self):
-        print("Creating goal")
-        with open('goal.csv') as csv_file:
-            print("Opening goal.csv")
-            csv_reader = csv.DictReader(csv_file, delimiter=',')
-            line_count = 0
-            for row in csv_reader:
-                if line_count = 0:
-                    line_count += 1
-                    continue
-                related_process_areas = row["to_satisfy"].split(";")
-                try:
-                    goal = Goal.objects.create(title=row["title"],detail=row["detail"])
-                    print(f'Goal {row["title"]} has been created successfully')
-                    for process_area in related_process_areas:
-                        goal.to_satisfy.add(ProcessArea.objects.get(title=process_area))
-                except IntegrityError:
-                    print(f'Goal {row["title"]} has already been created')
-            print("Finish create goal")
-            print("===================")
-        return
-    
-    def _create_cmmi_practices(self):
-        print("Creating cmmi practices")
-        with open('cmmipractices.csv') as csv_file:
-            print("Opening cmmipractices.csv")
-            csv_reader = csv.DictReader(csv_file, delimiter=',')
-            line_count = 0
-            for row in csv_reader:
-                if line_count = 0:
-                    line_count += 1
-                    continue
-                related_goal = row["to_achieve"].split(";")
-                try:
-                    cmmi_practice = CMMIPractices.objects.create(title=row["title"],detail=row["detail"])
-                    print(f'CMMI Practice {row["title"]} has been created successfully')
-                    for goal in related_goal:
-                        cmmi_practice.to_achieve.add(Goal.objects.get(title=goal))
-                except IntegrityError:
-                    print(f'CMMI Practice {row["title"]} has already been created')
-            print("Finish create cmmi practice")
-            print("===================")
-        return
+                attr = {}
 
-    def _create_ceremony(self):
-        print("Creating ceremony")
-        with open('ceremony.csv') as csv_file:
-            print("Opening ceremony.csv")
-            csv_reader = csv.DictReader(csv_file, delimiter=',')
-            line_count = 0
-            for row in csv_reader:
-                if line_count = 0:
+                if line_count == 0:
+                    for col in row:
+                        lst.append(col)
                     line_count += 1
-                    continue
-                related_cmmi_practice = row["can_be_enhanced_by_using"].split(";")
-                try:
-                    ceremony = Ceremony.objects.create(title=row["title"],detail=row["detail"],phase=Phase.objects.get(title=row["phase"]))
-                    print(f'Ceremony {row["title"]} has been created successfully')
-                    for cmmi_process in related_cmmi_practice:
-                        ceremony.can_be_enhanced_by_using.add(CMMIPractices.objects.get(title=cmmi_process))
-                except IntegrityError:
-                    print(f'Ceremony {row["title"]} has already been created')
-            print("Finish create ceremony")
-            print("===================")
-        return
 
-    def _create_problem(self):
-        print("Creating problem")
-        with open('problem.csv') as csv_file:
-            print("Opening problem.csv")
-            csv_reader = csv.DictReader(csv_file, delimiter=',')
-            line_count = 0
-            for row in csv_reader:
-                if line_count = 0:
-                    line_count += 1
-                    continue
-                related_cmmi_practice = row["can_be_solved_by_using"].split(";")
-                related_ceremonies = row["may_be_happen_at"]
-                try:
-                    problem = Problem.objects.create(title=row["title"],detail=row["detail"])
-                    print(f'Problem {row["title"]} has been created successfully')
-                    for cmmi_process in related_cmmi_practice:
-                        problem.can_be_solved_by_using.add(CMMIPractices.objects.get(title=cmmi_process))
-                    for ceremony in related_ceremonies:
-                        problem.may_be_happen_at.add(Ceremony.objects.get(title=ceremony))
-                except IntegrityError:
-                    print(f'Problem {row["title"]} has already been created')
-            print("Finish create problem")
-            print("===================")
-        return
+                else:
+                    many_to_many = {}
+                    for i in range(len(row)):
 
-    def _create_glossary(self):
-        print("Creating glossary")
-        with open('glossary.csv') as csv_file:
-            print("Opening glossary.csv")
-            csv_reader = csv.DictReader(csv_file, delimiter=',')
-            line_count = 0
-            for row in csv_reader:
-                if line_count = 0:
-                    line_count += 1
-                    continue
-                related_problem = row["problem_that_contain"].split(";")
-                related_ceremonies = row["ceremonies_that_contain"]
-                try:
-                    glossary = Glossary.objects.create(name=row["name"],detail=row["detail"])
-                    print(f'Glossary {row["name"]} has been created successfully')
-                    for problem in related_problem:
-                        glossary.problem_that_contain.add(Problem.objects.get(title=problem))
-                    for ceremony in related_ceremonies:
-                        glossary.ceremonies_that_contain.add(Ceremony.objects.get(title=ceremony))
-                except IntegrityError:
-                    print(f'Glossary {row["name"]} has already been created')
-            print("Finish create glossary")
-            print("===================")
-        return
+                        if row[i] == '':
+                            continue
 
-    def _create_quiz_question(self):
-        print("Creating quiz question")
-        with open('quizquestion.csv') as csv_file:
-            print("Opening quizquestion.csv")
-            csv_reader = csv.DictReader(csv_file, delimiter=',')
-            line_count = 0
-            for row in csv_reader:
-                if line_count = 0:
-                    line_count += 1
-                    continue
-                try:
-                    QuizQuestion.objects.create(question_for=Phase.objects.get(title=row["question_for"]),question=row["question"],
-                    option_1=row["option_1"],option_2=row["option_2"],option_2=row["option_2"],option_3=row["option_3"],option_4=row["option_4"],
-                    answer_key=int(row["answer_key"]))
-                    print(f'Question {row["question"]} has been created successfully')
-                except IntegrityError:
-                    print(f'Question {row["question"]} has already been created')
-            print("Finish create quiz question")
-            print("===================")
-        return
+                        if lst[i] in self.dct_manytomany:
+                            many_to_many[lst[i]] = row[i].split(';')
+
+                        elif lst[i] in self.dct_foreignkey:
+                            attr[lst[i]] = self.dct_foreignkey[lst[i]].objects.get(title=row[i])
+
+                        else:
+                            attr[lst[i]] = row[i]
+
+                    try:
+                        obj = models.objects.create(**attr)
+                        if (many_to_many):
+                            for key, values in many_to_many.items():
+                                many_to_many_field = getattr(obj, key)
+                                for value in values:
+                                    value_class = self.dct_manytomany[key]
+                                    value_obj = value_class.objects.get(title=value)
+                                    many_to_many_field.add(value_obj)
+
+                        print(models.__name__, obj.title, 'has been created successfully')
+
+                    except IntegrityError:
+                        print(models.__name__, attr[lst[0]], 'has already been created')
 
     def handle(self, *args, **options):
-        print("POPULATE DATABASE BEGIN")
-        self._create_phase()
-        self._create_process_areas()
-        self._create_goal()
-        self._create_cmmi_practices()
-        self._create_ceremony()
-        self._create_problem()
-        self._create_glossary()
-        self._create_quiz_question()
-        print("POPULATE DATABASE COMPLETE")
+        print("POPULATE DATABASE BEGIN!")
+        self._create_models(Phase, 'rest_api/management/commands/Phase.csv')
+        self._create_models(Ceremony, 'rest_api/management/commands/Ceremony.csv')
+        self._create_models(Problem, 'rest_api/management/commands/Problem.csv')
+        self._create_models(ProcessArea, 'rest_api/management/commands/ProcessArea.csv')
+        print("POPULATE DATABASE COMPLETE!")
+        print("""``````¶0````1¶1_```````````````````````````````````````
+```````¶¶¶0_`_¶¶¶0011100¶¶¶¶¶¶¶001_````````````````````
+````````¶¶¶¶¶00¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶0_````````````````
+`````1_``¶¶00¶0000000000000000000000¶¶¶¶0_`````````````
+`````_¶¶_`0¶000000000000000000000000000¶¶¶¶¶1``````````
+```````¶¶¶00¶00000000000000000000000000000¶¶¶_`````````
+````````_¶¶00000000000000000000¶¶00000000000¶¶`````````
+`````_0011¶¶¶¶¶000000000000¶¶00¶¶0¶¶00000000¶¶_````````
+```````_¶¶¶¶¶¶¶00000000000¶¶¶¶0¶¶¶¶¶00000000¶¶1````````
+``````````1¶¶¶¶¶000000¶¶0¶¶¶¶¶¶¶¶¶¶¶¶0000000¶¶¶````````
+```````````¶¶¶0¶000¶00¶0¶¶`_____`__1¶0¶¶00¶00¶¶````````
+```````````¶¶¶¶¶00¶00¶10¶0``_1111_`_¶¶0000¶0¶¶¶````````
+``````````1¶¶¶¶¶00¶0¶¶_¶¶1`_¶_1_0_`1¶¶_0¶0¶¶0¶¶````````
+````````1¶¶¶¶¶¶¶0¶¶0¶0_0¶``100111``_¶1_0¶0¶¶_1¶````````
+```````1¶¶¶¶00¶¶¶¶¶¶¶010¶``1111111_0¶11¶¶¶¶¶_10````````
+```````0¶¶¶¶__10¶¶¶¶¶100¶¶¶0111110¶¶¶1__¶¶¶¶`__````````
+```````¶¶¶¶0`__0¶¶0¶¶_¶¶¶_11````_0¶¶0`_1¶¶¶¶```````````
+```````¶¶¶00`__0¶¶_00`_0_``````````1_``¶0¶¶_```````````
+``````1¶1``¶¶``1¶¶_11``````````````````¶`¶¶````````````
+``````1_``¶0_¶1`0¶_`_``````````_``````1_`¶1````````````
+``````````_`1¶00¶¶_````_````__`1`````__`_¶`````````````
+````````````¶1`0¶¶_`````````_11_`````_``_``````````````
+`````````¶¶¶¶000¶¶_1```````_____```_1``````````````````
+`````````¶¶¶¶¶¶¶¶¶¶¶¶0_``````_````_1111__``````````````
+`````````¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶01_`````_11____1111_```````````
+`````````¶¶0¶0¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶1101_______11¶_```````````
+``````_¶¶¶0000000¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶0¶0¶¶¶1````````````
+`````0¶¶0000000¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶1`````````````
+````0¶0000000¶¶0_````_011_10¶110¶01_1¶¶¶0````_100¶001_`
+```1¶0000000¶0_``__`````````_`````````0¶_``_00¶¶010¶001
+```¶¶00000¶¶1``_01``_11____``1_``_`````¶¶0100¶1```_00¶1
+``1¶¶00000¶_``_¶_`_101_``_`__````__````_0000001100¶¶¶0`
+``¶¶¶0000¶1_`_¶``__0_``````_1````_1_````1¶¶¶0¶¶¶¶¶¶0```
+`_¶¶¶¶00¶0___01_10¶_``__````1`````11___`1¶¶¶01_````````
+`1¶¶¶¶¶0¶0`__01¶¶¶0````1_```11``___1_1__11¶000`````````
+`1¶¶¶¶¶¶¶1_1_01__`01```_1```_1__1_11___1_``00¶1````````
+``¶¶¶¶¶¶¶0`__10__000````1____1____1___1_```10¶0_```````
+``0¶¶¶¶¶¶¶1___0000000```11___1__`_0111_```000¶01```````
+```¶¶¶00000¶¶¶¶¶¶¶¶¶01___1___00_1¶¶¶`_``1¶¶10¶¶0```````
+```1010000¶000¶¶0100_11__1011000¶¶0¶1_10¶¶¶_0¶¶00``````
+10¶000000000¶0________0¶000000¶¶0000¶¶¶¶000_0¶0¶00`````
+¶¶¶¶¶¶0000¶¶¶¶_`___`_0¶¶¶¶¶¶¶00000000000000_0¶00¶01````
+¶¶¶¶¶0¶¶¶¶¶¶¶¶¶_``_1¶¶¶00000000000000000000_0¶000¶01```
+1__```1¶¶¶¶¶¶¶¶¶00¶¶¶¶00000000000000000000¶_0¶0000¶0_``
+```````¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶00000000000000000000010¶00000¶¶_`
+```````0¶¶¶¶¶¶¶¶¶¶¶¶¶¶00000000000000000000¶10¶¶0¶¶¶¶¶0`
+````````¶¶¶¶¶¶¶¶¶¶0¶¶¶00000000000000000000010¶¶¶0011```
+````````1¶¶¶¶¶¶¶¶¶¶0¶¶¶0000000000000000000¶100__1_`````
+`````````¶¶¶¶¶¶¶¶¶¶¶¶¶¶¶000000000000000000¶11``_1``````
+`````````1¶¶¶¶¶¶¶¶¶¶¶0¶¶¶00000000000000000¶11___1_`````
+``````````¶¶¶¶¶¶0¶0¶¶¶¶¶¶¶0000000000000000¶11__``1_````
+``````````¶¶¶¶¶¶¶0¶¶¶0¶¶¶¶¶000000000000000¶1__````__```
+``````````¶¶¶¶¶¶¶¶0¶¶¶¶¶¶¶¶¶0000000000000000__`````11``
+`````````_¶¶¶¶¶¶¶¶¶000¶¶¶¶¶¶¶¶000000000000011_``_1¶¶¶0`
+`````````_¶¶¶¶¶¶0¶¶000000¶¶¶¶¶¶¶000000000000100¶¶¶¶0_`_
+`````````1¶¶¶¶¶0¶¶¶000000000¶¶¶¶¶¶000000000¶00¶¶01`````
+`````````¶¶¶¶¶0¶0¶¶¶0000000000000¶0¶00000000011_``````_
+````````1¶¶0¶¶¶0¶¶¶¶¶¶¶000000000000000000000¶11___11111
+````````¶¶¶¶0¶¶¶¶¶00¶¶¶¶¶¶000000000000000000¶011111111_
+```````_¶¶¶¶¶¶¶¶¶0000000¶0¶00000000000000000¶01_1111111
+```````0¶¶¶¶¶¶¶¶¶000000000000000000000000000¶01___`````
+```````¶¶¶¶¶¶0¶¶¶000000000000000000000000000¶01___1````
+``````_¶¶¶¶¶¶¶¶¶00000000000000000000000000000011_111```
+``````0¶¶0¶¶¶0¶¶0000000000000000000000000000¶01`1_11_``
+``````¶¶¶¶¶¶0¶¶¶0000000000000000000000000000001`_0_11_`
+``````¶¶¶¶¶¶¶¶¶00000000000000000000000000000¶01``_0_11`
+``````¶¶¶¶0¶¶¶¶00000000000000000000000000000001```_1_11""")

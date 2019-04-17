@@ -3,37 +3,36 @@ import 'package:ScrumBooster/Utils/utils.dart';
 import 'package:ScrumBooster/contents/ceremonies.dart';
 import 'package:ScrumBooster/contents/problems.dart';
 import 'package:ScrumBooster/components/ScrumPhaseContentBtn.dart';
-import 'package:ScrumBooster/ScrumPhase/ProductBacklog/ApiProvider.dart';
-import 'package:ScrumBooster/ScrumPhase/ProductBacklog/Model.dart';
+import 'package:ScrumBooster/ScrumPhase/SprintPlanning/ApiProvider.dart';
+import 'package:ScrumBooster/ScrumPhase/SprintPlanning/Model.dart';
 
 import 'dart:async';
 import 'package:ScrumBooster/components/loading/loadingData.dart';
 
-_ProductBacklogState _productBacklogState;
-class ProductBacklog extends StatefulWidget {
+_SprintPlanningState _sprintPlanningState;
+class SprintPlanning extends StatefulWidget {
 
-  final ProductBacklogApiProvider apiProvider;
+  final SprintPlanningApiProvider apiProvider;
   final util = new Util();
   List<Widget> listView = [new Container(),];
 
-  ProductBacklogModel phaseDetailsDataJSON;
+  SprintPlanningModel phaseDetailsDataJSON;
   var phaseCeremoniesDataJSON;
   var phaseProblemsDataJSON;
 
-  ProductBacklog({
+  SprintPlanning({
     Key key,
     this.apiProvider,
   }) : super(key: key);
 
   @override
-  _ProductBacklogState createState() {
-    _productBacklogState = new _ProductBacklogState();
-    return _productBacklogState;
+  _SprintPlanningState createState() {
+    _sprintPlanningState = new _SprintPlanningState();
+    return _sprintPlanningState;
   }
 }
 
-class _ProductBacklogState extends State<ProductBacklog> {
-
+class _SprintPlanningState extends State<SprintPlanning> {
   final util = new Util();
 
   GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
@@ -49,13 +48,13 @@ class _ProductBacklogState extends State<ProductBacklog> {
   int problemsCount;
 
   Future<Null> refresh() async {
-    await loadProductBacklog(true);
+    await loadSprintPlanning(true);
     return null;
   }
 
-  Future<Null> loadProductBacklog(bool refresh) async {
-    final productBacklogApiProvider = widget.apiProvider == null
-        ? new ProductBacklogApiProvider()
+  Future<Null> loadSprintPlanning(bool refresh) async {
+    final sprintPlanningApiProvider = widget.apiProvider == null
+        ? new SprintPlanningApiProvider()
         : widget.apiProvider;
     widget.listView = [];
 
@@ -63,25 +62,25 @@ class _ProductBacklogState extends State<ProductBacklog> {
     final _width = MediaQuery.of(context).size.width;
 
     if (!refresh) {
-      _productBacklogState.setState(() {
+      _sprintPlanningState.setState(() {
         loading = _height;
       });
     }
 
     //Get Phase Details
-    await productBacklogApiProvider.fetchPosts();
+    await sprintPlanningApiProvider.fetchPosts();
 
-    widget.phaseDetailsDataJSON = productBacklogApiProvider.getModel();
+    widget.phaseDetailsDataJSON = sprintPlanningApiProvider.getModel();
 
     //Get Phase Ceremonies Details
-    widget.phaseCeremoniesDataJSON = productBacklogApiProvider.getCeremonyItemModel();
-    _productBacklogState.setState(() {
+    widget.phaseCeremoniesDataJSON = sprintPlanningApiProvider.getCeremonyItemModel();
+    _sprintPlanningState.setState(() {
       ceremoniesCount = widget.phaseCeremoniesDataJSON.length;
     });
 
     //Get Phase Problems Details
-    widget.phaseProblemsDataJSON = productBacklogApiProvider.getProblemItemModel();
-    _productBacklogState.setState(() {
+    widget.phaseProblemsDataJSON = sprintPlanningApiProvider.getProblemItemModel();
+    _sprintPlanningState.setState(() {
       problemsCount = widget.phaseProblemsDataJSON.length;
     });
 
@@ -95,7 +94,7 @@ class _ProductBacklogState extends State<ProductBacklog> {
             padding: EdgeInsets.all(15.0),
           ),
           new Text(
-            "Product Backlog".toUpperCase(),
+            "Sprint Planning".toUpperCase(),
             style: TextStyle(
               fontSize: util.fitScreenSize(_height, 0.03),
               fontWeight: FontWeight.bold,
@@ -183,7 +182,7 @@ class _ProductBacklogState extends State<ProductBacklog> {
 
     widget.listView.addAll(listView);
 
-    _productBacklogState.setState(() {
+    _sprintPlanningState.setState(() {
       loading = 0.0;
     });
   }
@@ -243,7 +242,7 @@ class _ProductBacklogState extends State<ProductBacklog> {
   @override
   void didChangeDependencies() {
     if (widget.listView.length == 1) {
-      loadProductBacklog(false);
+      loadSprintPlanning(false);
     }
   }
 
@@ -265,9 +264,9 @@ class _ProductBacklogState extends State<ProductBacklog> {
         title: Text(
           "Scrum Booster".toUpperCase(),
           style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-              color: util.hexToColor("#FFFFFF"),
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+            color: util.hexToColor("#FFFFFF"),
           ),
         ),
         actions: <Widget>[
