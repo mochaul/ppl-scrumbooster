@@ -3,6 +3,7 @@ from rest_framework import viewsets
 from . import serializers, models
 from rest_framework import views, status
 from rest_framework.response import Response
+import string
 
 
 class PhaseViewSet(viewsets.ReadOnlyModelViewSet):
@@ -60,3 +61,11 @@ class GetCeremonyAndProblemByPhase(views.APIView):
 
         return Response({'ceremonies':ceremonies_serializer.data, 'problems':problems_serializer.data},
                         status=status.HTTP_200_OK)
+
+
+class GetListCeremonyAlphabeticOrder(views.APIView):
+    pass
+
+
+class GetListProblemAlphabeticOrder(views.APIView):
+    pass

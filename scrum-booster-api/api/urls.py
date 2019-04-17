@@ -21,6 +21,8 @@ from rest_api import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     re_path(r'^phase/(?P<id>\d+)/details/$', views.GetCeremonyAndProblemByPhase.as_view(), name='phase-ceremony-problem'),
+    path('ceremony/alphabetic/', views.GetListCeremonyAlphabeticOrder.as_view(), name='ceremony-list-alphabetic'),
+    path('problem/alphabetic/', views.GetListProblemAlphabeticOrder.as_view(), name='problem-list-alphabetic'),
     path('', include('rest_api.urls'), name='api'),
 ]
 
