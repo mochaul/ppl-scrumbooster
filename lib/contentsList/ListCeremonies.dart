@@ -95,6 +95,17 @@ class ListCeremonies extends StatelessWidget {
                       fontWeight: FontWeight.w500,
                     ),
                   ),
+                  new InkWell(
+                    child: Text(
+                      "Backlog Grooming",
+                      style: TextStyle(
+                        fontSize: utils.fitScreenSize(_height, 0.03),
+                        fontWeight: FontWeight.w500,
+                        color: utils.hexToColor("#3498DB"),
+                      ),
+                    ),
+                    onTap: () {},
+                  ),
                     new Divider(
                     color: utils.hexToColor("#000000"),
                   ),
@@ -107,7 +118,7 @@ class ListCeremonies extends StatelessWidget {
                   ),
                   new InkWell(
                     child: Text(
-                      "Continuous Build/Integration",
+                      "Continuous Build / Integration",
                       style: TextStyle(
                         fontSize: utils.fitScreenSize(_height, 0.03),
                         fontWeight: FontWeight.w500,
@@ -126,6 +137,31 @@ class ListCeremonies extends StatelessWidget {
                       fontWeight: FontWeight.w500,
                     ),
                   ),
+                  new InkWell(
+                    child: Text(
+                      "Daily Standup / Daily Scrum",
+                      style: TextStyle(
+                        fontSize: utils.fitScreenSize(_height, 0.03),
+                        fontWeight: FontWeight.w500,
+                        color: utils.hexToColor("#3498DB"),
+                      ),
+                    ),
+                    onTap: () {},
+                  ),
+                    new Divider(
+                    color: utils.hexToColor("#000000"),
+                  ),
+                    new InkWell(
+                      child: Text(
+                        "Definition of Done",
+                        style: TextStyle(
+                          fontSize: utils.fitScreenSize(_height, 0.03),
+                          fontWeight: FontWeight.w500,
+                          color: utils.hexToColor("#3498DB"),
+                        ),
+                      ),
+                      onTap: () {},
+                    ),
                     new Divider(
                     color: utils.hexToColor("#000000"),
                   ),
@@ -136,6 +172,17 @@ class ListCeremonies extends StatelessWidget {
                       fontWeight: FontWeight.w500,
                     ),
                   ),
+                  new InkWell(
+                    child: Text(
+                      "Epics",
+                      style: TextStyle(
+                        fontSize: utils.fitScreenSize(_height, 0.03),
+                        fontWeight: FontWeight.w500,
+                        color: utils.hexToColor("#3498DB"),
+                      ),
+                    ),
+                    onTap: () {},
+                  ),
                     new Divider(
                     color: utils.hexToColor("#000000"),
                   ),
@@ -145,17 +192,6 @@ class ListCeremonies extends StatelessWidget {
                       fontSize: utils.fitScreenSize(_height, 0.06),
                       fontWeight: FontWeight.w500,
                     ),
-                  ),
-                  new InkWell(
-                    child: Text(
-                      "Failure to Foresee Potential Problems",
-                      style: TextStyle(
-                        fontSize: utils.fitScreenSize(_height, 0.03),
-                        fontWeight: FontWeight.w500,
-                        color: utils.hexToColor("#3498DB"),
-                      ),
-                    ),
-                    onTap: () {},
                   ),
                   new Divider(
                     color: utils.hexToColor("#000000"),
@@ -217,17 +253,6 @@ class ListCeremonies extends StatelessWidget {
                       fontWeight: FontWeight.w500,
                     ),
                   ),
-                  new InkWell(
-                    child: Text(
-                      "Lack Of Internal And External Support For Project",
-                      style: TextStyle(
-                        fontSize: utils.fitScreenSize(_height, 0.03),
-                        fontWeight: FontWeight.w500,
-                        color: utils.hexToColor("#3498DB"),
-                      ),
-                    ),
-                    onTap: () {},
-                  ),
                   new Divider(
                     color: utils.hexToColor("#000000"),
                   ),
@@ -258,18 +283,6 @@ class ListCeremonies extends StatelessWidget {
                       fontWeight: FontWeight.w500,
                     ),
                   ),
-                  new InkWell(
-                    child: Text(
-                      "Organizational Performance Isn't Improving",
-                      style: TextStyle(
-                        fontSize: utils.fitScreenSize(_height, 0.03),
-                        fontWeight: FontWeight.w500,
-                        color: utils.hexToColor("#3498DB"),
-                      ),
-                      textAlign: TextAlign.start,
-                    ),
-                    onTap: () {},
-                  ),
                   new Divider(
                     color: utils.hexToColor("#000000"),
                   ),
@@ -282,82 +295,7 @@ class ListCeremonies extends StatelessWidget {
                   ),
                   new InkWell(
                     child: Text(
-                      "Poor Project Communication",
-                      style: TextStyle(
-                        fontSize: utils.fitScreenSize(_height, 0.03),
-                        fontWeight: FontWeight.w500,
-                        color: utils.hexToColor("#3498DB"),
-                      ),
-                      textAlign: TextAlign.start,
-                    ),
-                    onTap: () {},
-                  ),
-                   new Divider(
-                    color: utils.hexToColor("#000000"),
-                  ),
-                  new InkWell(
-                    child: Text(
-                      "Projects Do Not Get Delivered On Schedule",
-                      style: TextStyle(
-                        fontSize: utils.fitScreenSize(_height, 0.03),
-                        fontWeight: FontWeight.w500,
-                        color: utils.hexToColor("#3498DB"),
-                      ),
-                      textAlign: TextAlign.start,
-                    ),
-                    onTap: () {},
-                  ),
-                   new Divider(
-                    color: utils.hexToColor("#000000"),
-                  ),
-                  new InkWell(
-                    child: Text(
-                      "Project Estimates Are Unrealistice or Unknown",
-                      style: TextStyle(
-                        fontSize: utils.fitScreenSize(_height, 0.03),
-                        fontWeight: FontWeight.w500,
-                        color: utils.hexToColor("#3498DB"),
-                      ),
-                      textAlign: TextAlign.start,
-                    ),
-                    onTap: () {},
-                  ),
-                   new Divider(
-                    color: utils.hexToColor("#000000"),
-                  ),
-                  new InkWell(
-                    child: Text(
-                      "Project Information Isn't Available When Needed",
-                      style: TextStyle(
-                        fontSize: utils.fitScreenSize(_height, 0.03),
-                        fontWeight: FontWeight.w500,
-                        color: utils.hexToColor("#3498DB"),
-                      ),
-                      textAlign: TextAlign.start,
-                    ),
-                    onTap: () {},
-                  ),
-                   new Divider(
-                    color: utils.hexToColor("#000000"),
-                  ),
-                  new InkWell(
-                    child: Text(
-                      "Project Team Member Training Is Inadequate For The Task",
-                      style: TextStyle(
-                        fontSize: utils.fitScreenSize(_height, 0.03),
-                        fontWeight: FontWeight.w500,
-                        color: utils.hexToColor("#3498DB"),
-                      ),
-                      textAlign: TextAlign.start,
-                    ),
-                    onTap: () {},
-                  ),
-                   new Divider(
-                    color: utils.hexToColor("#000000"),
-                  ),
-                  new InkWell(
-                    child: Text(
-                      "Project Team Responsibilities Are Not Clear",
+                      "Product Backlog",
                       style: TextStyle(
                         fontSize: utils.fitScreenSize(_height, 0.03),
                         fontWeight: FontWeight.w500,
@@ -389,7 +327,7 @@ class ListCeremonies extends StatelessWidget {
                   ),
                   new InkWell(
                     child: Text(
-                      "Requirements Are Always Changing",
+                      "Refactoring",
                       style: TextStyle(
                         fontSize: utils.fitScreenSize(_height, 0.03),
                         fontWeight: FontWeight.w500,
@@ -404,7 +342,22 @@ class ListCeremonies extends StatelessWidget {
                   ),
                   new InkWell(
                     child: Text(
-                      "Requirements Are Vague or Open-ended",
+                      "Release Burn-Down Chart",
+                      style: TextStyle(
+                        fontSize: utils.fitScreenSize(_height, 0.03),
+                        fontWeight: FontWeight.w500,
+                        color: utils.hexToColor("#3498DB"),
+                      ),
+                      textAlign: TextAlign.start,
+                    ),
+                    onTap: () {},
+                  ),
+                   new Divider(
+                    color: utils.hexToColor("#000000"),
+                  ),
+                  new InkWell(
+                    child: Text(
+                      "Release Planning",
                       style: TextStyle(
                         fontSize: utils.fitScreenSize(_height, 0.03),
                         fontWeight: FontWeight.w500,
@@ -424,6 +377,63 @@ class ListCeremonies extends StatelessWidget {
                       fontWeight: FontWeight.w500,
                     ),
                   ),
+                  new InkWell(
+                    child: Text(
+                      "Sprint / Iteration",
+                      style: TextStyle(
+                        fontSize: utils.fitScreenSize(_height, 0.03),
+                        fontWeight: FontWeight.w500,
+                        color: utils.hexToColor("#3498DB"),
+                      ),
+                      textAlign: TextAlign.start,
+                    ),
+                    onTap: () {},
+                  ),
+                    new Divider(
+                    color: utils.hexToColor("#000000"),
+                  ),
+                  new InkWell(
+                    child: Text(
+                      "Sprint Burn-Down Chart",
+                      style: TextStyle(
+                        fontSize: utils.fitScreenSize(_height, 0.03),
+                        fontWeight: FontWeight.w500,
+                        color: utils.hexToColor("#3498DB"),
+                      ),
+                      textAlign: TextAlign.start,
+                    ),
+                    onTap: () {},
+                  ),
+                    new Divider(
+                    color: utils.hexToColor("#000000"),
+                  ),
+                  new InkWell(
+                    child: Text(
+                      "Sprint Demo / Sprint Review",
+                      style: TextStyle(
+                        fontSize: utils.fitScreenSize(_height, 0.03),
+                        fontWeight: FontWeight.w500,
+                        color: utils.hexToColor("#3498DB"),
+                      ),
+                      textAlign: TextAlign.start,
+                    ),
+                    onTap: () {},
+                  ),
+                    new Divider(
+                    color: utils.hexToColor("#000000"),
+                  ),
+                  new InkWell(
+                    child: Text(
+                      "Sprint Planning",
+                      style: TextStyle(
+                        fontSize: utils.fitScreenSize(_height, 0.03),
+                        fontWeight: FontWeight.w500,
+                        color: utils.hexToColor("#3498DB"),
+                      ),
+                      textAlign: TextAlign.start,
+                    ),
+                    onTap: () {},
+                  ),
                     new Divider(
                     color: utils.hexToColor("#000000"),
                   ),
@@ -436,7 +446,52 @@ class ListCeremonies extends StatelessWidget {
                   ),
                    new InkWell(
                     child: Text(
-                      "There Are Too Many Bugs During A Project Or Post-Project",
+                      "Team Agreements",
+                      style: TextStyle(
+                        fontSize: utils.fitScreenSize(_height, 0.03),
+                        fontWeight: FontWeight.w500,
+                        color: utils.hexToColor("#3498DB"),
+                      ),
+                      textAlign: TextAlign.start,
+                    ),
+                    onTap: () {},
+                  ),
+                   new Divider(
+                    color: utils.hexToColor("#000000"),
+                  ),
+                   new InkWell(
+                    child: Text(
+                      "Team Estimating Game (Fibonacci Game) & Planning Poker",
+                      style: TextStyle(
+                        fontSize: utils.fitScreenSize(_height, 0.03),
+                        fontWeight: FontWeight.w500,
+                        color: utils.hexToColor("#3498DB"),
+                      ),
+                      textAlign: TextAlign.start,
+                    ),
+                    onTap: () {},
+                  ),
+                   new Divider(
+                    color: utils.hexToColor("#000000"),
+                  ),
+                   new InkWell(
+                    child: Text(
+                      "Technical Debt",
+                      style: TextStyle(
+                        fontSize: utils.fitScreenSize(_height, 0.03),
+                        fontWeight: FontWeight.w500,
+                        color: utils.hexToColor("#3498DB"),
+                      ),
+                      textAlign: TextAlign.start,
+                    ),
+                    onTap: () {},
+                  ),
+                   new Divider(
+                    color: utils.hexToColor("#000000"),
+                  ),
+                   new InkWell(
+                    child: Text(
+                      "Test Driven Development",
                       style: TextStyle(
                         fontSize: utils.fitScreenSize(_height, 0.03),
                         fontWeight: FontWeight.w500,
@@ -458,7 +513,7 @@ class ListCeremonies extends StatelessWidget {
                   ),
                    new InkWell(
                     child: Text(
-                      "Unable To Secure or Retain Project Resources",
+                      "User Stories",
                       style: TextStyle(
                         fontSize: utils.fitScreenSize(_height, 0.03),
                         fontWeight: FontWeight.w500,
@@ -477,6 +532,18 @@ class ListCeremonies extends StatelessWidget {
                       fontSize: utils.fitScreenSize(_height, 0.06),
                       fontWeight: FontWeight.w500,
                     ),
+                  ),
+                   new InkWell(
+                    child: Text(
+                      "Velocity",
+                      style: TextStyle(
+                        fontSize: utils.fitScreenSize(_height, 0.03),
+                        fontWeight: FontWeight.w500,
+                        color: utils.hexToColor("#3498DB"),
+                      ),
+                      textAlign: TextAlign.start,
+                    ),
+                    onTap: () {},
                   ),
                     new Divider(
                     color: utils.hexToColor("#000000"),
