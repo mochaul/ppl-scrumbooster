@@ -1,4 +1,4 @@
-import 'package:ScrumBooster/utils/utils.dart';
+import 'package:ScrumBooster/Utils/utils.dart';
 import 'package:flutter/material.dart';
 
 class Ceremonies extends StatelessWidget {
@@ -66,7 +66,7 @@ class Ceremonies extends StatelessWidget {
             decoration: BoxDecoration(
               image: DecorationImage(
                 fit: BoxFit.cover,
-                image: AssetImage(
+                image: NetworkImage(
                   this.imagePath,
                 )
               )

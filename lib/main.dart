@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:ScrumBooster/utils/utils.dart';
-import 'package:ScrumBooster/initScreen/splashScreen.dart';
+import 'package:ScrumBooster/Utils/utils.dart';
+import 'package:ScrumBooster/InitialScreen/splashScreen.dart';
 import 'package:flutter/services.dart';
-import 'package:ScrumBooster/initScreen/HomeScreen.dart';
+import 'package:ScrumBooster/InitialScreen/HomeScreen.dart';
 import 'package:ScrumBooster/contents/ceremonies.dart';
-import 'package:ScrumBooster/initScreen/AboutPage.dart';
-import 'package:ScrumBooster/initScreen/BoardingPage.dart';
+import 'package:ScrumBooster/InitialScreen/AboutPage.dart';
+import 'package:ScrumBooster/InitialScreen/BoardingPage.dart';
 import 'package:ScrumBooster/contentsList/GlossaryPage.dart';
 
 

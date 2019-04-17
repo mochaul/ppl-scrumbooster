@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:ScrumBooster/initScreen/HomeScreen.dart';
-import 'package:ScrumBooster/contents/problems.dart';
+import 'package:ScrumBooster/InitialScreen/HomeScreen.dart';
+import 'package:flutter/services.dart' show rootBundle;
+import 'dart:convert';
 import 'package:ScrumBooster/contentsList/ListCeremonies.dart';
 import 'package:ScrumBooster/contentsList/ListProblems.dart';
 import 'package:ScrumBooster/contentsList/GlossaryPage.dart';
-import 'package:ScrumBooster/initScreen/AboutPage.dart';
+import 'package:ScrumBooster/InitialScreen/AboutPage.dart';
 
 class Util {
   String call;
@@ -30,6 +31,43 @@ class Util {
     return MaterialApp(
       home: child,
     );
+  }
+
+  Future<Map<String, dynamic>> parseJsonFromAssets(String assetPath) async {
+    return rootBundle.loadString(assetPath).then((json) => jsonDecode(json));
+  }
+
+  Map<String, String> getConfiguration() {
+    return {
+      'base_url': "http://152.118.201.222:24150/",
+    }; //Staging API
+  }
+
+  Map<String, dynamic> getDummyJSONFile() {
+    return {
+      "ceremonies": [
+        {
+          "id": 1,
+          "title": "Backlog Grooming",
+          "detail": "This is dummy JSON response for Backlog Grooming.",
+          "image": "https://static1.squarespace.com/static/56c775ad27d4bd3fdb24775d/t/5a8b201324a694d7071662ee/1519067160925/dummy+logo.jpg",
+          "phase": 1,
+          "can_be_enchanced_by_using": []
+        }
+      ],
+      "problems": [
+        {
+          "id": 1,
+          "title": "Project Estimates Are Unrealistic or Unknown",
+          "detail": "This is dummy JSON response for Project Estimates Are Unrealistic or Unknown.",
+          "image": "https://static1.squarespace.com/static/56c775ad27d4bd3fdb24775d/t/5a8b201324a694d7071662ee/1519067160925/dummy+logo.jpg",
+          "may_be_happen_at": [
+            7
+          ],
+          "can_be_solved_by_using": []
+        }
+      ]
+    };
   }
 
   Widget defaultDrawer(BuildContext context) {

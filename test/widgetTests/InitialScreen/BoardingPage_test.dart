@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:ScrumBooster/initScreen/BoardingPage.dart';
-import 'package:ScrumBooster/utils/utils.dart';
+import 'package:ScrumBooster/InitialScreen/BoardingPage.dart';
+import 'package:ScrumBooster/Utils/utils.dart';
 
 void main() {
   final TestWidgetsFlutterBinding binding =

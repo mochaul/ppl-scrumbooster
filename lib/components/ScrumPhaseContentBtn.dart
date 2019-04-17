@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ScrumBooster/utils/utils.dart';
+import 'package:ScrumBooster/Utils/utils.dart';
 import 'package:ScrumBooster/components/ScrumListBtn.dart';
 
 class ScrumPhaseContentBtn extends StatelessWidget {
@@ -28,12 +28,19 @@ class ScrumPhaseContentBtn extends StatelessWidget {
           action: this.action,
           imgUrl: this.imageAssetURL,
         ),
+        new Padding(
+          padding: EdgeInsets.all(10.0),
+        ),
         new Container(
           height: util.fitScreenSize(_height, 0.05),
           width: util.fitScreenSize(_width, 0.3),
           child: new Text(
             this.title,
             textAlign: TextAlign.center,
+            style: TextStyle(
+              fontSize: 15.0,
+              fontWeight: FontWeight.bold,
+            ),
           )
         ),
       ],

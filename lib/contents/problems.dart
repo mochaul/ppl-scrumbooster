@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:ScrumBooster/utils/utils.dart';
+import 'package:ScrumBooster/Utils/utils.dart';
 
 class ProblemsContentPage extends StatelessWidget {
   final String title;
@@ -68,7 +68,7 @@ class ProblemsContentPage extends StatelessWidget {
             decoration: BoxDecoration(
               image: DecorationImage(
                   fit: BoxFit.cover,
-                  image: AssetImage(
+                  image: NetworkImage(
                     this.imagePath,
                   )
               ),
