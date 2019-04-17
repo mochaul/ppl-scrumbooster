@@ -16,6 +16,7 @@ class ListCeremonies extends StatelessWidget {
     double _width = MediaQuery.of(context).size.width;
 
     return Scaffold(
+      drawer: utils.defaultDrawer(context),
       key: scaffoldKey,
       appBar: AppBar(
         leading: new InkWell(
@@ -44,12 +45,12 @@ class ListCeremonies extends StatelessWidget {
                 Icons.search,
                 color: utils.hexToColor("#FFFFFF"),
               ),
-              onTap: () => {},
+              onTap: () {},
             ),
           ),
         ],
       ),
-      body: Container(
+      body: Center(
         child: ListView(
           children: <Widget>[
             Padding(
@@ -59,9 +60,12 @@ class ListCeremonies extends StatelessWidget {
               "CEREMONIES",
               style: TextStyle(
                 fontSize: utils.fitScreenSize(_height, 0.04),
-                fontWeight: FontWeight.bold
+                fontWeight: FontWeight.bold,
               ),
               textAlign: TextAlign.center,
+            ),
+            new Padding(
+              padding: EdgeInsets.all(15.0),
             ),
             Image.asset(
               "assets/listCeremonies/ceremonies.png",
@@ -69,111 +73,29 @@ class ListCeremonies extends StatelessWidget {
               width: utils.fitScreenSize(_width, 0.3),
             ),
             Container(
-              padding: EdgeInsets.only(
-                left: 20.0,
-                top: 10.0,
-                right: 20.0,
-              ),
+              padding: EdgeInsets.all(20),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  Text(
+                   Text(
                     "A",
                     style: TextStyle(
                       fontSize: utils.fitScreenSize(_height, 0.06),
                       fontWeight: FontWeight.w500,
                     ),
                   ),
-                  new InkWell(
-                    child: Text(
-                      "A dummy 1",
-                      style: TextStyle(
-                        fontSize: utils.fitScreenSize(_height, 0.03),
-                        fontWeight: FontWeight.w500,
-                        color: utils.hexToColor("#3498DB"),
-                      ),
-                    ),
-                    onTap: () {},
-                  ),
-                  new Divider(
+                    new Divider(
                     color: utils.hexToColor("#000000"),
                   ),
-                  new InkWell(
-                    child: Text(
-                      "A dummy 2",
-                      style: TextStyle(
-                        fontSize: utils.fitScreenSize(_height, 0.03),
-                        fontWeight: FontWeight.w500,
-                        color: utils.hexToColor("#3498DB"),
-                      ),
-                    ),
-                    onTap: () {},
-                  ),
-                  new Divider(
-                    color: utils.hexToColor("#000000"),
-                  ),
-                  new InkWell(
-                    child: Text(
-                      "A dummy 3",
-                      style: TextStyle(
-                        fontSize: utils.fitScreenSize(_height, 0.03),
-                        fontWeight: FontWeight.w500,
-                        color: utils.hexToColor("#3498DB"),
-                      ),
-                    ),
-                    onTap: () {},
-                  ),
-                  new Divider(
-                    color: utils.hexToColor("#000000"),
-                  ),
-                  Text(
+                   Text(
                     "B",
                     style: TextStyle(
                       fontSize: utils.fitScreenSize(_height, 0.06),
                       fontWeight: FontWeight.w500,
                     ),
                   ),
-                  new InkWell(
-                    child: Text(
-                      "B dummy 1",
-                      style: TextStyle(
-                        fontSize: utils.fitScreenSize(_height, 0.03),
-                        fontWeight: FontWeight.w500,
-                        color: utils.hexToColor("#3498DB"),
-                      ),
-                    ),
-                    onTap: () {},
-                  ),
-                  new Divider(
-                    color: utils.hexToColor("#000000"),
-                  ),
-                  new InkWell(
-                    child: Text(
-                      "B dummy 2",
-                      style: TextStyle(
-                        fontSize: utils.fitScreenSize(_height, 0.03),
-                        fontWeight: FontWeight.w500,
-                        color: utils.hexToColor("#3498DB"),
-                      ),
-                    ),
-                    onTap: () {},
-                  ),
-                  new Divider(
-                    color: utils.hexToColor("#000000"),
-                  ),
-                  new InkWell(
-                    child: Text(
-                      "B dummy 3",
-                      style: TextStyle(
-                        fontSize: utils.fitScreenSize(_height, 0.03),
-                        fontWeight: FontWeight.w500,
-                        color: utils.hexToColor("#3498DB"),
-                      ),
-                    ),
-                    onTap: () {},
-                  ),
-                  new Divider(
+                    new Divider(
                     color: utils.hexToColor("#000000"),
                   ),
                   Text(
@@ -185,7 +107,7 @@ class ListCeremonies extends StatelessWidget {
                   ),
                   new InkWell(
                     child: Text(
-                      "C dummy 1",
+                      "Continuous Build/Integration",
                       style: TextStyle(
                         fontSize: utils.fitScreenSize(_height, 0.03),
                         fontWeight: FontWeight.w500,
@@ -197,75 +119,148 @@ class ListCeremonies extends StatelessWidget {
                   new Divider(
                     color: utils.hexToColor("#000000"),
                   ),
-                  new InkWell(
-                    child: Text(
-                      "C dummy 2",
-                      style: TextStyle(
-                        fontSize: utils.fitScreenSize(_height, 0.03),
-                        fontWeight: FontWeight.w500,
-                        color: utils.hexToColor("#3498DB"),
-                      ),
-                    ),
-                    onTap: () {},
-                  ),
-                  new Divider(
-                    color: utils.hexToColor("#000000"),
-                  ),
-                  new InkWell(
-                    child: Text(
-                      "C dummy 3",
-                      style: TextStyle(
-                        fontSize: utils.fitScreenSize(_height, 0.03),
-                        fontWeight: FontWeight.w500,
-                        color: utils.hexToColor("#3498DB"),
-                      ),
-                    ),
-                    onTap: () {},
-                  ),
-                  new Divider(
-                    color: utils.hexToColor("#000000"),
-                  ),
-
-                  Text(
+                   Text(
                     "D",
                     style: TextStyle(
                       fontSize: utils.fitScreenSize(_height, 0.06),
                       fontWeight: FontWeight.w500,
                     ),
                   ),
+                    new Divider(
+                    color: utils.hexToColor("#000000"),
+                  ),
+                   Text(
+                    "E",
+                    style: TextStyle(
+                      fontSize: utils.fitScreenSize(_height, 0.06),
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                    new Divider(
+                    color: utils.hexToColor("#000000"),
+                  ),
+                  Text(
+                    "F",
+                    style: TextStyle(
+                      fontSize: utils.fitScreenSize(_height, 0.06),
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
                   new InkWell(
                     child: Text(
-                      "D dummy 1",
+                      "Failure to Foresee Potential Problems",
                       style: TextStyle(
                         fontSize: utils.fitScreenSize(_height, 0.03),
                         fontWeight: FontWeight.w500,
                         color: utils.hexToColor("#3498DB"),
                       ),
-                      textAlign: TextAlign.start,
                     ),
                     onTap: () {},
                   ),
                   new Divider(
                     color: utils.hexToColor("#000000"),
                   ),
+                   Text(
+                    "G",
+                    style: TextStyle(
+                      fontSize: utils.fitScreenSize(_height, 0.06),
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                    new Divider(
+                    color: utils.hexToColor("#000000"),
+                  ),
+                   Text(
+                    "H",
+                    style: TextStyle(
+                      fontSize: utils.fitScreenSize(_height, 0.06),
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                    new Divider(
+                    color: utils.hexToColor("#000000"),
+                  ),
+                   Text(
+                    "I",
+                    style: TextStyle(
+                      fontSize: utils.fitScreenSize(_height, 0.06),
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                    new Divider(
+                    color: utils.hexToColor("#000000"),
+                  ),
+                   Text(
+                    "J",
+                    style: TextStyle(
+                      fontSize: utils.fitScreenSize(_height, 0.06),
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                    new Divider(
+                    color: utils.hexToColor("#000000"),
+                  ),
+                   Text(
+                    "K",
+                    style: TextStyle(
+                      fontSize: utils.fitScreenSize(_height, 0.06),
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                    new Divider(
+                    color: utils.hexToColor("#000000"),
+                  ),
+                  Text(
+                    "L",
+                    style: TextStyle(
+                      fontSize: utils.fitScreenSize(_height, 0.06),
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
                   new InkWell(
                     child: Text(
-                      "D dummy 2",
+                      "Lack Of Internal And External Support For Project",
                       style: TextStyle(
                         fontSize: utils.fitScreenSize(_height, 0.03),
                         fontWeight: FontWeight.w500,
                         color: utils.hexToColor("#3498DB"),
                       ),
-                      textAlign: TextAlign.start,
                     ),
                     onTap: () {},
                   ),
                   new Divider(
                     color: utils.hexToColor("#000000"),
                   ),
+                   Text(
+                    "M",
+                    style: TextStyle(
+                      fontSize: utils.fitScreenSize(_height, 0.06),
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                    new Divider(
+                    color: utils.hexToColor("#000000"),
+                  ),
+                   Text(
+                    "N",
+                    style: TextStyle(
+                      fontSize: utils.fitScreenSize(_height, 0.06),
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                    new Divider(
+                    color: utils.hexToColor("#000000"),
+                  ),
+                  Text(
+                    "O",
+                    style: TextStyle(
+                      fontSize: utils.fitScreenSize(_height, 0.06),
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
                   new InkWell(
                     child: Text(
-                      "D dummy 3",
+                      "Organizational Performance Isn't Improving",
                       style: TextStyle(
                         fontSize: utils.fitScreenSize(_height, 0.03),
                         fontWeight: FontWeight.w500,
@@ -279,7 +274,7 @@ class ListCeremonies extends StatelessWidget {
                     color: utils.hexToColor("#000000"),
                   ),
                   Text(
-                    "E",
+                    "P",
                     style: TextStyle(
                       fontSize: utils.fitScreenSize(_height, 0.06),
                       fontWeight: FontWeight.w500,
@@ -287,54 +282,250 @@ class ListCeremonies extends StatelessWidget {
                   ),
                   new InkWell(
                     child: Text(
-                      "C dummy 1",
+                      "Poor Project Communication",
                       style: TextStyle(
                         fontSize: utils.fitScreenSize(_height, 0.03),
                         fontWeight: FontWeight.w500,
                         color: utils.hexToColor("#3498DB"),
                       ),
+                      textAlign: TextAlign.start,
                     ),
                     onTap: () {},
                   ),
-                  new Divider(
+                   new Divider(
                     color: utils.hexToColor("#000000"),
                   ),
                   new InkWell(
                     child: Text(
-                      "C dummy 2",
+                      "Projects Do Not Get Delivered On Schedule",
                       style: TextStyle(
                         fontSize: utils.fitScreenSize(_height, 0.03),
                         fontWeight: FontWeight.w500,
                         color: utils.hexToColor("#3498DB"),
                       ),
+                      textAlign: TextAlign.start,
                     ),
                     onTap: () {},
                   ),
-                  new Divider(
+                   new Divider(
                     color: utils.hexToColor("#000000"),
                   ),
                   new InkWell(
                     child: Text(
-                      "C dummy 3",
+                      "Project Estimates Are Unrealistice or Unknown",
                       style: TextStyle(
                         fontSize: utils.fitScreenSize(_height, 0.03),
                         fontWeight: FontWeight.w500,
                         color: utils.hexToColor("#3498DB"),
                       ),
+                      textAlign: TextAlign.start,
                     ),
                     onTap: () {},
                   ),
-                  new Divider(
+                   new Divider(
                     color: utils.hexToColor("#000000"),
                   ),
-
+                  new InkWell(
+                    child: Text(
+                      "Project Information Isn't Available When Needed",
+                      style: TextStyle(
+                        fontSize: utils.fitScreenSize(_height, 0.03),
+                        fontWeight: FontWeight.w500,
+                        color: utils.hexToColor("#3498DB"),
+                      ),
+                      textAlign: TextAlign.start,
+                    ),
+                    onTap: () {},
+                  ),
+                   new Divider(
+                    color: utils.hexToColor("#000000"),
+                  ),
+                  new InkWell(
+                    child: Text(
+                      "Project Team Member Training Is Inadequate For The Task",
+                      style: TextStyle(
+                        fontSize: utils.fitScreenSize(_height, 0.03),
+                        fontWeight: FontWeight.w500,
+                        color: utils.hexToColor("#3498DB"),
+                      ),
+                      textAlign: TextAlign.start,
+                    ),
+                    onTap: () {},
+                  ),
+                   new Divider(
+                    color: utils.hexToColor("#000000"),
+                  ),
+                  new InkWell(
+                    child: Text(
+                      "Project Team Responsibilities Are Not Clear",
+                      style: TextStyle(
+                        fontSize: utils.fitScreenSize(_height, 0.03),
+                        fontWeight: FontWeight.w500,
+                        color: utils.hexToColor("#3498DB"),
+                      ),
+                      textAlign: TextAlign.start,
+                    ),
+                    onTap: () {},
+                  ),
+                   new Divider(
+                    color: utils.hexToColor("#000000"),
+                  ),
+                   Text(
+                    "Q",
+                    style: TextStyle(
+                      fontSize: utils.fitScreenSize(_height, 0.06),
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                    new Divider(
+                    color: utils.hexToColor("#000000"),
+                  ),
+                  Text(
+                    "R",
+                    style: TextStyle(
+                      fontSize: utils.fitScreenSize(_height, 0.06),
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  new InkWell(
+                    child: Text(
+                      "Requirements Are Always Changing",
+                      style: TextStyle(
+                        fontSize: utils.fitScreenSize(_height, 0.03),
+                        fontWeight: FontWeight.w500,
+                        color: utils.hexToColor("#3498DB"),
+                      ),
+                      textAlign: TextAlign.start,
+                    ),
+                    onTap: () {},
+                  ),
+                   new Divider(
+                    color: utils.hexToColor("#000000"),
+                  ),
+                  new InkWell(
+                    child: Text(
+                      "Requirements Are Vague or Open-ended",
+                      style: TextStyle(
+                        fontSize: utils.fitScreenSize(_height, 0.03),
+                        fontWeight: FontWeight.w500,
+                        color: utils.hexToColor("#3498DB"),
+                      ),
+                      textAlign: TextAlign.start,
+                    ),
+                    onTap: () {},
+                  ),
+                   new Divider(
+                    color: utils.hexToColor("#000000"),
+                  ),
+                   Text(
+                    "S",
+                    style: TextStyle(
+                      fontSize: utils.fitScreenSize(_height, 0.06),
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                    new Divider(
+                    color: utils.hexToColor("#000000"),
+                  ),
+                  Text(
+                    "T",
+                    style: TextStyle(
+                      fontSize: utils.fitScreenSize(_height, 0.06),
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                   new InkWell(
+                    child: Text(
+                      "There Are Too Many Bugs During A Project Or Post-Project",
+                      style: TextStyle(
+                        fontSize: utils.fitScreenSize(_height, 0.03),
+                        fontWeight: FontWeight.w500,
+                        color: utils.hexToColor("#3498DB"),
+                      ),
+                      textAlign: TextAlign.start,
+                    ),
+                    onTap: () {},
+                  ),
+                   new Divider(
+                    color: utils.hexToColor("#000000"),
+                  ),
+                  Text(
+                    "U",
+                    style: TextStyle(
+                      fontSize: utils.fitScreenSize(_height, 0.06),
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                   new InkWell(
+                    child: Text(
+                      "Unable To Secure or Retain Project Resources",
+                      style: TextStyle(
+                        fontSize: utils.fitScreenSize(_height, 0.03),
+                        fontWeight: FontWeight.w500,
+                        color: utils.hexToColor("#3498DB"),
+                      ),
+                      textAlign: TextAlign.start,
+                    ),
+                    onTap: () {},
+                  ),
+                   new Divider(
+                    color: utils.hexToColor("#000000"),
+                  ),
+                   Text(
+                    "V",
+                    style: TextStyle(
+                      fontSize: utils.fitScreenSize(_height, 0.06),
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                    new Divider(
+                    color: utils.hexToColor("#000000"),
+                  ), Text(
+                    "W",
+                    style: TextStyle(
+                      fontSize: utils.fitScreenSize(_height, 0.06),
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                    new Divider(
+                    color: utils.hexToColor("#000000"),
+                  ),
+                   Text(
+                    "X",
+                    style: TextStyle(
+                      fontSize: utils.fitScreenSize(_height, 0.06),
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                    new Divider(
+                    color: utils.hexToColor("#000000"),
+                  ),
+                   Text(
+                    "Y",
+                    style: TextStyle(
+                      fontSize: utils.fitScreenSize(_height, 0.06),
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                    new Divider(
+                    color: utils.hexToColor("#000000"),
+                  ),
+                   Text(
+                    "Z",
+                    style: TextStyle(
+                      fontSize: utils.fitScreenSize(_height, 0.06),
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                    new Divider(
+                    color: utils.hexToColor("#000000"),
+                  ),
                 ],
               ),
             )
           ],
         )
       ),
-      drawer: utils.defaultDrawer(context),
     );
   }
 }
