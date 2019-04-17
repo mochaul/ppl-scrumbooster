@@ -63,9 +63,21 @@ class GetCeremonyAndProblemByPhase(views.APIView):
                         status=status.HTTP_200_OK)
 
 
-class GetListCeremonyAlphabeticOrder(views.APIView):
-    pass
+class GetListCeremonyAlphabeticalOrder(views.APIView):
+    def get(self, request):
+        response = get_list_data_alphabetical_order(request, models.Ceremony, serializers.CeremonySerializer)
+        return Response(response, status=status.HTTP_200_OK)
 
+class GetListProblemAlphabeticalOrder(views.APIView):
+    def get(self, request):
+        response = get_list_data_alphabetical_order(request, models.Problem, serializers.ProblemSerializer)
+        return Response(response, status=status.HTTP_200_OK)
 
-class GetListProblemAlphabeticOrder(views.APIView):
-    pass
+def get_list_data_alphabetical_order(request, model_class, serializer_class):
+    dct = {}
+    for i in string.ascii_lowercase:
+        objects = model_class.objects.filter(title__startswith=i)
+        objects_serializer = serializer_class(objects, many=True, context={'request': request})
+        dct[i] = objects_serializer.data
+
+    return dct
