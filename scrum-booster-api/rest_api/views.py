@@ -15,9 +15,9 @@ class ProcessAreaViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = serializers.ProcessAreaSerializer
 
 
-class GoalViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = models.Goal.objects.all()
-    serializer_class = serializers.GoalSerializer
+# class GoalViewSet(viewsets.ReadOnlyModelViewSet):
+#     queryset = models.Goal.objects.all()
+#     serializer_class = serializers.GoalSerializer
 
 
 class CMMIPracticesViewSet(viewsets.ReadOnlyModelViewSet):
@@ -43,6 +43,7 @@ class GlossaryViewSet(viewsets.ReadOnlyModelViewSet):
 class QuizQuestionViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = models.QuizQuestion.objects.all()
     serializer_class = serializers.QuizQuestionSerializer
+
 
 class GetCeremonyAndProblemByPhase(views.APIView):
     def get(self, request, id):
