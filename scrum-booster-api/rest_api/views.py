@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework import viewsets
 from . import serializers, models
-from rest_framework import views, status
+from rest_framework import views, status, filters
 from rest_framework.response import Response
 import string
 
@@ -9,11 +9,15 @@ import string
 class PhaseViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = models.Phase.objects.all()
     serializer_class = serializers.PhaseSerializer
+    filter_backends = (filters.SearchFilter,)
+    search_fields = ('title',)
 
 
 class ProcessAreaViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = models.ProcessArea.objects.all()
     serializer_class = serializers.ProcessAreaSerializer
+    filter_backends = (filters.SearchFilter,)
+    search_fields = ('title',)
 
 
 # class GoalViewSet(viewsets.ReadOnlyModelViewSet):
@@ -24,21 +28,29 @@ class ProcessAreaViewSet(viewsets.ReadOnlyModelViewSet):
 class CMMIPracticesViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = models.CMMIPractices.objects.all()
     serializer_class = serializers.CMMIPracticesSerializer
+    filter_backends = (filters.SearchFilter,)
+    search_fields = ('title',)
 
 
 class CeremonyViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = models.Ceremony.objects.all()
     serializer_class = serializers.CeremonySerializer
+    filter_backends = (filters.SearchFilter,)
+    search_fields = ('title',)
 
 
 class ProblemViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = models.Problem.objects.all()
     serializer_class = serializers.ProblemSerializer
+    filter_backends = (filters.SearchFilter,)
+    search_fields = ('title',)
 
 
 class GlossaryViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = models.Glossary.objects.all()
     serializer_class = serializers.GlossarySerializer
+    filter_backends = (filters.SearchFilter,)
+    search_fields = ('name',)
 
 
 class QuizQuestionViewSet(viewsets.ReadOnlyModelViewSet):

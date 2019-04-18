@@ -85,6 +85,54 @@ class ScrumBoosterTest(APITestCase):
         response = self.client.get(reverse("phase-ceremony-problem", args=[self.phase_test.id]))
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
+    def test_search_on_phase_exists(self):
+        response = self.client.get(reverse("phase-list"), {"search": "test"})
+        self.assertNotEqual(response.data, [])
+
+    def test_search_on_phase_works(self):
+        response = self.client.get(reverse("phase-list"), {"search": "wrong title"})
+        self.assertEqual(response.data, [])
+
+    def test_search_on_ceremony_exists(self):
+        response = self.client.get(reverse("ceremony-list"), {"search": "test"})
+        self.assertNotEqual(response.data, [])
+
+    def test_search_on_ceremony_works(self):
+        response = self.client.get(reverse("ceremony-list"), {"search": "wrong title"})
+        self.assertEqual(response.data, [])
+
+    def test_search_on_process_area_exists(self):
+        response = self.client.get(reverse("process-area-list"), {"search": "test"})
+        self.assertNotEqual(response.data, [])
+
+    def test_search_on_process_area_works(self):
+        response = self.client.get(reverse("process-area-list"), {"search": "wrong title"})
+        self.assertEqual(response.data, [])
+
+    def test_search_on_cmmi_practices_exists(self):
+        response = self.client.get(reverse("cmmi-practices-list"), {"search": "test"})
+        self.assertNotEqual(response.data, [])
+
+    def test_search_on_cmmi_practices_works(self):
+        response = self.client.get(reverse("cmmi-practices-list"), {"search": "wrong title"})
+        self.assertEqual(response.data, [])
+
+    def test_search_on_problem_exists(self):
+        response = self.client.get(reverse("problem-list"), {"search": "test"})
+        self.assertNotEqual(response.data, [])
+
+    def test_search_on_problem_works(self):
+        response = self.client.get(reverse("problem-list"), {"search": "wrong title"})
+        self.assertEqual(response.data, [])
+
+    def test_search_on_glossary_exists(self):
+        response = self.client.get(reverse("glossary-list"), {"search": "test"})
+        self.assertNotEqual(response.data, [])
+
+    def test_search_on_glossary_works(self):
+        response = self.client.get(reverse("glossary-list"), {"search": "wrong title"})
+        self.assertEqual(response.data, [])
+
     def test_get_ceremony_and_problem_by_phase_can_handle_error(self):
         response = self.client.get(reverse("phase-ceremony-problem", args=[0]))
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
