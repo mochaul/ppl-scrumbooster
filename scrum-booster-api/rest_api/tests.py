@@ -132,3 +132,15 @@ class ScrumBoosterTest(APITestCase):
     def test_search_on_glossary_works(self):
         response = self.client.get(reverse("glossary-list"), {"search": "wrong title"})
         self.assertEqual(response.data, [])
+
+    def test_get_ceremony_and_problem_by_phase_can_handle_error(self):
+        response = self.client.get(reverse("phase-ceremony-problem", args=[0]))
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+    def test_get_list_ceremony_alphabetic_order_exists(self):
+        response = self.client.get(reverse("ceremony-list-alphabetic"))
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    def test_get_list_problem_alphabetic_order_exists(self):
+        response = self.client.get(reverse("problem-list-alphabetic"))
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
