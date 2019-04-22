@@ -1,28 +1,194 @@
 import 'package:flutter/material.dart';
 import 'package:ScrumBooster/Utils/utils.dart';
+import 'package:ScrumBooster/contents/problems.dart';
 
-class ListProblems extends StatelessWidget {
+import 'package:ScrumBooster/contentsList/ListProblems/ApiProvider.dart';
+import 'package:ScrumBooster/contentsList/ListProblems/Model.dart';
+
+import 'dart:async';
+import 'package:ScrumBooster/components/loading/loadingData.dart';
+
+_ListProblemsState _listProblemsState;
+class ListProblems extends StatefulWidget {
+
+  final ListProblemsApiProvider apiProvider;
+  final util = new Util();
+  List<Widget> listView = [new Container(),];
+
+  ListProblemsModel listProblemsModel;
+  Map<String, dynamic> listProblemsDataAlphabeticJSON;
+
+  ListProblems({
+    Key key,
+    this.apiProvider,
+  }) : super(key: key);
+
+  @override
+  _ListProblemsState createState() {
+    _listProblemsState = new _ListProblemsState();
+    return _listProblemsState;
+  }
+}
+
+class _ListProblemsState extends State<ListProblems> {
+
+  final util = new Util();
+
   final scaffoldKey = GlobalKey<ScaffoldState>();
-
   getScaffoldKey() {
     return scaffoldKey;
   }
 
-  var utils = new Util();
+  double loading = 0.0;
+  int contentCount;
+
+  Future<Null> refresh() async {
+    await loadListProblems(true);
+    return null;
+  }
+
+  Future<Null> loadListProblems(bool refresh) async {
+    final listProblemsApiProvider = widget.apiProvider == null
+        ? new ListProblemsApiProvider()
+        : widget.apiProvider;
+    widget.listView = [];
+
+    final _height = MediaQuery.of(context).size.height;
+    final _width = MediaQuery.of(context).size.width;
+
+    if (!refresh) {
+      _listProblemsState.setState(() {
+        loading = _height;
+      });
+    }
+
+    //Fetch details from API
+    await listProblemsApiProvider.fetchPosts();
+
+    widget.listProblemsModel = listProblemsApiProvider.getModel();
+
+    //Get Details
+    widget.listProblemsDataAlphabeticJSON = listProblemsApiProvider.getDictProblemsAlphabetic();
+    _listProblemsState.setState(() {
+      contentCount = widget.listProblemsDataAlphabeticJSON.length;
+    });
+
+    List<Widget> listView = widget.listView;
+    widget.listView = [];
+
+    List<Widget> contentsList = [];
+
+    for (String alphabet in widget.listProblemsDataAlphabeticJSON.keys) {
+      print(alphabet);
+      contentsList.add(
+        Text(
+          alphabet.toUpperCase(),
+          style: TextStyle(
+            fontSize: util.fitScreenSize(_height, 0.06),
+            fontWeight: FontWeight.w500,
+          ),
+        ),
+      );
+      contentsList.add(
+        Divider(
+          color: util.hexToColor("#000000"),
+          height: 10.0,
+        ),
+      );
+      for (ProblemItem data in widget.listProblemsDataAlphabeticJSON[alphabet]) {
+        contentsList.add(
+          new InkWell(
+            child: Container(
+              width: util.fitScreenSize(_width, 0.8),
+              child: Text(
+                data.title,
+                style: TextStyle(
+                  fontSize: util.fitScreenSize(_height, 0.03),
+                  fontWeight: FontWeight.w500,
+                  color: util.hexToColor("#3498DB"),
+                ),
+              ),
+            ),
+            onTap: () {
+              Navigator.of(context).push(
+                  new MaterialPageRoute(
+                      builder: (context) => ProblemsContentPage(
+                        imagePath: data.image,
+                        title: data.title,
+                        contents: data.detail,
+                      )
+                  )
+              );
+            },
+          ),
+        );
+        contentsList.add(
+          Divider(
+            color: util.hexToColor("#000000"),
+            height: 10.0,
+          ),
+        );
+      }
+    }
+
+    listView.add(
+      new Column(
+        children: <Widget>[
+          Padding(
+            padding: EdgeInsets.all(10.0),
+          ),
+          Text(
+            "PROBLEMS",
+            style: TextStyle(
+              fontSize: util.fitScreenSize(_height, 0.04),
+              fontWeight: FontWeight.bold,
+            ),
+            textAlign: TextAlign.center,
+          ),
+          new Padding(
+            padding: EdgeInsets.all(15.0),
+          ),
+          Image.asset(
+            "assets/listProblems/problems.png",
+            height: util.fitScreenSize(_height, 0.3),
+            width: util.fitScreenSize(_width, 0.3),
+          ),
+          new Padding(
+            padding: EdgeInsets.all(20.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: contentsList,
+            ),
+          ),
+        ],
+      ),
+    );
+
+    widget.listView.addAll(listView);
+
+    _listProblemsState.setState(() {
+      loading = 0.0;
+    });
+  }
+
+  @override
+  void didChangeDependencies() {
+    if (widget.listView.length == 1) {
+      loadListProblems(false);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-    double _height = MediaQuery.of(context).size.height;
-    double _width = MediaQuery.of(context).size.width;
-
     return Scaffold(
-      drawer: utils.defaultDrawer(context),
+      drawer: util.defaultDrawer(context),
       key: scaffoldKey,
       appBar: AppBar(
         leading: new InkWell(
           child: new Icon(
             Icons.menu,
-            color: utils.hexToColor("#FFFFFF"),
+            color: util.hexToColor("#FFFFFF"),
           ),
           onTap: () {
             scaffoldKey.currentState.openDrawer();
@@ -34,7 +200,7 @@ class ListProblems extends StatelessWidget {
           style: TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.bold,
-            color: utils.hexToColor("#FFFFFF"),
+            color: util.hexToColor("#FFFFFF"),
           ),
         ),
         actions: <Widget>[
@@ -43,246 +209,28 @@ class ListProblems extends StatelessWidget {
             child: new InkWell(
               child: new Icon(
                 Icons.search,
-                color: utils.hexToColor("#FFFFFF"),
+                color: util.hexToColor("#FFFFFF"),
               ),
               onTap: () {},
             ),
           ),
         ],
       ),
-      body: Center(
-        child: ListView(
-          children: <Widget>[
-            Padding(
-              padding: EdgeInsets.all(10),
-            ),
-            Text(
-              "PROBLEMS",
-              style: TextStyle(
-                fontSize: utils.fitScreenSize(_height, 0.04),
-                fontWeight: FontWeight.bold,
+      body: Stack(
+        children: <Widget>[
+          new Container(
+            child: new RefreshIndicator(
+              child: new ListView(
+                children: widget.listView,
               ),
-              textAlign: TextAlign.center,
+              onRefresh: refresh,
             ),
-            new Padding(
-              padding: EdgeInsets.all(15.0),
-            ),
-            Image.asset(
-              "assets/listProblems/problems.png",
-              height: utils.fitScreenSize(_height, 0.3),
-              width: utils.fitScreenSize(_width, 0.3),
-            ),
-            Container(
-              padding: EdgeInsets.all(20),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Text(
-                    "A",
-                    style: TextStyle(
-                      fontSize: utils.fitScreenSize(_height, 0.06),
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  new InkWell(
-                    child: Text(
-                      "A dummy 1",
-                      style: TextStyle(
-                        fontSize: utils.fitScreenSize(_height, 0.03),
-                        fontWeight: FontWeight.w500,
-                        color: utils.hexToColor("#3498DB"),
-                      ),
-                    ),
-                    onTap: () {},
-                  ),
-                  new Divider(
-                    color: utils.hexToColor("#000000"),
-                  ),
-                  new InkWell(
-                    child: Text(
-                      "A dummy 2",
-                      style: TextStyle(
-                        fontSize: utils.fitScreenSize(_height, 0.03),
-                        fontWeight: FontWeight.w500,
-                        color: utils.hexToColor("#3498DB"),
-                      ),
-                    ),
-                    onTap: () {},
-                  ),
-                  new Divider(
-                    color: utils.hexToColor("#000000"),
-                  ),
-                  new InkWell(
-                    child: Text(
-                      "A dummy 3",
-                      style: TextStyle(
-                        fontSize: utils.fitScreenSize(_height, 0.03),
-                        fontWeight: FontWeight.w500,
-                        color: utils.hexToColor("#3498DB"),
-                      ),
-                    ),
-                    onTap: () {},
-                  ),
-                  new Divider(
-                    color: utils.hexToColor("#000000"),
-                  ),
-                  Text(
-                    "B",
-                    style: TextStyle(
-                      fontSize: utils.fitScreenSize(_height, 0.06),
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  new InkWell(
-                    child: Text(
-                      "B dummy 1",
-                      style: TextStyle(
-                        fontSize: utils.fitScreenSize(_height, 0.03),
-                        fontWeight: FontWeight.w500,
-                        color: utils.hexToColor("#3498DB"),
-                      ),
-                    ),
-                    onTap: () {},
-                  ),
-                  new Divider(
-                    color: utils.hexToColor("#000000"),
-                  ),
-                  new InkWell(
-                    child: Text(
-                      "B dummy 2",
-                      style: TextStyle(
-                        fontSize: utils.fitScreenSize(_height, 0.03),
-                        fontWeight: FontWeight.w500,
-                        color: utils.hexToColor("#3498DB"),
-                      ),
-                    ),
-                    onTap: () {},
-                  ),
-                  new Divider(
-                    color: utils.hexToColor("#000000"),
-                  ),
-                  new InkWell(
-                    child: Text(
-                      "B dummy 3",
-                      style: TextStyle(
-                        fontSize: utils.fitScreenSize(_height, 0.03),
-                        fontWeight: FontWeight.w500,
-                        color: utils.hexToColor("#3498DB"),
-                      ),
-                    ),
-                    onTap: () {},
-                  ),
-                  new Divider(
-                    color: utils.hexToColor("#000000"),
-                  ),
-                  Text(
-                    "C",
-                    style: TextStyle(
-                      fontSize: utils.fitScreenSize(_height, 0.06),
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  new InkWell(
-                    child: Text(
-                      "C dummy 1",
-                      style: TextStyle(
-                        fontSize: utils.fitScreenSize(_height, 0.03),
-                        fontWeight: FontWeight.w500,
-                        color: utils.hexToColor("#3498DB"),
-                      ),
-                    ),
-                    onTap: () {},
-                  ),
-                  new Divider(
-                    color: utils.hexToColor("#000000"),
-                  ),
-                  new InkWell(
-                    child: Text(
-                      "C dummy 2",
-                      style: TextStyle(
-                        fontSize: utils.fitScreenSize(_height, 0.03),
-                        fontWeight: FontWeight.w500,
-                        color: utils.hexToColor("#3498DB"),
-                      ),
-                    ),
-                    onTap: () {},
-                  ),
-                  new Divider(
-                    color: utils.hexToColor("#000000"),
-                  ),
-                  new InkWell(
-                    child: Text(
-                      "C dummy 3",
-                      style: TextStyle(
-                        fontSize: utils.fitScreenSize(_height, 0.03),
-                        fontWeight: FontWeight.w500,
-                        color: utils.hexToColor("#3498DB"),
-                      ),
-                    ),
-                    onTap: () {},
-                  ),
-                  new Divider(
-                    color: utils.hexToColor("#000000"),
-                  ),
-
-                  Text(
-                    "D",
-                    style: TextStyle(
-                      fontSize: utils.fitScreenSize(_height, 0.06),
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                  new InkWell(
-                    child: Text(
-                      "D dummy 1",
-                      style: TextStyle(
-                        fontSize: utils.fitScreenSize(_height, 0.03),
-                        fontWeight: FontWeight.w500,
-                        color: utils.hexToColor("#3498DB"),
-                      ),
-                      textAlign: TextAlign.start,
-                    ),
-                    onTap: () {},
-                  ),
-                  new Divider(
-                    color: utils.hexToColor("#000000"),
-                  ),
-                  new InkWell(
-                    child: Text(
-                      "D dummy 2",
-                      style: TextStyle(
-                        fontSize: utils.fitScreenSize(_height, 0.03),
-                        fontWeight: FontWeight.w500,
-                        color: utils.hexToColor("#3498DB"),
-                      ),
-                      textAlign: TextAlign.start,
-                    ),
-                    onTap: () {},
-                  ),
-                  new Divider(
-                    color: utils.hexToColor("#000000"),
-                  ),
-                  new InkWell(
-                    child: Text(
-                      "D dummy 3",
-                      style: TextStyle(
-                        fontSize: utils.fitScreenSize(_height, 0.03),
-                        fontWeight: FontWeight.w500,
-                        color: utils.hexToColor("#3498DB"),
-                      ),
-                      textAlign: TextAlign.start,
-                    ),
-                    onTap: () {},
-                  ),
-                  new Divider(
-                    color: utils.hexToColor("#000000"),
-                  ),
-                ],
-              ),
-            )
-          ],
-        )
+          ),
+          new LoadingData(
+            key: Key("Loading Data"),
+            height: loading,
+          ),
+        ],
       ),
     );
   }

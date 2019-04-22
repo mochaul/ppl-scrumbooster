@@ -68,7 +68,7 @@ class _ListCeremoniesState extends State<ListCeremonies> {
     widget.listCeremoniesModel = listCeremoniesApiProvider.getModel();
 
     //Get Details
-    widget.listCeremoniesDataAlphabeticJSON = listCeremoniesApiProvider.getDictCeremoniesAlphabetic();
+    widget.listCeremoniesDataAlphabeticJSON = listCeremoniesApiProvider.getDictProblemsAlphabetic();
     _listCeremoniesState.setState(() {
       contentCount = widget.listCeremoniesDataAlphabeticJSON.length;
     });
@@ -95,7 +95,7 @@ class _ListCeremoniesState extends State<ListCeremonies> {
           height: 10.0,
         ),
       );
-      for (CeremonyItem data in widget.listCeremoniesDataAlphabeticJSON[alphabet]) {
+      for (ProblemItem data in widget.listCeremoniesDataAlphabeticJSON[alphabet]) {
         contentsList.add(
           new InkWell(
             child: Container(

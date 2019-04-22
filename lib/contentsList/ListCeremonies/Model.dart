@@ -1,30 +1,30 @@
 class ListCeremoniesModel {
   
-  Map<String, List<CeremonyItem>> _dictCeremoniesAlphabetic = {};
+  Map<String, List<ProblemItem>> _dictCeremoniesAlphabetic = {};
 
   ListCeremoniesModel.fromJson(Map<String, dynamic> parsedJson) {
     for (var key in parsedJson.keys) {
       var lstData = parsedJson[key];
-      List<CeremonyItem> listObj = [];
+      List<ProblemItem> listObj = [];
       for (var data in lstData) {
-        listObj.add(CeremonyItem.fromJson(data));
+        listObj.add(ProblemItem.fromJson(data));
       }
       _dictCeremoniesAlphabetic[key] = listObj;
     }
   }
 
-  Map<String, List<CeremonyItem>> get dictCeremoniesAlphabetic => _dictCeremoniesAlphabetic;
+  Map<String, List<ProblemItem>> get dictCeremoniesAlphabetic => _dictCeremoniesAlphabetic;
   
 }
 
-class CeremonyItem {
+class ProblemItem {
   int _id;
   String _title;
   String _detail;
   String _image;
   int _phase;
 
-  CeremonyItem.fromJson(Map<String, dynamic> parsedJson) {
+  ProblemItem.fromJson(Map<String, dynamic> parsedJson) {
     _id = parsedJson['id'];
     _title = parsedJson['title'];
     _detail = parsedJson['detail'];
