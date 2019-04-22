@@ -26,7 +26,7 @@ class ListCeremoniesApiProvider {
       }
     }
   }
-
+  
   List<CeremonyAlphabet> getCeremonyItemModel() {
     return ceremonyAlphabeticModels;
   }
