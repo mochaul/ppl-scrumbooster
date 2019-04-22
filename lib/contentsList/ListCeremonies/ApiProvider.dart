@@ -25,7 +25,6 @@ class ListCeremoniesApiProvider {
         ceremonyAlphabeticModels.add(CeremonyAlphabet.fromJson(model.listCeremoniesAlphabetic[i][j]));
       }
     }
- 
   }
 
   List<CeremonyAlphabet> getCeremonyItemModel() {
