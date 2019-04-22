@@ -1,11 +1,13 @@
 class ListProblemsModel {
-  List<dynamic> _problems;
+  List<dynamic> _listProblemsAlphabetic;
 
   ListProblemsModel.fromJson(Map<String, dynamic> parsedJson) {
-      _problems = parsedJson['problems'];
+      for(var alphabets in parsedJson.keys){
+        _listProblemsAlphabetic.add(alphabets);
+      }
   }
 
-  List<dynamic> get problems => _problems;
+  List<dynamic> get listProblemsAplhabetic => _listProblemsAlphabetic;
 
 }
 
