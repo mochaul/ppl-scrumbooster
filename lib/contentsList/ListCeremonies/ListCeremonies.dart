@@ -1,19 +1,79 @@
 import 'package:flutter/material.dart';
 import 'package:ScrumBooster/Utils/utils.dart';
-import 'package:ScrumBooster/contentList/ListCeremonies/ApiProvider.dart';
-import 'package:ScrumBooster/contentList/ListCeremonies/Model.dart';
+import 'package:ScrumBooster/contentsList/ListCeremonies/ApiProvider.dart';
+import 'package:ScrumBooster/contentsList/ListCeremonies/Model.dart';
 
 import 'dart:async';
 import 'package:ScrumBooster/components/loading/loadingData.dart';
 
-class ListCeremonies extends StatelessWidget {
-  final scaffoldKey = GlobalKey<ScaffoldState>();
+_ListCeremoniesState _listCeremoniesState;
+class ListCeremonies extends StatefulWidget {
 
+  final ListCeremoniesApiProvider apiProvider;
+  final util = new Util();
+  List<Widget> listView = [new Container(),];
+
+  List<CeremonyAlphabet> listCeremoniesDetailsDataJSON;
+  
+  ListCeremonies({
+    Key key,
+    this.apiProvider,
+  }) : super(key: key);
+  
+  @override
+  _ListCeremoniesState createState() {
+    _listCeremoniesState = new _ListCeremoniesState();
+    return _listCeremoniesState;
+  }
+}
+
+class _ListCeremoniesState extends State<ListCeremonies> {
+
+  final utils = new Util();
+  
+  final scaffoldKey = GlobalKey<ScaffoldState>();
   getScaffoldKey() {
     return scaffoldKey;
   }
 
-  var utils = new Util();
+  double loading = 0.0;
+  int contentCount;
+
+  Future<Null> refresh() async {
+    await loadListCeremonies(true);
+    return null;
+  }
+
+  Future<Null> loadListCeremonies(bool refresh) async {
+    final listCeremoniesApiProvider = widget.apiProvider == null
+      ? new ListCeremoniesApiProvider()
+      : widget.apiProvider;
+    widget.listView = [];
+
+    final _height = MediaQuery.of(context).size.height;
+    final _width = MediaQuery.of(context).size.width;
+
+    if (!refresh) {
+      _listCeremoniesState.setState(() {
+        loading = _height;
+      });
+    }
+
+    //Fetch details from API
+    await listCeremoniesApiProvider.fetchPosts();
+
+    widget.listCeremoniesDetailsDataJSON = listCeremoniesApiProvider.getCeremonyItemModel();
+    _listCeremoniesState.setState(() {
+      contentCount = widget.listCeremoniesDetailsDataJSON.length;
+    });
+
+    List<Widget> listView = widget.listView;
+    widget.listView = [];
+
+    listView.add(
+      
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
