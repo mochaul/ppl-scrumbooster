@@ -3,7 +3,7 @@ class ListProblemsModel {
 
   ListProblemsModel.fromJson(Map<String, dynamic> parsedJson) {
       for(var alphabets in parsedJson.keys){
-        _listProblemsAlphabetic.add(alphabets);
+        _listProblemsAlphabetic.add(parsedJson[alphabets]);
       }
   }
 
@@ -11,14 +11,14 @@ class ListProblemsModel {
 
 }
 
-class ProblemsItem {
+class ProblemItem {
   int _id;
   String _title;
   String _detail;
   String _image;
   List<dynamic> _enhanced;
 
-  ProblemsItem.fromJson(Map<String, dynamic> parsedJson) {
+  ProblemItem.fromJson(Map<String, dynamic> parsedJson) {
     _id = parsedJson['id'];
     _title = parsedJson['title'];
     _detail = parsedJson['detail'];
