@@ -189,6 +189,10 @@ class _SprintEvaluationState extends State<SprintEvaluation> {
   Widget generateColumn(List<dynamic> json, Function className, int length) {
     List<Widget> columnWidgetList = [];
     List<Widget> rowWidgetList = [];
+
+    double _height = MediaQuery.of(context).size.height;
+    double _width = MediaQuery.of(context).size.width;
+
     Widget column = new Column(
       children: columnWidgetList,
     );
@@ -204,7 +208,7 @@ class _SprintEvaluationState extends State<SprintEvaluation> {
         );
         columnWidgetList.add(
           new Padding(
-            padding: EdgeInsets.all(10.0),
+            padding: EdgeInsets.all(util.fitScreenSize(_height, 0.03)),
           ),
         );
         rowWidgetList = [];
