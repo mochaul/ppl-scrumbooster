@@ -1,23 +1,23 @@
 class ListCeremoniesModel {
-  List<dynamic> _listCeremoniesAlphabetic;
+  List<List<dynamic>> _listCeremoniesAlphabetic;
 
   ListCeremoniesModel.fromJson(Map<String, dynamic> parsedJson) {
-    for (var alphabets in parsedJson.keys) {
-      _listCeremoniesAlphabetic.add(alphabets);
+    for (var alphabet in parsedJson.keys) {
+      _listCeremoniesAlphabetic.add(parsedJson[alphabet]);
     }
   }
 
   List<dynamic> get listCeremoniesAlphabetic => _listCeremoniesAlphabetic;
 }
 
-class CeremonyItem {
+class CeremonyAlphabet {
   int _id;
   String _title;
   String _detail;
   String _image;
   int _phase;
 
-  CeremonyItem.fromJson(Map<String, dynamic> parsedJson) {
+  CeremonyAlphabet.fromJson(Map<String, dynamic> parsedJson) {
     _id = parsedJson['id'];
     _title = parsedJson['title'];
     _detail = parsedJson['detail'];
