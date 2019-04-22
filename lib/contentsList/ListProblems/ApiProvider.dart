@@ -3,7 +3,7 @@ import 'package:ScrumBooster/contentsList/ListProblems/Model.dart';
 import 'dart:convert';
 import 'package:ScrumBooster/Utils/utils.dart';
 
-class ProductBacklogApiProvider {
+class ListProblemsApiProvider {
   Client client = Client();
   var response;
   var util = new Util();
