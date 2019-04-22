@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:ScrumBooster/InitialScreen/HomeScreen.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'dart:convert';
-import 'package:ScrumBooster/contentsList/ListCeremonies.dart';
-import 'package:ScrumBooster/contentsList/ListProblems.dart';
-import 'package:ScrumBooster/contentsList/GlossaryPage.dart';
+import 'package:ScrumBooster/contentsList/ListCeremonies/ListCeremonies.dart';
+import 'package:ScrumBooster/contentsList/ListProblems/ListProblems.dart';
+import 'package:ScrumBooster/contentsList/ListGlossary/ListGlossary.dart';
 import 'package:ScrumBooster/InitialScreen/AboutPage.dart';
 
 class Util {

@@ -8,26 +8,24 @@ class ListCeremoniesApiProvider {
   var response;
   var util = new Util();
   ListCeremoniesModel model;
-  List<CeremonyAlphabet> ceremonyAlphabeticModels;
+  Map<String, List<CeremonyItem>> dictCeremoniesAlphabetic;
 
   fetchPosts() async {
     response = await client.get(
       util.getConfiguration()['base_url']+"ceremony/alphabetic/"
     );
-
     var jsonBody = json.decode(response.body);
 
     model = ListCeremoniesModel.fromJson(jsonBody);
+    dictCeremoniesAlphabetic = model.dictCeremoniesAlphabetic;
 
-    ceremonyAlphabeticModels = [];
-    for (int i = 0; i < model.listCeremoniesAlphabetic.length; i++) {
-      for (int j = 0; j < model.listCeremoniesAlphabetic[i].length; j++) {
-        ceremonyAlphabeticModels.add(CeremonyAlphabet.fromJson(model.listCeremoniesAlphabetic[i][j]));
-      }
-    }
+  }
+
+  ListCeremoniesModel getModel() {
+    return model;
   }
   
-  List<CeremonyAlphabet> getCeremonyItemModel() {
-    return ceremonyAlphabeticModels;
+  Map<String, List<CeremonyItem>> getDictCeremoniesAlphabetic() {
+    return dictCeremoniesAlphabetic;
   }
 }
