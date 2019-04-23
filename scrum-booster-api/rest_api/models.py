@@ -29,7 +29,7 @@ class ProcessArea(models.Model):
     related_ceremony = models.ForeignKey(Ceremony, models.CASCADE)
 
 class CMMIPractices(models.Model):
-    title = models.CharField(max_length=255, unique=True)
+    title = models.CharField(max_length=255)
     strengthens = models.CharField(max_length=2047)
     satisfy = models.CharField(max_length=2047)
     demonstrated = models.CharField(max_length=2047)
