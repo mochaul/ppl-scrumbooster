@@ -39,7 +39,7 @@ class Util {
 
   Map<String, String> getConfiguration() {
     return {
-      'base_url': "http://152.118.201.222:24100/",
+      'base_url': "http://152.118.201.222:24150/",
     }; //Staging API
   }
 
