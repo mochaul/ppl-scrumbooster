@@ -95,7 +95,7 @@ class _ListCeremoniesState extends State<ListCeremonies> {
           height: 10.0,
         ),
       );
-      for (ProblemItem data in widget.listCeremoniesDataAlphabeticJSON[alphabet]) {
+      for (CeremonyItem data in widget.listCeremoniesDataAlphabeticJSON[alphabet]) {
         contentsList.add(
           new InkWell(
             child: Container(

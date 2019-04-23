@@ -8,7 +8,7 @@ class ListCeremoniesApiProvider {
   var response;
   var util = new Util();
   ListCeremoniesModel model;
-  Map<String, List<ProblemItem>> dictCeremoniesAlphabetic;
+  Map<String, List<CeremonyItem>> dictCeremoniesAlphabetic;
 
   fetchPosts() async {
     response = await client.get(
@@ -25,7 +25,7 @@ class ListCeremoniesApiProvider {
     return model;
   }
   
-  Map<String, List<ProblemItem>> getDictProblemsAlphabetic() {
+  Map<String, List<CeremonyItem>> getDictProblemsAlphabetic() {
     return dictCeremoniesAlphabetic;
   }
 }
