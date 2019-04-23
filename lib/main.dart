@@ -42,7 +42,6 @@ class _ScrumBoosterAppState extends State<ScrumBoosterApp> {
         '/About':(BuildContext context) => new AboutPage(),
         '/Boarding':(BuildContext context) => new BoardingPage(),
         '/Glossary':(BuildContext context) => new GlossaryPage(),
-        '/SearchPage':(BuildContext context) => new SearchPage(),
       },
     );
   }
