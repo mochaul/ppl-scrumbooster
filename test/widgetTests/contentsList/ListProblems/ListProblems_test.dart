@@ -43,7 +43,7 @@ void main() {
       );
       await tester.pump();
 
-      String header1 = "CEREMONIES";
+      String header1 = "PROBLEMS";
       expect(find.text(header1), findsOneWidget);
     });
   });
@@ -55,7 +55,7 @@ void main() {
       );
       await tester.pump();
 
-      String header1 = "PROBLEMS";
+      String header1 = "CEREMONIES";
       expect(find.text(header1), findsNothing);
     });
   });
