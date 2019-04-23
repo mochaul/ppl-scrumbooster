@@ -40,7 +40,7 @@ class CMMIPractices(models.Model):
 class Problem(models.Model):
     title = models.CharField(max_length=255, unique=True)
     detail = models.CharField(max_length=2047)
-    may_be_happen_at = models.ManyToManyField(Ceremony)
+    can_be_solved_by = models.ManyToManyField(Ceremony)
     image = models.URLField()
     # can_be_solved_by_using = models.ManyToManyField(CMMIPractices, blank=True)
 
