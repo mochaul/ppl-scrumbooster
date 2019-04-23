@@ -13,6 +13,12 @@ class ListCeremonies extends StatefulWidget {
 
   final ListCeremoniesApiProvider apiProvider;
   final util = new Util();
+
+  final scaffoldKey = GlobalKey<ScaffoldState>();
+  getScaffoldKey() {
+    return scaffoldKey;
+  }
+
   List<Widget> listView = [new Container(),];
 
   ListCeremoniesModel listCeremoniesModel;
@@ -33,11 +39,6 @@ class ListCeremonies extends StatefulWidget {
 class _ListCeremoniesState extends State<ListCeremonies> {
 
   final util = new Util();
-  
-  final scaffoldKey = GlobalKey<ScaffoldState>();
-  getScaffoldKey() {
-    return scaffoldKey;
-  }
 
   double loading = 0.0;
   int contentCount;
@@ -183,7 +184,7 @@ class _ListCeremoniesState extends State<ListCeremonies> {
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: util.defaultDrawer(context),
-      key: scaffoldKey,
+      key: widget.scaffoldKey,
       appBar: AppBar(
         leading: new InkWell(
           child: new Icon(
@@ -191,7 +192,7 @@ class _ListCeremoniesState extends State<ListCeremonies> {
             color: util.hexToColor("#FFFFFF"),
           ),
           onTap: () {
-            scaffoldKey.currentState.openDrawer();
+            widget.scaffoldKey.currentState.openDrawer();
           },
         ),
         centerTitle: true,

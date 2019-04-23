@@ -13,6 +13,12 @@ class ListProblems extends StatefulWidget {
 
   final ListProblemsApiProvider apiProvider;
   final util = new Util();
+
+  final scaffoldKey = GlobalKey<ScaffoldState>();
+  getScaffoldKey() {
+    return scaffoldKey;
+  }
+
   List<Widget> listView = [new Container(),];
 
   ListProblemsModel listProblemsModel;
@@ -33,11 +39,6 @@ class ListProblems extends StatefulWidget {
 class _ListProblemsState extends State<ListProblems> {
 
   final util = new Util();
-
-  final scaffoldKey = GlobalKey<ScaffoldState>();
-  getScaffoldKey() {
-    return scaffoldKey;
-  }
 
   double loading = 0.0;
   int contentCount;
@@ -183,7 +184,7 @@ class _ListProblemsState extends State<ListProblems> {
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: util.defaultDrawer(context),
-      key: scaffoldKey,
+      key: widget.scaffoldKey,
       appBar: AppBar(
         leading: new InkWell(
           child: new Icon(
@@ -191,7 +192,7 @@ class _ListProblemsState extends State<ListProblems> {
             color: util.hexToColor("#FFFFFF"),
           ),
           onTap: () {
-            scaffoldKey.currentState.openDrawer();
+            widget.scaffoldKey.currentState.openDrawer();
           },
         ),
         centerTitle: true,
