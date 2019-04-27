@@ -243,31 +243,6 @@ class Util {
             }, //TODO: Implement fungsi buat callback kalo mencet Glossary di drawer
           ),
           ListTile(
-            key: new Key("Pop Quiz!"),
-            title: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                new Icon(
-                  Icons.question_answer,
-                  color: hexToColor("#979797"),
-                ),
-                new Padding(
-                  padding: EdgeInsets.all(10.0),
-                ),
-                new Text(
-                  "Pop Quiz!",
-                  style: TextStyle(
-                    color: hexToColor("#979797"),
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20.0,
-                  ),
-                ),
-              ],
-            ),
-            onTap: () {}, //TODO: Implement fungsi buat callback kalo mencet Pop Quiz di drawer
-          ),
-          ListTile(
             key: new Key("About"),
             title: Row(
               mainAxisAlignment: MainAxisAlignment.start,
