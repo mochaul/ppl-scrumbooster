@@ -303,6 +303,7 @@ class _SprintExecutionState extends State<SprintExecution> {
           ),
         ],
       ),
+      drawer: util.defaultDrawer(context),
     );
   }
 }
