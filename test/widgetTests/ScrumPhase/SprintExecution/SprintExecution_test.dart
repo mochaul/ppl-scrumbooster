@@ -15,7 +15,7 @@ void main() {
 
   //Test Mocking Initialization
   widgetTestingApiProvider.client = MockClient((request) async {
-    final mapJSON = util.getDummyJSONFile();
+    final mapJSON = util.getDummyJSONCeremoniesAndProblems();
     return Response(json.encode(mapJSON), 200);
   });
 

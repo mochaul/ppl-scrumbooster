@@ -5,6 +5,7 @@ import 'package:ScrumBooster/ScrumPhase/ProductBacklog/ProductBacklog.dart';
 import 'package:ScrumBooster/ScrumPhase/SprintEvaluation/SprintEvaluation.dart';
 import 'package:ScrumBooster/ScrumPhase/SprintExecution/SprintExecution.dart';
 import 'package:ScrumBooster/ScrumPhase/SprintPlanning/SprintPlanning.dart';
+import 'package:ScrumBooster/search/SearchPage.dart';
 
 class HomePage extends StatelessWidget {
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -18,7 +19,14 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double _height = MediaQuery.of(context).size.height;
-
+    void _searchpage() {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => SearchPage()
+        ),
+      );
+    }
     return Scaffold(
       key: scaffoldKey,
       appBar: AppBar(
@@ -47,7 +55,7 @@ class HomePage extends StatelessWidget {
                 Icons.search,
                 color: util.hexToColor("#FFFFFF"),
               ),
-              onTap: () => {},
+              onTap: _searchpage,
             ),
           ),
         ],
