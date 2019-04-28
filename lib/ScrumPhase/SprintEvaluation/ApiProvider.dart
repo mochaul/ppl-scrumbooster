@@ -13,9 +13,13 @@ class SprintEvaluationApiProvider {
   List<ProblemItem> problemItemModels;
 
   fetchPosts() async {
-    response = await client.get(
-      util.getConfiguration()['base_url']+"phase/$PHASE_ID/details"
-    );
+    try {
+      response = await client.get(
+          util.getConfiguration()['base_url']+"phase/$PHASE_ID/details"
+      );
+    } catch (e) {
+      print("API isn't available");
+    }
 
     var jsonBody = json.decode(response.body);
 

@@ -32,8 +32,8 @@ class ScrumPhaseContentBtn extends StatelessWidget {
           padding: EdgeInsets.all(10.0),
         ),
         new Container(
-          height: util.fitScreenSize(_height, 0.05),
-          width: util.fitScreenSize(_width, 0.3),
+          height: util.fitScreenSize(_height, 0.07),
+          width: util.fitScreenSize(_width, 0.3 ),
           child: new Text(
             this.title,
             textAlign: TextAlign.center,
