@@ -16,8 +16,7 @@ void main() {
     Key menu2 = new Key("Ceremonies");
     Key menu3 = new Key("Problems");
     Key menu4 = new Key("Glossary");
-    Key menu5 = new Key("Pop Quiz!");
-    Key menu6 = new Key("About");
+    Key menu5 = new Key("About");
 
     scaffoldKey.currentState.openDrawer();
     await tester.pump();
@@ -27,7 +26,6 @@ void main() {
     expect(find.byKey(menu3), findsOneWidget);
     expect(find.byKey(menu4), findsOneWidget);
     expect(find.byKey(menu5), findsOneWidget);
-    expect(find.byKey(menu6), findsOneWidget);
   });
 
   testWidgets('Test Find Header', (WidgetTester tester) async {
