@@ -50,6 +50,31 @@ class AboutPage extends StatelessWidget {
                   Padding(
                     padding: EdgeInsets.all(10.0),
                   ),
+                  new Text(
+                    'Eko K. Budiardjo',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  new Text(
+                    'Suci Fadhilah',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                
+                  new Text(
+                    'Arfi Renaldi',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                   //name for each members
                   new Text(
                     'Mochamad Aulia Akbar Praditomo',
