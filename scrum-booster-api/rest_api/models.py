@@ -46,7 +46,7 @@ class Problem(models.Model):
 
 
 class Glossary(models.Model):
-    name = models.CharField(max_length=255, unique=True)
+    title = models.CharField(max_length=255, unique=True)
     detail = models.CharField(max_length=2047)
     ceremonies_that_contain = models.ManyToManyField(Ceremony, blank=True)
     problem_that_contain = models.ManyToManyField(Problem, blank=True)

@@ -72,6 +72,7 @@ class Command(BaseCommand):
         self._create_models(Problem, 'rest_api/management/commands/Problem.csv')
         self._create_models(ProcessArea, 'rest_api/management/commands/ProcessArea.csv')
         self._create_models(CMMIPractices, 'rest_api/management/commands/CMMIPractice.csv')
+        self._create_models(Glossary, 'rest_api/management/commands/Glossary.csv')
         print("POPULATE DATABASE COMPLETE!")
         print("""``````¶0````1¶1_```````````````````````````````````````
 ```````¶¶¶0_`_¶¶¶0011100¶¶¶¶¶¶¶001_````````````````````
