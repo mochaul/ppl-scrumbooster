@@ -3,14 +3,27 @@ import 'package:ScrumBooster/Utils/utils.dart';
 import 'package:ScrumBooster/contents/ceremonies.dart';
 import 'package:ScrumBooster/contents/problems.dart';
 import 'package:ScrumBooster/components/ScrumPhaseContentBtn.dart';
-import 'package:ScrumBooster/ScrumPhase/ProductBacklog/ApiProvider.dart';
-import 'package:ScrumBooster/ScrumPhase/ProductBacklog/Model.dart';
+import 'package:ScrumBooster/search/ApiProvider.dart';
+import 'package:ScrumBooster/search/Model.dart';
 
 import 'dart:async';
 import 'package:ScrumBooster/components/loading/loadingData.dart';
 
 _SearchPageState _searchPageState;
 class SearchPage extends StatefulWidget {
+  final util = new Util();
+  final SearchApiProvider apiProvider;
+  List<Widget> listView = [new Container(),];
+
+  SearchResultModel ceremoniesSearchResultsDataJSON;
+  SearchResultModel problemsSearchResultsDataJSON;
+  var problemsJSON;
+  var ceremoniesJSON;
+
+  SearchPage({
+    Key key,
+    this.apiProvider,
+  }) : super(key: key);
 
   @override
   _SearchPageState createState() {
@@ -20,9 +33,7 @@ class SearchPage extends StatefulWidget {
 }
 
 class _SearchPageState extends State<SearchPage> {
-
-  static final util = new Util();
-
+  final util = new Util();
   final TextEditingController _filter = new TextEditingController();
   String _searchText = "";
   List names = new List();
