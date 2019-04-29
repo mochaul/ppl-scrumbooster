@@ -10,7 +10,6 @@ router.register(r'cmmi-practices', views.CMMIPracticesViewSet, base_name="cmmi-p
 router.register(r'ceremony', views.CeremonyViewSet, base_name="ceremony")
 router.register(r'problem', views.ProblemViewSet, base_name="problem")
 router.register(r'glossary', views.GlossaryViewSet, base_name="glossary")
-router.register(r'quiz-question', views.QuizQuestionViewSet, base_name="quiz-question")
 
 urlpatterns = [
     path('', include(router.urls), name='api')

@@ -1,2 +1,47 @@
 title,related_ceremony
-dummy,Backlog Grooming
+Requirements Management (REQM),Backlog Grooming
+Requirements Development (RD),Backlog Grooming
+Project Planning (PP),Backlog Grooming
+Verification (VER)/Validation (VAL),Continuous Build/Integration
+Product Integration (PI),Continuous Build/Integration
+Project Monitoring and Control (PMC),Daily Standup/Daily Scrum
+Integrated Project Management (IPM),Daily Standup/Daily Scrum
+Risk Management (RSKM),Daily Standup/Daily Scrum
+Project Planning (PP),Definition of Done
+Validation (VAL) and Verification (VER),Definition of Done
+Requirements Development (RD),Epics
+Requirements Managements (REQM),Epics
+Requirements Management (REQM),Product Backlog
+Integrated Project Management (IPM),Product Backlog
+Project Planning (PP),Product Backlog
+Integrated Project Management (IPM),Refactoring
+Technical Solution (TS),Refactoring
+Project Monitoring & Control,Release Burn-Down Chart
+Measurement & Analysis,Release Burn-Down Chart
+Organizational Process Definition,Release Burn-Down Chart
+Integrated Project Management,Release Burn-Down Chart
+Project Planning,Release Planning
+Measurement & Analysis,Release Planning
+Integrated Project Management,Release Planning
+Requirements Management,Release Planning
+Project Planning,Sprint / Iteration
+Organizational Process Definition,Sprint / Iteration
+Measurement & Analysis,Sprint Burn-Down Chart
+Project Monitoring & Control,Sprint Burn-Down Chart
+Integrated Project Management (IPM),Sprint Burn-Down Chart
+Integrated Project Management (IPM),Sprint Demo/Sprint Review
+Project Monitoring and Control (PMC),Sprint Demo/Sprint Review
+Validation (VAL),Sprint Demo/Sprint Review
+Project Planning (PP),Sprint Planning
+Requirements Management (REQM),Sprint Planning
+Integrated Project Management (IPM),Team Agreements
+Project Planning (PP),Team Agreements
+Project Planning (PP),Team Estimating Game (Fibonacci Game) & Planning Poker
+Requirements Management (REQM),Team Estimating Game (Fibonacci Game) & Planning Poker
+Technical Solution (TS),Technical Debt
+Project Planning (PP),Technical Debt
+Requirement Development (RD),Test Driven Development
+Validation (VAL),Test Driven Development
+Verification (VER),Test Driven Development
+Requirements Development (RD),User Stories
+Measurement & Analysis (MA),Velocity

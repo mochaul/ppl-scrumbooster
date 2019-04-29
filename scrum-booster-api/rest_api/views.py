@@ -53,11 +53,6 @@ class GlossaryViewSet(viewsets.ReadOnlyModelViewSet):
     search_fields = ('name',)
 
 
-class QuizQuestionViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = models.QuizQuestion.objects.all()
-    serializer_class = serializers.QuizQuestionSerializer
-
-
 class GetCeremonyAndProblemByPhase(views.APIView):
     def get(self, request, id):
         try:
@@ -66,7 +61,7 @@ class GetCeremonyAndProblemByPhase(views.APIView):
             return Response({'detail': 'Invalid id'}, status=status.HTTP_400_BAD_REQUEST)
 
         ceremonies = phase.ceremony_set.all()
-        problems = models.Problem.objects.filter(may_be_happen_at__in=ceremonies).distinct()
+        problems = models.Problem.objects.filter(can_be_solved_by__in=ceremonies).distinct()
 
         ceremonies_serializer = serializers.CeremonySerializer(ceremonies, many=True, context={'request': request})
         problems_serializer = serializers.ProblemSerializer(problems, many=True, context={'request': request})

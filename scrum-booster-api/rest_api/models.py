@@ -29,7 +29,7 @@ class ProcessArea(models.Model):
     related_ceremony = models.ForeignKey(Ceremony, models.CASCADE)
 
 class CMMIPractices(models.Model):
-    title = models.CharField(max_length=255, unique=True)
+    title = models.CharField(max_length=255)
     strengthens = models.CharField(max_length=2047)
     satisfy = models.CharField(max_length=2047)
     demonstrated = models.CharField(max_length=2047)
@@ -40,24 +40,14 @@ class CMMIPractices(models.Model):
 class Problem(models.Model):
     title = models.CharField(max_length=255, unique=True)
     detail = models.CharField(max_length=2047)
-    may_be_happen_at = models.ManyToManyField(Ceremony)
+    can_be_solved_by = models.ManyToManyField(Ceremony)
     image = models.URLField()
     # can_be_solved_by_using = models.ManyToManyField(CMMIPractices, blank=True)
 
 
 class Glossary(models.Model):
-    name = models.CharField(max_length=255, unique=True)
+    title = models.CharField(max_length=255, unique=True)
     detail = models.CharField(max_length=2047)
     ceremonies_that_contain = models.ManyToManyField(Ceremony, blank=True)
     problem_that_contain = models.ManyToManyField(Problem, blank=True)
     image = models.URLField()
-
-
-class QuizQuestion(models.Model):
-    question_for = models.ForeignKey(Phase, models.CASCADE)
-    question = models.CharField(max_length=2047)
-    option_1 = models.CharField(max_length=255)
-    option_2 = models.CharField(max_length=255)
-    option_3 = models.CharField(max_length=255)
-    option_4 = models.CharField(max_length=255)
-    answer_key = models.IntegerField()

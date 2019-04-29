@@ -43,8 +43,3 @@ class GlossarySerializer(serializers.ModelSerializer):
         model = models.Glossary
         fields = '__all__'
 
-
-class QuizQuestionSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = models.QuizQuestion
-        fields = '__all__'
