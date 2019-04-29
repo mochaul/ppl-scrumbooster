@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:ScrumBooster/Utils/utils.dart';
 
 class AboutPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("About Scrum Booster", style: TextStyle(color: Colors.white),),
+        title: Text("Scrum Booster", style: TextStyle(color: Colors.white),),
       ),
       
       //add new cotainer for page's contents
@@ -39,7 +38,7 @@ class AboutPage extends StatelessWidget {
                 children: <Widget>[
                   //about content
                   new Text(
-                    'Scrum Booster is a software project developed by RSE Labs. RSE Labs is a part of Faculty of Computer Science in University of Indonesia. Scrum Booster is part of software engineering projects by:',
+                    'Scrum Booster is a software project developed by RSE Labs. RSE Labs is a part of Faculty of Computer Science in University of Indonesia. Scrum Booster is part of software engineering projects developed by:',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 16,
@@ -55,7 +54,6 @@ class AboutPage extends StatelessWidget {
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 16,
-                      fontWeight: FontWeight.bold,
                     ),
                   ),
                   new Text(
@@ -63,7 +61,6 @@ class AboutPage extends StatelessWidget {
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 16,
-                      fontWeight: FontWeight.bold,
                     ),
                   ),
                 
@@ -72,7 +69,6 @@ class AboutPage extends StatelessWidget {
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 16,
-                      fontWeight: FontWeight.bold,
                     ),
                   ),
                   //name for each members
@@ -81,7 +77,6 @@ class AboutPage extends StatelessWidget {
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 16,
-                      fontWeight: FontWeight.bold,
                     ),
                   ),
                   new Text(
@@ -89,7 +84,6 @@ class AboutPage extends StatelessWidget {
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 16,
-                      fontWeight: FontWeight.bold,
                     )
                   ),
                   new Text(
@@ -97,7 +91,6 @@ class AboutPage extends StatelessWidget {
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 16,
-                      fontWeight: FontWeight.bold,
                     ),
                   ),
                   new Text(
@@ -105,7 +98,6 @@ class AboutPage extends StatelessWidget {
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 16,
-                      fontWeight: FontWeight.bold,
                     ),
                   ),
                   new Text(
@@ -113,7 +105,6 @@ class AboutPage extends StatelessWidget {
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 16,
-                      fontWeight: FontWeight.bold,
                     ),
                   ),
                   new Text(
@@ -121,7 +112,6 @@ class AboutPage extends StatelessWidget {
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 16,
-                      fontWeight: FontWeight.bold,
                     ),
                   ),
                 ],

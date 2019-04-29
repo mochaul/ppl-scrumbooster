@@ -23,6 +23,9 @@ void main() {
 
   testWidgets('About Page: Find Team Members Text', (WidgetTester tester) async {
     List<String> teamMembers = <String>[
+      "Eko K. Budiarjo",
+      "Suci Fadhilah",
+      "Arfi Renaldi",
       "Mochamad Aulia Akbar Praditomo",
       "Fajrin Maulana Kingwijati",
       "Izzan Fakhril Islam",
