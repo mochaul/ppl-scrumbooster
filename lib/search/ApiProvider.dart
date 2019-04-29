@@ -10,9 +10,11 @@ class SearchApiProvider {
 
   SearchResultModel modelCeremonies;
   SearchResultModel modelProblems;
+  SearchResultModel modelPhases;
 
   List<CeremonyItem> ceremonyItemSearchResults;
   List<ProblemItem> problemItemSearchResults;
+  List<PhaseItem> phaseItemSearchResults;
 
   SearchApiProvider({
     String query,
@@ -22,6 +24,7 @@ class SearchApiProvider {
 
   var responseCeremonies;
   var responseProblem;
+  var responsePhases;
 
   fetchSearchResults() async {
     try {
@@ -31,14 +34,19 @@ class SearchApiProvider {
       responseProblem = await client.get(
         util.getConfiguration()['base_url']+"problem/?search=${this.query}"
       );
+      responsePhases = await client.get(
+        util.getConfiguration()['base_url']+"phase/?search=${this.query}"
+      );
     } catch (e) {
       print("API isn't available");
     }
     var ceremoniesBody = json.decode(responseCeremonies.body);
     var problemsBody = json.decode(responseProblem.body);
+    var phasesBody = json.decode(responsePhases.body);
 
     modelCeremonies = SearchResultModel.fromJson(ceremoniesBody, 'ceremonies');
     modelProblems = SearchResultModel.fromJson(problemsBody, 'problems');
+    modelPhases = SearchResultModel.fromJson(phasesBody, 'phases');
 
     ceremonyItemSearchResults = [];
     for (Map<String, dynamic> ceremony in modelCeremonies.ceremonies) {
@@ -48,6 +56,11 @@ class SearchApiProvider {
     problemItemSearchResults = [];
     for (Map<String, dynamic> problem in modelProblems.problems) {
       problemItemSearchResults.add(ProblemItem.fromJson(problem));
+    }
+
+    phaseItemSearchResults = [];
+    for (Map<String, dynamic> phase in modelPhases.phases) {
+      phaseItemSearchResults.add(PhaseItem.fromJson(phase));
     }
   }
 
@@ -59,11 +72,19 @@ class SearchApiProvider {
     return modelProblems;
   }
 
+  SearchResultModel getPhasesModel() {
+    return modelPhases;
+  }
+
   List<CeremonyItem> getCeremonyItemSearchResults() {
     return ceremonyItemSearchResults;
   }
 
   List<ProblemItem> getProblemItemSearchResults() {
     return problemItemSearchResults;
+  }
+
+  List<PhaseItem> getPhaseItemSearchResults() {
+    return phaseItemSearchResults;
   }
 }
