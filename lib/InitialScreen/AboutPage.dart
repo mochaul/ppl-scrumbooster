@@ -160,6 +160,16 @@ class AboutPage extends StatelessWidget {
                       fontSize: 16,
                     ),
                   ),
+                  Padding(
+                    padding: EdgeInsets.all(10.0),
+                  ),
+                  new Text(
+                    'All contents are taken from CMMI Institute',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 12,
+                    ),
+                  ),
                 ],
               ) 
             )
