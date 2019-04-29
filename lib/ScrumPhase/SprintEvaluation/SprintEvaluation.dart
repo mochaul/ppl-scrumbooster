@@ -5,6 +5,9 @@ import 'package:ScrumBooster/contents/problems.dart';
 import 'package:ScrumBooster/components/ScrumPhaseContentBtn.dart';
 import 'package:ScrumBooster/ScrumPhase/SprintEvaluation/ApiProvider.dart';
 import 'package:ScrumBooster/ScrumPhase/SprintEvaluation/Model.dart';
+import 'package:ScrumBooster/ScrumPhase/ProductBacklog/ProductBacklog.dart';
+import 'package:ScrumBooster/ScrumPhase/SprintExecution/SprintExecution.dart';
+import 'package:ScrumBooster/ScrumPhase/SprintPlanning/SprintPlanning.dart';
 
 import 'dart:async';
 import 'package:ScrumBooster/components/loading/loadingData.dart';
@@ -92,14 +95,107 @@ class _SprintEvaluationState extends State<SprintEvaluation> {
           new Padding(
             padding: EdgeInsets.all(15.0),
           ),
-          new Text(
-            "Sprint Evaluation".toUpperCase(),
-            style: TextStyle(
-              fontSize: util.fitScreenSize(_height, 0.03),
-              fontWeight: FontWeight.bold,
-              color: util.hexToColor("#3498DB"),
-            ),
-            textAlign: TextAlign.center,
+          new Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              new RawMaterialButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => ProductBacklog()
+                    ),
+                  );
+                },
+                shape: new CircleBorder(),
+                elevation: 0,
+                fillColor: util.hexToColor("#C4C4C4"),
+                padding: const EdgeInsets.all(15.0),
+              ),
+              new RawMaterialButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => SprintPlanning()
+                    ),
+                  );
+                },
+                shape: new CircleBorder(),
+                elevation: 0,
+                fillColor: util.hexToColor("#C4C4C4"),
+                padding: const EdgeInsets.all(15.0),
+              ),
+              new RawMaterialButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => SprintExecution()
+                    ),
+                  );
+                },
+                shape: new CircleBorder(),
+                elevation: 0,
+                fillColor: util.hexToColor("#C4C4C4"),
+                padding: const EdgeInsets.all(15.0),
+              ),
+              new RawMaterialButton(
+                shape: new CircleBorder(),
+                elevation: 0,
+                fillColor: util.hexToColor("#E74D3B"),
+                padding: const EdgeInsets.all(15.0),
+              )
+            ],
+          ),
+          new Padding(
+            padding: EdgeInsets.all(8.0),
+          ),
+          new Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              new InkWell(
+                child: new Icon(
+                    Icons.arrow_back_ios
+                ),
+                onTap: () => {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(builder:
+                        (context) => SprintExecution()
+                    )
+                )
+                },
+              ),
+              new Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 23)
+              ),
+              new Text(
+                "Sprint Evaluation".toUpperCase(),
+                style: TextStyle(
+                  fontSize: util.fitScreenSize(_height, 0.03),
+                  fontWeight: FontWeight.bold,
+                  color: util.hexToColor("#3498DB"),
+                ),
+                textAlign: TextAlign.center,
+              ),
+              new Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 23)
+              ),
+              new InkWell(
+                child: new Icon(
+                    Icons.arrow_forward_ios
+                ),
+                onTap: () => {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(builder:
+                        (context) => ProductBacklog()
+                    )
+                )
+                },
+              ),
+            ],
           ),
           new Padding(
             padding: EdgeInsets.all(15.0),
