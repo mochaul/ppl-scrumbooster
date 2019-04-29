@@ -50,7 +50,7 @@ class GlossaryViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = models.Glossary.objects.all()
     serializer_class = serializers.GlossarySerializer
     filter_backends = (filters.SearchFilter,)
-    search_fields = ('name',)
+    search_fields = ('title',)
 
 
 class GetCeremonyAndProblemByPhase(views.APIView):
