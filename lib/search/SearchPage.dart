@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:ScrumBooster/Utils/utils.dart';
-import 'package:ScrumBooster/contents/ceremonies.dart';
-import 'package:ScrumBooster/contents/problems.dart';
-import 'package:ScrumBooster/components/ScrumPhaseContentBtn.dart';
+import 'package:ScrumBooster/components/SearchResultCard.dart';
 import 'package:ScrumBooster/search/ApiProvider.dart';
 import 'package:ScrumBooster/search/Model.dart';
 
@@ -58,7 +56,6 @@ class _SearchPageState extends State<SearchPage> {
   int phasesCount;
 
   String searchQuery;
-  var focusNode = new FocusNode();
 
   Future<Null> refresh() async {
     await search(searchQuery, true);
@@ -110,99 +107,75 @@ class _SearchPageState extends State<SearchPage> {
     List<Widget> ceremonyList = [];
     List<Widget> phaseList = [];
 
-    listView.add(
-      new Padding(
-        padding: EdgeInsets.only(
-          top: 15.0,
-          left: 6.0,
-          right: 6.0,
-          bottom: 10.0,
-        ),
-        child: new Text(
-          "Maybe this is what you looking for:",
-          style: TextStyle(
-            color: util.hexToColor("#000000"),
-            fontSize: 15.0,
+    if (widget.problemModels.length != 0 || widget.ceremonyModels.length != 0) {
+      listView.add(
+        new Padding(
+          padding: EdgeInsets.only(
+            top: 15.0,
+            left: 10.0,
+            right: 6.0,
+            bottom: 10.0,
           ),
-        ),
-      ),
-    );
-
-    //Adding Problem Items
-    for (ProblemItem data in widget.problemModels) {
-      problemsList.add(
-        new Container(
-          width: util.fitScreenSize(_width, 0.7),
-          height: util.fitScreenSize(_width, 0.4),
-          padding: EdgeInsets.only(top: 10.0, bottom: 10.0, right: 10.0, left: 10.0),
-          child: new InkWell(
-            onTap: () {},
-            child: new Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10.0),
-                color: util.hexToColor("#FFFFFF"),
-                boxShadow: <BoxShadow>[
-                  new BoxShadow(
-                    color: util.hexToColor("#000000"),
-                    offset: new Offset(0, 0.0),
-                    blurRadius: 20.0,
-                  ),
-                ],
-              ),
-              child: Center(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    //Picture
-                    Container(
-                      height: util.fitScreenSize(_width, 0.23),
-                      width: util.fitScreenSize(_width, 0.23),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(50.0),
-                        image: DecorationImage(
-                          image: NetworkImage(
-                            data.image,
-                          ),
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ),
-                    new Padding(
-                      padding: EdgeInsets.all(3.0),
-                    ),
-                    //Content
-                    new Column(
-                      children: <Widget>[
-                        new Container(
-                          height: util.fitScreenSize(_height, 0.1),
-                          width: util.fitScreenSize(_width, 0.6),
-                          child: Center(
-                            child: Text(
-                              data.title,
-                              style: TextStyle(
-                                color: util.hexToColor("#000000"),
-                                fontSize: 20.0,
-                              ),
-                            ),
-                          ),
-                        ),
-                        new Padding(padding: EdgeInsets.all(1.0)),
-                        new InkWell(
-                          child: Text("Testes"),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
+          child: new Text(
+            "Maybe this is what you looking for:",
+            style: TextStyle(
+              color: util.hexToColor("#000000"),
+              fontSize: 25.0,
             ),
           ),
         ),
       );
+
+      //Adding Problem Items
+      for (ProblemItem data in widget.problemModels) {
+        problemsList.add(
+            SearchResultCard(
+              title: data.title,
+              detail: data.detail,
+              imageURL: data.image,
+              contentType: "Problems",
+            )
+        );
+      }
+
+      //Adding Ceremony Items
+      for (CeremonyItem data in widget.ceremonyModels) {
+        ceremonyList.add(
+            SearchResultCard(
+              title: data.title,
+              detail: data.detail,
+              imageURL: data.image,
+              contentType: "Ceremonies",
+            )
+        );
+      }
+    } else {
+      print("empty!");
+      listView = [
+        Container(
+          height: util.fitScreenSize(_height, 0.9),
+          width: util.fitScreenSize(_width, 0.6),
+          child: Center(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Text(
+                  "Oops, we can't find your desired item!\nTry searching again.",
+                  style: TextStyle(
+                    fontSize: 25.0,
+                  ),
+                  textAlign: TextAlign.center,
+                ),
+              ],
+            ),
+          ),
+        ),
+      ];
     }
 
     listView.addAll(problemsList);
+    listView.addAll(ceremonyList);
     widget.listView.addAll(listView);
 
     _searchPageState.setState(() {
@@ -210,13 +183,6 @@ class _SearchPageState extends State<SearchPage> {
     });
 
     return null;
-  }
-
-  @override
-  void didChangeDependencies() {
-    if (widget.listView.length == 1) {
-      search(searchQuery, false);
-    }
   }
 
   @override
@@ -262,7 +228,7 @@ class _SearchPageState extends State<SearchPage> {
               ),
               Container(
                 width: util.fitScreenSize(_width, 0.78),
-                height: 45.0,
+                height: 50.0,
                 color: util.hexToColor("#FFFFFF"),
                 child: TextFormField(
                   autocorrect: false,
@@ -298,7 +264,7 @@ class _SearchPageState extends State<SearchPage> {
             ),
           ),
           new LoadingData(
-            key: Key("Loading Data"),
+            key: Key("Searching..."),
             height: loading,
           ),
         ],
