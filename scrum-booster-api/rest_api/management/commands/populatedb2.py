@@ -3,6 +3,7 @@ from rest_api.models import (Phase, ProcessArea, CMMIPractices, Ceremony,
                              Problem, Glossary, QuizQuestion)
 from django.db import IntegrityError
 import csv
+import re
 
 
 # phaseTitle = ["Product Backlog","Sprint Planning","Sprint Execution","Sprint Evaluation"]
@@ -43,6 +44,8 @@ class Command(BaseCommand):
                             attr[lst[i]] = self.dct_foreignkey[lst[i]].objects.get(title=row[i])
 
                         else:
+                            if lst[i] == 'detail':
+                                row[i] = Command.formatify(row[i])
                             attr[lst[i]] = row[i]
 
                     try:
@@ -59,6 +62,13 @@ class Command(BaseCommand):
 
                     except IntegrityError:
                         print(models.__name__, attr[lst[0]], 'has already been created')
+
+    def formatify(text):
+        for glossary in Glossary.objects.all():
+            regex = r'(?i)\b' + re.escape(glossary.name) + r'\b'
+            subs = '#' + glossary.name + '#'
+            text = re.sub(regex, subs, text)
+        return text
 
     def handle(self, *args, **options):
         print("POPULATE DATABASE BEGIN!")
