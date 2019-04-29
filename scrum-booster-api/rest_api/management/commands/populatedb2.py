@@ -1,6 +1,6 @@
 from django.core.management.base import BaseCommand
 from rest_api.models import (Phase, ProcessArea, CMMIPractices, Ceremony,
-                             Problem, Glossary, QuizQuestion)
+                             Problem, Glossary)
 from django.db import IntegrityError
 import csv
 

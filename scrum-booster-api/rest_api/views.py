@@ -40,11 +40,6 @@ class GlossaryViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = serializers.GlossarySerializer
 
 
-class QuizQuestionViewSet(viewsets.ReadOnlyModelViewSet):
-    queryset = models.QuizQuestion.objects.all()
-    serializer_class = serializers.QuizQuestionSerializer
-
-
 class GetCeremonyAndProblemByPhase(views.APIView):
     def get(self, request, id):
         try:

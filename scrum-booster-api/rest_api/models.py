@@ -51,13 +51,3 @@ class Glossary(models.Model):
     ceremonies_that_contain = models.ManyToManyField(Ceremony, blank=True)
     problem_that_contain = models.ManyToManyField(Problem, blank=True)
     image = models.URLField()
-
-
-class QuizQuestion(models.Model):
-    question_for = models.ForeignKey(Phase, models.CASCADE)
-    question = models.CharField(max_length=2047)
-    option_1 = models.CharField(max_length=255)
-    option_2 = models.CharField(max_length=255)
-    option_3 = models.CharField(max_length=255)
-    option_4 = models.CharField(max_length=255)
-    answer_key = models.IntegerField()
