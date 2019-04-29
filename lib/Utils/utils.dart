@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:ScrumBooster/InitialScreen/HomeScreen.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'dart:convert';
-import 'package:ScrumBooster/contentsList/ListCeremonies.dart';
-import 'package:ScrumBooster/contentsList/ListProblems.dart';
-import 'package:ScrumBooster/contentsList/GlossaryPage.dart';
+import 'package:ScrumBooster/contentsList/ListCeremonies/ListCeremonies.dart';
+import 'package:ScrumBooster/contentsList/ListProblems/ListProblems.dart';
+import 'package:ScrumBooster/contentsList/ListGlossary/ListGlossary.dart';
 import 'package:ScrumBooster/InitialScreen/AboutPage.dart';
 
 class Util {
@@ -43,7 +43,39 @@ class Util {
     }; //Staging API
   }
 
-  Map<String, dynamic> getDummyJSONFile() {
+  Map<String, dynamic> getDummyJSONContentsList() {
+    return {
+      "a": [
+        {
+          "id": 1,
+          "title": "A Letter",
+          "detail": "This is dummy JSON response for A Letter.",
+          "image": "https://static1.squarespace.com/static/56c775ad27d4bd3fdb24775d/t/5a8b201324a694d7071662ee/1519067160925/dummy+logo.jpg",
+          "phase": 1,
+        }
+      ],
+      "b": [
+        {
+          "id": 2,
+          "title": "B Letter",
+          "detail": "This is dummy JSON response for B Letter.",
+          "image": "https://static1.squarespace.com/static/56c775ad27d4bd3fdb24775d/t/5a8b201324a694d7071662ee/1519067160925/dummy+logo.jpg",
+          "phase": 1,
+        }
+      ],
+      "c": [
+        {
+          "id": 3,
+          "title": "C Letter",
+          "detail": "This is dummy JSON response for C Letter.",
+          "image": "https://static1.squarespace.com/static/56c775ad27d4bd3fdb24775d/t/5a8b201324a694d7071662ee/1519067160925/dummy+logo.jpg",
+          "phase": 1,
+        }
+      ]
+    };
+  }
+
+  Map<String, dynamic> getDummyJSONCeremoniesAndProblems() {
     return {
       "ceremonies": [
         {

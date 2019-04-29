@@ -12,10 +12,7 @@ class ScrumBoosterTest(APITestCase):
         # self.goal_test = models.Goal.objects.create(title="test", detail="test", to_satisfy=self.process_area_test)
         self.cmmi_practices_test = models.CMMIPractices.objects.create(title="test", strengthens="test",satisfy="test",demonstrated="test",process_area=self.process_area_test)
         self.problem_test = models.Problem.objects.create(title="test", detail="test")
-        self.glossary_test = models.Glossary.objects.create(name="test", detail="test")
-        self.quiz_question_test = models.QuizQuestion.objects.create(question_for=self.phase_test, question="test",
-                                                                     option_1="test", option_2="test", option_3="test",
-                                                                     option_4="test", answer_key=1)
+        self.glossary_test = models.Glossary.objects.create(title="test", detail="test")
 
     def test_phase_url_exists(self):
         response = self.client.get(reverse("phase-list"))
@@ -73,18 +70,66 @@ class ScrumBoosterTest(APITestCase):
         response = self.client.get(reverse('glossary-detail', args=[self.glossary_test.id]))
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
-    def test_quiz_question_url_exists(self):
-        response = self.client.get(reverse("quiz-question-list"))
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-
-    def test_can_read_quiz_question_detail(self):
-        response = self.client.get(reverse('quiz-question-detail', args=[self.quiz_question_test.id]))
-        self.assertEqual(response.status_code, status.HTTP_200_OK)
-
     def test_get_ceremony_and_problem_by_phase_exists(self):
         response = self.client.get(reverse("phase-ceremony-problem", args=[self.phase_test.id]))
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
+    def test_search_on_phase_exists(self):
+        response = self.client.get(reverse("phase-list"), {"search": "test"})
+        self.assertNotEqual(response.data, [])
+
+    def test_search_on_phase_works(self):
+        response = self.client.get(reverse("phase-list"), {"search": "wrong title"})
+        self.assertEqual(response.data, [])
+
+    def test_search_on_ceremony_exists(self):
+        response = self.client.get(reverse("ceremony-list"), {"search": "test"})
+        self.assertNotEqual(response.data, [])
+
+    def test_search_on_ceremony_works(self):
+        response = self.client.get(reverse("ceremony-list"), {"search": "wrong title"})
+        self.assertEqual(response.data, [])
+
+    def test_search_on_process_area_exists(self):
+        response = self.client.get(reverse("process-area-list"), {"search": "test"})
+        self.assertNotEqual(response.data, [])
+
+    def test_search_on_process_area_works(self):
+        response = self.client.get(reverse("process-area-list"), {"search": "wrong title"})
+        self.assertEqual(response.data, [])
+
+    def test_search_on_cmmi_practices_exists(self):
+        response = self.client.get(reverse("cmmi-practices-list"), {"search": "test"})
+        self.assertNotEqual(response.data, [])
+
+    def test_search_on_cmmi_practices_works(self):
+        response = self.client.get(reverse("cmmi-practices-list"), {"search": "wrong title"})
+        self.assertEqual(response.data, [])
+
+    def test_search_on_problem_exists(self):
+        response = self.client.get(reverse("problem-list"), {"search": "test"})
+        self.assertNotEqual(response.data, [])
+
+    def test_search_on_problem_works(self):
+        response = self.client.get(reverse("problem-list"), {"search": "wrong title"})
+        self.assertEqual(response.data, [])
+
+    def test_search_on_glossary_exists(self):
+        response = self.client.get(reverse("glossary-list"), {"search": "test"})
+        self.assertNotEqual(response.data, [])
+
+    def test_search_on_glossary_works(self):
+        response = self.client.get(reverse("glossary-list"), {"search": "wrong title"})
+        self.assertEqual(response.data, [])
+
     def test_get_ceremony_and_problem_by_phase_can_handle_error(self):
         response = self.client.get(reverse("phase-ceremony-problem", args=[0]))
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+    def test_get_list_ceremony_alphabetic_order_exists(self):
+        response = self.client.get(reverse("ceremony-list-alphabetic"))
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    def test_get_list_problem_alphabetic_order_exists(self):
+        response = self.client.get(reverse("problem-list-alphabetic"))
+        self.assertEqual(response.status_code, status.HTTP_200_OK)

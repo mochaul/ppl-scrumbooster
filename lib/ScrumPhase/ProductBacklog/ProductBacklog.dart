@@ -191,6 +191,10 @@ class _ProductBacklogState extends State<ProductBacklog> {
   Widget generateColumn(List<dynamic> json, Function className, int length) {
     List<Widget> columnWidgetList = [];
     List<Widget> rowWidgetList = [];
+
+    double _height = MediaQuery.of(context).size.height;
+    double _width = MediaQuery.of(context).size.width;
+
     Widget column = new Column(
       children: columnWidgetList,
     );
