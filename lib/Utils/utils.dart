@@ -176,7 +176,8 @@ class Util {
                   builder: (context) => ListCeremonies()
                 ),
               );
-            }, //TODO: Implement fungsi buat callback kalo mencet Ceremonies di drawer
+            }, 
+            //TODO: Implement fungsi buat callback kalo mencet Ceremonies di drawer
           ),
           ListTile(
             key: new Key("Problems"),
