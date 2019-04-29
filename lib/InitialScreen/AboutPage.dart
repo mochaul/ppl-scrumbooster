@@ -1,14 +1,60 @@
 import 'package:flutter/material.dart';
+import 'package:ScrumBooster/Utils/utils.dart';
+import 'package:ScrumBooster/search/SearchPage.dart';
 
 class AboutPage extends StatelessWidget {
+  final scaffoldKey = GlobalKey<ScaffoldState>();
+  var utils = new Util();
+  getScaffoldKey() {
+    return scaffoldKey;
+  }
+
+  final util = new Util();
+
   @override
   Widget build(BuildContext context) {
+    double _height = MediaQuery.of(context).size.height;
+    void _searchpage() {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => SearchPage()
+        ),
+      );
+    }
     return Scaffold(
+      key: scaffoldKey,
       appBar: AppBar(
-        title: Text("Scrum Booster", style: TextStyle(color: Colors.white),),
+        leading: new InkWell(
+          child: new Icon(
+            Icons.menu,
+            color: util.hexToColor("#FFFFFF"),
+          ),
+          onTap: () {
+            scaffoldKey.currentState.openDrawer();
+          },
+        ),
+        centerTitle: true,
+        title: Text(
+          "Scrum Booster".toUpperCase(),
+          style: TextStyle(
+            color: util.hexToColor("#FFFFFF"),
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        actions: <Widget>[
+          new Padding(
+            padding: EdgeInsets.only(right: 6.0),
+            child: new InkWell(
+              child: new Icon(
+                Icons.search,
+                color: util.hexToColor("#FFFFFF"),
+              ),
+              onTap: _searchpage,
+            ),
+          ),
+        ],
       ),
-      
-      //add new cotainer for page's contents
       body : new Container(
         padding: new EdgeInsets.only(top: 50.0, left: 20.0, right: 20.0),
 
