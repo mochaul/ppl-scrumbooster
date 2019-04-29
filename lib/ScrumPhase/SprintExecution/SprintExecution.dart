@@ -101,6 +101,7 @@ class _SprintExecutionState extends State<SprintExecution> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               new RawMaterialButton(
+                key: new Key("button a"),
                 onPressed: () {
                   Navigator.push(
                     context,
@@ -115,6 +116,7 @@ class _SprintExecutionState extends State<SprintExecution> {
                 padding: const EdgeInsets.all(15.0),
               ),
               new RawMaterialButton(
+                key: new Key("button b"),
                 onPressed: () {
                   Navigator.push(
                     context,
@@ -129,12 +131,14 @@ class _SprintExecutionState extends State<SprintExecution> {
                 padding: const EdgeInsets.all(15.0),
               ),
               new RawMaterialButton(
+                key: new Key("button c"),
                 shape: new CircleBorder(),
                 elevation: 0,
                 fillColor: util.hexToColor("#E74D3B"),
                 padding: const EdgeInsets.all(15.0),
               ),
               new RawMaterialButton(
+                key: new Key("button d"),
                 onPressed: () {
                   Navigator.push(
                     context,
@@ -158,7 +162,8 @@ class _SprintExecutionState extends State<SprintExecution> {
             children: <Widget>[
               new InkWell(
                 child: new Icon(
-                    Icons.arrow_back_ios
+                    Icons.arrow_back_ios,
+                  key: new Key("left arrow"),
                 ),
                 onTap: () => {
                 Navigator.push(
@@ -186,7 +191,8 @@ class _SprintExecutionState extends State<SprintExecution> {
               ),
               new InkWell(
                 child: new Icon(
-                    Icons.arrow_forward_ios
+                    Icons.arrow_forward_ios,
+                  key: new Key("right arrow"),
                 ),
                 onTap: () => {
                 Navigator.push(

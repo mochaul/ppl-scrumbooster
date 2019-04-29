@@ -99,6 +99,7 @@ class _SprintEvaluationState extends State<SprintEvaluation> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               new RawMaterialButton(
+                key: new Key("button a"),
                 onPressed: () {
                   Navigator.push(
                     context,
@@ -113,6 +114,7 @@ class _SprintEvaluationState extends State<SprintEvaluation> {
                 padding: const EdgeInsets.all(15.0),
               ),
               new RawMaterialButton(
+                key: new Key("button b"),
                 onPressed: () {
                   Navigator.push(
                     context,
@@ -127,6 +129,7 @@ class _SprintEvaluationState extends State<SprintEvaluation> {
                 padding: const EdgeInsets.all(15.0),
               ),
               new RawMaterialButton(
+                key: new Key("button c"),
                 onPressed: () {
                   Navigator.push(
                     context,
@@ -141,6 +144,7 @@ class _SprintEvaluationState extends State<SprintEvaluation> {
                 padding: const EdgeInsets.all(15.0),
               ),
               new RawMaterialButton(
+                key: new Key("button d"),
                 shape: new CircleBorder(),
                 elevation: 0,
                 fillColor: util.hexToColor("#E74D3B"),
@@ -156,7 +160,8 @@ class _SprintEvaluationState extends State<SprintEvaluation> {
             children: <Widget>[
               new InkWell(
                 child: new Icon(
-                    Icons.arrow_back_ios
+                    Icons.arrow_back_ios,
+                    key: new Key("left arrow"),
                 ),
                 onTap: () => {
                 Navigator.push(
@@ -184,7 +189,8 @@ class _SprintEvaluationState extends State<SprintEvaluation> {
               ),
               new InkWell(
                 child: new Icon(
-                    Icons.arrow_forward_ios
+                    Icons.arrow_forward_ios,
+                    key: new Key("right arrow"),
                 ),
                 onTap: () => {
                 Navigator.push(

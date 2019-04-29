@@ -100,6 +100,7 @@ class _SprintPlanningState extends State<SprintPlanning> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               new RawMaterialButton(
+                key: new Key("button a"),
                 onPressed: () {
                   Navigator.push(
                     context,
@@ -114,12 +115,14 @@ class _SprintPlanningState extends State<SprintPlanning> {
                 padding: const EdgeInsets.all(15.0),
               ),
               new RawMaterialButton(
+                key: new Key("button b"),
                 shape: new CircleBorder(),
                 elevation: 0,
                 fillColor: util.hexToColor("#E74D3B"),
                 padding: const EdgeInsets.all(15.0),
               ),
               new RawMaterialButton(
+                key: new Key("button c"),
                 onPressed: () {
                   Navigator.push(
                     context,
@@ -134,6 +137,7 @@ class _SprintPlanningState extends State<SprintPlanning> {
                 padding: const EdgeInsets.all(15.0),
               ),
               new RawMaterialButton(
+                key: new Key("button d"),
                 onPressed: () {Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -155,7 +159,8 @@ class _SprintPlanningState extends State<SprintPlanning> {
             children: <Widget>[
               new InkWell(
                 child: new Icon(
-                    Icons.arrow_back_ios
+                    Icons.arrow_back_ios,
+                  key: new Key("left arrow"),
                 ),
                 onTap: () => {
                 Navigator.push(
@@ -183,7 +188,8 @@ class _SprintPlanningState extends State<SprintPlanning> {
               ),
               new InkWell(
                 child: new Icon(
-                    Icons.arrow_forward_ios
+                    Icons.arrow_forward_ios,
+                  key: new Key("right arrow"),
                 ),
                 onTap: () => {
                 Navigator.push(
