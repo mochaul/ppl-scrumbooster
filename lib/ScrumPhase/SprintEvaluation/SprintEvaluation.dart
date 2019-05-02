@@ -301,6 +301,7 @@ class _SprintEvaluationState extends State<SprintEvaluation> {
           ),
         ],
       ),
+      drawer: util.defaultDrawer(context),
     );
   }
 }

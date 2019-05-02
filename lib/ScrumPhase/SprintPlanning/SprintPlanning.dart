@@ -302,6 +302,7 @@ class _SprintPlanningState extends State<SprintPlanning> {
           ),
         ],
       ),
+      drawer: util.defaultDrawer(context),
     );
   }
 }

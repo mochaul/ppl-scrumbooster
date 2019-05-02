@@ -33,12 +33,12 @@ class SearchPage extends StatefulWidget {
 }
 
 class _SearchPageState extends State<SearchPage> {
-  final util = new Util();
+  // final util = new Util();
   final TextEditingController _filter = new TextEditingController();
   String _searchText = "";
   List names = new List();
   List filteredNames = new List();
-  Icon _searchIcon = new Icon(Icons.search, color: util.hexToColor("#FFFFFF"),);
+  Icon _searchIcon = new Icon(Icons.search, color: Util().hexToColor("#FFFFFF"),);
   Widget _appBarTitle = new Text( 'Search Example' );
 
   _SearchPageState() {

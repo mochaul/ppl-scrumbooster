@@ -303,6 +303,7 @@ class _ProductBacklogState extends State<ProductBacklog> {
           ),
         ],
       ),
+      drawer: util.defaultDrawer(context),
     );
   }
 }
