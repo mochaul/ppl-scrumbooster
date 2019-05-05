@@ -149,6 +149,7 @@ class _SprintEvaluationState extends State<SprintEvaluation> {
                 elevation: 0,
                 fillColor: util.hexToColor("#E74D3B"),
                 padding: const EdgeInsets.all(15.0),
+                onPressed: () {},
               )
             ],
           ),
@@ -163,13 +164,13 @@ class _SprintEvaluationState extends State<SprintEvaluation> {
                     Icons.arrow_back_ios,
                     key: new Key("left arrow"),
                 ),
-                onTap: () => {
-                Navigator.push(
+                onTap: () {
+                  Navigator.push(
                     context,
                     MaterialPageRoute(builder:
-                        (context) => SprintExecution()
+                      (context) => SprintExecution()
                     )
-                )
+                  );
                 },
               ),
               new Padding(
@@ -192,13 +193,13 @@ class _SprintEvaluationState extends State<SprintEvaluation> {
                     Icons.arrow_forward_ios,
                     key: new Key("right arrow"),
                 ),
-                onTap: () => {
-                Navigator.push(
+                onTap: () {
+                  Navigator.push(
                     context,
                     MaterialPageRoute(builder:
-                        (context) => ProductBacklog()
+                      (context) => ProductBacklog()
                     )
-                )
+                  );
                 },
               ),
             ],
