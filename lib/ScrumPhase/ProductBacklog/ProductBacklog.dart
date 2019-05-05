@@ -106,6 +106,7 @@ class _ProductBacklogState extends State<ProductBacklog> {
                 elevation: 0,
                 fillColor: util.hexToColor("#E74D3B"),
                 padding: const EdgeInsets.all(15.0),
+                onPressed: () {},
               ),
               new RawMaterialButton(
                 key: new Key("button b"),
@@ -163,13 +164,13 @@ class _ProductBacklogState extends State<ProductBacklog> {
                   Icons.arrow_back_ios,
                   key: new Key("left arrow"),
                 ),
-                onTap: () => {
+                onTap: () {
                   Navigator.push(
                       context,
                       MaterialPageRoute(builder:
                           (context) => SprintEvaluation()
                       )
-                  )
+                  );
                 },
               ),
               new Padding(
@@ -192,13 +193,13 @@ class _ProductBacklogState extends State<ProductBacklog> {
                     Icons.arrow_forward_ios,
                     key: new Key("right arrow"),
                 ),
-                onTap: () => {
+                onTap: () {
                 Navigator.push(
                     context,
                     MaterialPageRoute(builder:
                         (context) => SprintPlanning()
                     )
-                )
+                  );
                 },
               ),
             ],

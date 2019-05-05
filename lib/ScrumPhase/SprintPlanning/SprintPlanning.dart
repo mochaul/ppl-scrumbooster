@@ -120,6 +120,7 @@ class _SprintPlanningState extends State<SprintPlanning> {
                 elevation: 0,
                 fillColor: util.hexToColor("#E74D3B"),
                 padding: const EdgeInsets.all(15.0),
+                onPressed: () {},
               ),
               new RawMaterialButton(
                 key: new Key("button c"),
@@ -162,13 +163,13 @@ class _SprintPlanningState extends State<SprintPlanning> {
                     Icons.arrow_back_ios,
                   key: new Key("left arrow"),
                 ),
-                onTap: () => {
-                Navigator.push(
+                onTap: () {
+                  Navigator.push(
                     context,
                     MaterialPageRoute(builder:
-                        (context) => ProductBacklog()
+                      (context) => ProductBacklog()
                     )
-                )
+                  );
                 },
               ),
               new Padding(
@@ -191,13 +192,13 @@ class _SprintPlanningState extends State<SprintPlanning> {
                     Icons.arrow_forward_ios,
                   key: new Key("right arrow"),
                 ),
-                onTap: () => {
-                Navigator.push(
+                onTap: () {
+                  Navigator.push(
                     context,
                     MaterialPageRoute(builder:
                         (context) => SprintExecution()
                     )
-                )
+                  );
                 },
               ),
             ],
