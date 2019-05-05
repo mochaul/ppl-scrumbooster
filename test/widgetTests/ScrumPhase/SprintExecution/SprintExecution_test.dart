@@ -34,6 +34,34 @@ void main() {
     });
   });
 
+  testWidgets('Detect Progress Bar', (WidgetTester tester) async {
+    provideMockedNetworkImages(() async {
+      await tester.pumpWidget(
+          util.makeTestableWidget(child: sprintExecution)
+      );
+      String keyA = "button a";
+      String keyB = "button b";
+      String keyC = "button c";
+      String keyD = "button d";
+      expect(find.byKey(Key(keyA)), findsOneWidget);
+      expect(find.byKey(Key(keyB)), findsOneWidget);
+      expect(find.byKey(Key(keyC)), findsOneWidget);
+      expect(find.byKey(Key(keyD)), findsOneWidget);
+    });
+  });
+
+  testWidgets('Detect Progress Arrow', (WidgetTester tester) async {
+    provideMockedNetworkImages(() async {
+      await tester.pumpWidget(
+          util.makeTestableWidget(child: sprintExecution)
+      );
+      String keyA = "left arrow";
+      String keyB = "right arrow";
+      expect(find.byKey(Key(keyA)), findsOneWidget);
+      expect(find.byKey(Key(keyB)), findsOneWidget);
+    });
+  });
+
   testWidgets('Find Header', (WidgetTester tester) async {
     provideMockedNetworkImages(() async {
       await tester.pumpWidget(
