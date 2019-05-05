@@ -1,15 +1,60 @@
 import 'package:flutter/material.dart';
 import 'package:ScrumBooster/Utils/utils.dart';
+import 'package:ScrumBooster/search/SearchPage.dart';
 
 class AboutPage extends StatelessWidget {
+  final scaffoldKey = GlobalKey<ScaffoldState>();
+  var utils = new Util();
+  getScaffoldKey() {
+    return scaffoldKey;
+  }
+
+  final util = new Util();
+
   @override
   Widget build(BuildContext context) {
+    double _height = MediaQuery.of(context).size.height;
+    void _searchpage() {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => SearchPage()
+        ),
+      );
+    }
     return Scaffold(
+      key: scaffoldKey,
       appBar: AppBar(
-        title: Text("About Scrum Booster", style: TextStyle(color: Colors.white),),
+        leading: new InkWell(
+          child: new Icon(
+            Icons.menu,
+            color: util.hexToColor("#FFFFFF"),
+          ),
+          onTap: () {
+            scaffoldKey.currentState.openDrawer();
+          },
+        ),
+        centerTitle: true,
+        title: Text(
+          "Scrum Booster".toUpperCase(),
+          style: TextStyle(
+            color: util.hexToColor("#FFFFFF"),
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        actions: <Widget>[
+          new Padding(
+            padding: EdgeInsets.only(right: 6.0),
+            child: new InkWell(
+              child: new Icon(
+                Icons.search,
+                color: util.hexToColor("#FFFFFF"),
+              ),
+              onTap: _searchpage,
+            ),
+          ),
+        ],
       ),
-      
-      //add new cotainer for page's contents
       body : new Container(
         padding: new EdgeInsets.only(top: 50.0, left: 20.0, right: 20.0),
 
@@ -39,7 +84,7 @@ class AboutPage extends StatelessWidget {
                 children: <Widget>[
                   //about content
                   new Text(
-                    'Scrum Booster is a software project developed by RSE Labs. RSE Labs is a part of Faculty of Computer Science in University of Indonesia. Scrum Booster is part of software engineering projects by:',
+                    'Scrum Booster is a software project developed by RSE Labs. RSE Labs is a part of Faculty of Computer Science in University of Indonesia. Scrum Booster is part of software engineering projects developed by:',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 16,
@@ -55,7 +100,6 @@ class AboutPage extends StatelessWidget {
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 16,
-                      fontWeight: FontWeight.bold,
                     ),
                   ),
                   new Text(
@@ -63,7 +107,6 @@ class AboutPage extends StatelessWidget {
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 16,
-                      fontWeight: FontWeight.bold,
                     ),
                   ),
                 
@@ -72,7 +115,6 @@ class AboutPage extends StatelessWidget {
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 16,
-                      fontWeight: FontWeight.bold,
                     ),
                   ),
                   //name for each members
@@ -81,7 +123,6 @@ class AboutPage extends StatelessWidget {
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 16,
-                      fontWeight: FontWeight.bold,
                     ),
                   ),
                   new Text(
@@ -89,7 +130,6 @@ class AboutPage extends StatelessWidget {
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 16,
-                      fontWeight: FontWeight.bold,
                     )
                   ),
                   new Text(
@@ -97,7 +137,6 @@ class AboutPage extends StatelessWidget {
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 16,
-                      fontWeight: FontWeight.bold,
                     ),
                   ),
                   new Text(
@@ -105,7 +144,6 @@ class AboutPage extends StatelessWidget {
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 16,
-                      fontWeight: FontWeight.bold,
                     ),
                   ),
                   new Text(
@@ -113,7 +151,6 @@ class AboutPage extends StatelessWidget {
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 16,
-                      fontWeight: FontWeight.bold,
                     ),
                   ),
                   new Text(
@@ -121,7 +158,16 @@ class AboutPage extends StatelessWidget {
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 16,
-                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.all(10.0),
+                  ),
+                  new Text(
+                    'All contents are taken from CMMI Institute',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 12,
                     ),
                   ),
                 ],
