@@ -1,17 +1,21 @@
 class SearchResultModel {
   List<dynamic> _ceremonies;
   List<dynamic> _problems;
+  List<dynamic> _phases;
 
   SearchResultModel.fromJson(List<dynamic> parsedJson, String type) {
     if (type == "ceremonies") {
       _ceremonies = parsedJson;
-    } else {
+    } else if (type == "problems") {
       _problems = parsedJson;
+    } else {
+      _phases = parsedJson;
     }
   }
 
   List<dynamic> get ceremonies => _ceremonies;
   List<dynamic> get problems => _problems;
+  List<dynamic> get phases => _phases;
 }
 
 class CeremonyItem {
@@ -41,7 +45,7 @@ class ProblemItem {
   String _title;
   String _detail;
   String _image;
-  List<int> _mayBeHappenAt;
+  List<dynamic> _mayBeHappenAt;
 
   ProblemItem.fromJson(Map<String, dynamic> parsedJson) {
     _id = parsedJson['id'];
@@ -55,5 +59,24 @@ class ProblemItem {
   String get title => _title;
   String get detail => _detail;
   String get image => _image;
-  List<int> get mayBeHappenAt => _mayBeHappenAt;
+  List<dynamic> get mayBeHappenAt => _mayBeHappenAt;
+}
+
+class PhaseItem {
+  int _id;
+  String _title;
+  String _detail;
+  String _image;
+
+  PhaseItem.fromJson(Map<String, dynamic> parsedJson) {
+    _id = parsedJson['id'];
+    _title = parsedJson['title'];
+    _detail = parsedJson['detail'];
+    _image = parsedJson['image'];
+  }
+
+  int get id => _id;
+  String get title => _title;
+  String get detail => _detail;
+  String get image => _image;
 }
