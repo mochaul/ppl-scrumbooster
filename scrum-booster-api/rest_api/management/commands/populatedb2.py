@@ -1,6 +1,6 @@
 from django.core.management.base import BaseCommand
 from rest_api.models import (Phase, ProcessArea, CMMIPractices, Ceremony,
-                             Problem, Glossary, QuizQuestion)
+                             Problem, Glossary)
 from django.db import IntegrityError
 import csv
 import re
@@ -11,9 +11,10 @@ import re
 # for i in phaseTitle:
 
 class Command(BaseCommand):
-    dct_manytomany = {'may_be_happen_at': Ceremony,'ceremonies_that_contain': Ceremony, 'problem_that_contain': Problem}
+    dct_manytomany = {'can_be_solved_by': Ceremony,'ceremonies_that_contain': Ceremony, 'problem_that_contain': Problem}
     dct_foreignkey = {'to_satisfy': ProcessArea, 'phase': Phase, 'question_for': Phase,
                       'related_ceremony': Ceremony,'process_area':ProcessArea}
+    dct_combinedforeignkey = {'containing_ceremony':Ceremony,'containing_process_area':ProcessArea}
 
     def _create_models(self, models, file_name):
         
@@ -36,8 +37,12 @@ class Command(BaseCommand):
 
                         if row[i] == '':
                             continue
+                        
+                        if lst[i] in self.dct_combinedforeignkey:
+                            if self.dct_combinedforeignkey[lst[i]] == Ceremony:
+                                attr['process_area'] = ProcessArea.objects.get(related_ceremony=Ceremony.objects.get(title=row[i]),title=row[i+1])
 
-                        if lst[i] in self.dct_manytomany:
+                        elif lst[i] in self.dct_manytomany:
                             many_to_many[lst[i]] = row[i].split(';')
 
                         elif lst[i] in self.dct_foreignkey:
@@ -76,6 +81,8 @@ class Command(BaseCommand):
         self._create_models(Ceremony, 'rest_api/management/commands/Ceremony.csv')
         self._create_models(Problem, 'rest_api/management/commands/Problem.csv')
         self._create_models(ProcessArea, 'rest_api/management/commands/ProcessArea.csv')
+        self._create_models(CMMIPractices, 'rest_api/management/commands/CMMIPractice.csv')
+        self._create_models(Glossary, 'rest_api/management/commands/Glossary.csv')
         print("POPULATE DATABASE COMPLETE!")
         print("""``````¶0````1¶1_```````````````````````````````````````
 ```````¶¶¶0_`_¶¶¶0011100¶¶¶¶¶¶¶001_````````````````````
