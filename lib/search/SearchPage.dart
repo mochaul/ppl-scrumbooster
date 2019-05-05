@@ -129,24 +129,24 @@ class _SearchPageState extends State<SearchPage> {
       //Adding Problem Items
       for (ProblemItem data in widget.problemModels) {
         problemsList.add(
-            SearchResultCard(
-              title: data.title,
-              detail: data.detail,
-              imageURL: data.image,
-              contentType: "Problems",
-            )
+          SearchResultCard(
+            title: data.title,
+            detail: data.detail,
+            imageURL: data.image,
+            contentType: "Problems",
+          )
         );
       }
 
       //Adding Ceremony Items
       for (CeremonyItem data in widget.ceremonyModels) {
         ceremonyList.add(
-            SearchResultCard(
-              title: data.title,
-              detail: data.detail,
-              imageURL: data.image,
-              contentType: "Ceremonies",
-            )
+          SearchResultCard(
+            title: data.title,
+            detail: data.detail,
+            imageURL: data.image,
+            contentType: "Ceremonies",
+          )
         );
       }
     } else {
