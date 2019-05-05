@@ -33,7 +33,7 @@ class SearchPage extends StatefulWidget {
 }
 
 class _SearchPageState extends State<SearchPage> {
-  // final util = new Util();
+  static final util = new Util();
   final TextEditingController _filter = new TextEditingController();
   String _searchText = "";
   List names = new List();
