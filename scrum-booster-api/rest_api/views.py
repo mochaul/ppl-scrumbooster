@@ -81,7 +81,14 @@ class GetListProblemAlphabeticalOrder(views.APIView):
         return Response(response, status=status.HTTP_200_OK)
 
 class GetGlossaryByName(views.APIView):
-    pass
+    def get(self, request, title):
+        try:
+            obj = models.Glossary.objects.get(title=title)
+        except models.Glossary.DoesNotExist:
+            return Response({'detail': 'Not found'}, status=status.HTTP_400_BAD_REQUEST)
+
+        obj_serializer = serializers.GlossarySerializer(obj, context={'request': request})
+        return Response(response, status=status.HTTP_200_OK)
 
 def get_list_data_alphabetical_order(request, model_class, serializer_class):
     dct = {}
