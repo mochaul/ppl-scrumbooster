@@ -3,21 +3,21 @@ import 'package:ScrumBooster/contentsList/ListGlossary/Model.dart';
 import 'dart:convert';
 import 'package:ScrumBooster/Utils/utils.dart';
 
-class ListProblemsApiProvider {
+class ListGlossaryApiProvider {
   Client client = Client();
   var response;
   var util = new Util();
   ListGlossaryModel model;
-  Map<String, List<GlossaryItem>> dictProblemsAlphabetic;
+  Map<String, List<GlossaryItem>> dictGlossaryAlphabetic;
 
   fetchPosts() async {
     response = await client.get(
-        util.getConfiguration()['base_url']+"problem/alphabetic/"
+        util.getConfiguration()['base_url']+"glossary/alphabetic/"
     );
     var jsonBody = json.decode(response.body);
 
     model = ListGlossaryModel.fromJson(jsonBody);
-    dictProblemsAlphabetic = model.dictGlossaryAlphabetic;
+    dictGlossaryAlphabetic = model.dictGlossaryAlphabetic;
 
   }
 
@@ -25,7 +25,7 @@ class ListProblemsApiProvider {
     return model;
   }
 
-  Map<String, List<GlossaryItem>> getDictProblemsAlphabetic() {
-    return dictProblemsAlphabetic;
+  Map<String, List<GlossaryItem>> getDictGlossaryAlphabetic() {
+    return dictGlossaryAlphabetic;
   }
 }

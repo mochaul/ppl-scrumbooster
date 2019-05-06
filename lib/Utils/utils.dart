@@ -238,7 +238,7 @@ class Util {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => GlossaryPage()
+                  builder: (context) => ListGlossary()
                 ),
               );
             }, //TODO: Implement fungsi buat callback kalo mencet Glossary di drawer
