@@ -23,6 +23,7 @@ urlpatterns = [
     re_path(r'^phase/(?P<id>\d+)/details/$', views.GetCeremonyAndProblemByPhase.as_view(), name='phase-ceremony-problem'),
     path('ceremony/alphabetic/', views.GetListCeremonyAlphabeticalOrder.as_view(), name='ceremony-list-alphabetic'),
     path('problem/alphabetic/', views.GetListProblemAlphabeticalOrder.as_view(), name='problem-list-alphabetic'),
+    path('glossary/alphabetic/', views.GetListGlossaryAlphabeticalOrder.as_view(), name='glossary-list-alphabetic'),
     path('', include('rest_api.urls'), name='api'),
 ]
 
