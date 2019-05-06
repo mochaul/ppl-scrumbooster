@@ -113,7 +113,7 @@ class _ListGlossaryState extends State<ListGlossary> {
             onTap: () {
               Navigator.of(context).push(
                 new MaterialPageRoute(
-                  builder: (context) => Ceremonies(
+                  builder: (context) => Glossary(
                    imagePath: data.image,
                    title: data.title,
                    contents: data.detail,
