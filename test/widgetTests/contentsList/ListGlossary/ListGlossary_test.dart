@@ -55,7 +55,7 @@ void main() {
       );
       await tester.pump();
 
-      String header1 = "PROBLEMS";
+      String header1 = "CEREMONIES";
       expect(find.text(header1), findsNothing);
     });
   });
