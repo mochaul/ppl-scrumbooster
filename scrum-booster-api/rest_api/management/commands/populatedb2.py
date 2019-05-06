@@ -71,7 +71,7 @@ class Command(BaseCommand):
     def formatify(text):
         for glossary in Glossary.objects.all():
             regex = r'(?i)\b' + re.escape(glossary.name) + r'\b'
-            subs = '#' + glossary.name + '#'
+            subs = '#' + glossary.title + '#'
             text = re.sub(regex, subs, text)
         return text
 
