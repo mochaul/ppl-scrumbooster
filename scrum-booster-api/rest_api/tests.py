@@ -135,7 +135,7 @@ class ScrumBoosterTest(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_get_glossary_by_name_exists(self):
-        response = self.client.get(reverse("glossary-detail-by-name"), args=[self.glossary_test.title])
+        response = self.client.get(reverse("glossary-detail-by-name", args=[self.glossary_test.title]))
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
     def test_get_glossary_by_name_can_handle_error(self):
