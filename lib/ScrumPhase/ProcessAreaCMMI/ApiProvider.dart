@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:http/http.dart' show Client;
 import 'package:ScrumBooster/ScrumPhase/ProcessAreaCMMI/Model.dart';
 import 'dart:convert';
@@ -13,8 +12,8 @@ class ProcessAreaCMMIFetcher {
   ProcessArea processAreaModel;
   CMMIPractices cmmiPracticeModel;
 
-  Map<int, List<CMMIPractices>> cmmiPracticesByProcessArea;
-  List<ProcessArea> processAreasByPhase;
+  Map<int, List<CMMIPractices>> cmmiPracticesByProcessArea = {};
+  List<ProcessArea> processAreasByPhase = [];
 
   fetchPosts(int ceremonyID) async {
     processAreasResponse = await client.get(
@@ -36,7 +35,7 @@ class ProcessAreaCMMIFetcher {
     );
     var cmmiPracticeJsonBody = json.decode(cmmiPracticesResponse.body);
 
-    for (int i = 0; i < processAreaCount; i++) {
+    for (int i = 1; i < processAreaCount+1; i++) {
       cmmiPracticesByProcessArea.putIfAbsent(i, () => []);
       for (var data in cmmiPracticeJsonBody) {
         if (data["id"] == i) {

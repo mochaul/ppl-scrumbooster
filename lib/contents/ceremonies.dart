@@ -1,64 +1,93 @@
 import 'package:ScrumBooster/Utils/utils.dart';
+import 'package:ScrumBooster/components/loading/loadingData.dart';
 import 'package:flutter/material.dart';
+import 'package:ScrumBooster/ScrumPhase/ProcessAreaCMMI/ApiProvider.dart';
+import 'dart:async';
 
-class Ceremonies extends StatelessWidget {
+_CeremoniesState _ceremoniesState;
+class Ceremonies extends StatefulWidget {
+  final int id;
   final String title;
   final String imagePath;
   final String contents;
-  final scaffoldKey = GlobalKey<ScaffoldState>();
+  final ProcessAreaCMMIFetcher apiProvider;
+  List<Widget> listView = [Container(),];
 
+  final util = new Util();
+  var cmmiPracticesByProcessArea;
+  var processAreaByPhase;
+
+  Ceremonies({
+    Key key,
+    this.id,
+    this.title,
+    this.imagePath,
+    this.contents,
+    this.apiProvider,
+  }) : super(key: key);
+
+  @override
+  _CeremoniesState createState() {
+    _ceremoniesState = new _CeremoniesState();
+    return _ceremoniesState;
+  }
+}
+
+class _CeremoniesState extends State<Ceremonies> {
+  final util = new Util();
+
+  GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   getScaffoldKey() {
     return scaffoldKey;
   }
 
-  final util = new Util();
+  double loading = 0.0;
 
-  Ceremonies({
-    Key key,
-    this.title,
-    this.imagePath,
-    this.contents,
-  }) : super(key:key);
+  Future<Null> refresh() async {
+    await loadContents(true);
+    return null;
+  }
 
-  @override
-  Widget build(BuildContext context){
-    double _height = MediaQuery.of(context).size.height;
-    double _width = MediaQuery.of(context).size.width;
-    return Scaffold(
-      key: scaffoldKey,
-      appBar: AppBar(
-        leading: new InkWell(
-          child: Icon(
-            Icons.menu,
-            color: util.hexToColor("#FFFFFF"),
-          ),
-          onTap: () {
-            scaffoldKey.currentState.openDrawer();
-          },
-        ),
-        centerTitle: true,
-        title: Text(
-          "SCRUM BOOSTER",
-          style: TextStyle(
-            fontSize: 20, fontWeight: FontWeight.bold,
-            color: util.hexToColor("#FFFFFF"),
-          ),
-        ),
-        actions: <Widget>[
-          new Padding(
-            padding: EdgeInsets.only(right: 6.0),
-            child: new InkWell(
-              child: new Icon(
-                Icons.search,
-                color: util.hexToColor("#FFFFFF"),
-              ),
-              onTap: () => {},
+  Future<Null> loadContents(bool refresh) async {
+    final contentPageApiProvider = widget.apiProvider == null
+      ? new ProcessAreaCMMIFetcher()
+      : widget.apiProvider;
+    widget.listView = [];
+    final _height = MediaQuery.of(context).size.height;
+    final _width = MediaQuery.of(context).size.width;
+
+    if (!refresh) {
+      _ceremoniesState.setState(() {
+        loading = _height;
+      });
+    }
+
+    await contentPageApiProvider.fetchPosts(widget.id);
+    widget.cmmiPracticesByProcessArea = contentPageApiProvider.getCmmiPracticesByProcessArea();
+    widget.processAreaByPhase = contentPageApiProvider.getProcessAreasByPhase();
+    
+    List<Widget> processAreasList = [];
+    for (var data in widget.processAreaByPhase) {
+      processAreasList.add(
+        new InkWell(
+          onTap: () {},
+          child: Text(
+            "- ${data.title}",
+            style: TextStyle(
+              fontSize: 20.0,
+              fontWeight: FontWeight.bold,
+              color: util.hexToColor("#3498DB"),
             ),
-          )
-        ],
-      ),
-      drawer: util.defaultDrawer(context),
-      body: Stack(
+          ),
+        ),
+      );
+    }
+    
+    List<Widget> listView = widget.listView;
+    widget.listView = [];
+
+    listView.add(
+      new Stack(
         children: <Widget>[
           new Container(
             width: _width,
@@ -67,12 +96,12 @@ class Ceremonies extends StatelessWidget {
               image: DecorationImage(
                 fit: BoxFit.cover,
                 image: NetworkImage(
-                  this.imagePath,
+                  widget.imagePath,
                 )
               )
             ),
           ),
-          ListView(
+          Column(
             children: <Widget>[
               new Column(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -95,7 +124,7 @@ class Ceremonies extends StatelessWidget {
                               height: util.fitScreenSize(_height, 0.08),
                               width: util.fitScreenSize(_width, 0.75),
                               child: new Text(
-                                this.title,
+                                widget.title,
                                 style:TextStyle(
                                   color:util.hexToColor("#3498DB"),
                                   fontWeight:FontWeight.bold,
@@ -104,14 +133,14 @@ class Ceremonies extends StatelessWidget {
                                 textAlign: TextAlign.center,
                               ),
                               decoration: new BoxDecoration(
-                                color: util.hexToColor("#FFFFFF"),
-                                boxShadow: <BoxShadow>[
-                                  new BoxShadow(
-                                    color: util.hexToColor("#000000"),
-                                    offset: new Offset(15.0, 7.5),
-                                    blurRadius: 50.0,
-                                  )
-                                ]
+                                  color: util.hexToColor("#FFFFFF"),
+                                  boxShadow: <BoxShadow>[
+                                    new BoxShadow(
+                                      color: util.hexToColor("#000000"),
+                                      offset: new Offset(15.0, 7.5),
+                                      blurRadius: 50.0,
+                                    )
+                                  ]
                               ),
                             ),
                           ),
@@ -146,11 +175,25 @@ class Ceremonies extends StatelessWidget {
                           bottom: 15.0,
                           top: 15.0,
                         ),
-                        child: new Text(
-                          this.contents,
-                          style:TextStyle(
-                            fontSize: util.fitScreenSize(_height, 0.025),
-                          )
+                        child: new Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            new Text(
+                              "${widget.contents}\n\nCMMI Practices that will enhanched this ceremony are:",
+                              style:TextStyle(
+                                fontSize: util.fitScreenSize(_height, 0.025),
+                              )
+                            ),
+                            new Padding(
+                              padding: EdgeInsets.all(10.0),
+                            ),
+                            new Column(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: processAreasList,
+                            ),
+                          ],
                         ),
                       ),
                     ),
@@ -158,8 +201,81 @@ class Ceremonies extends StatelessWidget {
                 ],
               )
             ],
-            )
+          ),
         ],
       ),
-    );}
+    );
+
+    widget.listView.addAll(listView);
+    _ceremoniesState.setState(() {
+      loading = 0.0;
+    });
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    if (widget.listView.length == 1) {
+      loadContents(false);
+    }
+  }
+
+
+  @override
+  Widget build(BuildContext context){
+    double _height = MediaQuery.of(context).size.height;
+
+    return Scaffold(
+      key: scaffoldKey,
+      appBar: AppBar(
+        leading: new InkWell(
+          child: Icon(
+            Icons.menu,
+            color: util.hexToColor("#FFFFFF"),
+          ),
+          onTap: () {
+            scaffoldKey.currentState.openDrawer();
+          },
+        ),
+        centerTitle: true,
+        title: Text(
+          "SCRUM BOOSTER",
+          style: TextStyle(
+            fontSize: 20, fontWeight: FontWeight.bold,
+            color: util.hexToColor("#FFFFFF"),
+          ),
+        ),
+        actions: <Widget>[
+          new Padding(
+            padding: EdgeInsets.only(right: 6.0),
+            child: new InkWell(
+              child: new Icon(
+                Icons.search,
+                color: util.hexToColor("#FFFFFF"),
+              ),
+              onTap: () => {},
+            ),
+          )
+        ],
+      ),
+      body: Stack(
+        children: <Widget>[
+          new Container(
+            height: _height,
+            child: new RefreshIndicator(
+              child: new ListView(
+                children: widget.listView,
+              ),
+              onRefresh: refresh,
+            ),
+          ),
+          new LoadingData(
+            key: Key("Loading data"),
+            height: loading,
+          ),
+        ],
+      ),
+      drawer: util.defaultDrawer(context),
+    );
+  }
 }
