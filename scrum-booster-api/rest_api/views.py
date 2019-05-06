@@ -80,6 +80,9 @@ class GetListProblemAlphabeticalOrder(views.APIView):
         response = get_list_data_alphabetical_order(request, models.Problem, serializers.ProblemSerializer)
         return Response(response, status=status.HTTP_200_OK)
 
+class GetGlossaryByName(views.APIView):
+    pass
+
 def get_list_data_alphabetical_order(request, model_class, serializer_class):
     dct = {}
     for i in string.ascii_lowercase:
