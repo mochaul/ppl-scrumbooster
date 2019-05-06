@@ -49,8 +49,6 @@ class Command(BaseCommand):
                             attr[lst[i]] = self.dct_foreignkey[lst[i]].objects.get(title=row[i])
 
                         else:
-                            if lst[i] == 'detail':
-                                row[i] = Command.formatify(row[i])
                             attr[lst[i]] = row[i]
 
                     try:
@@ -68,12 +66,42 @@ class Command(BaseCommand):
                     except IntegrityError:
                         print(models.__name__, attr[lst[0]], 'has already been created')
 
-    def formatify(text):
-        for glossary in Glossary.objects.all():
-            regex = r'(?i)\b' + re.escape(glossary.name) + r'\b'
-            subs = '#' + glossary.title + '#'
-            text = re.sub(regex, subs, text)
+    def formatify_text(text, glossaries):
+        for glossary in glossaries:
+            regex = r'(?i)\b' + re.escape(glossary) + r'\b'
+            subs = '#' + glossary + '#'
+            done = False
+            index = 0
+            new_text = ""
+            while not done:
+                first = text[index:].find('#')
+                if first > -1:
+                    new_text += re.sub(regex, subs, text[index:index + first])
+                    second = text[index + first + 1:].find('#')
+                    if second == -1:
+                        new_text += re.sub(regex, subs, text[index + first:])
+                        break
+                    new_text += text[index + first:index + first + second + 2]
+                    index = index + first + second + 2
+                else:
+                    new_text += re.sub(regex, subs, text[index:])
+                    done = True
+
+            text = new_text
+
         return text
+
+    def formatify_details(models, glossaries):
+        for obj in models.objects.all():
+            new_glossaries = glossaries
+            if models == Glossary:
+                new_glossaries = new_glossaries.copy()
+                new_glossaries.remove(obj.title)
+
+            new_detail = Command.formatify_text(obj.detail, new_glossaries)
+            obj.detail = new_detail
+            obj.save()
+            print(models.__name__, obj.title, 'detail has been formated successfully')
 
     def handle(self, *args, **options):
         print("POPULATE DATABASE BEGIN!")
@@ -83,6 +111,23 @@ class Command(BaseCommand):
         self._create_models(ProcessArea, 'rest_api/management/commands/ProcessArea.csv')
         self._create_models(CMMIPractices, 'rest_api/management/commands/CMMIPractice.csv')
         self._create_models(Glossary, 'rest_api/management/commands/Glossary.csv')
+
+        dct = {}
+        for glossary in Glossary.objects.all():
+            word_count = len(glossary.title.split())
+            if word_count not in dct:
+                dct[word_count] = []
+            dct[word_count].append(glossary.title)
+
+        lst = []
+        for key in sorted(dct.keys(), reverse=True):
+            lst += dct[key]
+
+        Command.formatify_details(Phase, lst)
+        Command.formatify_details(Ceremony, lst)
+        Command.formatify_details(Problem, lst)
+        Command.formatify_details(Glossary, lst)
+
         print("POPULATE DATABASE COMPLETE!")
         print("""``````¶0````1¶1_```````````````````````````````````````
 ```````¶¶¶0_`_¶¶¶0011100¶¶¶¶¶¶¶001_````````````````````

@@ -24,6 +24,7 @@ urlpatterns = [
     path('glossary/<str:title>/', views.GetGlossaryByName.as_view(), name='glossary-detail-by-name'),
     path('ceremony/alphabetic/', views.GetListCeremonyAlphabeticalOrder.as_view(), name='ceremony-list-alphabetic'),
     path('problem/alphabetic/', views.GetListProblemAlphabeticalOrder.as_view(), name='problem-list-alphabetic'),
+    path('glossary/alphabetic/', views.GetListGlossaryAlphabeticalOrder.as_view(), name='glossary-list-alphabetic'),
     path('', include('rest_api.urls'), name='api'),
 ]
 

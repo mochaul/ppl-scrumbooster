@@ -75,11 +75,19 @@ class GetListCeremonyAlphabeticalOrder(views.APIView):
         response = get_list_data_alphabetical_order(request, models.Ceremony, serializers.CeremonySerializer)
         return Response(response, status=status.HTTP_200_OK)
 
+
 class GetListProblemAlphabeticalOrder(views.APIView):
     def get(self, request):
         response = get_list_data_alphabetical_order(request, models.Problem, serializers.ProblemSerializer)
         return Response(response, status=status.HTTP_200_OK)
 
+
+class GetListGlossaryAlphabeticalOrder(views.APIView):
+    def get(self, request):
+        response = get_list_data_alphabetical_order(request, models.Glossary, serializers.GlossarySerializer)
+        return Response(response, status=status.HTTP_200_OK)
+
+        
 class GetGlossaryByName(views.APIView):
     def get(self, request, title):
         try:
