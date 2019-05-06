@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:ScrumBooster/Utils/utils.dart';
-import 'package:ScrumBooster/contents/ceremonies.dart';
+import 'package:ScrumBooster/contents/glossary.dart';
 
-import 'package:ScrumBooster/contentsList/ListCeremonies/ApiProvider.dart';
-import 'package:ScrumBooster/contentsList/ListCeremonies/Model.dart';
+import 'package:ScrumBooster/contentsList/ListGlossary/ApiProvider.dart';
+import 'package:ScrumBooster/contentsList/ListGlossary/Model.dart';
 
 import 'dart:async';
 import 'package:ScrumBooster/components/loading/loadingData.dart';
 
-_ListCeremoniesState _listCeremoniesState;
-class ListCeremonies extends StatefulWidget {
+_ListGlossaryState _listGlossaryState;
+class ListGlossary extends StatefulWidget {
 
-  final ListCeremoniesApiProvider apiProvider;
+  final ListGlossaryApiProvider apiProvider;
   final util = new Util();
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
@@ -21,22 +21,22 @@ class ListCeremonies extends StatefulWidget {
 
   List<Widget> listView = [new Container(),];
 
-  ListCeremoniesModel listCeremoniesModel;
-  Map<String, dynamic> listCeremoniesDataAlphabeticJSON;
+  ListGlossaryModel listGlossaryModel;
+  Map<String, dynamic> listGlossaryDataAlphabeticJSON;
   
-  ListCeremonies({
+  ListGlossary({
     Key key,
     this.apiProvider,
   }) : super(key: key);
   
   @override
-  _ListCeremoniesState createState() {
-    _listCeremoniesState = new _ListCeremoniesState();
-    return _listCeremoniesState;
+  _ListGlossaryState createState() {
+    _listGlossaryState = new _ListGlossaryState();
+    return _listGlossaryState;
   }
 }
 
-class _ListCeremoniesState extends State<ListCeremonies> {
+class _ListGlossaryState extends State<ListGlossary> {
 
   final util = new Util();
 
@@ -44,13 +44,13 @@ class _ListCeremoniesState extends State<ListCeremonies> {
   int contentCount;
 
   Future<Null> refresh() async {
-    await loadListCeremonies(true);
+    await loadListGlossary(true);
     return null;
   }
 
-  Future<Null> loadListCeremonies(bool refresh) async {
+  Future<Null> loadListGlossary(bool refresh) async {
     final listCeremoniesApiProvider = widget.apiProvider == null
-      ? new ListCeremoniesApiProvider()
+      ? new ListGlossaryApiProvider()
       : widget.apiProvider;
     widget.listView = [];
 
@@ -58,7 +58,7 @@ class _ListCeremoniesState extends State<ListCeremonies> {
     final _width = MediaQuery.of(context).size.width;
 
     if (!refresh) {
-      _listCeremoniesState.setState(() {
+      _listGlossaryState.setState(() {
         loading = _height;
       });
     }
@@ -66,12 +66,12 @@ class _ListCeremoniesState extends State<ListCeremonies> {
     //Fetch details from API
     await listCeremoniesApiProvider.fetchPosts();
 
-    widget.listCeremoniesModel = listCeremoniesApiProvider.getModel();
+    widget.listGlossaryModel = listCeremoniesApiProvider.getModel();
 
     //Get Details
-    widget.listCeremoniesDataAlphabeticJSON = listCeremoniesApiProvider.getDictProblemsAlphabetic();
-    _listCeremoniesState.setState(() {
-      contentCount = widget.listCeremoniesDataAlphabeticJSON.length;
+    widget.listGlossaryDataAlphabeticJSON = listCeremoniesApiProvider.getDictProblemsAlphabetic();
+    _listGlossaryState.setState(() {
+      contentCount = widget.listGlossaryDataAlphabeticJSON.length;
     });
 
     List<Widget> listView = widget.listView;
@@ -79,7 +79,7 @@ class _ListCeremoniesState extends State<ListCeremonies> {
 
     List<Widget> contentsList = [];
 
-    for (String alphabet in widget.listCeremoniesDataAlphabeticJSON.keys) {
+    for (String alphabet in widget.listGlossaryDataAlphabeticJSON.keys) {
       print(alphabet);
       contentsList.add(
         Text(
@@ -96,7 +96,7 @@ class _ListCeremoniesState extends State<ListCeremonies> {
           height: 10.0,
         ),
       );
-      for (CeremonyItem data in widget.listCeremoniesDataAlphabeticJSON[alphabet]) {
+      for (CeremonyItem data in widget.listGlossaryDataAlphabeticJSON[alphabet]) {
         contentsList.add(
           new InkWell(
             child: Container(
@@ -168,7 +168,7 @@ class _ListCeremoniesState extends State<ListCeremonies> {
 
     widget.listView.addAll(listView);
 
-    _listCeremoniesState.setState(() {
+    _listGlossaryState.setState(() {
       loading = 0.0;
     });
   }
@@ -176,7 +176,7 @@ class _ListCeremoniesState extends State<ListCeremonies> {
   @override
   void didChangeDependencies() {
     if (widget.listView.length == 1) {
-      loadListCeremonies(false);
+      loadListGlossary(false);
     }
   }
 
