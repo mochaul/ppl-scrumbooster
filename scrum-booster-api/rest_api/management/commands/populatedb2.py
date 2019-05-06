@@ -50,7 +50,10 @@ class Command(BaseCommand):
 
                         else:
                             if lst[i] == 'detail':
-                                row[i] = Command.formatify(row[i])
+                                if models == Glossary:
+                                    row[i] = Command.formatify(row[i], attr['title'])
+                                else:
+                                    row[i] = Command.formatify(row[i])
                             attr[lst[i]] = row[i]
 
                     try:
@@ -68,9 +71,9 @@ class Command(BaseCommand):
                     except IntegrityError:
                         print(models.__name__, attr[lst[0]], 'has already been created')
 
-    def formatify(text):
-        for glossary in Glossary.objects.all():
-            regex = r'(?i)\b' + re.escape(glossary.name) + r'\b'
+    def formatify(text, title=None):
+        for glossary in Glossary.objects.all().exclude(title=title):
+            regex = r'(?i)\b' + re.escape(glossary.title) + r'\b'
             subs = '#' + glossary.title + '#'
             text = re.sub(regex, subs, text)
         return text
