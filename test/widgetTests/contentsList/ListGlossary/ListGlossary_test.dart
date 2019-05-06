@@ -6,7 +6,7 @@ import 'package:ScrumBooster/Utils/utils.dart';
 import 'package:ScrumBooster/contentsList/ListGlossary/ListGlossary.dart';
 
 void main() {
-  final GlossaryPage glossary = GlossaryPage();
+  final ListGlossary glossary = ListGlossary();
   final util = new Util();
 
   //Glossary Page Widget Tests
