@@ -1,7 +1,7 @@
 import 'package:ScrumBooster/Utils/utils.dart';
 import 'package:flutter/material.dart';
 
-class Ceremonies extends StatelessWidget {
+class Glossary extends StatelessWidget {
   final String title;
   final String imagePath;
   final String contents;
@@ -13,7 +13,7 @@ class Ceremonies extends StatelessWidget {
 
   final util = new Util();
 
-  Ceremonies({
+  Glossary({
     Key key,
     this.title,
     this.imagePath,

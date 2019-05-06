@@ -49,7 +49,7 @@ class _ListGlossaryState extends State<ListGlossary> {
   }
 
   Future<Null> loadListGlossary(bool refresh) async {
-    final listCeremoniesApiProvider = widget.apiProvider == null
+    final listGlosaryApiProvider = widget.apiProvider == null
       ? new ListGlossaryApiProvider()
       : widget.apiProvider;
     widget.listView = [];
@@ -64,12 +64,12 @@ class _ListGlossaryState extends State<ListGlossary> {
     }
 
     //Fetch details from API
-    await listCeremoniesApiProvider.fetchPosts();
+    await listGlosaryApiProvider.fetchPosts();
 
-    widget.listGlossaryModel = listCeremoniesApiProvider.getModel();
+    widget.listGlossaryModel = listGlosaryApiProvider.getModel();
 
     //Get Details
-    widget.listGlossaryDataAlphabeticJSON = listCeremoniesApiProvider.getDictProblemsAlphabetic();
+    widget.listGlossaryDataAlphabeticJSON = listGlosaryApiProvider.getDictGlossaryAlphabetic();
     _listGlossaryState.setState(() {
       contentCount = widget.listGlossaryDataAlphabeticJSON.length;
     });
@@ -96,7 +96,7 @@ class _ListGlossaryState extends State<ListGlossary> {
           height: 10.0,
         ),
       );
-      for (CeremonyItem data in widget.listGlossaryDataAlphabeticJSON[alphabet]) {
+      for (GlossaryItem data in widget.listGlossaryDataAlphabeticJSON[alphabet]) {
         contentsList.add(
           new InkWell(
             child: Container(
@@ -139,7 +139,7 @@ class _ListGlossaryState extends State<ListGlossary> {
             padding: EdgeInsets.all(10.0),
           ),
           Text(
-            "CEREMONIES",
+            "GLOSSARY",
             style: TextStyle(
               fontSize: util.fitScreenSize(_height, 0.04),
               fontWeight: FontWeight.bold,
@@ -150,7 +150,7 @@ class _ListGlossaryState extends State<ListGlossary> {
             padding: EdgeInsets.all(15.0),
           ),
           Image.asset(
-            "assets/listCeremonies/ceremonies.png",
+            "assets/listGlossary/glossary.png",
             height: util.fitScreenSize(_height, 0.3),
             width: util.fitScreenSize(_width, 0.3),
           ),
