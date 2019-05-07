@@ -1,8 +1,8 @@
-import 'package:flutter/material.dart';
 import 'package:ScrumBooster/Utils/utils.dart';
+import 'package:flutter/material.dart';
 import 'package:ScrumBooster/search/SearchPage.dart';
 
-class ProblemsContentPage extends StatelessWidget {
+class Glossary extends StatelessWidget {
   final String title;
   final String imagePath;
   final String contents;
@@ -12,17 +12,17 @@ class ProblemsContentPage extends StatelessWidget {
     return scaffoldKey;
   }
 
-  ProblemsContentPage({
+  final util = new Util();
+
+  Glossary({
     Key key,
     this.title,
     this.imagePath,
     this.contents,
-  }) : super(key: key);
-
-  final util = new Util();
+  }) : super(key:key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context){
     double _height = MediaQuery.of(context).size.height;
     double _width = MediaQuery.of(context).size.width;
     void _searchpage() {
@@ -47,10 +47,10 @@ class ProblemsContentPage extends StatelessWidget {
         ),
         centerTitle: true,
         title: Text(
-          "Scrum Booster".toUpperCase(),
+          "SCRUM BOOSTER",
           style: TextStyle(
+            fontSize: 20, fontWeight: FontWeight.bold,
             color: util.hexToColor("#FFFFFF"),
-            fontWeight: FontWeight.bold,
           ),
         ),
         actions: <Widget>[
@@ -63,59 +63,51 @@ class ProblemsContentPage extends StatelessWidget {
               ),
               onTap: _searchpage,
             ),
-          ),
+          )
         ],
       ),
       drawer: util.defaultDrawer(context),
       body: Stack(
-        key: new Key("Main Stack"),
         children: <Widget>[
           new Container(
-            key: new Key("Problems Content Image"),
             width: _width,
             height: util.fitScreenSize(_height, 0.45),
             decoration: BoxDecoration(
               image: DecorationImage(
-                  fit: BoxFit.cover,
-                  image: NetworkImage(
-                    this.imagePath,
-                  )
-              ),
+                fit: BoxFit.cover,
+                image: NetworkImage(
+                  this.imagePath,
+                )
+              )
             ),
           ),
           ListView(
-            key: new Key("Problems Content"),
             children: <Widget>[
               new Column(
-                key: new Key("Problems Content Column"),
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   new Container(
-                    key: new Key("Problems Title Container"),
                     width: _width,
                     height: util.fitScreenSize(_height, 0.45),
                     decoration: BoxDecoration(
-                      color: Colors.transparent
+                      color: Colors.transparent,
                     ),
                     child: new Stack(
-                      key: new Key("Problems Title Stack"),
                       children: <Widget>[
                         new Align(
                           alignment: Alignment.bottomLeft,
                           child: new Padding(
                             padding: EdgeInsets.only(bottom: 30.0),
                             child: new Container(
-                              key: new Key("Problems Title Container"),
                               alignment: Alignment.center,
                               height: util.fitScreenSize(_height, 0.08),
                               width: util.fitScreenSize(_width, 0.75),
                               child: new Text(
                                 this.title,
-                                key: new Key("Problems Title"),
-                                style: TextStyle(
-                                  color: util.hexToColor("#3498DB"),
-                                  fontWeight: FontWeight.bold,
+                                style:TextStyle(
+                                  color:util.hexToColor("#3498DB"),
+                                  fontWeight:FontWeight.bold,
                                   fontSize: util.fitScreenSize(_height, 0.03),
                                 ),
                                 textAlign: TextAlign.center,
@@ -132,7 +124,7 @@ class ProblemsContentPage extends StatelessWidget {
                               ),
                             ),
                           ),
-                        ),
+                        )
                       ],
                     ),
                   ),
@@ -143,7 +135,6 @@ class ProblemsContentPage extends StatelessWidget {
                       bottom: 10.0,
                     ),
                     child: new Container(
-                      key: new Key("Problems Content Container"),
                       width: _width,
                       height: _height,
                       decoration: new BoxDecoration(
@@ -166,21 +157,18 @@ class ProblemsContentPage extends StatelessWidget {
                         ),
                         child: new Text(
                           this.contents,
-                          key: new Key("Problems Content Text"),
-                          style: TextStyle(
+                          style:TextStyle(
                             fontSize: util.fitScreenSize(_height, 0.025),
-                          ),
+                          )
                         ),
                       ),
                     ),
-                  ),
+                  )
                 ],
-              ),
+              )
             ],
-          ),
+            )
         ],
       ),
-    );
-  }
+    );}
 }
-

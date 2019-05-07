@@ -5,7 +5,6 @@ import 'package:ScrumBooster/InitialScreen/HomeScreen.dart';
 import 'package:ScrumBooster/InitialScreen/AboutPage.dart';
 import 'package:ScrumBooster/InitialScreen/BoardingPage.dart';
 import 'package:ScrumBooster/contentsList/ListGlossary/ListGlossary.dart';
-import 'package:ScrumBooster/search/SearchPage.dart';
 
 void main() {
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
@@ -42,7 +41,7 @@ class _ScrumBoosterAppState extends State<ScrumBoosterApp> {
         '/Home': (BuildContext context) => new HomePage(),
         '/About':(BuildContext context) => new AboutPage(),
         '/Boarding':(BuildContext context) => new BoardingPage(),
-        '/Glossary':(BuildContext context) => new GlossaryPage(),
+        '/Glossary':(BuildContext context) => new ListGlossary(),
       },
     );
   }
