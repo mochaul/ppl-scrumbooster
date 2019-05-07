@@ -7,6 +7,7 @@ import 'package:ScrumBooster/contentsList/ListProblems/Model.dart';
 
 import 'dart:async';
 import 'package:ScrumBooster/components/loading/loadingData.dart';
+import 'package:ScrumBooster/search/SearchPage.dart';
 
 _ListProblemsState _listProblemsState;
 class ListProblems extends StatefulWidget {
@@ -182,6 +183,15 @@ class _ListProblemsState extends State<ListProblems> {
 
   @override
   Widget build(BuildContext context) {
+    void _searchpage() {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => SearchPage()
+        ),
+      );
+    }
+
     return Scaffold(
       drawer: util.defaultDrawer(context),
       key: widget.scaffoldKey,
@@ -212,7 +222,7 @@ class _ListProblemsState extends State<ListProblems> {
                 Icons.search,
                 color: util.hexToColor("#FFFFFF"),
               ),
-              onTap: () {},
+              onTap: _searchpage,
             ),
           ),
         ],
