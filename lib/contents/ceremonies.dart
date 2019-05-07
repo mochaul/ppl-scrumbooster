@@ -2,6 +2,7 @@ import 'package:ScrumBooster/Utils/utils.dart';
 import 'package:ScrumBooster/components/loading/loadingData.dart';
 import 'package:flutter/material.dart';
 import 'package:ScrumBooster/ScrumPhase/ProcessAreaCMMI/ApiProvider.dart';
+import 'package:ScrumBooster/contents/cmmiPractices.dart';
 import 'dart:async';
 
 _CeremoniesState _ceremoniesState;
@@ -70,7 +71,9 @@ class _CeremoniesState extends State<Ceremonies> {
     for (var data in widget.processAreaByPhase) {
       processAreasList.add(
         new InkWell(
-          onTap: () {},
+          onTap: () {
+            executeCmmiPages(data.id, data.title);
+          },
           child: Text(
             "- ${data.title}",
             style: TextStyle(
@@ -210,6 +213,19 @@ class _CeremoniesState extends State<Ceremonies> {
     _ceremoniesState.setState(() {
       loading = 0.0;
     });
+  }
+
+  executeCmmiPages(int processAreaID, String processAreaTitle) {
+    var cmmiPractices = widget.cmmiPracticesByProcessArea[processAreaID];
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (BuildContext context) => CMMIPracticesPage(
+          title: processAreaTitle,
+          cmmiPractices: cmmiPractices,
+        )
+      )
+    );
   }
 
   @override

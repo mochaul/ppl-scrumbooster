@@ -22,7 +22,7 @@ class ProcessAreaCMMIFetcher {
     var processAreaJsonBody = json.decode(processAreasResponse.body);
 
     for (var data in processAreaJsonBody) {
-      if (data['id'] == ceremonyID) {
+      if (data['related_ceremony'] == ceremonyID) {
         processAreaModel = ProcessArea.fromJson(data);
         processAreasByPhase.add(processAreaModel);
       }
@@ -38,7 +38,7 @@ class ProcessAreaCMMIFetcher {
     for (int i = 1; i < processAreaCount+1; i++) {
       cmmiPracticesByProcessArea.putIfAbsent(i, () => []);
       for (var data in cmmiPracticeJsonBody) {
-        if (data["id"] == i) {
+        if (data["process_area"] == i) {
           cmmiPracticeModel = CMMIPractices.fromJson(data);
           cmmiPracticesByProcessArea[i].add(cmmiPracticeModel);
         }
