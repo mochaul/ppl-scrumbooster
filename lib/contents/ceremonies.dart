@@ -119,6 +119,7 @@ class _CeremoniesState extends State<Ceremonies> {
                     child: new Stack(
                       children: <Widget>[
                         new Align(
+                          key: new Key("Alignment 1"),
                           alignment: Alignment.bottomLeft,
                           child: new Padding(
                             padding: EdgeInsets.only(bottom: 30.0),
