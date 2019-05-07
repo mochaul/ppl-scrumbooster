@@ -11,6 +11,7 @@ import 'package:ScrumBooster/ScrumPhase/SprintPlanning/SprintPlanning.dart';
 
 import 'dart:async';
 import 'package:ScrumBooster/components/loading/loadingData.dart';
+import 'package:ScrumBooster/search/SearchPage.dart';
 
 _ProductBacklogState _productBacklogState;
 class ProductBacklog extends StatefulWidget {
@@ -38,7 +39,6 @@ class ProductBacklog extends StatefulWidget {
 class _ProductBacklogState extends State<ProductBacklog> {
 
   final util = new Util();
-
   GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   getScaffoldKey() {
     return scaffoldKey;
@@ -234,9 +234,18 @@ class _ProductBacklogState extends State<ProductBacklog> {
     );
 
     //Adding ceremony items
-    Function ceremoniesFunc = (String image, String title, String detail) =>
-        Ceremonies(imagePath: image, title: title, contents: detail);
-    Widget column = generateColumn(widget.phaseCeremoniesDataJSON, ceremoniesFunc, ceremoniesCount);
+    Function ceremoniesFunc = (int id, String image, String title, String detail) =>
+      Ceremonies(
+        id: id,
+        imagePath: image,
+        title: title,
+        contents: detail,
+      );
+    Widget column = generateColumn(
+      widget.phaseCeremoniesDataJSON,
+      ceremoniesFunc,
+      ceremoniesCount,
+    );
     listView.add(column);
 
     listView.add(
@@ -293,8 +302,7 @@ class _ProductBacklogState extends State<ProductBacklog> {
     List<Widget> columnWidgetList = [];
     List<Widget> rowWidgetList = [];
 
-    double _height = MediaQuery.of(context).size.height;
-    double _width = MediaQuery.of(context).size.width;
+    print("class name: ${className.toString()}");
 
     Widget column = new Column(
       children: columnWidgetList,
@@ -326,16 +334,33 @@ class _ProductBacklogState extends State<ProductBacklog> {
           title: data.title,
           imageAssetURL: data.image,
           action: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => className(
-                  data.image,
-                  data.title,
-                  data.detail,
-                ),
-              ),
-            );
+            switch (className.toString()) {
+              case "Closure: (int, String, String, String) => Ceremonies":
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => className(
+                      data.id,
+                      data.image,
+                      data.title,
+                      data.detail,
+                    ),
+                  ),
+                );
+                break;
+              case "Closure: (String, String, String) => ProblemsContentPage":
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => className(
+                      data.image,
+                      data.title,
+                      data.detail,
+                    ),
+                  ),
+                );
+                break;
+            }
           },
         ),
       );
@@ -354,6 +379,14 @@ class _ProductBacklogState extends State<ProductBacklog> {
 
   @override
   Widget build(BuildContext context) {
+     void _searchpage() {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => SearchPage()
+        ),
+      );
+    }
     return Scaffold(
       key: scaffoldKey,
       appBar: AppBar(
@@ -383,7 +416,7 @@ class _ProductBacklogState extends State<ProductBacklog> {
                 Icons.search,
                 color: util.hexToColor("#FFFFFF"),
               ),
-              onTap: () => {},
+              onTap: _searchpage,
             ),
           ),
         ],

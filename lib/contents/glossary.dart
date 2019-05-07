@@ -1,5 +1,6 @@
 import 'package:ScrumBooster/Utils/utils.dart';
 import 'package:flutter/material.dart';
+import 'package:ScrumBooster/search/SearchPage.dart';
 
 class Glossary extends StatelessWidget {
   final String title;
@@ -24,6 +25,14 @@ class Glossary extends StatelessWidget {
   Widget build(BuildContext context){
     double _height = MediaQuery.of(context).size.height;
     double _width = MediaQuery.of(context).size.width;
+    void _searchpage() {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => SearchPage()
+        ),
+      );
+    }
     return Scaffold(
       key: scaffoldKey,
       appBar: AppBar(
@@ -52,7 +61,7 @@ class Glossary extends StatelessWidget {
                 Icons.search,
                 color: util.hexToColor("#FFFFFF"),
               ),
-              onTap: () => {},
+              onTap: _searchpage,
             ),
           )
         ],

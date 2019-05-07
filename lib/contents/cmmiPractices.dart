@@ -1,22 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:ScrumBooster/Utils/utils.dart';
-import 'package:ScrumBooster/search/SearchPage.dart';
+import 'package:ScrumBooster/ScrumPhase/ProcessAreaCMMI/Model.dart';
+import 'package:ScrumBooster/components/cmmiPracticesDropdown.dart';
 
-class ProblemsContentPage extends StatelessWidget {
+class CMMIPracticesPage extends StatelessWidget {
   final String title;
-  final String imagePath;
-  final String contents;
+  final List<CMMIPractices> cmmiPractices;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   getScaffoldKey() {
     return scaffoldKey;
   }
 
-  ProblemsContentPage({
+  CMMIPracticesPage({
     Key key,
     this.title,
-    this.imagePath,
-    this.contents,
+    this.cmmiPractices,
   }) : super(key: key);
 
   final util = new Util();
@@ -25,14 +24,39 @@ class ProblemsContentPage extends StatelessWidget {
   Widget build(BuildContext context) {
     double _height = MediaQuery.of(context).size.height;
     double _width = MediaQuery.of(context).size.width;
-    void _searchpage() {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-            builder: (context) => SearchPage()
+
+    List<Widget> mainWidgets = [
+      Text(
+        "CMMI Practices",
+        style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 22.5,
+            color: util.hexToColor("#000000")
+        ),
+        textAlign: TextAlign.center,
+      ),
+      new Padding(
+        padding: EdgeInsets.all(10.0),
+      ),
+    ];
+
+    for (CMMIPractices data in this.cmmiPractices) {
+      mainWidgets.add(
+        CmmiPracticesDropdown(
+          id: data.id,
+          title: data.title,
+          strengthens: data.strengthens,
+          satisfy: data.satisfy,
+          demonstrated: data.demonstrated,
+        ),
+      );
+      mainWidgets.add(
+        new Padding(
+          padding: EdgeInsets.all(10.0),
         ),
       );
     }
+
     return Scaffold(
       key: scaffoldKey,
       appBar: AppBar(
@@ -61,7 +85,7 @@ class ProblemsContentPage extends StatelessWidget {
                 Icons.search,
                 color: util.hexToColor("#FFFFFF"),
               ),
-              onTap: _searchpage,
+              onTap: () => {},
             ),
           ),
         ],
@@ -76,15 +100,15 @@ class ProblemsContentPage extends StatelessWidget {
             height: util.fitScreenSize(_height, 0.45),
             decoration: BoxDecoration(
               image: DecorationImage(
-                  fit: BoxFit.cover,
-                  image: NetworkImage(
-                    this.imagePath,
-                  )
+                fit: BoxFit.cover,
+                image: NetworkImage(
+                  "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRTT3t3Uf-5Axs6lmkoRnVD3xOSuCRmi4hjk_VPVODLQ2AaC0py"
+                ),
               ),
             ),
           ),
           ListView(
-            key: new Key("Problems Content"),
+            key: new Key("CMMI Contents"),
             children: <Widget>[
               new Column(
                 key: new Key("Problems Content Column"),
@@ -96,7 +120,7 @@ class ProblemsContentPage extends StatelessWidget {
                     width: _width,
                     height: util.fitScreenSize(_height, 0.45),
                     decoration: BoxDecoration(
-                      color: Colors.transparent
+                        color: Colors.transparent
                     ),
                     child: new Stack(
                       key: new Key("Problems Title Stack"),
@@ -144,8 +168,8 @@ class ProblemsContentPage extends StatelessWidget {
                     ),
                     child: new Container(
                       key: new Key("Problems Content Container"),
-                      width: _width,
-                      height: _height,
+//                      width: _width,
+//                      height: util.fitScreenSize(_height, 3.2),
                       decoration: new BoxDecoration(
                         color: util.hexToColor("#FFFFFF"),
                         borderRadius: BorderRadius.circular(30.0),
@@ -164,12 +188,11 @@ class ProblemsContentPage extends StatelessWidget {
                           bottom: 15.0,
                           top: 15.0,
                         ),
-                        child: new Text(
-                          this.contents,
-                          key: new Key("Problems Content Text"),
-                          style: TextStyle(
-                            fontSize: util.fitScreenSize(_height, 0.025),
-                          ),
+                        child: Column(
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: mainWidgets,
                         ),
                       ),
                     ),
@@ -183,4 +206,3 @@ class ProblemsContentPage extends StatelessWidget {
     );
   }
 }
-

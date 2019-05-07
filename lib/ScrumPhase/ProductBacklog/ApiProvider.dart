@@ -21,7 +21,7 @@ class ProductBacklogApiProvider {
       print("API isn't available");
     }
 
-    var jsonBody = json.decode(response.body);
+    var jsonBody = json.decode(utf8.decode(response.bodyBytes));
 
     model = ProductBacklogModel.fromJson(jsonBody);
 
