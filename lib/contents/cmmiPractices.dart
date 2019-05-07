@@ -168,8 +168,6 @@ class CMMIPracticesPage extends StatelessWidget {
                     ),
                     child: new Container(
                       key: new Key("Problems Content Container"),
-//                      width: _width,
-//                      height: util.fitScreenSize(_height, 3.2),
                       decoration: new BoxDecoration(
                         color: util.hexToColor("#FFFFFF"),
                         borderRadius: BorderRadius.circular(30.0),

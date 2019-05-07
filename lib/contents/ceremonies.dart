@@ -159,7 +159,6 @@ class _CeremoniesState extends State<Ceremonies> {
                     ),
                     child: new Container(
                       width: _width,
-                      height: _height,
                       decoration: new BoxDecoration(
                         color: util.hexToColor("#FFFFFF"),
                         borderRadius: BorderRadius.circular(30.0),
@@ -179,6 +178,7 @@ class _CeremoniesState extends State<Ceremonies> {
                           top: 15.0,
                         ),
                         child: new Column(
+                          mainAxisSize: MainAxisSize.min,
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
@@ -192,6 +192,7 @@ class _CeremoniesState extends State<Ceremonies> {
                               padding: EdgeInsets.all(10.0),
                             ),
                             new Column(
+                              mainAxisSize: MainAxisSize.min,
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: processAreasList,

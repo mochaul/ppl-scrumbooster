@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ScrumBooster/Utils/utils.dart';
 import 'package:ScrumBooster/contents/ceremonies.dart';
-import 'package:ScrumBooster/contents/problems.dart';
+import 'package:ScrumBooster/contents/Problems/problems.dart';
 import 'package:ScrumBooster/components/ScrumPhaseContentBtn.dart';
 import 'package:ScrumBooster/ScrumPhase/SprintPlanning/ApiProvider.dart';
 import 'package:ScrumBooster/ScrumPhase/SprintPlanning/Model.dart';
