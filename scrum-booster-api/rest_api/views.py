@@ -75,15 +75,31 @@ class GetListCeremonyAlphabeticalOrder(views.APIView):
         response = get_list_data_alphabetical_order(request, models.Ceremony, serializers.CeremonySerializer)
         return Response(response, status=status.HTTP_200_OK)
 
+
 class GetListProblemAlphabeticalOrder(views.APIView):
     def get(self, request):
         response = get_list_data_alphabetical_order(request, models.Problem, serializers.ProblemSerializer)
         return Response(response, status=status.HTTP_200_OK)
 
+
 class GetListGlossaryAlphabeticalOrder(views.APIView):
     def get(self, request):
         response = get_list_data_alphabetical_order(request, models.Glossary, serializers.GlossarySerializer)
         return Response(response, status=status.HTTP_200_OK)
+
+        
+class GetGlossaryByName(views.APIView):
+    def get(self, request, title):
+        try:
+            if title.isdigit():
+                obj = models.Glossary.objects.get(id=int(title))
+            else:
+                obj = models.Glossary.objects.get(title=title)
+        except models.Glossary.DoesNotExist:
+            return Response({'detail': 'Not found'}, status=status.HTTP_400_BAD_REQUEST)
+
+        obj_serializer = serializers.GlossarySerializer(obj, context={'request': request})
+        return Response(obj_serializer.data, status=status.HTTP_200_OK)
 
 def get_list_data_alphabetical_order(request, model_class, serializer_class):
     dct = {}
