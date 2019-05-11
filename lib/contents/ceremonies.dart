@@ -16,7 +16,7 @@ class Ceremonies extends StatefulWidget {
 
   final util = new Util();
   var cmmiPracticesByProcessArea;
-  var processAreaByPhase;
+  var processAreaByCeremony;
 
   Ceremonies({
     Key key,
@@ -65,10 +65,10 @@ class _CeremoniesState extends State<Ceremonies> {
 
     await contentPageApiProvider.fetchPosts(widget.id);
     widget.cmmiPracticesByProcessArea = contentPageApiProvider.getCmmiPracticesByProcessArea();
-    widget.processAreaByPhase = contentPageApiProvider.getProcessAreasByPhase();
-    
+    widget.processAreaByCeremony = contentPageApiProvider.getProcessAreasByCeremony();
+
     List<Widget> processAreasList = [];
-    for (var data in widget.processAreaByPhase) {
+    for (var data in widget.processAreaByCeremony) {
       processAreasList.add(
         new InkWell(
           onTap: () {

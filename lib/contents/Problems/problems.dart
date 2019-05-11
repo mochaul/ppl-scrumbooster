@@ -1,114 +1,134 @@
 import 'package:flutter/material.dart';
 import 'package:ScrumBooster/Utils/utils.dart';
 import 'package:ScrumBooster/components/loading/loadingData.dart';
-import 'package:ScrumBooster/ScrumPhase/ProductBacklog/Model.dart';
+import 'package:ScrumBooster/contentsList/ListCeremonies/Model.dart';
+import 'package:ScrumBooster/contents/Problems/ApiProvider.dart';
+import 'dart:async';
 
-class ProblemsContentPage extends StatelessWidget {
+_ProblemsContentPageState _problemsContentPageState;
+class ProblemsContentPage extends StatefulWidget {
+  final int id;
   final String title;
   final String imagePath;
   final String contents;
-  final scaffoldKey = GlobalKey<ScaffoldState>();
+  final List<dynamic> canBeSolvedBy;
+  final ProblemsDetailPageApiProvider apiProvider;
+  List<Widget> listView = [Container(),];
 
+  final util = new Util();
+  var ceremoniesByProblem;
+
+  ProblemsContentPage({
+    Key key,
+    this.id,
+    this.title,
+    this.imagePath,
+    this.contents,
+    this.canBeSolvedBy,
+    this.apiProvider,
+  }) : super(key: key);
+
+  @override
+  _ProblemsContentPageState createState() {
+    _problemsContentPageState = new _ProblemsContentPageState();
+    return _problemsContentPageState;
+  }
+}
+
+class _ProblemsContentPageState extends State<ProblemsContentPage> {
+  final util = new Util();
+
+  GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   getScaffoldKey() {
     return scaffoldKey;
   }
 
-  ProblemsContentPage({
-    Key key,
-    this.title,
-    this.imagePath,
-    this.contents,
-  }) : super(key: key);
+  double loading = 0.0;
 
-  final util = new Util();
+  Future<Null> refresh() async {
+    await loadContents(true);
+    return null;
+  }
 
-  @override
-  Widget build(BuildContext context) {
-    double _height = MediaQuery.of(context).size.height;
-    double _width = MediaQuery.of(context).size.width;
-    return Scaffold(
-      key: scaffoldKey,
-      appBar: AppBar(
-        leading: new InkWell(
-          child: Icon(
-            Icons.menu,
-            color: util.hexToColor("#FFFFFF"),
-          ),
-          onTap: () {
-            scaffoldKey.currentState.openDrawer();
-          },
-        ),
-        centerTitle: true,
-        title: Text(
-          "Scrum Booster".toUpperCase(),
-          style: TextStyle(
-            color: util.hexToColor("#FFFFFF"),
-            fontWeight: FontWeight.bold,
-          ),
-        ),
-        actions: <Widget>[
-          new Padding(
-            padding: EdgeInsets.only(right: 6.0),
-            child: new InkWell(
-              child: new Icon(
-                Icons.search,
-                color: util.hexToColor("#FFFFFF"),
-              ),
-              onTap: () => {},
+  Future<Null> loadContents(bool refresh) async {
+    final contentPageApiProvider = widget.apiProvider == null
+      ? new ProblemsDetailPageApiProvider()
+      : widget.apiProvider;
+    widget.listView = [];
+    final _height = MediaQuery.of(context).size.height;
+    final _width = MediaQuery.of(context).size.width;
+
+    if (!refresh) {
+      _problemsContentPageState.setState(() {
+        loading = _height;
+      });
+    }
+
+    await contentPageApiProvider.getCeremoniesByProblemsList(widget.canBeSolvedBy);
+    widget.ceremoniesByProblem = contentPageApiProvider.listCeremoniesByProblem;
+
+    List<Widget> ceremoniesList = [];
+    for (var data in widget.ceremoniesByProblem) {
+      ceremoniesList.add(
+        new InkWell(
+          onTap: () {},
+          child: Text(
+            "- ${data.title}",
+            style: TextStyle(
+              fontSize: 20.0,
+              fontWeight: FontWeight.bold,
+              color: util.hexToColor("#3498DB"),
             ),
           ),
-        ],
-      ),
-      drawer: util.defaultDrawer(context),
-      body: Stack(
-        key: new Key("Main Stack"),
+        ),
+      );
+    }
+
+    List<Widget> listView = widget.listView;
+    widget.listView = [];
+
+    listView.add(
+      new Stack(
         children: <Widget>[
           new Container(
-            key: new Key("Problems Content Image"),
             width: _width,
             height: util.fitScreenSize(_height, 0.45),
             decoration: BoxDecoration(
-              image: DecorationImage(
-                  fit: BoxFit.cover,
-                  image: NetworkImage(
-                    this.imagePath,
-                  )
-              ),
+                image: DecorationImage(
+                    fit: BoxFit.cover,
+                    image: NetworkImage(
+                      widget.imagePath,
+                    )
+                )
             ),
           ),
-          ListView(
-            key: new Key("Problems Content"),
+          Column(
             children: <Widget>[
               new Column(
-                key: new Key("Problems Content Column"),
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   new Container(
-                    key: new Key("Problems Title Container"),
                     width: _width,
                     height: util.fitScreenSize(_height, 0.45),
                     decoration: BoxDecoration(
-                      color: Colors.transparent
+                      color: Colors.transparent,
                     ),
                     child: new Stack(
-                      key: new Key("Problems Title Stack"),
                       children: <Widget>[
                         new Align(
                           alignment: Alignment.bottomLeft,
                           child: new Padding(
                             padding: EdgeInsets.only(bottom: 30.0),
                             child: new Container(
-                              key: new Key("Problems Title Container"),
                               alignment: Alignment.center,
                               height: util.fitScreenSize(_height, 0.08),
                               width: util.fitScreenSize(_width, 0.75),
                               child: new Text(
-                                this.title,
-                                key: new Key("Problems Title"),
-                                style: TextStyle(
-                                  color: util.hexToColor("#3498DB"),
-                                  fontWeight: FontWeight.bold,
+                                widget.title,
+                                style:TextStyle(
+                                  color:util.hexToColor("#3498DB"),
+                                  fontWeight:FontWeight.bold,
                                   fontSize: util.fitScreenSize(_height, 0.03),
                                 ),
                                 textAlign: TextAlign.center,
@@ -125,7 +145,7 @@ class ProblemsContentPage extends StatelessWidget {
                               ),
                             ),
                           ),
-                        ),
+                        )
                       ],
                     ),
                   ),
@@ -136,9 +156,7 @@ class ProblemsContentPage extends StatelessWidget {
                       bottom: 10.0,
                     ),
                     child: new Container(
-                      key: new Key("Problems Content Container"),
                       width: _width,
-                      height: _height,
                       decoration: new BoxDecoration(
                         color: util.hexToColor("#FFFFFF"),
                         borderRadius: BorderRadius.circular(30.0),
@@ -157,23 +175,49 @@ class ProblemsContentPage extends StatelessWidget {
                           bottom: 15.0,
                           top: 15.0,
                         ),
-                        child: new Text(
-                          this.contents,
-                          key: new Key("Problems Content Text"),
-                          style: TextStyle(
-                            fontSize: util.fitScreenSize(_height, 0.025),
-                          ),
+                        child: new Column(
+                          mainAxisSize: MainAxisSize.min,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: <Widget>[
+                            new Text(
+                                "${widget.contents}\n\nScrum ceremonies that can help you with this problem are:",
+                                style:TextStyle(
+                                  fontSize: util.fitScreenSize(_height, 0.025),
+                                )
+                            ),
+                            new Padding(
+                              padding: EdgeInsets.all(10.0),
+                            ),
+                            new Column(
+                              mainAxisSize: MainAxisSize.min,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: ceremoniesList,
+                            ),
+                          ],
                         ),
                       ),
                     ),
-                  ),
+                  )
                 ],
-              ),
+              )
             ],
           ),
         ],
       ),
     );
+
+    widget.listView.addAll(listView);
+    _problemsContentPageState.setState(() {
+      loading = 0.0;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container();
   }
 }
+
 
