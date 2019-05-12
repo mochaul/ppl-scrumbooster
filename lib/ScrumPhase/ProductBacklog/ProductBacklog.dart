@@ -11,6 +11,7 @@ import 'package:ScrumBooster/ScrumPhase/SprintPlanning/SprintPlanning.dart';
 
 import 'dart:async';
 import 'package:ScrumBooster/components/loading/loadingData.dart';
+import 'package:ScrumBooster/search/SearchPage.dart';
 
 _ProductBacklogState _productBacklogState;
 class ProductBacklog extends StatefulWidget {
@@ -38,7 +39,6 @@ class ProductBacklog extends StatefulWidget {
 class _ProductBacklogState extends State<ProductBacklog> {
 
   final util = new Util();
-
   GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   getScaffoldKey() {
     return scaffoldKey;
@@ -390,6 +390,14 @@ class _ProductBacklogState extends State<ProductBacklog> {
 
   @override
   Widget build(BuildContext context) {
+     void _searchpage() {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => SearchPage()
+        ),
+      );
+    }
     return Scaffold(
       key: scaffoldKey,
       appBar: AppBar(
@@ -419,7 +427,7 @@ class _ProductBacklogState extends State<ProductBacklog> {
                 Icons.search,
                 color: util.hexToColor("#FFFFFF"),
               ),
-              onTap: () => {},
+              onTap: _searchpage,
             ),
           ),
         ],

@@ -429,10 +429,10 @@ class _ProblemsContentPageState extends State<ProblemsContentPage> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => GlossaryPage()
+                      builder: (context) => ListGlossary(),
                   ),
                 );
-              }, //TODO: Implement fungsi buat callback kalo mencet Glossary di drawer
+              },
             ),
             ListTile(
               key: new Key("About"),
@@ -464,7 +464,7 @@ class _ProblemsContentPageState extends State<ProblemsContentPage> {
                       builder: (context) => AboutPage()
                   ),
                 );
-              }, //TODO: Implement fungsi buat callback kalo mencet About di drawer
+              },
             ),
           ],
         ),

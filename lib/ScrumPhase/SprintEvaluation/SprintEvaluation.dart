@@ -11,6 +11,7 @@ import 'package:ScrumBooster/ScrumPhase/SprintPlanning/SprintPlanning.dart';
 
 import 'dart:async';
 import 'package:ScrumBooster/components/loading/loadingData.dart';
+import 'package:ScrumBooster/search/SearchPage.dart';
 
 _SprintEvaluationState _sprintEvaluationState;
 class SprintEvaluation extends StatefulWidget {
@@ -354,6 +355,14 @@ class _SprintEvaluationState extends State<SprintEvaluation> {
 
   @override
   Widget build(BuildContext context) {
+    void _searchpage() {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => SearchPage()
+        ),
+      );
+    }
     return Scaffold(
       key: scaffoldKey,
       appBar: AppBar(
@@ -383,7 +392,7 @@ class _SprintEvaluationState extends State<SprintEvaluation> {
                 Icons.search,
                 color: util.hexToColor("#FFFFFF"),
               ),
-              onTap: () => {},
+              onTap: _searchpage,
             ),
           ),
         ],
