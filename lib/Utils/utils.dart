@@ -43,6 +43,38 @@ class Util {
     }; //Staging API
   }
 
+  List<dynamic> getDummyJSONCMMIPractices() {
+    return [
+      {
+        "id": 1,
+        "title": "Dummy CMMI Practice 1",
+        "strengthens": "This CMMI Practice can strengthen dummy",
+        "satisfy": "This CMMI Practice can satisfy dummy",
+        "demonstrated": "This CMMI Practice can demonstrate dummy",
+        "image": "https://static1.squarespace.com/static/56c775ad27d4bd3fdb24775d/t/5a8b201324a694d7071662ee/1519067160925/dummy+logo.jpg",
+        "process_area": 1
+      },
+      {
+        "id": 2,
+        "title": "Dummy CMMI Practice 2",
+        "strengthens": "This CMMI Practice can strengthen dummy",
+        "satisfy": "This CMMI Practice can satisfy dummy",
+        "demonstrated": "This CMMI Practice can demonstrate dummy",
+        "image": "https://static1.squarespace.com/static/56c775ad27d4bd3fdb24775d/t/5a8b201324a694d7071662ee/1519067160925/dummy+logo.jpg",
+        "process_area": 1
+      },
+      {
+        "id": 3,
+        "title": "Dummy CMMI Practice 3",
+        "strengthens": "This CMMI Practice can strengthen dummy",
+        "satisfy": "This CMMI Practice can satisfy dummy",
+        "demonstrated": "This CMMI Practice can demonstrate dummy",
+        "image": "https://static1.squarespace.com/static/56c775ad27d4bd3fdb24775d/t/5a8b201324a694d7071662ee/1519067160925/dummy+logo.jpg",
+        "process_area": 2
+      }
+    ];
+  }
+
   Map<String, dynamic> getDummyJSONContentsList() {
     return {
       "a": [

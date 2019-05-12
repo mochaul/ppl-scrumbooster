@@ -11,7 +11,8 @@ class Ceremonies extends StatefulWidget {
   final String title;
   final String imagePath;
   final String contents;
-  final ProcessAreaCMMIFetcher apiProvider;
+  final ProcessAreaCMMIFetcher processAreaApiProvider;
+  final CMMIPracticesFetcher cmmiPracticesApiProvider;
   List<Widget> listView = [Container(),];
 
   final util = new Util();
@@ -24,7 +25,8 @@ class Ceremonies extends StatefulWidget {
     this.title,
     this.imagePath,
     this.contents,
-    this.apiProvider,
+    this.processAreaApiProvider,
+    this.cmmiPracticesApiProvider
   }) : super(key: key);
 
   @override
@@ -50,9 +52,10 @@ class _CeremoniesState extends State<Ceremonies> {
   }
 
   Future<Null> loadContents(bool refresh) async {
-    final contentPageApiProvider = widget.apiProvider == null
+    final processAreaApiProvider = widget.processAreaApiProvider == null
       ? new ProcessAreaCMMIFetcher()
-      : widget.apiProvider;
+      : widget.processAreaApiProvider;
+
     widget.listView = [];
     final _height = MediaQuery.of(context).size.height;
     final _width = MediaQuery.of(context).size.width;
@@ -63,9 +66,17 @@ class _CeremoniesState extends State<Ceremonies> {
       });
     }
 
-    await contentPageApiProvider.fetchPosts(widget.id);
-    widget.cmmiPracticesByProcessArea = contentPageApiProvider.getCmmiPracticesByProcessArea();
-    widget.processAreaByCeremony = contentPageApiProvider.getProcessAreasByCeremony();
+    await processAreaApiProvider.fetchPosts(widget.id);
+    widget.processAreaByCeremony = processAreaApiProvider.getProcessAreasByCeremony();
+
+    final cmmiPracticesApiProvider = widget.cmmiPracticesApiProvider == null
+      ? new CMMIPracticesFetcher(
+          processAreasByCeremony: widget.processAreaByCeremony,
+        )
+      : widget.cmmiPracticesApiProvider;
+    
+    await cmmiPracticesApiProvider.fetchPosts();
+    widget.cmmiPracticesByProcessArea = cmmiPracticesApiProvider.getCmmiPracticesByProcessArea();
 
     List<Widget> processAreasList = [];
     for (var data in widget.processAreaByCeremony) {

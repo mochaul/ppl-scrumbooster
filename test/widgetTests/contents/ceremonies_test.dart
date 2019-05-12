@@ -13,6 +13,10 @@ void main() {
   final util = new Util();
   final widgetTestingApiProvider = ProcessAreaCMMIFetcher();
 
+  widgetTestingApiProvider.client = MockClient((request) async {
+    final mapJSON = util.getDummyJSONCMMIPractices();
+    return Response(json.encode(mapJSON), 200);
+  });
 
   final Ceremonies ceremonies = Ceremonies(
     title: "Backlog Grooming".toUpperCase(),

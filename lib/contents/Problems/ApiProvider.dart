@@ -7,17 +7,17 @@ class ProblemsDetailPageApiProvider {
   Client client = Client();
   var response;
   var util = new Util();
-  List<CeremonyItem> _listCeremoniesByProblem;
+  List<CeremonyItem> _listCeremoniesByProblem = [];
 
-  getCeremoniesByProblemsList(List<int> ceremonyIDs) async {
+  getCeremoniesByProblemsList(List<dynamic> ceremonyIDs) async {
     response = await client.get(
       util.getConfiguration()['base_url']+'ceremony/'
     );
     var jsonBody = json.decode(utf8.decode(response.bodyBytes));
 
     for (var data in jsonBody) {
-      for (int id in ceremonyIDs) {
-        if (data['id'] == id) {
+      for (int i = 0; i < ceremonyIDs.length; i++) {
+        if (data['id'] == ceremonyIDs[i]) {
           CeremonyItem mapped = CeremonyItem.fromJson(data);
           _listCeremoniesByProblem.add(mapped);
         }
