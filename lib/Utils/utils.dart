@@ -6,6 +6,10 @@ import 'package:ScrumBooster/contentsList/ListCeremonies/ListCeremonies.dart';
 import 'package:ScrumBooster/contentsList/ListProblems/ListProblems.dart';
 import 'package:ScrumBooster/contentsList/ListGlossary/ListGlossary.dart';
 import 'package:ScrumBooster/InitialScreen/AboutPage.dart';
+import 'package:ScrumBooster/components/LinkTextSpan.dart';
+import 'package:ScrumBooster/contents/glossary.dart';
+import 'package:ScrumBooster/contents/GlossaryText/ApiProvider.dart';
+import 'package:ScrumBooster/contentsList/ListGlossary/Model.dart';
 
 class Util {
   String call;
@@ -26,6 +30,53 @@ class Util {
     "11": "November",
     "12": "Desember",
   };
+
+  Future<List<TextSpan>> getFormattedContentDetailsText(BuildContext context, String contentText) async {
+    List<String> splittedByDelimiter = contentText.split('#');
+    List<TextSpan> formatted = [];
+    GlossaryTextApiProvider apiProvider = new GlossaryTextApiProvider();
+    for (int i = 0; i < splittedByDelimiter.length; i++) {
+      if (i%2!=0) {
+        await apiProvider.getGlossaryTextItem('1');
+        GlossaryItem mapped = apiProvider.glossaryItem;
+        formatted.add(
+          new LinkTextSpan(
+            text: splittedByDelimiter[i],
+            style: TextStyle(
+              color: hexToColor("#3498DB"),
+              fontWeight: FontWeight.bold,
+              fontSize: 17.5,
+              fontFamily: "Montserrat",
+            ),
+            action: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => Glossary(
+                    title: mapped.title,
+                    imagePath: mapped.image,
+                    contents: mapped.detail,
+                  )
+                ),
+              );
+            }
+          )
+        );
+      } else {
+        formatted.add(
+          new TextSpan(
+            text: splittedByDelimiter[i],
+            style: TextStyle(
+              color: hexToColor("#000000"),
+              fontSize: 17.5,
+              fontFamily: "Montserrat",
+            ),
+          )
+        );
+      }
+    }
+    return formatted;
+  }
 
   Widget makeTestableWidget({Widget child}) {
     return MaterialApp(

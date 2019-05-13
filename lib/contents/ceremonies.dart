@@ -3,6 +3,7 @@ import 'package:ScrumBooster/components/loading/loadingData.dart';
 import 'package:flutter/material.dart';
 import 'package:ScrumBooster/ScrumPhase/ProcessAreaCMMI/ApiProvider.dart';
 import 'package:ScrumBooster/contents/cmmiPractices.dart';
+
 import 'dart:async';
 
 _CeremoniesState _ceremoniesState;
@@ -26,7 +27,7 @@ class Ceremonies extends StatefulWidget {
     this.imagePath,
     this.contents,
     this.processAreaApiProvider,
-    this.cmmiPracticesApiProvider
+    this.cmmiPracticesApiProvider,
   }) : super(key: key);
 
   @override
@@ -77,6 +78,8 @@ class _CeremoniesState extends State<Ceremonies> {
     
     await cmmiPracticesApiProvider.fetchPosts();
     widget.cmmiPracticesByProcessArea = cmmiPracticesApiProvider.getCmmiPracticesByProcessArea();
+
+    List<TextSpan> formattedTexts = await util.getFormattedContentDetailsText(context, widget.contents);
 
     List<Widget> processAreasList = [];
     for (var data in widget.processAreaByCeremony) {
@@ -194,8 +197,13 @@ class _CeremoniesState extends State<Ceremonies> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
+                            new RichText(
+                              text: TextSpan(
+                                children: formattedTexts,
+                              ),
+                            ),
                             new Text(
-                              "${widget.contents}\n\nCMMI Practices that will enhanched this ceremony are:",
+                              "\nCMMI Practices that will enhanched this ceremony are:",
                               style:TextStyle(
                                 fontSize: util.fitScreenSize(_height, 0.025),
                               )

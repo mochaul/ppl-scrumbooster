@@ -13,6 +13,7 @@ import 'package:ScrumBooster/contents/Problems/ApiProvider.dart';
 import 'dart:async';
 
 _ProblemsContentPageState _problemsContentPageState;
+// ignore: must_be_immutable
 class ProblemsContentPage extends StatefulWidget {
   final int id;
   final String title;
@@ -73,6 +74,8 @@ class _ProblemsContentPageState extends State<ProblemsContentPage> {
 
     await contentPageApiProvider.getCeremoniesByProblemsList(widget.canBeSolvedUsing);
     widget.ceremoniesByProblem = contentPageApiProvider.listCeremoniesByProblem;
+
+    List<TextSpan> formattedTexts = await util.getFormattedContentDetailsText(context, widget.contents);
 
     List<Widget> ceremoniesList = [];
     for (var data in widget.ceremoniesByProblem) {
@@ -199,8 +202,13 @@ class _ProblemsContentPageState extends State<ProblemsContentPage> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
+                            new RichText(
+                              text: TextSpan(
+                                children: formattedTexts,
+                              ),
+                            ),
                             new Text(
-                              "${widget.contents}\n\nScrum ceremonies that can help you with this problem are:",
+                              "\nScrum ceremonies that can help you with this problem are:",
                               style:TextStyle(
                                 fontSize: util.fitScreenSize(_height, 0.025),
                               )
@@ -368,7 +376,6 @@ class _ProblemsContentPageState extends State<ProblemsContentPage> {
                   ),
                 );
               },
-              //TODO: Implement fungsi buat callback kalo mencet Ceremonies di drawer
             ),
             ListTile(
               key: new Key("Problems"),
