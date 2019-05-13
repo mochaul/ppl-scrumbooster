@@ -55,126 +55,134 @@ class AboutPage extends StatelessWidget {
           ),
         ],
       ),
-      body : new Container(
-        padding: new EdgeInsets.only(top: 50.0, left: 20.0, right: 20.0),
-
-        //add column for the content
-        child: new Column(
-          children: <Widget>[
-            new Row(
+      body : new ListView(
+        children: <Widget>[
+          //about content
+          new Padding(
+            padding: EdgeInsets.only(
+              top: 25.0,
+              bottom: 25.0,
+            ),
+            child: new Row(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 new Image.asset(
-                  'assets/logos/logo-color.png', 
+                  'assets/logos/logo-color.png',
                   height: 120,
                   key: new Key("Scrum Booster Logo"),
                 ),
                 Padding(padding: EdgeInsets.all(10.0),),
                 new Image.asset(
-                  'assets/logos/Makara-UI.png', 
+                  'assets/logos/Makara-UI.png',
                   height: 120,
                   key: new Key("Makara UI Logo"),
                 ),
-              ], 
+              ],
             ),
-            Padding(
-              padding: EdgeInsets.only(top: 50.0),
-              child: new Column(
-                children: <Widget>[
-                  //about content
-                  new Text(
-                    'Scrum Booster is a software project developed by RSE Labs. RSE Labs is a part of Faculty of Computer Science in University of Indonesia. Scrum Booster is part of software engineering projects developed by:',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
-                    key: new Key("Explanation"),
+          ),
+          new Padding(
+            padding: EdgeInsets.only(
+              left: 15.0,
+              right: 15.0,
+              top: 10.0,
+              bottom: 10.0,
+            ),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                new Text(
+                  'Scrum Booster is a software project developed by RSE Labs.\nRSE Labs is a part of Faculty of Computer Science, Universitas Indonesia.\nScrum Booster is part of software engineering projects developed by:',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
                   ),
-                  Padding(
-                    padding: EdgeInsets.all(10.0),
+                  key: new Key("Explanation"),
+                ),
+                Padding(
+                  padding: EdgeInsets.all(10.0),
+                ),
+                new Text(
+                  'Eko K. Budiardjo',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 16,
                   ),
-                  new Text(
-                    'Eko K. Budiardjo',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 16,
-                    ),
+                ),
+                new Text(
+                  'Suci Fadhilah',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 16,
                   ),
-                  new Text(
-                    'Suci Fadhilah',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 16,
-                    ),
+                ),
+
+                new Text(
+                  'Arfi Renaldi',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 16,
                   ),
-                
-                  new Text(
-                    'Arfi Renaldi',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 16,
-                    ),
+                ),
+                //name for each members
+                new Text(
+                  'Mochamad Aulia Akbar Praditomo',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 16,
                   ),
-                  //name for each members
-                  new Text(
-                    'Mochamad Aulia Akbar Praditomo',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 16,
-                    ),
-                  ),
-                  new Text(
+                ),
+                new Text(
                     'Fajrin Maulana Kingwijati',
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 16,
                     )
+                ),
+                new Text(
+                  'Izzan Fakhril Islam',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 16,
                   ),
-                  new Text(
-                    'Izzan Fakhril Islam',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 16,
-                    ),
+                ),
+                new Text(
+                  'Muhammad Rezki',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 16,
                   ),
-                  new Text(
-                    'Muhammad Rezki',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 16,
-                    ),
+                ),
+                new Text(
+                  'Khoirul Khuluqi Abdulloh',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 16,
                   ),
-                  new Text(
-                    'Khoirul Khuluqi Abdulloh',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 16,
-                    ),
+                ),
+                new Text(
+                  'Wildan Fahmi Gunawan',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 16,
                   ),
-                  new Text(
-                    'Wildan Fahmi Gunawan',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 16,
-                    ),
+                ),
+                Padding(
+                  padding: EdgeInsets.all(10.0),
+                ),
+                new Text(
+                  'All contents are taken from CMMI Institute',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 12,
                   ),
-                  Padding(
-                    padding: EdgeInsets.all(10.0),
-                  ),
-                  new Text(
-                    'All contents are taken from CMMI Institute',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 12,
-                    ),
-                  ),
-                ],
-              ) 
-            )
-          ],
-        ),
+                ),
+              ],
+            ),
+          ),
+        ],
       )
     );
   }
