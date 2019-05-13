@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:ScrumBooster/Utils/utils.dart';
+import 'package:ScrumBooster/InitialScreen/AboutPage.dart';
+import 'package:ScrumBooster/InitialScreen/HomeScreen.dart';
+import 'package:ScrumBooster/contentsList/ListCeremonies/ListCeremonies.dart';
+import 'package:ScrumBooster/contentsList/ListGlossary/ListGlossary.dart';
+import 'package:ScrumBooster/contentsList/ListProblems/ListProblems.dart';
 import 'package:ScrumBooster/contents/ceremonies.dart';
 import 'package:ScrumBooster/contents/Problems/problems.dart';
 import 'package:ScrumBooster/components/ScrumPhaseContentBtn.dart';
@@ -340,10 +345,8 @@ class _ProductBacklogState extends State<ProductBacklog> {
           title: data.title,
           imageAssetURL: data.image,
           action: () {
-            print('masuk');
             switch (className.toString()) {
               case "Closure: (int, String, String, String) => Ceremonies":
-                print('masuk ceremonies');
                 Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -357,7 +360,6 @@ class _ProductBacklogState extends State<ProductBacklog> {
                 );
                 break;
               case "Closure: (int, String, String, String, List<dynamic>) => ProblemsContentPage":
-                print(data.canBeSolvedUsing.toString());
                 Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -383,6 +385,7 @@ class _ProductBacklogState extends State<ProductBacklog> {
 
   @override
   void didChangeDependencies() {
+    super.didChangeDependencies();
     if (widget.listView.length == 1) {
       loadProductBacklog(false);
     }
@@ -448,7 +451,181 @@ class _ProductBacklogState extends State<ProductBacklog> {
           ),
         ],
       ),
-      drawer: util.defaultDrawer(context),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            new DrawerHeader(
+              child: Center(
+                child: new Image.asset(
+                  "assets/logos/logo-color.png",
+                ),
+              ),
+            ),
+            ListTile(
+              key: new Key("Home"),
+              title: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  new Icon(
+                    Icons.home,
+                    color: util.hexToColor("#979797"),
+                  ),
+                  new Padding(
+                    padding: EdgeInsets.all(10.0),
+                  ),
+                  new Text(
+                    "Home",
+                    style: TextStyle(
+                      color: util.hexToColor("#979797"),
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20.0,
+                    ),
+                  ),
+                ],
+              ),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => HomePage()
+                  ),
+                );
+              },
+            ),
+            ListTile(
+              key: new Key("Ceremonies"),
+              title: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  new Icon(
+                    Icons.graphic_eq,
+                    color: util.hexToColor("#979797"),
+                  ),
+                  new Padding(
+                    padding: EdgeInsets.all(10.0),
+                  ),
+                  new Text(
+                    "Ceremonies",
+                    style: TextStyle(
+                      color: util.hexToColor("#979797"),
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20.0,
+                    ),
+                  ),
+                ],
+              ),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => ListCeremonies()
+                  ),
+                );
+              },
+              //TODO: Implement fungsi buat callback kalo mencet Ceremonies di drawer
+            ),
+            ListTile(
+              key: new Key("Problems"),
+              title: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  new Icon(
+                    Icons.warning,
+                    color: util.hexToColor("#979797"),
+                  ),
+                  new Padding(
+                    padding: EdgeInsets.all(10.0),
+                  ),
+                  new Text(
+                    "Problems",
+                    style: TextStyle(
+                      color: util.hexToColor("#979797"),
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20.0,
+                    ),
+                  ),
+                ],
+              ),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => ListProblems()
+                  ),
+                );
+              },
+            ),
+            ListTile(
+              key: new Key("Glossary"),
+              title: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  new Icon(
+                    Icons.book,
+                    color: util.hexToColor("#979797"),
+                  ),
+                  new Padding(
+                    padding: EdgeInsets.all(10.0),
+                  ),
+                  new Text(
+                    "Glossary",
+                    style: TextStyle(
+                      color: util.hexToColor("#979797"),
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20.0,
+                    ),
+                  ),
+                ],
+              ),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => ListGlossary()
+                  ),
+                );
+              }, //TODO: Implement fungsi buat callback kalo mencet Glossary di drawer
+            ),
+            ListTile(
+              key: new Key("About"),
+              title: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  new Icon(
+                    Icons.info,
+                    color: util.hexToColor("#979797"),
+                  ),
+                  new Padding(
+                    padding: EdgeInsets.all(10.0),
+                  ),
+                  new Text(
+                    "About",
+                    style: TextStyle(
+                      color: util.hexToColor("#979797"),
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20.0,
+                    ),
+                  ),
+                ],
+              ),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => AboutPage()
+                  ),
+                );
+              }, //TODO: Implement fungsi buat callback kalo mencet About di drawer
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

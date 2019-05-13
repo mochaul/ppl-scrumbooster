@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:ScrumBooster/Utils/utils.dart';
+import 'package:ScrumBooster/InitialScreen/AboutPage.dart';
+import 'package:ScrumBooster/InitialScreen/HomeScreen.dart';
+import 'package:ScrumBooster/contentsList/ListCeremonies/ListCeremonies.dart';
+import 'package:ScrumBooster/contentsList/ListGlossary/ListGlossary.dart';
+import 'package:ScrumBooster/contentsList/ListProblems/ListProblems.dart';
 import 'package:ScrumBooster/components/SearchResultCard.dart';
 import 'package:ScrumBooster/search/ApiProvider.dart';
 import 'package:ScrumBooster/search/Model.dart';
@@ -130,9 +135,11 @@ class _SearchPageState extends State<SearchPage> {
       for (ProblemItem data in widget.problemModels) {
         problemsList.add(
           SearchResultCard(
+            id: data.id,
             title: data.title,
             detail: data.detail,
             imageURL: data.image,
+            canBeSolvedUsing: data.canBeSolvedUsing,
             contentType: "Problems",
           )
         );
@@ -142,6 +149,7 @@ class _SearchPageState extends State<SearchPage> {
       for (CeremonyItem data in widget.ceremonyModels) {
         ceremonyList.add(
           SearchResultCard(
+            id: data.id,
             title: data.title,
             detail: data.detail,
             imageURL: data.image,
@@ -191,7 +199,6 @@ class _SearchPageState extends State<SearchPage> {
     double _width = MediaQuery.of(context).size.width;
 
     return Scaffold(
-      drawer: util.defaultDrawer(context),
       key: scaffoldKey,
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -268,6 +275,181 @@ class _SearchPageState extends State<SearchPage> {
             height: loading,
           ),
         ],
+      ),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            new DrawerHeader(
+              child: Center(
+                child: new Image.asset(
+                  "assets/logos/logo-color.png",
+                ),
+              ),
+            ),
+            ListTile(
+              key: new Key("Home"),
+              title: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  new Icon(
+                    Icons.home,
+                    color: util.hexToColor("#979797"),
+                  ),
+                  new Padding(
+                    padding: EdgeInsets.all(10.0),
+                  ),
+                  new Text(
+                    "Home",
+                    style: TextStyle(
+                      color: util.hexToColor("#979797"),
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20.0,
+                    ),
+                  ),
+                ],
+              ),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => HomePage()
+                  ),
+                );
+              },
+            ),
+            ListTile(
+              key: new Key("Ceremonies"),
+              title: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  new Icon(
+                    Icons.graphic_eq,
+                    color: util.hexToColor("#979797"),
+                  ),
+                  new Padding(
+                    padding: EdgeInsets.all(10.0),
+                  ),
+                  new Text(
+                    "Ceremonies",
+                    style: TextStyle(
+                      color: util.hexToColor("#979797"),
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20.0,
+                    ),
+                  ),
+                ],
+              ),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => ListCeremonies()
+                  ),
+                );
+              },
+              //TODO: Implement fungsi buat callback kalo mencet Ceremonies di drawer
+            ),
+            ListTile(
+              key: new Key("Problems"),
+              title: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  new Icon(
+                    Icons.warning,
+                    color: util.hexToColor("#979797"),
+                  ),
+                  new Padding(
+                    padding: EdgeInsets.all(10.0),
+                  ),
+                  new Text(
+                    "Problems",
+                    style: TextStyle(
+                      color: util.hexToColor("#979797"),
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20.0,
+                    ),
+                  ),
+                ],
+              ),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => ListProblems()
+                  ),
+                );
+              },
+            ),
+            ListTile(
+              key: new Key("Glossary"),
+              title: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  new Icon(
+                    Icons.book,
+                    color: util.hexToColor("#979797"),
+                  ),
+                  new Padding(
+                    padding: EdgeInsets.all(10.0),
+                  ),
+                  new Text(
+                    "Glossary",
+                    style: TextStyle(
+                      color: util.hexToColor("#979797"),
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20.0,
+                    ),
+                  ),
+                ],
+              ),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => ListGlossary()
+                  ),
+                );
+              }, //TODO: Implement fungsi buat callback kalo mencet Glossary di drawer
+            ),
+            ListTile(
+              key: new Key("About"),
+              title: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  new Icon(
+                    Icons.info,
+                    color: util.hexToColor("#979797"),
+                  ),
+                  new Padding(
+                    padding: EdgeInsets.all(10.0),
+                  ),
+                  new Text(
+                    "About",
+                    style: TextStyle(
+                      color: util.hexToColor("#979797"),
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20.0,
+                    ),
+                  ),
+                ],
+              ),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => AboutPage()
+                  ),
+                );
+              }, //TODO: Implement fungsi buat callback kalo mencet About di drawer
+            ),
+          ],
+        ),
       ),
     );
   }

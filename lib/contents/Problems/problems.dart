@@ -1,3 +1,4 @@
+import 'package:ScrumBooster/search/SearchPage.dart';
 import 'package:flutter/material.dart';
 import 'package:ScrumBooster/Utils/utils.dart';
 import 'package:ScrumBooster/components/loading/loadingData.dart';
@@ -252,6 +253,14 @@ class _ProblemsContentPageState extends State<ProblemsContentPage> {
   @override
   Widget build(BuildContext context) {
     double _height = MediaQuery.of(context).size.height;
+    void _searchpage() {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => SearchPage()
+        ),
+      );
+    }
     return Scaffold(
       key: scaffoldKey,
       appBar: AppBar(
@@ -280,9 +289,9 @@ class _ProblemsContentPageState extends State<ProblemsContentPage> {
                 Icons.search,
                 color: util.hexToColor("#FFFFFF"),
               ),
-              onTap: () => {},
+              onTap: _searchpage,
             ),
-          )
+          ),
         ],
       ),
       body: Stack(
