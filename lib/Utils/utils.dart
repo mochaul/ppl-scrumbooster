@@ -6,6 +6,10 @@ import 'package:ScrumBooster/contentsList/ListCeremonies/ListCeremonies.dart';
 import 'package:ScrumBooster/contentsList/ListProblems/ListProblems.dart';
 import 'package:ScrumBooster/contentsList/ListGlossary/ListGlossary.dart';
 import 'package:ScrumBooster/InitialScreen/AboutPage.dart';
+import 'package:ScrumBooster/components/LinkTextSpan.dart';
+import 'package:ScrumBooster/contents/glossary.dart';
+import 'package:ScrumBooster/contents/GlossaryText/ApiProvider.dart';
+import 'package:ScrumBooster/contentsList/ListGlossary/Model.dart';
 
 class Util {
   String call;
@@ -27,6 +31,54 @@ class Util {
     "12": "Desember",
   };
 
+  Future<List<TextSpan>> getFormattedContentDetailsText(BuildContext context, String contentText) async {
+    List<String> splittedByDelimiter = contentText.split('#');
+    List<TextSpan> formatted = [];
+    GlossaryTextApiProvider apiProvider = new GlossaryTextApiProvider();
+    for (int i = 0; i < splittedByDelimiter.length; i++) {
+      if (i%2!=0) {
+        String glossaryID = await apiProvider.getGlossaryIDStringByName(splittedByDelimiter[i]);
+        await apiProvider.getGlossaryTextItem(glossaryID);
+        GlossaryItem mapped = apiProvider.glossaryItem;
+        formatted.add(
+          new LinkTextSpan(
+            text: splittedByDelimiter[i],
+            style: TextStyle(
+              color: hexToColor("#3498DB"),
+              fontWeight: FontWeight.bold,
+              fontSize: 17.5,
+              fontFamily: "Montserrat",
+            ),
+            action: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => Glossary(
+                    title: mapped.title,
+                    imagePath: mapped.image,
+                    contents: mapped.detail,
+                  )
+                ),
+              );
+            }
+          )
+        );
+      } else {
+        formatted.add(
+          new TextSpan(
+            text: splittedByDelimiter[i],
+            style: TextStyle(
+              color: hexToColor("#000000"),
+              fontSize: 17.5,
+              fontFamily: "Montserrat",
+            ),
+          )
+        );
+      }
+    }
+    return formatted;
+  }
+
   Widget makeTestableWidget({Widget child}) {
     return MaterialApp(
       home: child,
@@ -39,8 +91,40 @@ class Util {
 
   Map<String, String> getConfiguration() {
     return {
-      'base_url': "http://152.118.201.222:24150/",
+      'base_url': "http://152.118.201.222:24100/",
     }; //Staging API
+  }
+
+  List<dynamic> getDummyJSONCMMIPractices() {
+    return [
+      {
+        "id": 1,
+        "title": "Dummy CMMI Practice 1",
+        "strengthens": "This CMMI Practice can strengthen dummy",
+        "satisfy": "This CMMI Practice can satisfy dummy",
+        "demonstrated": "This CMMI Practice can demonstrate dummy",
+        "image": "https://static1.squarespace.com/static/56c775ad27d4bd3fdb24775d/t/5a8b201324a694d7071662ee/1519067160925/dummy+logo.jpg",
+        "process_area": 1
+      },
+      {
+        "id": 2,
+        "title": "Dummy CMMI Practice 2",
+        "strengthens": "This CMMI Practice can strengthen dummy",
+        "satisfy": "This CMMI Practice can satisfy dummy",
+        "demonstrated": "This CMMI Practice can demonstrate dummy",
+        "image": "https://static1.squarespace.com/static/56c775ad27d4bd3fdb24775d/t/5a8b201324a694d7071662ee/1519067160925/dummy+logo.jpg",
+        "process_area": 1
+      },
+      {
+        "id": 3,
+        "title": "Dummy CMMI Practice 3",
+        "strengthens": "This CMMI Practice can strengthen dummy",
+        "satisfy": "This CMMI Practice can satisfy dummy",
+        "demonstrated": "This CMMI Practice can demonstrate dummy",
+        "image": "https://static1.squarespace.com/static/56c775ad27d4bd3fdb24775d/t/5a8b201324a694d7071662ee/1519067160925/dummy+logo.jpg",
+        "process_area": 2
+      }
+    ];
   }
 
   Map<String, dynamic> getDummyJSONContentsList() {

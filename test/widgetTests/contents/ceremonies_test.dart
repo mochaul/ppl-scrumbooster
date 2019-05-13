@@ -1,13 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:http/http.dart';
+import 'package:http/testing.dart';
+import 'dart:convert';
 import 'package:image_test_utils/image_test_utils.dart';
 import 'package:ScrumBooster/ScrumPhase/ProcessAreaCMMI/ApiProvider.dart';
 
-import 'package:ScrumBooster/Utils/utils.dart';
+import 'package:ScrumBooster/ScrumPhase/ProcessAreaCMMI/ApiProvider.dart';
 import 'package:ScrumBooster/contents/ceremonies.dart';
+import 'package:ScrumBooster/Utils/utils.dart';
 
 void main() {
   final util = new Util();
+  final widgetTestingApiProvider = ProcessAreaCMMIFetcher();
+
+  widgetTestingApiProvider.client = MockClient((request) async {
+    final mapJSON = util.getDummyJSONCMMIPractices();
+    return Response(json.encode(mapJSON), 200);
+  });
+
   final Ceremonies ceremonies = Ceremonies(
     id: 1,
     title: "Backlog Grooming",
