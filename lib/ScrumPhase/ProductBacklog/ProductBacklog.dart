@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ScrumBooster/Utils/utils.dart';
 import 'package:ScrumBooster/contents/ceremonies.dart';
-import 'package:ScrumBooster/contents/problems.dart';
+import 'package:ScrumBooster/contents/Problems/problems.dart';
 import 'package:ScrumBooster/components/ScrumPhaseContentBtn.dart';
 import 'package:ScrumBooster/ScrumPhase/ProductBacklog/ApiProvider.dart';
 import 'package:ScrumBooster/ScrumPhase/ProductBacklog/Model.dart';
@@ -280,8 +280,14 @@ class _ProductBacklogState extends State<ProductBacklog> {
     );
 
     //Adding problem items
-    Function problemsFunc = (String image, String title, String detail) =>
-        ProblemsContentPage(imagePath: image, title: title, contents: detail);
+    Function problemsFunc = (int id, String title, String image, String detail, List<dynamic> canBeSolvedUsing) =>
+      ProblemsContentPage(
+        id: id,
+        title: title,
+        imagePath: image,
+        contents: detail,
+        canBeSolvedUsing: canBeSolvedUsing,
+      );
     column = generateColumn(widget.phaseProblemsDataJSON, problemsFunc, problemsCount);
     listView.add(column);
 
@@ -334,8 +340,10 @@ class _ProductBacklogState extends State<ProductBacklog> {
           title: data.title,
           imageAssetURL: data.image,
           action: () {
+            print('masuk');
             switch (className.toString()) {
               case "Closure: (int, String, String, String) => Ceremonies":
+                print('masuk ceremonies');
                 Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -348,14 +356,17 @@ class _ProductBacklogState extends State<ProductBacklog> {
                   ),
                 );
                 break;
-              case "Closure: (String, String, String) => ProblemsContentPage":
+              case "Closure: (int, String, String, String, List<dynamic>) => ProblemsContentPage":
+                print(data.canBeSolvedUsing.toString());
                 Navigator.push(
                   context,
                   MaterialPageRoute(
                     builder: (context) => className(
-                      data.image,
+                      data.id,
                       data.title,
+                      data.image,
                       data.detail,
+                      data.canBeSolvedUsing,
                     ),
                   ),
                 );

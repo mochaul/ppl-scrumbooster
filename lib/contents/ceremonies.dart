@@ -3,6 +3,7 @@ import 'package:ScrumBooster/components/loading/loadingData.dart';
 import 'package:flutter/material.dart';
 import 'package:ScrumBooster/ScrumPhase/ProcessAreaCMMI/ApiProvider.dart';
 import 'package:ScrumBooster/contents/cmmiPractices.dart';
+
 import 'dart:async';
 
 _CeremoniesState _ceremoniesState;
@@ -11,12 +12,13 @@ class Ceremonies extends StatefulWidget {
   final String title;
   final String imagePath;
   final String contents;
-  final ProcessAreaCMMIFetcher apiProvider;
+  final ProcessAreaCMMIFetcher processAreaApiProvider;
+  final CMMIPracticesFetcher cmmiPracticesApiProvider;
   List<Widget> listView = [Container(),];
 
   final util = new Util();
   var cmmiPracticesByProcessArea;
-  var processAreaByPhase;
+  var processAreaByCeremony;
 
   Ceremonies({
     Key key,
@@ -24,7 +26,8 @@ class Ceremonies extends StatefulWidget {
     this.title,
     this.imagePath,
     this.contents,
-    this.apiProvider,
+    this.processAreaApiProvider,
+    this.cmmiPracticesApiProvider,
   }) : super(key: key);
 
   @override
@@ -50,9 +53,10 @@ class _CeremoniesState extends State<Ceremonies> {
   }
 
   Future<Null> loadContents(bool refresh) async {
-    final contentPageApiProvider = widget.apiProvider == null
+    final processAreaApiProvider = widget.processAreaApiProvider == null
       ? new ProcessAreaCMMIFetcher()
-      : widget.apiProvider;
+      : widget.processAreaApiProvider;
+
     widget.listView = [];
     final _height = MediaQuery.of(context).size.height;
     final _width = MediaQuery.of(context).size.width;
@@ -63,12 +67,22 @@ class _CeremoniesState extends State<Ceremonies> {
       });
     }
 
-    await contentPageApiProvider.fetchPosts(widget.id);
-    widget.cmmiPracticesByProcessArea = contentPageApiProvider.getCmmiPracticesByProcessArea();
-    widget.processAreaByPhase = contentPageApiProvider.getProcessAreasByPhase();
+    await processAreaApiProvider.fetchPosts(widget.id);
+    widget.processAreaByCeremony = processAreaApiProvider.getProcessAreasByCeremony();
+
+    final cmmiPracticesApiProvider = widget.cmmiPracticesApiProvider == null
+      ? new CMMIPracticesFetcher(
+          processAreasByCeremony: widget.processAreaByCeremony,
+        )
+      : widget.cmmiPracticesApiProvider;
     
+    await cmmiPracticesApiProvider.fetchPosts();
+    widget.cmmiPracticesByProcessArea = cmmiPracticesApiProvider.getCmmiPracticesByProcessArea();
+
+    List<TextSpan> formattedTexts = await util.getFormattedContentDetailsText(context, widget.contents);
+
     List<Widget> processAreasList = [];
-    for (var data in widget.processAreaByPhase) {
+    for (var data in widget.processAreaByCeremony) {
       processAreasList.add(
         new InkWell(
           onTap: () {
@@ -160,7 +174,6 @@ class _CeremoniesState extends State<Ceremonies> {
                     ),
                     child: new Container(
                       width: _width,
-                      height: _height,
                       decoration: new BoxDecoration(
                         color: util.hexToColor("#FFFFFF"),
                         borderRadius: BorderRadius.circular(30.0),
@@ -180,11 +193,17 @@ class _CeremoniesState extends State<Ceremonies> {
                           top: 15.0,
                         ),
                         child: new Column(
+                          mainAxisSize: MainAxisSize.min,
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
+                            new RichText(
+                              text: TextSpan(
+                                children: formattedTexts,
+                              ),
+                            ),
                             new Text(
-                              "${widget.contents}\n\nCMMI Practices that will enhanched this ceremony are:",
+                              "\nCMMI Practices that will enhanched this ceremony are:",
                               style:TextStyle(
                                 fontSize: util.fitScreenSize(_height, 0.025),
                               )
@@ -193,6 +212,7 @@ class _CeremoniesState extends State<Ceremonies> {
                               padding: EdgeInsets.all(10.0),
                             ),
                             new Column(
+                              mainAxisSize: MainAxisSize.min,
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: processAreasList,
