@@ -37,7 +37,8 @@ class Util {
     GlossaryTextApiProvider apiProvider = new GlossaryTextApiProvider();
     for (int i = 0; i < splittedByDelimiter.length; i++) {
       if (i%2!=0) {
-        await apiProvider.getGlossaryTextItem('1');
+        String glossaryID = await apiProvider.getGlossaryIDStringByName(splittedByDelimiter[i]);
+        await apiProvider.getGlossaryTextItem(glossaryID);
         GlossaryItem mapped = apiProvider.glossaryItem;
         formatted.add(
           new LinkTextSpan(
