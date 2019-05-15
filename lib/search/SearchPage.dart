@@ -311,12 +311,7 @@ class _SearchPageState extends State<SearchPage> {
                 ],
               ),
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => HomePage()
-                  ),
-                );
+                Navigator.of(context).pushReplacementNamed('/Home');
               },
             ),
             ListTile(
@@ -343,10 +338,11 @@ class _SearchPageState extends State<SearchPage> {
                 ],
               ),
               onTap: () {
+                Navigator.of(context).popUntil(ModalRoute.withName('/Home'));
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => ListCeremonies()
+                    builder: (context) => ListCeremonies(),
                   ),
                 );
               },
@@ -376,6 +372,7 @@ class _SearchPageState extends State<SearchPage> {
                 ],
               ),
               onTap: () {
+                Navigator.of(context).popUntil(ModalRoute.withName('/Home'));
                 Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -408,6 +405,7 @@ class _SearchPageState extends State<SearchPage> {
                 ],
               ),
               onTap: () {
+                Navigator.of(context).popUntil(ModalRoute.withName('/Home'));
                 Navigator.push(
                   context,
                   MaterialPageRoute(

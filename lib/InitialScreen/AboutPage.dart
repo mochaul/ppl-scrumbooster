@@ -223,12 +223,7 @@ class AboutPage extends StatelessWidget {
                 ],
               ),
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => HomePage()
-                  ),
-                );
+                Navigator.of(context).pushReplacementNamed('/Home');
               },
             ),
             ListTile(
@@ -255,10 +250,11 @@ class AboutPage extends StatelessWidget {
                 ],
               ),
               onTap: () {
+                Navigator.of(context).popUntil(ModalRoute.withName('/Home'));
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => ListCeremonies()
+                    builder: (context) => ListCeremonies(),
                   ),
                 );
               },
@@ -288,6 +284,7 @@ class AboutPage extends StatelessWidget {
                 ],
               ),
               onTap: () {
+                Navigator.of(context).popUntil(ModalRoute.withName('/Home'));
                 Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -320,6 +317,7 @@ class AboutPage extends StatelessWidget {
                 ],
               ),
               onTap: () {
+                Navigator.of(context).popUntil(ModalRoute.withName('/Home'));
                 Navigator.push(
                   context,
                   MaterialPageRoute(

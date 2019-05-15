@@ -189,12 +189,7 @@ class HomePage extends StatelessWidget {
                 ],
               ),
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => HomePage()
-                  ),
-                );
+                Navigator.of(context).pushReplacementNamed('/Home');
               },
             ),
             ListTile(
@@ -221,10 +216,11 @@ class HomePage extends StatelessWidget {
                 ],
               ),
               onTap: () {
+                Navigator.of(context).popUntil(ModalRoute.withName('/Home'));
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => ListCeremonies()
+                    builder: (context) => ListCeremonies(),
                   ),
                 );
               },
@@ -254,6 +250,7 @@ class HomePage extends StatelessWidget {
                 ],
               ),
               onTap: () {
+                Navigator.of(context).popUntil(ModalRoute.withName('/Home'));
                 Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -286,6 +283,7 @@ class HomePage extends StatelessWidget {
                 ],
               ),
               onTap: () {
+                Navigator.of(context).popUntil(ModalRoute.withName('/Home'));
                 Navigator.push(
                   context,
                   MaterialPageRoute(

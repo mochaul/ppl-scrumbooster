@@ -490,12 +490,7 @@ class _SprintPlanningState extends State<SprintPlanning> {
                 ],
               ),
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => HomePage()
-                  ),
-                );
+                Navigator.of(context).pushReplacementNamed('/Home');
               },
             ),
             ListTile(
@@ -522,10 +517,11 @@ class _SprintPlanningState extends State<SprintPlanning> {
                 ],
               ),
               onTap: () {
+                Navigator.of(context).popUntil(ModalRoute.withName('/Home'));
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => ListCeremonies()
+                    builder: (context) => ListCeremonies(),
                   ),
                 );
               },
@@ -555,6 +551,7 @@ class _SprintPlanningState extends State<SprintPlanning> {
                 ],
               ),
               onTap: () {
+                Navigator.of(context).popUntil(ModalRoute.withName('/Home'));
                 Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -587,6 +584,7 @@ class _SprintPlanningState extends State<SprintPlanning> {
                 ],
               ),
               onTap: () {
+                Navigator.of(context).popUntil(ModalRoute.withName('/Home'));
                 Navigator.push(
                   context,
                   MaterialPageRoute(

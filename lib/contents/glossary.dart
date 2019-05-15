@@ -289,12 +289,7 @@ class _GlossaryState extends State<Glossary> {
                 ],
               ),
               onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => HomePage()
-                  ),
-                );
+                Navigator.of(context).pushReplacementNamed('/Home');
               },
             ),
             ListTile(
@@ -321,10 +316,11 @@ class _GlossaryState extends State<Glossary> {
                 ],
               ),
               onTap: () {
+                Navigator.of(context).popUntil(ModalRoute.withName('/Home'));
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => ListCeremonies()
+                    builder: (context) => ListCeremonies(),
                   ),
                 );
               },
@@ -354,6 +350,7 @@ class _GlossaryState extends State<Glossary> {
                 ],
               ),
               onTap: () {
+                Navigator.of(context).popUntil(ModalRoute.withName('/Home'));
                 Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -386,6 +383,7 @@ class _GlossaryState extends State<Glossary> {
                 ],
               ),
               onTap: () {
+                Navigator.of(context).popUntil(ModalRoute.withName('/Home'));
                 Navigator.push(
                   context,
                   MaterialPageRoute(
