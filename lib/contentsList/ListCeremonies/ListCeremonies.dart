@@ -85,7 +85,6 @@ class _ListCeremoniesState extends State<ListCeremonies> {
     List<Widget> contentsList = [];
 
     for (String alphabet in widget.listCeremoniesDataAlphabeticJSON.keys) {
-      print(alphabet);
       contentsList.add(
         Text(
           alphabet.toUpperCase(),
@@ -119,7 +118,8 @@ class _ListCeremoniesState extends State<ListCeremonies> {
               Navigator.of(context).push(
                 new MaterialPageRoute(
                   builder: (context) => Ceremonies(
-                   imagePath: data.image,
+                   id: data.id,
+                    imagePath: data.image,
                    title: data.title,
                    contents: data.detail,
                   )
@@ -180,6 +180,7 @@ class _ListCeremoniesState extends State<ListCeremonies> {
 
   @override
   void didChangeDependencies() {
+    super.didChangeDependencies();
     if (widget.listView.length == 1) {
       loadListCeremonies(false);
     }

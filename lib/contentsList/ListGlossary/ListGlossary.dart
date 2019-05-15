@@ -85,7 +85,6 @@ class _ListGlossaryState extends State<ListGlossary> {
     List<Widget> contentsList = [];
 
     for (String alphabet in widget.listGlossaryDataAlphabeticJSON.keys) {
-      print(alphabet);
       contentsList.add(
         Text(
           alphabet.toUpperCase(),

@@ -85,7 +85,6 @@ class _ListProblemsState extends State<ListProblems> {
     List<Widget> contentsList = [];
 
     for (String alphabet in widget.listProblemsDataAlphabeticJSON.keys) {
-      print(alphabet);
       contentsList.add(
         Text(
           alphabet.toUpperCase(),
@@ -122,6 +121,7 @@ class _ListProblemsState extends State<ListProblems> {
                     imagePath: data.image,
                     title: data.title,
                     contents: data.detail,
+                    canBeSolvedUsing: data.canBeSolvedBy,
                   )
                 )
               );
