@@ -17,7 +17,6 @@ class AboutPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double _height = MediaQuery.of(context).size.height;
     void _searchpage() {
       Navigator.push(
         context,
@@ -81,6 +80,12 @@ class AboutPage extends StatelessWidget {
                   'assets/logos/Makara-UI.png',
                   height: 120,
                   key: new Key("Makara UI Logo"),
+                ),
+                Padding(padding: EdgeInsets.all(10.0),),
+                new Image.asset(
+                  'assets/logos/cmmi.png',
+                  height: 120,
+                  key: new Key("CMMI Institue Logo"),
                 ),
               ],
             ),

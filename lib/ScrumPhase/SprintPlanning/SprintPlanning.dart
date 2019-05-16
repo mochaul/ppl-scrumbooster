@@ -1,3 +1,4 @@
+import 'package:ScrumBooster/components/transitions/SlideRightRoute.dart';
 import 'package:flutter/material.dart';
 import 'package:ScrumBooster/Utils/utils.dart';
 import 'package:ScrumBooster/contents/ceremonies.dart';
@@ -170,11 +171,12 @@ class _SprintPlanningState extends State<SprintPlanning> {
                   key: new Key("left arrow"),
                 ),
                 onTap: () {
+                  Navigator.pop(context);
                   Navigator.push(
-                    context,
-                    MaterialPageRoute(builder:
-                      (context) => ProductBacklog()
-                    )
+                      context,
+                      new CustomRoute(
+                          builder: (context) => ProductBacklog()
+                      )
                   );
                 },
               ),
@@ -199,11 +201,12 @@ class _SprintPlanningState extends State<SprintPlanning> {
                   key: new Key("right arrow"),
                 ),
                 onTap: () {
+                  Navigator.pop(context);
                   Navigator.push(
-                    context,
-                    MaterialPageRoute(builder:
-                        (context) => SprintExecution()
-                    )
+                      context,
+                      new CustomRoute(
+                          builder: (context) => SprintExecution()
+                      )
                   );
                 },
               ),

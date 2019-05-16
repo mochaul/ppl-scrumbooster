@@ -1,3 +1,4 @@
+import 'package:ScrumBooster/components/transitions/SlideRightRoute.dart';
 import 'package:flutter/material.dart';
 import 'package:ScrumBooster/Utils/utils.dart';
 import 'package:ScrumBooster/InitialScreen/AboutPage.dart';
@@ -173,11 +174,12 @@ class _SprintExecutionState extends State<SprintExecution> {
                   key: new Key("left arrow"),
                 ),
                 onTap: () {
+                  Navigator.pop(context);
                   Navigator.push(
-                    context,
-                    MaterialPageRoute(builder:
-                      (context) => SprintPlanning()
-                    )
+                      context,
+                      new CustomRoute(
+                          builder: (context) => SprintPlanning()
+                      )
                   );
                 },
               ),
@@ -202,11 +204,12 @@ class _SprintExecutionState extends State<SprintExecution> {
                   key: new Key("right arrow"),
                 ),
                 onTap: () {
+                  Navigator.pop(context);
                   Navigator.push(
-                    context,
-                    MaterialPageRoute(builder:
-                      (context) => SprintEvaluation()
-                    )
+                      context,
+                      new CustomRoute(
+                          builder: (context) => SprintEvaluation()
+                      )
                   );
                 },
               ),

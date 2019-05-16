@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ScrumBooster/Utils/utils.dart';
 import 'package:ScrumBooster/InitialScreen/AboutPage.dart';
-import 'package:ScrumBooster/InitialScreen/HomeScreen.dart';
+import 'package:ScrumBooster/components/transitions/SlideRightRoute.dart';
 import 'package:ScrumBooster/contentsList/ListCeremonies/ListCeremonies.dart';
 import 'package:ScrumBooster/contentsList/ListGlossary/ListGlossary.dart';
 import 'package:ScrumBooster/contentsList/ListProblems/ListProblems.dart';
@@ -170,10 +170,11 @@ class _ProductBacklogState extends State<ProductBacklog> {
                   key: new Key("left arrow"),
                 ),
                 onTap: () {
+                  Navigator.pop(context);
                   Navigator.push(
                       context,
-                      MaterialPageRoute(builder:
-                          (context) => SprintEvaluation()
+                      new CustomRoute(
+                          builder: (context) => SprintEvaluation()
                       )
                   );
                 },
@@ -199,10 +200,11 @@ class _ProductBacklogState extends State<ProductBacklog> {
                     key: new Key("right arrow"),
                 ),
                 onTap: () {
-                Navigator.push(
+                  Navigator.pop(context);
+                  Navigator.push(
                     context,
-                    MaterialPageRoute(builder:
-                        (context) => SprintPlanning()
+                    new CustomRoute(
+                      builder: (context) => SprintPlanning()
                     )
                   );
                 },
