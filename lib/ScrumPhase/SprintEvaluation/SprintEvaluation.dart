@@ -29,6 +29,11 @@ class SprintEvaluation extends StatefulWidget {
   var phaseCeremoniesDataJSON;
   var phaseProblemsDataJSON;
 
+  GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+  getScaffoldKey() {
+    return scaffoldKey;
+  }
+
   SprintEvaluation({
     Key key,
     this.apiProvider,
@@ -43,11 +48,6 @@ class SprintEvaluation extends StatefulWidget {
 
 class _SprintEvaluationState extends State<SprintEvaluation> {
   final util = new Util();
-
-  GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-  getScaffoldKey() {
-    return scaffoldKey;
-  }
 
   double loading = 0.0;
   int ceremoniesRowCount = 0;
@@ -409,7 +409,7 @@ class _SprintEvaluationState extends State<SprintEvaluation> {
       );
     }
     return Scaffold(
-      key: scaffoldKey,
+      key: widget.scaffoldKey,
       appBar: AppBar(
         centerTitle: true,
         leading: new InkWell(
@@ -418,7 +418,7 @@ class _SprintEvaluationState extends State<SprintEvaluation> {
             color: util.hexToColor("#FFFFFF"),
           ),
           onTap: () {
-            scaffoldKey.currentState.openDrawer();
+            widget.scaffoldKey.currentState.openDrawer();
           },
         ),
         title: Text(

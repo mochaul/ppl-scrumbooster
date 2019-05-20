@@ -1,4 +1,3 @@
-import 'package:ScrumBooster/InitialScreen/HomeScreen.dart';
 import 'package:ScrumBooster/contentsList/ListCeremonies/ListCeremonies.dart';
 import 'package:ScrumBooster/contentsList/ListGlossary/ListGlossary.dart';
 import 'package:ScrumBooster/contentsList/ListProblems/ListProblems.dart';
@@ -85,7 +84,7 @@ class AboutPage extends StatelessWidget {
                 new Image.asset(
                   'assets/logos/cmmi.png',
                   height: 120,
-                  key: new Key("CMMI Institue Logo"),
+                  key: new Key("CMMI Institute Logo"),
                 ),
               ],
             ),
@@ -127,7 +126,6 @@ class AboutPage extends StatelessWidget {
                     fontSize: 16,
                   ),
                 ),
-
                 new Text(
                   'Arfi Renaldi',
                   textAlign: TextAlign.center,

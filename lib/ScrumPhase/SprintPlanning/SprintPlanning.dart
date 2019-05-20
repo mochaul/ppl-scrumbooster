@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:ScrumBooster/Utils/utils.dart';
 import 'package:ScrumBooster/contents/ceremonies.dart';
 import 'package:ScrumBooster/InitialScreen/AboutPage.dart';
-import 'package:ScrumBooster/InitialScreen/HomeScreen.dart';
 import 'package:ScrumBooster/contentsList/ListCeremonies/ListCeremonies.dart';
 import 'package:ScrumBooster/contentsList/ListGlossary/ListGlossary.dart';
 import 'package:ScrumBooster/contentsList/ListProblems/ListProblems.dart';
@@ -20,6 +19,7 @@ import 'package:ScrumBooster/components/loading/loadingData.dart';
 import 'package:ScrumBooster/search/SearchPage.dart';
 
 _SprintPlanningState _sprintPlanningState;
+// ignore: must_be_immutable
 class SprintPlanning extends StatefulWidget {
 
   final SprintPlanningApiProvider apiProvider;
@@ -29,6 +29,11 @@ class SprintPlanning extends StatefulWidget {
   SprintPlanningModel phaseDetailsDataJSON;
   var phaseCeremoniesDataJSON;
   var phaseProblemsDataJSON;
+
+  GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+  getScaffoldKey() {
+    return scaffoldKey;
+  }
 
   SprintPlanning({
     Key key,
@@ -44,11 +49,6 @@ class SprintPlanning extends StatefulWidget {
 
 class _SprintPlanningState extends State<SprintPlanning> {
   final util = new Util();
-
-  GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-  getScaffoldKey() {
-    return scaffoldKey;
-  }
 
   double loading = 0.0;
   int ceremoniesRowCount = 0;
@@ -317,7 +317,6 @@ class _SprintPlanningState extends State<SprintPlanning> {
     List<Widget> rowWidgetList = [];
 
     double _height = MediaQuery.of(context).size.height;
-    double _width = MediaQuery.of(context).size.width;
 
     Widget column = new Column(
       children: columnWidgetList,
@@ -409,7 +408,7 @@ class _SprintPlanningState extends State<SprintPlanning> {
       );
     }
     return Scaffold(
-      key: scaffoldKey,
+      key: widget.scaffoldKey,
       appBar: AppBar(
         centerTitle: true,
         leading: new InkWell(
@@ -418,7 +417,7 @@ class _SprintPlanningState extends State<SprintPlanning> {
             color: util.hexToColor("#FFFFFF"),
           ),
           onTap: () {
-            scaffoldKey.currentState.openDrawer();
+            widget.scaffoldKey.currentState.openDrawer();
           },
         ),
         title: Text(

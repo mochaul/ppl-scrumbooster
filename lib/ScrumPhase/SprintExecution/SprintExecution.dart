@@ -2,7 +2,6 @@ import 'package:ScrumBooster/components/transitions/SlideRightRoute.dart';
 import 'package:flutter/material.dart';
 import 'package:ScrumBooster/Utils/utils.dart';
 import 'package:ScrumBooster/InitialScreen/AboutPage.dart';
-import 'package:ScrumBooster/InitialScreen/HomeScreen.dart';
 import 'package:ScrumBooster/contentsList/ListCeremonies/ListCeremonies.dart';
 import 'package:ScrumBooster/contentsList/ListGlossary/ListGlossary.dart';
 import 'package:ScrumBooster/contentsList/ListProblems/ListProblems.dart';
@@ -20,11 +19,17 @@ import 'package:ScrumBooster/components/loading/loadingData.dart';
 import 'package:ScrumBooster/search/SearchPage.dart';
 
 _SprintExecutionState _sprintExecutionState;
+// ignore: must_be_immutable
 class SprintExecution extends StatefulWidget {
 
   final SprintExecutionApiProvider apiProvider;
   final util = new Util();
   List<Widget> listView = [new Container(),];
+
+  GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+  getScaffoldKey() {
+    return scaffoldKey;
+  }
 
   SprintExecutionModel phaseDetailsDataJSON;
   var phaseCeremoniesDataJSON;
@@ -43,13 +48,7 @@ class SprintExecution extends StatefulWidget {
 }
 
 class _SprintExecutionState extends State<SprintExecution> {
-
   final util = new Util();
-
-  GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-  getScaffoldKey() {
-    return scaffoldKey;
-  }
 
   double loading = 0.0;
   int ceremoniesRowCount = 0;
@@ -319,7 +318,6 @@ class _SprintExecutionState extends State<SprintExecution> {
     List<Widget> rowWidgetList = [];
 
     double _height = MediaQuery.of(context).size.height;
-    double _width = MediaQuery.of(context).size.width;
 
     Widget column = new Column(
       children: columnWidgetList,
@@ -411,7 +409,7 @@ class _SprintExecutionState extends State<SprintExecution> {
       );
     }
     return Scaffold(
-      key: scaffoldKey,
+      key: widget.scaffoldKey,
       appBar: AppBar(
         centerTitle: true,
         leading: new InkWell(
@@ -420,7 +418,7 @@ class _SprintExecutionState extends State<SprintExecution> {
             color: util.hexToColor("#FFFFFF"),
           ),
           onTap: () {
-            scaffoldKey.currentState.openDrawer();
+            widget.scaffoldKey.currentState.openDrawer();
           },
         ),
         title: Text(

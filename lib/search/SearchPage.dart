@@ -238,6 +238,7 @@ class _SearchPageState extends State<SearchPage> {
                 height: 50.0,
                 color: util.hexToColor("#FFFFFF"),
                 child: TextFormField(
+                  key: new Key("Search Field"),
                   autocorrect: false,
                   decoration: InputDecoration(
                     border: InputBorder.none,

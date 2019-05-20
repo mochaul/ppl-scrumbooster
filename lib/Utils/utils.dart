@@ -201,6 +201,59 @@ class Util {
     };
   }
 
+  List<dynamic> getDummyJSONProblemSearchResult() {
+    return [
+      {
+        "id": 1,
+        "title": "Test search result",
+        "detail": "This is a dummy test search result",
+        "image": "https://static1.squarespace.com/static/56c775ad27d4bd3fdb24775d/t/5a8b201324a694d7071662ee/1519067160925/dummy+logo.jpg",
+        "can_be_solved_by": [
+          1,
+          2,
+          3,
+        ],
+      },
+      {
+        "id": 2,
+        "title": "Test search result 2",
+        "detail": "This is a dummy test search result 2",
+        "image": "https://static1.squarespace.com/static/56c775ad27d4bd3fdb24775d/t/5a8b201324a694d7071662ee/1519067160925/dummy+logo.jpg",
+        "can_be_solved_by": [
+          2,
+          3,
+          4,
+        ],
+      }
+    ];
+  }
+
+  List<dynamic> getDummyJSONCeremonies() {
+    return [
+      {
+        "id": 1,
+        "title": "Dummy Ceremony 1",
+        "detail": "This is a dummy ceremony item in id 1",
+        "image": "https://static1.squarespace.com/static/56c775ad27d4bd3fdb24775d/t/5a8b201324a694d7071662ee/1519067160925/dummy+logo.jpg",
+        "phase": 1,
+      },
+      {
+        "id": 2,
+        "title": "Dummy Ceremony 2",
+        "detail": "This is a dummy ceremony item in id 2",
+        "image": "https://static1.squarespace.com/static/56c775ad27d4bd3fdb24775d/t/5a8b201324a694d7071662ee/1519067160925/dummy+logo.jpg",
+        "phase": 1,
+      },
+      {
+        "id": 3,
+        "title": "Dummy Ceremony 3",
+        "detail": "This is a dummy ceremony item in id 3",
+        "image": "https://static1.squarespace.com/static/56c775ad27d4bd3fdb24775d/t/5a8b201324a694d7071662ee/1519067160925/dummy+logo.jpg",
+        "phase": 2,
+      },
+    ];
+  }
+
   Color hexToColor(String colorCode) {
     return new Color(int.parse(colorCode.substring(1, 7), radix: 16) + 0xFF000000);
   }

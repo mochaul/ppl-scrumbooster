@@ -39,7 +39,7 @@ void main() async {
     cmmiPracticesApiProvider: cmmiPracticeFetcher,
   );
 
-  //Ceremony Page Widget Tests
+  //Ceremony Content Page Widget Tests
   testWidgets('Detect Loading Animation', (WidgetTester tester) async {
     provideMockedNetworkImages(() async {
       await tester.pumpWidget(
@@ -49,7 +49,6 @@ void main() async {
       expect(find.byKey(Key(key)), findsOneWidget);
     });
   });
-
 
   testWidgets('Test Find Ceremony Title', (WidgetTester tester) async {
     provideMockedNetworkImages(() async {
@@ -93,7 +92,7 @@ void main() async {
       ];
       for (String item in processAreas) {
         print(item);
-        expect(find.text(item), findsNWidgets(2));
+        expect(find.text(item), findsNWidgets(5));
       }
     });
   });

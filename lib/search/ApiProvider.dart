@@ -42,7 +42,7 @@ class SearchApiProvider {
     }
     var ceremoniesBody = json.decode(utf8.decode(responseCeremonies.bodyBytes));
     var problemsBody = json.decode(utf8.decode(responseProblem.bodyBytes));
-    var phasesBody = json.decode(utf8.decode(responsePhases.bodyBytes));;
+    var phasesBody = json.decode(utf8.decode(responsePhases.bodyBytes));
 
     modelCeremonies = SearchResultModel.fromJson(ceremoniesBody, 'ceremonies');
     modelProblems = SearchResultModel.fromJson(problemsBody, 'problems');
