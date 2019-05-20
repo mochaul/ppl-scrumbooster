@@ -1,7 +1,6 @@
 import 'package:ScrumBooster/Utils/utils.dart';
 import 'package:ScrumBooster/components/loading/loadingData.dart';
 import 'package:ScrumBooster/InitialScreen/AboutPage.dart';
-import 'package:ScrumBooster/InitialScreen/HomeScreen.dart';
 import 'package:ScrumBooster/contentsList/ListCeremonies/ListCeremonies.dart';
 import 'package:ScrumBooster/contentsList/ListGlossary/ListGlossary.dart';
 import 'package:ScrumBooster/contentsList/ListProblems/ListProblems.dart';
@@ -14,6 +13,10 @@ import 'dart:async';
 
 _CeremoniesState _ceremoniesState;
 class Ceremonies extends StatefulWidget {
+  GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+  getScaffoldKey() {
+    return scaffoldKey;
+  }
   final int id;
   final String title;
   final String imagePath;
@@ -45,12 +48,6 @@ class Ceremonies extends StatefulWidget {
 
 class _CeremoniesState extends State<Ceremonies> {
   final util = new Util();
-
-  GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-  getScaffoldKey() {
-    return scaffoldKey;
-  }
-
   double loading = 0.0;
 
   Future<Null> refresh() async {
@@ -59,6 +56,7 @@ class _CeremoniesState extends State<Ceremonies> {
   }
 
   Future<Null> loadContents(bool refresh) async {
+    //Load Process Area API Provider
     final processAreaApiProvider = widget.processAreaApiProvider == null
       ? new ProcessAreaCMMIFetcher()
       : widget.processAreaApiProvider;
@@ -276,7 +274,7 @@ class _CeremoniesState extends State<Ceremonies> {
       );
     }
     return Scaffold(
-      key: scaffoldKey,
+      key: widget.scaffoldKey,
       appBar: AppBar(
         leading: new InkWell(
           child: Icon(
@@ -284,7 +282,7 @@ class _CeremoniesState extends State<Ceremonies> {
             color: util.hexToColor("#FFFFFF"),
           ),
           onTap: () {
-            scaffoldKey.currentState.openDrawer();
+            widget.scaffoldKey.currentState.openDrawer();
           },
         ),
         centerTitle: true,
@@ -320,7 +318,7 @@ class _CeremoniesState extends State<Ceremonies> {
             ),
           ),
           new LoadingData(
-            key: Key("Loading data"),
+            key: Key("Loading Data"),
             height: loading,
           ),
         ],

@@ -1,11 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:ScrumBooster/InitialScreen/HomeScreen.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'dart:convert';
-import 'package:ScrumBooster/contentsList/ListCeremonies/ListCeremonies.dart';
-import 'package:ScrumBooster/contentsList/ListProblems/ListProblems.dart';
-import 'package:ScrumBooster/contentsList/ListGlossary/ListGlossary.dart';
-import 'package:ScrumBooster/InitialScreen/AboutPage.dart';
 import 'package:ScrumBooster/components/LinkTextSpan.dart';
 import 'package:ScrumBooster/contents/glossary.dart';
 import 'package:ScrumBooster/contents/GlossaryText/ApiProvider.dart';
@@ -93,6 +88,26 @@ class Util {
     return {
       'base_url': "http://152.118.201.222:24100/",
     }; //Staging API
+  }
+
+  List<dynamic> getDummyJSONProcessAreas() {
+    return [
+      {
+        "id": 1,
+        "title": "Dummy Process Area 1",
+        "related_ceremony": 1,
+      },
+      {
+        "id": 2,
+        "title": "Dummy Process Area 2",
+        "related_ceremony": 1,
+      },
+      {
+        "id": 3,
+        "title": "Dummy Process Area 3",
+        "related_ceremony": 2,
+      }
+    ];
   }
 
   List<dynamic> getDummyJSONCMMIPractices() {

@@ -20,14 +20,18 @@ import 'package:ScrumBooster/search/SearchPage.dart';
 
 _ProductBacklogState _productBacklogState;
 class ProductBacklog extends StatefulWidget {
-
   final ProductBacklogApiProvider apiProvider;
   final util = new Util();
   List<Widget> listView = [new Container(),];
-
   ProductBacklogModel phaseDetailsDataJSON;
+
   var phaseCeremoniesDataJSON;
   var phaseProblemsDataJSON;
+
+  GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+  getScaffoldKey() {
+    return scaffoldKey;
+  }
 
   ProductBacklog({
     Key key,
@@ -42,12 +46,7 @@ class ProductBacklog extends StatefulWidget {
 }
 
 class _ProductBacklogState extends State<ProductBacklog> {
-
   final util = new Util();
-  GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-  getScaffoldKey() {
-    return scaffoldKey;
-  }
 
   double loading = 0.0;
   int ceremoniesRowCount = 0;
@@ -404,7 +403,7 @@ class _ProductBacklogState extends State<ProductBacklog> {
       );
     }
     return Scaffold(
-      key: scaffoldKey,
+      key: widget.scaffoldKey,
       appBar: AppBar(
         centerTitle: true,
         leading: new InkWell(
@@ -413,7 +412,7 @@ class _ProductBacklogState extends State<ProductBacklog> {
             color: util.hexToColor("#FFFFFF"),
           ),
           onTap: () {
-            scaffoldKey.currentState.openDrawer();
+            widget.scaffoldKey.currentState.openDrawer();
           },
         ),
         title: Text(
