@@ -14,7 +14,7 @@ class ListGlossaryApiProvider {
     response = await client.get(
       util.getConfiguration()['base_url']+"glossary/alphabetic/"
     );
-    var jsonBody = json.decode(response.body);
+    var jsonBody = json.decode(utf8.decode(response.bodyBytes));
 
     model = ListGlossaryModel.fromJson(jsonBody);
     dictGlossaryAlphabetic = model.dictGlossaryAlphabetic;
