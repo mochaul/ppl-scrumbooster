@@ -1,22 +1,33 @@
 import 'package:ScrumBooster/Utils/utils.dart';
 import 'package:ScrumBooster/components/loading/loadingData.dart';
+import 'package:ScrumBooster/InitialScreen/AboutPage.dart';
+import 'package:ScrumBooster/contentsList/ListCeremonies/ListCeremonies.dart';
+import 'package:ScrumBooster/contentsList/ListGlossary/ListGlossary.dart';
+import 'package:ScrumBooster/contentsList/ListProblems/ListProblems.dart';
+import 'package:ScrumBooster/search/SearchPage.dart';
 import 'package:flutter/material.dart';
 import 'package:ScrumBooster/ScrumPhase/ProcessAreaCMMI/ApiProvider.dart';
 import 'package:ScrumBooster/contents/cmmiPractices.dart';
+
 import 'dart:async';
 
 _CeremoniesState _ceremoniesState;
 class Ceremonies extends StatefulWidget {
+  GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+  getScaffoldKey() {
+    return scaffoldKey;
+  }
   final int id;
   final String title;
   final String imagePath;
   final String contents;
-  final ProcessAreaCMMIFetcher apiProvider;
+  final ProcessAreaCMMIFetcher processAreaApiProvider;
+  final CMMIPracticesFetcher cmmiPracticesApiProvider;
   List<Widget> listView = [Container(),];
 
   final util = new Util();
   var cmmiPracticesByProcessArea;
-  var processAreaByPhase;
+  var processAreaByCeremony;
 
   Ceremonies({
     Key key,
@@ -24,7 +35,8 @@ class Ceremonies extends StatefulWidget {
     this.title,
     this.imagePath,
     this.contents,
-    this.apiProvider,
+    this.processAreaApiProvider,
+    this.cmmiPracticesApiProvider,
   }) : super(key: key);
 
   @override
@@ -36,12 +48,6 @@ class Ceremonies extends StatefulWidget {
 
 class _CeremoniesState extends State<Ceremonies> {
   final util = new Util();
-
-  GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-  getScaffoldKey() {
-    return scaffoldKey;
-  }
-
   double loading = 0.0;
 
   Future<Null> refresh() async {
@@ -50,9 +56,11 @@ class _CeremoniesState extends State<Ceremonies> {
   }
 
   Future<Null> loadContents(bool refresh) async {
-    final contentPageApiProvider = widget.apiProvider == null
+    //Load Process Area API Provider
+    final processAreaApiProvider = widget.processAreaApiProvider == null
       ? new ProcessAreaCMMIFetcher()
-      : widget.apiProvider;
+      : widget.processAreaApiProvider;
+
     widget.listView = [];
     final _height = MediaQuery.of(context).size.height;
     final _width = MediaQuery.of(context).size.width;
@@ -63,12 +71,22 @@ class _CeremoniesState extends State<Ceremonies> {
       });
     }
 
-    await contentPageApiProvider.fetchPosts(widget.id);
-    widget.cmmiPracticesByProcessArea = contentPageApiProvider.getCmmiPracticesByProcessArea();
-    widget.processAreaByPhase = contentPageApiProvider.getProcessAreasByPhase();
+    await processAreaApiProvider.fetchPosts(widget.id);
+    widget.processAreaByCeremony = processAreaApiProvider.getProcessAreasByCeremony();
+
+    final cmmiPracticesApiProvider = widget.cmmiPracticesApiProvider == null
+      ? new CMMIPracticesFetcher(
+          processAreasByCeremony: widget.processAreaByCeremony,
+        )
+      : widget.cmmiPracticesApiProvider;
     
+    await cmmiPracticesApiProvider.fetchPosts();
+    widget.cmmiPracticesByProcessArea = cmmiPracticesApiProvider.getCmmiPracticesByProcessArea();
+
+    List<TextSpan> formattedTexts = await util.getFormattedContentDetailsText(context, widget.contents);
+
     List<Widget> processAreasList = [];
-    for (var data in widget.processAreaByPhase) {
+    for (var data in widget.processAreaByCeremony) {
       processAreasList.add(
         new InkWell(
           onTap: () {
@@ -160,7 +178,6 @@ class _CeremoniesState extends State<Ceremonies> {
                     ),
                     child: new Container(
                       width: _width,
-                      height: _height,
                       decoration: new BoxDecoration(
                         color: util.hexToColor("#FFFFFF"),
                         borderRadius: BorderRadius.circular(30.0),
@@ -180,11 +197,17 @@ class _CeremoniesState extends State<Ceremonies> {
                           top: 15.0,
                         ),
                         child: new Column(
+                          mainAxisSize: MainAxisSize.min,
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
+                            new RichText(
+                              text: TextSpan(
+                                children: formattedTexts,
+                              ),
+                            ),
                             new Text(
-                              "${widget.contents}\n\nCMMI Practices that will enhanched this ceremony are:",
+                              "\nCMMI Practices that will enhanched this ceremony are:",
                               style:TextStyle(
                                 fontSize: util.fitScreenSize(_height, 0.025),
                               )
@@ -193,6 +216,7 @@ class _CeremoniesState extends State<Ceremonies> {
                               padding: EdgeInsets.all(10.0),
                             ),
                             new Column(
+                              mainAxisSize: MainAxisSize.min,
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: processAreasList,
@@ -241,9 +265,16 @@ class _CeremoniesState extends State<Ceremonies> {
   @override
   Widget build(BuildContext context){
     double _height = MediaQuery.of(context).size.height;
-
+    void _searchpage() {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => SearchPage()
+        ),
+      );
+    }
     return Scaffold(
-      key: scaffoldKey,
+      key: widget.scaffoldKey,
       appBar: AppBar(
         leading: new InkWell(
           child: Icon(
@@ -251,7 +282,7 @@ class _CeremoniesState extends State<Ceremonies> {
             color: util.hexToColor("#FFFFFF"),
           ),
           onTap: () {
-            scaffoldKey.currentState.openDrawer();
+            widget.scaffoldKey.currentState.openDrawer();
           },
         ),
         centerTitle: true,
@@ -270,7 +301,7 @@ class _CeremoniesState extends State<Ceremonies> {
                 Icons.search,
                 color: util.hexToColor("#FFFFFF"),
               ),
-              onTap: () => {},
+              onTap: _searchpage,
             ),
           )
         ],
@@ -287,12 +318,184 @@ class _CeremoniesState extends State<Ceremonies> {
             ),
           ),
           new LoadingData(
-            key: Key("Loading data"),
+            key: Key("Loading Data"),
             height: loading,
           ),
         ],
       ),
-      drawer: util.defaultDrawer(context),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            new DrawerHeader(
+              child: Center(
+                child: new Image.asset(
+                  "assets/logos/logo-color.png",
+                ),
+              ),
+            ),
+            ListTile(
+              key: new Key("Home"),
+              title: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  new Icon(
+                    Icons.home,
+                    color: util.hexToColor("#979797"),
+                  ),
+                  new Padding(
+                    padding: EdgeInsets.all(10.0),
+                  ),
+                  new Text(
+                    "Home",
+                    style: TextStyle(
+                      color: util.hexToColor("#979797"),
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20.0,
+                    ),
+                  ),
+                ],
+              ),
+              onTap: () {
+                Navigator.of(context).pushReplacementNamed('/Home');
+              },
+            ),
+            ListTile(
+              key: new Key("Ceremonies"),
+              title: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  new Icon(
+                    Icons.graphic_eq,
+                    color: util.hexToColor("#979797"),
+                  ),
+                  new Padding(
+                    padding: EdgeInsets.all(10.0),
+                  ),
+                  new Text(
+                    "Ceremonies",
+                    style: TextStyle(
+                      color: util.hexToColor("#979797"),
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20.0,
+                    ),
+                  ),
+                ],
+              ),
+              onTap: () {
+                Navigator.of(context).popUntil(ModalRoute.withName('/Home'));
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ListCeremonies(),
+                  ),
+                );
+              },
+              //TODO: Implement fungsi buat callback kalo mencet Ceremonies di drawer
+            ),
+            ListTile(
+              key: new Key("Problems"),
+              title: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  new Icon(
+                    Icons.warning,
+                    color: util.hexToColor("#979797"),
+                  ),
+                  new Padding(
+                    padding: EdgeInsets.all(10.0),
+                  ),
+                  new Text(
+                    "Problems",
+                    style: TextStyle(
+                      color: util.hexToColor("#979797"),
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20.0,
+                    ),
+                  ),
+                ],
+              ),
+              onTap: () {
+                Navigator.of(context).popUntil(ModalRoute.withName('/Home'));
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => ListProblems()
+                  ),
+                );
+              },
+            ),
+            ListTile(
+              key: new Key("Glossary"),
+              title: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  new Icon(
+                    Icons.book,
+                    color: util.hexToColor("#979797"),
+                  ),
+                  new Padding(
+                    padding: EdgeInsets.all(10.0),
+                  ),
+                  new Text(
+                    "Glossary",
+                    style: TextStyle(
+                      color: util.hexToColor("#979797"),
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20.0,
+                    ),
+                  ),
+                ],
+              ),
+              onTap: () {
+                Navigator.of(context).popUntil(ModalRoute.withName('/Home'));
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => ListGlossary()
+                  ),
+                );
+              }, //TODO: Implement fungsi buat callback kalo mencet Glossary di drawer
+            ),
+            ListTile(
+              key: new Key("About"),
+              title: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  new Icon(
+                    Icons.info,
+                    color: util.hexToColor("#979797"),
+                  ),
+                  new Padding(
+                    padding: EdgeInsets.all(10.0),
+                  ),
+                  new Text(
+                    "About",
+                    style: TextStyle(
+                      color: util.hexToColor("#979797"),
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20.0,
+                    ),
+                  ),
+                ],
+              ),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => AboutPage()
+                  ),
+                );
+              }, //TODO: Implement fungsi buat callback kalo mencet About di drawer
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

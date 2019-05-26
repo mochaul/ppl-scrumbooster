@@ -13,6 +13,7 @@ void main() {
     List<String> keys = <String>[
       "Scrum Booster Logo",
       "Makara UI Logo",
+      "CMMI Institute Logo"
     ];
 
     await tester.pumpWidget(util.makeTestableWidget(child: about));
@@ -44,6 +45,30 @@ void main() {
     Key key = new Key("Explanation");
     await tester.pumpWidget(util.makeTestableWidget(child: about));
     expect(find.byKey(key), findsOneWidget);
+  });
+
+  testWidgets('Drawer Test', (WidgetTester tester) async {
+    GlobalKey<ScaffoldState> scaffoldKey = about.getScaffoldKey();
+    await tester.pumpWidget(
+        util.makeTestableWidget(child: about)
+    );
+    await tester.pump();
+
+    List<String> keys = [
+      'Home',
+      'Ceremonies',
+      'Problems',
+      'Glossary',
+      'About',
+    ];
+
+    scaffoldKey.currentState.openDrawer();
+    await tester.pump();
+
+    for (int i = 0; i < keys.length; i++) {
+      Key key = new Key(keys[i]);
+      expect(find.byKey(key), findsOneWidget);
+    }
   });
 
 }

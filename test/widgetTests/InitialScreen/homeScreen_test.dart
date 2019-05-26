@@ -9,23 +9,28 @@ void main() {
   final util = new Util();
 
   //Home Page Widget Tests
-  testWidgets('Home Screen Drawer Test', (WidgetTester tester) async {
+  testWidgets('Drawer Test', (WidgetTester tester) async {
     GlobalKey<ScaffoldState> scaffoldKey = home.getScaffoldKey();
-    await tester.pumpWidget(util.makeTestableWidget(child: home));
-    Key menu1 = new Key("Home");
-    Key menu2 = new Key("Ceremonies");
-    Key menu3 = new Key("Problems");
-    Key menu4 = new Key("Glossary");
-    Key menu5 = new Key("About");
+    await tester.pumpWidget(
+        util.makeTestableWidget(child: home)
+    );
+    await tester.pump();
+
+    List<String> keys = [
+      'Home',
+      'Ceremonies',
+      'Problems',
+      'Glossary',
+      'About',
+    ];
 
     scaffoldKey.currentState.openDrawer();
     await tester.pump();
 
-    expect(find.byKey(menu1), findsOneWidget);
-    expect(find.byKey(menu2), findsOneWidget);
-    expect(find.byKey(menu3), findsOneWidget);
-    expect(find.byKey(menu4), findsOneWidget);
-    expect(find.byKey(menu5), findsOneWidget);
+    for (int i = 0; i < keys.length; i++) {
+      Key key = new Key(keys[i]);
+      expect(find.byKey(key), findsOneWidget);
+    }
   });
 
   testWidgets('Test Find Header', (WidgetTester tester) async {

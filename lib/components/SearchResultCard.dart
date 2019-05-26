@@ -1,23 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:ScrumBooster/Utils/utils.dart';
 import 'package:ScrumBooster/contents/ceremonies.dart';
-import 'package:ScrumBooster/contents/problems.dart';
+import 'package:ScrumBooster/contents/Problems/problems.dart';
 
 class SearchResultCard extends StatelessWidget {
+  final int id;
   final String title;
   final String detail;
   final String imageURL;
   final int phaseID;
-  final List<dynamic> mayBeHappenAt;
+  final List<dynamic> canBeSolvedUsing;
   final String contentType;
 
   SearchResultCard({
     Key key,
+    @required this.id,
     @required this.title,
     @required this.detail,
     @required this.imageURL,
     this.phaseID,
-    this.mayBeHappenAt,
+    this.canBeSolvedUsing,
     @required this.contentType
   }) : super(key: key);
 
@@ -44,9 +46,11 @@ class SearchResultCard extends StatelessWidget {
               Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: (context) => ProblemsContentPage(
+                    id: this.id,
                     title: this.title,
                     imagePath: this.imageURL,
                     contents: this.detail,
+                    canBeSolvedUsing: this.canBeSolvedUsing,
                   )
                 ),
               );
@@ -55,6 +59,7 @@ class SearchResultCard extends StatelessWidget {
               Navigator.of(context).push(
                 MaterialPageRoute(
                   builder: (context) => Ceremonies(
+                    id: this.id,
                     title: this.title,
                     imagePath: this.imageURL,
                     contents: this.detail,
