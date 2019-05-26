@@ -1,7 +1,12 @@
+import 'package:ScrumBooster/components/transitions/SlideRightRoute.dart';
 import 'package:flutter/material.dart';
 import 'package:ScrumBooster/Utils/utils.dart';
+import 'package:ScrumBooster/InitialScreen/AboutPage.dart';
+import 'package:ScrumBooster/contentsList/ListCeremonies/ListCeremonies.dart';
+import 'package:ScrumBooster/contentsList/ListGlossary/ListGlossary.dart';
+import 'package:ScrumBooster/contentsList/ListProblems/ListProblems.dart';
 import 'package:ScrumBooster/contents/ceremonies.dart';
-import 'package:ScrumBooster/contents/problems.dart';
+import 'package:ScrumBooster/contents/Problems/problems.dart';
 import 'package:ScrumBooster/components/ScrumPhaseContentBtn.dart';
 import 'package:ScrumBooster/ScrumPhase/SprintExecution/ApiProvider.dart';
 import 'package:ScrumBooster/ScrumPhase/SprintExecution/Model.dart';
@@ -14,11 +19,17 @@ import 'package:ScrumBooster/components/loading/loadingData.dart';
 import 'package:ScrumBooster/search/SearchPage.dart';
 
 _SprintExecutionState _sprintExecutionState;
+// ignore: must_be_immutable
 class SprintExecution extends StatefulWidget {
 
   final SprintExecutionApiProvider apiProvider;
   final util = new Util();
   List<Widget> listView = [new Container(),];
+
+  GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+  getScaffoldKey() {
+    return scaffoldKey;
+  }
 
   SprintExecutionModel phaseDetailsDataJSON;
   var phaseCeremoniesDataJSON;
@@ -37,13 +48,7 @@ class SprintExecution extends StatefulWidget {
 }
 
 class _SprintExecutionState extends State<SprintExecution> {
-
   final util = new Util();
-
-  GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-  getScaffoldKey() {
-    return scaffoldKey;
-  }
 
   double loading = 0.0;
   int ceremoniesRowCount = 0;
@@ -168,11 +173,12 @@ class _SprintExecutionState extends State<SprintExecution> {
                   key: new Key("left arrow"),
                 ),
                 onTap: () {
+                  Navigator.pop(context);
                   Navigator.push(
-                    context,
-                    MaterialPageRoute(builder:
-                      (context) => SprintPlanning()
-                    )
+                      context,
+                      new CustomRoute(
+                          builder: (context) => SprintPlanning()
+                      )
                   );
                 },
               ),
@@ -197,11 +203,12 @@ class _SprintExecutionState extends State<SprintExecution> {
                   key: new Key("right arrow"),
                 ),
                 onTap: () {
+                  Navigator.pop(context);
                   Navigator.push(
-                    context,
-                    MaterialPageRoute(builder:
-                      (context) => SprintEvaluation()
-                    )
+                      context,
+                      new CustomRoute(
+                          builder: (context) => SprintEvaluation()
+                      )
                   );
                 },
               ),
@@ -236,9 +243,18 @@ class _SprintExecutionState extends State<SprintExecution> {
     );
 
     //Adding ceremony items
-    Function ceremoniesFunc = (String image, String title, String detail) =>
-        Ceremonies(imagePath: image, title: title, contents: detail);
-    Widget column = generateColumn(widget.phaseCeremoniesDataJSON, ceremoniesFunc, ceremoniesCount);
+    Function ceremoniesFunc = (int id, String image, String title, String detail) =>
+        Ceremonies(
+          id: id,
+          imagePath: image,
+          title: title,
+          contents: detail,
+        );
+    Widget column = generateColumn(
+      widget.phaseCeremoniesDataJSON,
+      ceremoniesFunc,
+      ceremoniesCount,
+    );
     listView.add(column);
 
     listView.add(
@@ -273,8 +289,14 @@ class _SprintExecutionState extends State<SprintExecution> {
     );
 
     //Adding problem items
-    Function problemsFunc = (String image, String title, String detail) =>
-        ProblemsContentPage(imagePath: image, title: title, contents: detail);
+    Function problemsFunc = (int id, String title, String image, String detail, List<dynamic> canBeSolvedUsing) =>
+        ProblemsContentPage(
+          id: id,
+          title: title,
+          imagePath: image,
+          contents: detail,
+          canBeSolvedUsing: canBeSolvedUsing,
+        );
     column = generateColumn(widget.phaseProblemsDataJSON, problemsFunc, problemsCount);
     listView.add(column);
 
@@ -296,7 +318,6 @@ class _SprintExecutionState extends State<SprintExecution> {
     List<Widget> rowWidgetList = [];
 
     double _height = MediaQuery.of(context).size.height;
-    double _width = MediaQuery.of(context).size.width;
 
     Widget column = new Column(
       children: columnWidgetList,
@@ -328,16 +349,38 @@ class _SprintExecutionState extends State<SprintExecution> {
           title: data.title,
           imageAssetURL: data.image,
           action: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => className(
-                  data.image,
-                  data.title,
-                  data.detail,
-                ),
-              ),
-            );
+            print('masuk');
+            switch (className.toString()) {
+              case "Closure: (int, String, String, String) => Ceremonies":
+                print('masuk ceremonies');
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => className(
+                      data.id,
+                      data.image,
+                      data.title,
+                      data.detail,
+                    ),
+                  ),
+                );
+                break;
+              case "Closure: (int, String, String, String, List<dynamic>) => ProblemsContentPage":
+                print(data.canBeSolvedUsing.toString());
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => className(
+                      data.id,
+                      data.title,
+                      data.image,
+                      data.detail,
+                      data.canBeSolvedUsing,
+                    ),
+                  ),
+                );
+                break;
+            }
           },
         ),
       );
@@ -349,6 +392,7 @@ class _SprintExecutionState extends State<SprintExecution> {
 
   @override
   void didChangeDependencies() {
+    super.didChangeDependencies();
     if (widget.listView.length == 1) {
       loadSprintExecution(false);
     }
@@ -365,7 +409,7 @@ class _SprintExecutionState extends State<SprintExecution> {
       );
     }
     return Scaffold(
-      key: scaffoldKey,
+      key: widget.scaffoldKey,
       appBar: AppBar(
         centerTitle: true,
         leading: new InkWell(
@@ -374,7 +418,7 @@ class _SprintExecutionState extends State<SprintExecution> {
             color: util.hexToColor("#FFFFFF"),
           ),
           onTap: () {
-            scaffoldKey.currentState.openDrawer();
+            widget.scaffoldKey.currentState.openDrawer();
           },
         ),
         title: Text(
@@ -414,7 +458,179 @@ class _SprintExecutionState extends State<SprintExecution> {
           ),
         ],
       ),
-      drawer: util.defaultDrawer(context),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            new DrawerHeader(
+              child: Center(
+                child: new Image.asset(
+                  "assets/logos/logo-color.png",
+                ),
+              ),
+            ),
+            ListTile(
+              key: new Key("Home"),
+              title: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  new Icon(
+                    Icons.home,
+                    color: util.hexToColor("#979797"),
+                  ),
+                  new Padding(
+                    padding: EdgeInsets.all(10.0),
+                  ),
+                  new Text(
+                    "Home",
+                    style: TextStyle(
+                      color: util.hexToColor("#979797"),
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20.0,
+                    ),
+                  ),
+                ],
+              ),
+              onTap: () {
+                Navigator.of(context).pushReplacementNamed('/Home');
+              },
+            ),
+            ListTile(
+              key: new Key("Ceremonies"),
+              title: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  new Icon(
+                    Icons.graphic_eq,
+                    color: util.hexToColor("#979797"),
+                  ),
+                  new Padding(
+                    padding: EdgeInsets.all(10.0),
+                  ),
+                  new Text(
+                    "Ceremonies",
+                    style: TextStyle(
+                      color: util.hexToColor("#979797"),
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20.0,
+                    ),
+                  ),
+                ],
+              ),
+              onTap: () {
+                Navigator.of(context).popUntil(ModalRoute.withName('/Home'));
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ListCeremonies(),
+                  ),
+                );
+              },
+              //TODO: Implement fungsi buat callback kalo mencet Ceremonies di drawer
+            ),
+            ListTile(
+              key: new Key("Problems"),
+              title: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  new Icon(
+                    Icons.warning,
+                    color: util.hexToColor("#979797"),
+                  ),
+                  new Padding(
+                    padding: EdgeInsets.all(10.0),
+                  ),
+                  new Text(
+                    "Problems",
+                    style: TextStyle(
+                      color: util.hexToColor("#979797"),
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20.0,
+                    ),
+                  ),
+                ],
+              ),
+              onTap: () {
+                Navigator.of(context).popUntil(ModalRoute.withName('/Home'));
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => ListProblems()
+                  ),
+                );
+              },
+            ),
+            ListTile(
+              key: new Key("Glossary"),
+              title: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  new Icon(
+                    Icons.book,
+                    color: util.hexToColor("#979797"),
+                  ),
+                  new Padding(
+                    padding: EdgeInsets.all(10.0),
+                  ),
+                  new Text(
+                    "Glossary",
+                    style: TextStyle(
+                      color: util.hexToColor("#979797"),
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20.0,
+                    ),
+                  ),
+                ],
+              ),
+              onTap: () {
+                Navigator.of(context).popUntil(ModalRoute.withName('/Home'));
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => ListGlossary()
+                  ),
+                );
+              }, //TODO: Implement fungsi buat callback kalo mencet Glossary di drawer
+            ),
+            ListTile(
+              key: new Key("About"),
+              title: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  new Icon(
+                    Icons.info,
+                    color: util.hexToColor("#979797"),
+                  ),
+                  new Padding(
+                    padding: EdgeInsets.all(10.0),
+                  ),
+                  new Text(
+                    "About",
+                    style: TextStyle(
+                      color: util.hexToColor("#979797"),
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20.0,
+                    ),
+                  ),
+                ],
+              ),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => AboutPage()
+                  ),
+                );
+              }, //TODO: Implement fungsi buat callback kalo mencet About di drawer
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

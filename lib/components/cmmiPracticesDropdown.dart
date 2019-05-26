@@ -42,7 +42,6 @@ class CmmiPracticesDropdown extends StatelessWidget {
         ),
         children: <Widget>[
           new Container(
-            height: util.fitScreenSize(_height, 0.5),
             width: _width,
             child: new Padding(
               padding: EdgeInsets.all(15.0),

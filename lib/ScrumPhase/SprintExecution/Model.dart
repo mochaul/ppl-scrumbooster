@@ -41,7 +41,6 @@ class ProblemItem {
   String _title;
   String _detail;
   String _image;
-  List<dynamic> _mayBeHappenAt;
   List<dynamic> _canBeSolvedUsing;
 
   ProblemItem.fromJson(Map<String, dynamic> parsedJson) {
@@ -49,14 +48,12 @@ class ProblemItem {
     _title = parsedJson['title'];
     _detail = parsedJson['detail'];
     _image = parsedJson['image'];
-    _mayBeHappenAt = parsedJson['may_be_happen_at'];
-    _canBeSolvedUsing = parsedJson['can_be_solved_using'];
+    _canBeSolvedUsing = parsedJson['can_be_solved_by'];
   }
 
   int get id => _id;
   String get title => _title;
   String get detail => _detail;
   String get image => _image;
-  List<dynamic> get mayBeHappenAt => _mayBeHappenAt;
   List<dynamic> get canBeSolvedUsing => _canBeSolvedUsing;
 }

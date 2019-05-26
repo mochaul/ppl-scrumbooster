@@ -14,7 +14,7 @@ class ListCeremoniesApiProvider {
     response = await client.get(
       util.getConfiguration()['base_url']+"ceremony/alphabetic/"
     );
-    var jsonBody = json.decode(response.body);
+    var jsonBody = json.decode(utf8.decode(response.bodyBytes));
 
     model = ListCeremoniesModel.fromJson(jsonBody);
     dictCeremoniesAlphabetic = model.dictCeremoniesAlphabetic;
