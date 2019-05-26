@@ -40,9 +40,9 @@ class SearchApiProvider {
     } catch (e) {
       print("API isn't available");
     }
-    var ceremoniesBody = json.decode(responseCeremonies.body);
-    var problemsBody = json.decode(responseProblem.body);
-    var phasesBody = json.decode(responsePhases.body);
+    var ceremoniesBody = json.decode(utf8.decode(responseCeremonies.bodyBytes));
+    var problemsBody = json.decode(utf8.decode(responseProblem.bodyBytes));
+    var phasesBody = json.decode(utf8.decode(responsePhases.bodyBytes));
 
     modelCeremonies = SearchResultModel.fromJson(ceremoniesBody, 'ceremonies');
     modelProblems = SearchResultModel.fromJson(problemsBody, 'problems');

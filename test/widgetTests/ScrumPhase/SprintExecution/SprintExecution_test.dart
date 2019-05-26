@@ -171,24 +171,29 @@ void main() {
     });
   });
 
-//  testWidgets('Home Screen Drawer Test', (WidgetTester tester) async {
-//    GlobalKey<ScaffoldState> scaffoldKey = sprintExecution.getScaffoldKey();
-//    await tester.pumpWidget(util.makeTestableWidget(child: sprintExecution));
-//    Key menu1 = new Key("Home");
-//    Key menu2 = new Key("Ceremonies");
-//    Key menu3 = new Key("Problems");
-//    Key menu4 = new Key("Glossary");
-//    Key menu5 = new Key("Pop Quiz!");
-//    Key menu6 = new Key("About");
-//
-//    scaffoldKey.currentState.openDrawer();
-//    await tester.pump();
-//
-//    expect(find.byKey(menu1), findsOneWidget);
-//    expect(find.byKey(menu2), findsOneWidget);
-//    expect(find.byKey(menu3), findsOneWidget);
-//    expect(find.byKey(menu4), findsOneWidget);
-//    expect(find.byKey(menu5), findsOneWidget);
-//    expect(find.byKey(menu6), findsOneWidget);
-//  });
+  testWidgets('Drawer Test', (WidgetTester tester) async {
+    provideMockedNetworkImages(() async {
+      GlobalKey<ScaffoldState> scaffoldKey = sprintExecution.getScaffoldKey();
+      await tester.pumpWidget(
+          util.makeTestableWidget(child: sprintExecution)
+      );
+      await tester.pump();
+
+      List<String> keys = [
+        'Home',
+        'Ceremonies',
+        'Problems',
+        'Glossary',
+        'About',
+      ];
+
+      scaffoldKey.currentState.openDrawer();
+      await tester.pump();
+
+      for (int i = 0; i < keys.length; i++) {
+        Key key = new Key(keys[i]);
+        expect(find.byKey(key), findsOneWidget);
+      }
+    });
+  });
 }

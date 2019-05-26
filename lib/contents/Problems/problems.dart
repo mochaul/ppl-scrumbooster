@@ -1,3 +1,4 @@
+import 'package:ScrumBooster/search/SearchPage.dart';
 import 'package:flutter/material.dart';
 import 'package:ScrumBooster/Utils/utils.dart';
 import 'package:ScrumBooster/components/loading/loadingData.dart';
@@ -23,6 +24,11 @@ class ProblemsContentPage extends StatefulWidget {
   final ProblemsDetailPageApiProvider apiProvider;
   List<Widget> listView = [Container(),];
 
+  GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+  getScaffoldKey() {
+    return scaffoldKey;
+  }
+
   final util = new Util();
   var ceremoniesByProblem;
 
@@ -45,12 +51,6 @@ class ProblemsContentPage extends StatefulWidget {
 
 class _ProblemsContentPageState extends State<ProblemsContentPage> {
   final util = new Util();
-
-  GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-  getScaffoldKey() {
-    return scaffoldKey;
-  }
-
   double loading = 0.0;
 
   Future<Null> refresh() async {
@@ -252,8 +252,16 @@ class _ProblemsContentPageState extends State<ProblemsContentPage> {
   @override
   Widget build(BuildContext context) {
     double _height = MediaQuery.of(context).size.height;
+    void _searchpage() {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => SearchPage()
+        ),
+      );
+    }
     return Scaffold(
-      key: scaffoldKey,
+      key: widget.scaffoldKey,
       appBar: AppBar(
         leading: new InkWell(
           child: Icon(
@@ -261,7 +269,7 @@ class _ProblemsContentPageState extends State<ProblemsContentPage> {
             color: util.hexToColor("#FFFFFF"),
           ),
           onTap: () {
-            scaffoldKey.currentState.openDrawer();
+            widget.scaffoldKey.currentState.openDrawer();
           },
         ),
         centerTitle: true,
@@ -280,9 +288,9 @@ class _ProblemsContentPageState extends State<ProblemsContentPage> {
                 Icons.search,
                 color: util.hexToColor("#FFFFFF"),
               ),
-              onTap: () => {},
+              onTap: _searchpage,
             ),
-          )
+          ),
         ],
       ),
       body: Stack(
@@ -297,7 +305,7 @@ class _ProblemsContentPageState extends State<ProblemsContentPage> {
             ),
           ),
           new LoadingData(
-            key: Key("Loading data"),
+            key: Key("Loading Data"),
             height: loading,
           ),
         ],
