@@ -33,7 +33,7 @@ psycopg2-binary==2.7.5
 PyJWT==1.6.4
 python3-openid==3.1.0
 pytz==2018.5
-PyYAML==3.13
+PyYAML==5.4
 requests==2.18.4
 requests-oauthlib==1.0.0
 six==1.11.0
